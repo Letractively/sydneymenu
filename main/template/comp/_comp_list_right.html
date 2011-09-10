@@ -1,0 +1,28 @@
+{% load hash_filters %}
+{% load comp_filters %}
+ {% for v in LAYOUT_INFO|hash:'RIGHT' %}
+    {% if v = 'icon' %}
+      {% include "comp/_icon.html" %}
+    {% endif %}
+    {% if v = 'girls' %}
+      {% include "comp/_girls.html" %}
+    {% endif %}
+    {% if v = 'info' %}
+      {% include "comp/_info.html" %}
+    {% endif %}
+    {% if v = 'timetable' %}
+      {% include "comp/_timetable.html" %}
+    {% endif %}
+    {% if v = 'roster' %}
+      {% include "comp/_roster.html" %}
+    {% endif %}
+    {% if v = 'post_list' %}
+      {% include "comp/_post_list.html" %}
+    {% endif %}
+    {% if v = 'gallery' %}
+      {% include "comp/_gallery.html" %}
+    {% endif %}
+    {% if v = 'forum' %}
+      {% include "comp/_forum.html" %}
+    {% endif %}
+  {% endfor %}

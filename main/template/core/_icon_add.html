@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"-->
+<html>
+<head>
+<style type="text/css">
+body,div{
+padding:0px;
+margin:0px;
+}
+body{
+width:100%;
+}
+div.icon{
+height:{{REQUEST.size}}px;
+text-align:center;
+}
+img{
+height:100%;
+}
+div.hform{
+position:relative;
+top:-{{REQUEST.size}}px;
+overflow:hidden;
+opacity:0;
+width:{{REQUEST.size}}px;
+height:{{REQUEST.size}}px;
+margin:auto;
+}
+input{
+font-size:{{REQUEST.size}}px
+}
+</style>
+<script type="text/javascript">
+  function commit(){
+    document.getElementById('icon').innerHTML = '';
+    document.forms['hform'].submit();
+  }
+</script>
+</head>
+<body>
+<div id ='icon' class='icon'>
+<img src='/res/add_img.png'></img>
+</div>
+<div class='hform'>
+<form action="/core/imageadd/{{SERVICE}}/{{RESNAME}}/?size={{REQUEST.size}}" name='hform'
+  enctype="multipart/form-data" 
+  name="imagecache" method="post">{% csrf_token %}
+<input type="file" name='cache' onchange="document.forms['hform'].submit();"></input>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html xmlns = "http://www.w3.org/1999/xhtml">
+  <head>
+    <script src="/ckeditor/ckeditor.js"></script>
+  </head>
+  <body>
+    <form method='post' action="">
+      <textarea cols="40" rows="10" id = "editor" name = "editor">
+         Type Something Here
+      </textarea>
+        <script type = "text/javascript">
+        //<![CDATA[
+        var tool_bar_config = [
+    ['Source','-','Cut','Copy','Paste','PasteText','PasteFromWord'],
+    ['Undo','Redo','-','Find','Replace'],
+    '/',
+    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
+          ];
+ 
+          CKEDITOR.replace('editor',{fullPage:true,toolbar:tool_bar_config});
+        //]]>
+        </script>
+    </form>
+  </body>
+</html>

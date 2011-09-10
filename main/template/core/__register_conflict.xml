@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFLICT>
+  <MSG>{{MSG}}</MSG>
+  {% for key, value in REQUEST.iteritems%}
+  <key name='{{key}}'>{{value}}
+  </key>
+  {% endfor %}
+</CONFLICT>

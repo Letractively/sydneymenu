@@ -1,0 +1,52 @@
+body,div,input,label{
+font-family:"Trebuchet MS",Serif;
+padding:0px;
+margin:0px;
+}
+body{
+width:100%;
+background-color:black;
+}
+img{
+}
+div.navform{
+padding-left:10px;
+width:420px;
+position:relative;
+font-size:12px;
+background-color:white;
+-moz-border-radius-topleft:10px;
+-webkit-border-radius-topleft:10px;
+-moz-border-radius-topright:10px;
+-webkit-border-radius-topright:10px;
+border-radius:10px 10px 0 0;
+background-color:#cccccc;
+height:26px;
+overflow:hidden;
+}
+input.button{
+font-size:12px;
+width:80px;
+border:none;
+background-color:#cccccc;
+height:26px;
+padding:0px;
+cursor:pointer;
+}
+input.normal{
+font-size:12px;
+width:80px;
+border:none;
+background-color:white;
+height:26px;
+padding:0px;
+}
+label{
+height:26px;
+margin:0 5px 0 5px;
+}
+a{
+height:26px;
+margin:0 5px 0 5px;
+}
+

@@ -1,0 +1,114 @@
+body, div, iframe {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  position:relative;
+}
+#crumbs a:link { color:black; text-decoration:none; }
+#crumbs a:visited { color:black; text-decoration:none; }
+#crumbs a:hover {color:black; text-decoration:none;}
+
+body {
+  width:100%;
+}
+#crumbs{
+  border-bottom: 1px solid #1b1b1b;
+}
+
+div.page{
+margin:auto;
+width:960px;
+}
+table{
+}
+table thead th{
+text-align:left;
+border-bottom:1px solid gray;
+border-top:1px solid gray;
+}
+table thead th.name{
+width:140px;
+}
+
+table thead th.feed{
+width:40px;
+}
+
+table thead th.post-count{
+width:40px;
+}
+table thead th.recent-info{
+width:200px;
+}
+
+div.controls{
+text-align:right;
+}
+
+div.nav {
+height:50px;
+padding:10px 10px 3px 10px;
+margin:10px 0 5px 0px;
+background-color:#1b1b1b;
+}
+
+.nav div.title {float:left}
+.nav ul li a:link { color:white; text-decoration:none; }
+.nav ul li a:visited { color:white; text-decoration:none; }
+.nav ul li a:hover {color:white; text-decoration:none;}
+
+div.nav div.title h3{
+  padding:10px 0 0 10px;
+  margin:0px;
+  font-size:28px;
+  color:#cccccc;
+  font-weight:300;
+}
+div.nav div.title img {padding:6px 3px 3px 3px;border:none;}
+div.nav div.title a {text-decoration:none;border:none;}
+
+div.nav {
+}
+.nav > ul {
+  float:right;
+  display:block;list-style-type:none; margin:0; padding:0 0 13px 0; 
+  font-family: "proxima-nova-extra-condensed", "Trebuchet MS", sans-serif; 
+  color:white;
+  font-size:13px; font-weight:100; text-transform:uppercase; 
+  border-bottom:0px solid #bb6848;
+}
+.nav ul li.menu{
+  display:block;
+  height:20px;
+  cursor:pointer;
+}
+div.nav ul li.menu{
+  float:left;
+  padding:10px;
+  position:relative;
+  top:20px;
+}
+div.nav ul.submenu{
+  display:none;
+}
+
+div.nav ul li.menu:hover ul.submenu{
+  display:block;
+  width:200px;
+  padding:10px;
+  position:relative;
+  top:5px;
+  left:-20px;
+  clear:both;
+  float:left;
+  border:1px solid #3b3b3b;
+  background-color: #1b1b1b;
+}
+div.nav ul.submenu li{
+ padding:3px;
+}
+div.nav ul.submenu li:hover {
+ padding-bottom:5px;
+ background-color:black;
+}
+

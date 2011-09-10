@@ -1,0 +1,35 @@
+{% load comp_filters %}
+    <form id='form-mdyservice' action="">
+      <div id="age">
+        <label for ="aveage">Average Age:</label>
+        {{"aveage"|select|style:"width:152px;margin-top:5px;"|addfield:"18-24"|addfield:"20-30"|addfield:"30-40"|render|safe}}
+      </div>
+      <div id="type">
+        <label for='type'>Service Type:</label>
+        {{"type"|select|style:"width:152px;margin-top:5px;"|addfield:"Brothel"|addfield:"Escort"|render|safe}}
+      </div>
+      <div id="phone">
+        <label for='phone'>Phone:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
+      </div>
+      <div id='description'>
+        <label for="description">Description:</label>
+        <span class='input-fine'>
+        &#9746
+        </span>
+        <textarea name='description' value='{{REQUEST.phone}}'></textarea>
+      </div>
+      <div id='days'>
+        <a>Working Days:</a></br>
+          <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
+          <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
+          <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
+          <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
+          <input type = checkbox name='Thu' value = 'Thu'>Thu.</input>
+          <input type = checkbox name='Fri' value = 'Fri'>Fri.</input>
+          <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
+      </div>
+    </form>

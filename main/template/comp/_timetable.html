@@ -1,0 +1,36 @@
+{% load hash_filters %}
+{% if ROOT %}
+    <div class='section-container'>
+{% endif %}
+      <div id='timetable' class='section'>
+        <div class='title'>
+          <h3>Time Table:</h3>
+        </div>
+        <div class='info-block'>
+          <ul class='border-split select'>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(0,this)">
+              <span class='label'>Sunday:</span><a>{{TIMETABLE_INFO|hash:"Sunday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(1,this)" class='dif'>
+              <span class='label'>Monday:</span><a>{{TIMETABLE_INFO|hash:"Monday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(2,this)" >
+              <span class='label'>Tuesday:</span><a>{{TIMETABLE_INFO|hash:"Tuesday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(3,this)" class='dif'>
+              <span class='label'>Wednesday:</span><a>{{TIMETABLE_INFO|hash:"Wednesday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(4,this)" >
+              <span class='label'>Thursday:</span><a>{{TIMETABLE_INFO|hash:"Thursday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(5,this)" class='dif'>
+              <span class='label'>Friday:</span><a>{{TIMETABLE_INFO|hash:"Friday"|hash:"timeslot"}}</a></li>
+          <li onclick="zoyoe.comps['TIME_TABLE'].Select(6,this)" >
+              <span class='label'>Saturday:</span><a>{{TIMETABLE_INFO|hash:"Saturday"|hash:"timeslot"}}</a></li>
+          </ul>
+        </div>
+      </div>
+{% if HAS_AUTHORITY %}
+      <div class='tail'>
+         <h3><a onclick="zoyoe.comps['TIME_TABLE'].ShowModifyDialog()">modify</a></h3>
+      </div>
+{% endif %}
+{% if ROOT %}
+    </div>
+{% endif %}
+ 

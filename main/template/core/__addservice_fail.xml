@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FAIL>
+  {% for key, value in ERROR.iteritems%}
+  <ERROR name='{{key}}'>{{value}}
+  </ERROR>
+  {% endfor %}
+</FAIL>

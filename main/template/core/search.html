@@ -1,0 +1,116 @@
+{% extends 'core/clean.html'%}
+{% load comp_filters %}
+{% block css_link %}
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/search.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/element.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  <!-- YUI Components --> 
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <!-- need finally make a new js file contain all the info manage script -->	
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <script type="text/javascript" src="/js/histogram.js"></script>
+  <!-- Project Components -->
+
+  <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/surburb.js"></script>
+  <script type="text/javascript" src="/js/search.js"></script>
+{% endblock %}
+
+{% block title %} Sydney Menu {% endblock %}
+
+{% block bar %}
+  <div class='brand'>
+   <img src="/res/none_design.png"></img>
+  </div>
+{% endblock %}
+
+{% block nav %}
+  <li><a href="/map/">Distribution</a></li>
+  <li><a href="/forum/">Forum</a></li>
+  <li><a href="/">Recommendation</a></li>
+  <li><a href="/">Menu</a></li>
+  <li><a href="/">About us</a></li>
+{% endblock %}
+ 
+
+{% block content %}
+    <form id="search"><!-- Just for convenience, Not very useful -->
+    <div id = "match-option" class="option">
+      <label>Search By:</label>
+      <a class="select">Address</a>
+      <a>Dish Name</a>
+      <a>Restaurant Name</a>
+    </div>
+    <div id = "share-option" class='option'>
+      <label>Share Your Choice On:</label>
+      <a>Facebook</a>
+    </div>
+    <div id="search-bar">
+      {{"AutoComplete"|auto_complete|style:"left:110px;height:40px;padding:0 40 0 0px;width:740px;"|render|safe}}
+    </div>
+    <div id = "filter-bar">
+      <div id = "service-type" class="drop-list">
+        <div class="label">
+        Service Type
+        </div>
+        {{"type"|combo|style:"width:140px;float:right;"|addfield:"Brothel"|addfield:"Escort"|addfield:"Massage"|render|safe}}
+      </div>
+      <div id = "nationality" class="drop-list">
+        <div class="label">
+        Nationality
+        </div>
+        {{"nationality"|combo|style:"width:140px;float:right;"|addfield:"Caucasion"|addfield:"Asia"|addfield:"European"|addfield:"South American"|addfield:"African"|render|safe}}
+      </div>
+      <div id = "radius" class="drop-list">
+        <div class="label">
+        Radius 
+        </div>
+        {{"radius"|select|style:"width:90px;float:right;"|addfield:"1 km"|addfield:"2 km"|addfield:"5 km"|addfield:"10 km"|addfield:"20 km"|addfield:"50 km"|render|safe}}
+      </div>
+      <div id = "min-price" class="drop-list">
+        <div class="label">
+        Min. price
+        </div>
+        {{"min"|select|style:"width:80px;float:left;"|addfield:"40"|addfield:"60"|addfield:"80"|addfield:"100"|addfield:"120"|render|safe}}
+      </div>
+      <div id="max-price" class="drop-list">
+        <div class="label">
+        Max. price
+        </div>
+        {{"max"|select|style:"width:80px;float:left;"|addfield:"90"|addfield:"140"|addfield:"190"|addfield:"240"|addfield:"290"|render|safe}}
+      </div>
+      <a id='search-btn' onclick="PreSearch()">Search</a>
+    </div>
+
+    <div id="restaurant-type">
+    </div>
+    </form><!-- End of the main form -->
+{% endblock %}
+
+
+{% block tail %}
+ <div id='zsk' class='msk'>
+  </div>
+ <!-- Following is just for dialog support -->
+ <div id='dialog'>
+    <div class='dialog'>
+    <div class='dialog-hint'>
+    </div>
+    <div class='dialog-content'>
+    </div>
+    <div class='button-lane'>
+      <input type='button' class="commit" value='ok' onclick='zoyoe.ui.SubmitForm();'></input>
+      <input type='button' class="cancel" value='cancel' onclick='zoyoe.ui.HideDialog();'></input>
+    </div>
+  </div>
+<!-- End dialog Support -->
+{% endblock %}
