@@ -1,14 +1,16 @@
+{% extends 'core/clean.html' %}
 {% load hash_filters %}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-  <title>Adult Services Distribution Admin</title>
-  <!-- YUI Components --> 
+{% load comp_filters %}
+{% block title %} Sydney Menu {% endblock %}
+
+{% block css_link %}
   <link rel="stylesheet" href="/css/default/element.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/general.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/service.css" type="text/css" media="all" charset="utf-8"/>
-  <!--link rel="stylesheet" href="/css/default/bx_styles/bx_styles.css" type="text/css"/-->
+  <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
   <script type="text/javascript" charset="utf-8"
           src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
   </script>
@@ -58,162 +60,108 @@
       });
     }
   </script>
- </head>
- <body onload="document_load()" >
-  <div class='page'>
-    <div id='title-bar'>
-      <div class='nav'>
-        <ul>
-          <li class='menu'><a href='/search/'>Home</a></li>
-          {% if user.is_authenticated %}
-          <li class='menu' onclick ="Logout()"><a>Logout</a></li>
-          {% else %}
-          <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-          <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-          {% endif %}
-          <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
-        </ul>
-        <div class='title'>
-          <a href="/search/"><img src="/res/map_logo_5.png" width="236px" height="40px"/></a>
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/search/'>Home</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="Logout()"><a>Logout</a></li>
+  {% else %}
+  <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+  <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
+{% endblock %}
+ 
+{% block content %}
+  <div class='mid'>
+   <div class='mid-section'>
+    <div style="float:left;">
+      <div class="map-title">
+        <div><img src="/res/pushpin_tiny.png">
+       Try our distribution map and sharing your experience with us
+        </div>
+        <div id="map-bot" style="z-index:20;position:relative;top:315px;">
         </div>
       </div>
-    </div>
-    <div class='mid-section'>
-      <div style="width:266px;margin-top:-25px;margin-bottom:15px;clear:both;border-bottom:1px solid #4c4c4c;text-align:right;">
-        <h3 style="margin:0;padding:0;padding-right:10px;color:#cccccc;font-size:24px;">Map Show</h3>
+      <div id="map-info" style="width:672px;height:300px;z-index:10;">
       </div>
-      <div class='section-container'>
-        <div class='section' style="width:696px;height:535px;padding:0;border:3px solid #cccccc;">
-          <div id="map-info" style="width:690px;height:528px;z-index:10;position:absolute;border:3px solid black;">
-          </div>
-          <div style="z-index:11;position:absolute;opacity:0;background-color:white;width:696px;height:250px;">
-          </div>
-          <a style="z-index:12;position:relative;display:block;text-decoration:none;opacity:0.3;width:696px;height:40px;top:0px;padding-top:250px;padding-bottom:250px;-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=30)';text-align:center;font-size:30px;font-weight:bold;color:white;" href="/map/" id="map-link">
-           <div style="width:696px;background-color:blue;">SHOW ALL SERVICES ON MAP</div>
-          </a>
-          <div style="width:33px;height:164px;position:relative;top:-531px;left:678px;z-index:100;"><img src="/res/feature_arrow.png"></img></div>
+    </div>
+    <div id="report-bar">
+      <form name="form-report">
+        <div class="head">
+        <h5>Sharing Your Experience:</h5>
         </div>
+        <div class='window-container'>
+          <label>OF:</label>
+          {{"type"|select|style:"width:240px;float:left;margin-bottom:2px;"|addfield:"Breakfast"|addfield:"Lunch"|addfield:"Dinnner"|render|safe}}
+        </div>
+        <div class='window-container'>
+          <label>IN(restaurant name):</label>
+          <input class="normal" type="textfield" name="name"></input>
+        </div>
+        <div class='window-container'>
+          <label>AT(address):</label>
+          {{"address"|auto_complete|style:"width:240px;height:30px;float:left;margin-bottom:2px;"|render|safe}}
+        </div>
+        <div class='window-container'>
+          <label>FOR(what food you've ordered):</label>
+          <input class="normal" type="textfield" name="item"></input>
+        </div>
+        <div class='window-container'>
+          <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
+        </div>
+        </form>
+     </div>
+   </div>
+   <div class='mid-section' style="width:100%;clear:both;">
+      <div class="title" style="width:100%;border-bottom:1px solid ;">
+        <h3>Search Results</h3>
+        <h4>page [1]</h4>
       </div>
-    </div>
-    <div style="margin-top:20px;padding-bottom:11px;float:right;background-color:#262626;z-index:100;">
-      <ul>
-        <li style="width:256px;height:166px;padding-top:11px;">
-          <div style="width:235px;height:166px;margin:auto;background-color:#333333;">
-            <div style="width:215px;margin:auto;border-bottom:1px solid black;">
-              <a style="border:none;" href="#"><img src='/res/res_error.png' style="width:80px;height:80px;margin:11px;margin-left:0;float:left;border:1px solid #cccccc;"></img></a>
-              <div style="height:93px;margin-right:11px;padding-top:10px;overflow:hidden;">
-                <p style="margin:0;">
-                  <span><a style="color:#ff25a5;text-decoration:none;font-size:14px;font-weight:800;" href="#">12 Cottam</a></span>
-                </p>
-                <div style="margin-top:8px;color:#939393;font-size:12px;font-weight:800;line-height:20px;overflow:hidden;">
-                  <span>Brothel</span><br>
-                  <span>1234 5678</span><br>
-                  <div style="height:22px;overflow:hidden;"><span>12 Cottam Ave AAA</span></div>
+      <ul id="slist">
+        {% for service in DATA%}
+              <li style="clear:both;">
+                <div style="float:left">
+                  <a href="/core/service/{{service.name}}/">
+                  <img src='/core/data/res/{{service.name}}/{{service.icon}}/?sc=true'>
+                  </img></a>
                 </div>
-              </div>
-            </div>
-            <div style="width:218px;height:60px;margin:auto;color:#999999;font-size:12px;font-weight:100;line-height:18px;overflow:hidden;">
-              <p style="margin-top:3px;">Business among the world, while a looking to secure access to raw-materials workforce and recognises the contribution.</p>
-            </div>
-          </div>
-        </li>
-        <li style="width:256px;height:166px;padding-top:11px;">
-          <div style="width:235px;height:166px;margin:auto;background-color:#333333;">
-            <div style="width:215px;margin:auto;border-bottom:1px solid black;">
-              <a style="border:none;" href="#"><img src='/res/res_error.png' style="width:80px;height:80px;margin:11px;margin-left:0;float:left;border:1px solid #cccccc;"></img></a>
-              <div style="height:93px;margin-right:11px;padding-top:10px;overflow:hidden;">
-                <p style="margin:0;">
-                  <span><a style="color:#ff25a5;text-decoration:none;font-size:14px;font-weight:800;" href="#">12 Cottam</a></span>
-                </p>
-                <div style="margin-top:8px;color:#939393;font-size:12px;font-weight:800;line-height:20px;overflow:hidden;">
-                  <span>Brothel</span><br>
-                  <span>1234 5678</span><br>
-                  <div style="height:22px;overflow:hidden;"><span>12 Cottam Ave AAA</span></div>
+                <div class="content">
+                  <h3><a href="/core/service/{{service.name}}/">{{service.name}}</a>
+                   (type:<span>{{service.type}}</span>,
+                    phone:<span>{{service.phone}}</span>)
+                    <span style="float:right">{{service.address}}</span>
+                  </h3>
+                   <div style="height:40px;float:left;">
+                    <p>{{service.description}}</p>
+                   </div>
                 </div>
-              </div>
-            </div>
-            <div style="width:218px;height:60px;margin:auto;color:#999999;font-size:12px;font-weight:100;line-height:18px;overflow:hidden;">
-              <p style="margin-top:3px;">Business among the world, while a looking to secure access to raw-materials workforce and recognises the contribution.</p>
-            </div>
-          </div>
-        </li>
-        <li style="width:256px;height:166px;padding-top:11px;">
-          <div style="width:235px;height:166px;margin:auto;background-color:#333333;">
-            <div style="width:215px;margin:auto;border-bottom:1px solid black;">
-              <a style="border:none;" href="#/"><img src='/res/res_error.png' style="width:80px;height:80px;margin:11px;margin-left:0;float:left;border:1px solid #cccccc;"></img></a>
-              <div style="height:93px;margin-right:11px;padding-top:10px;overflow:hidden;">
-                <p style="margin:0;">
-                  <span><a style="color:#ff25a5;text-decoration:none;font-size:14px;font-weight:800;" href="#">12 Cottam</a></span>
-                </p>
-                <div style="margin-top:8px;color:#939393;font-size:12px;font-weight:800;line-height:20px;overflow:hidden;">
-                  <span>Brothel</span><br>
-                  <span>1234 5678</span><br>
-                  <div style="height:22px;overflow:hidden;"><span>12 Cottam Ave AAA</span></div>
-                </div>
-              </div>
-            </div>
-            <div style="width:218px;height:60px;margin:auto;color:#999999;font-size:12px;font-weight:100;line-height:18px;overflow:hidden;">
-              <p style="margin-top:3px;">Business among the world, while a a a looking to secure access to raw-materials workforce and recognises the contribution.</p>
-            </div>
-          </div>
-        </li>
+             </li>
+        {% endfor %}
       </ul>
     </div>
-    <div class='mid-section' style="width:100%;clear:both;">
-      <div style="width:266px;margin-bottom:15px;border-bottom:1px solid #4c4c4c;text-align:right;">
-        <h3 style="margin:0;padding:0;padding-right:10px;color:#cccccc;font-size:24px;">Search Results</h3>
-      </div>
-      <div class='mid-section' style="width:949px;margin:auto;padding:0;padding-top:11px;padding-left:11px;background-color:#262626;">
-            <ul>
-              {% for service in DATA%}
-              <li style="width:50%;height:167px;float:left;">
-                <div style="margin-right:11px;height:156px;background-color:#333333;">
-                  <a style="border:none;" href="/core/service/{{service.name}}/"><img src='/core/data/res/{{service.name}}/{{service.icon}}/?sc=true' style="width:134px;height:134px;margin:11px;float:left;border:1px solid #cccccc;"></img></a>
-                  <div style="height:21px;margin-right:11px;padding-top:10px;overflow:hidden;border-bottom:1px solid black">
-                    <p style="margin:0;">
-                      <span><a style="color:#e9e9e9;text-decoration:none;font-size:14px;font-weight:800;" href="/core/service/{{service.name}}/">{{service.name}}</a></span>
-                    </p>
-                  </div>
-                  <div style="height:111px;color:#939393;font-size:14px;overflow:hidden;">
-                    <div style="margin-top:3px;margin-right:11px;font-weight:800;line-height:19px;">
-                      <div style="float:left;">
-                        <span>{{service.phone}}</span>
-                      </div>
-                      <div style="float:right;">
-                        <span>{{service.type}}</span>
-                      </div>
-                      <div style="clear:both;">
-                        <span>{{service.address}}</span>
-                      </div>
-                    </div>
-                    <div style="line-height:19px;">
-                      <p>{{service.description}}</p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              {% endfor %}
-            </ul>
-      </div>
-    </div>
-    <div style="clear:both;">
-      <span>FOOTER</span>
-    </div>
   </div><!-- page -->
-  <div id='zsk' class='msk'>
+ </div>
+{% endblock %}
+
+{% block tail %}
+ <div id='zsk' class='msk'>
   </div>
-  <div id='dialog'>
-   <div class='dialog'>
+ <!-- Following is just for dialog support -->
+ <div id='dialog'>
+    <div class='dialog'>
     <div class='dialog-hint'>
     </div>
     <div class='dialog-content'>
     </div>
     <div class='button-lane'>
-      <input type='button' value='ok' class="commit" onclick='zoyoe.ui.SubmitForm();'></input>
-      <input type='button' value='cancel' class="cancel" onclick='zoyoe.ui.HideDialog();'></input>
+      <input type='button' class="commit" value='ok' onclick='zoyoe.ui.SubmitForm();'></input>
+      <input type='button' class="cancel" value='cancel' onclick='zoyoe.ui.HideDialog();'></input>
     </div>
-   </div>
   </div>
-</body>
-</html>
-
+<!-- End dialog Support -->
+{% endblock %}

@@ -42,6 +42,16 @@ addserv_handler = {
   ,'address':(address_patten,(lambda x:x),lambda x, v:setattr(x,'address',v))
   ,'icon':(url_patten,(lambda x:x),lambda x, v:setattr(x,'icon',v))}
 
+report_handler = {
+  'name':(name_patten,(lambda x:x),lambda x, v:(x.update(name = v)))
+  ,'type':(type_patten,(lambda x:x),lambda x, v:(x.update(type = v)))
+  ,'address':(address_patten,(lambda x:x),lambda x, v:(x.update(address = v)))
+  ,'latitude':(latlong_patten,(lambda x: int(eval(x)*1000000)),lambda x, v: (x.update(latitude = v)))
+  ,'longitude':(latlong_patten,(lambda x: int(eval(x)*1000000)),lambda x, v: (x.update(longitude = v)))
+  }
+
+
+
 mdyserv_handler = {
    'type':(type_patten,(lambda x:x),lambda x, v:setattr(x,'type',v))
   ,'phone':(phone_patten,(lambda x:x),lambda x, v:setattr(x,'phone',v))

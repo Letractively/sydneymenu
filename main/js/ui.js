@@ -16,6 +16,7 @@ function ZOYOE_UI(env,yui,static_dialog){
   this.update = null;
   this.complete = null;
   this.dialog_title = null;
+  this.dialog_name = null;
   this.static_dialog = static_dialog;
   this.dialog_commit_btn = this.dialog.one(".button-lane input.commit");
   this.dialog_cancel_btn = this.dialog.one(".button-lane input.cancel");
@@ -127,7 +128,7 @@ function ZOYOE_UI(env,yui,static_dialog){
       ClearHint();
       env.ALERT(o.responseText);
       var data = o.responseXML;
-      if(data){
+      if(data && data.documentElement){
         if(data.documentElement.tagName == 'SUCC'){
           var msg = data.documentElement.getElementsByTagName('HTMLMSG')[0].firstChild.data;
           UI.BuildGeneralMsg(msg,null);

@@ -275,15 +275,15 @@ function InitRoster(env,day){
   return roster_comp;
 }
 
-function InitGirls(env){
-  var girl_comp = new function(){
+function InitItems(env){
+  var item_comp = new function(){
     this.cache = null;
     this.info_cache = null;
-    this.del_girl_uri = function(){
-      return "/core/girl/"+env.service_name+'/remove/';
+    this.del_item_uri = function(){
+      return "/core/item/"+env.service_name+'/remove/';
     }
-    this.add_girl_uri = function(){
-      return "/core/girl/"+env.service_name+'/add/';
+    this.add_item_uri = function(){
+      return "/core/item/"+env.service_name+'/add/';
     }
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
@@ -299,22 +299,22 @@ function InitGirls(env){
         this.info_cache = info;
       }
     }
-    this.AddGirl = function(form_obj){
+    this.AddItem = function(form_obj){
       var config = {
         method: 'GET',
         form: {id:form_obj}
       }
-      var uri = this.add_girl_uri();
+      var uri = this.add_item_uri();
       var request = env.ui.GeneralDialogCont(uri,config,true
-        ,new update_info("/core/service/" + env.service_name + "/?comp=girls","girls"));
+        ,new update_info("/core/service/" + env.service_name + "/?comp=items","items"));
     }
-    this.DelGirl = function(gname){
+    this.DelItem = function(gname){
       var config = {
          method: 'GET',
       }
       var uri = this.del_girl_uri() + gname;
       var request = env.ui.ResponseDialog(uri,config,true
-        ,new update_info("/core/service/" + env.service_name + "/?comp=girls","girls"));
+        ,new update_info("/core/service/" + env.service_name + "/?comp=items","items"));
     }
     this.DelGirlSelect = function(){
       if(this.info_cache){
@@ -322,11 +322,11 @@ function InitGirls(env){
       }
     }
     this.ShowAddDialog = function(){
-      var dialog_uri = "/core/dialog/addgirl/"+env.service_name;
-      env.ui.InfoCollectDialog("AddGirl",
-        dialog_uri,"form-addgirl",
+      var dialog_uri = "/core/dialog/additem/"+env.service_name;
+      env.ui.InfoCollectDialog("AddItem",
+        dialog_uri,"form-additem",
         function(form_obj){
-          env.comps['GIRLS'].AddGirl(form_obj);
+          env.comps['ITEMS'].AddItem(form_obj);
         },
         function(dialog){
           YUI().use('node',function(Y){
@@ -341,7 +341,7 @@ function InitGirls(env){
       });
     }
   }
-  return girl_comp;
+  return item_comp;
 }
 
 function InitGallery(env){
@@ -611,7 +611,23 @@ function InitAdmin(zo){
       this.login_dialog_uri,"form-login",admin.LoginCallback());
     }
     this.ShowAddServiceDialog = function(){
-      env.ui.InfoCollectDialog("AddService",this.addserv_dialog_uri,"form-addservice",AddService);
+      env.ui.InfoCollectDialog("Restaurant",this.addserv_dialog_uri,"form-addservice",AddService);
+    }
+    this.AddReport = function(){
+      var map_comp = zoyoe.map;/*Convention*/
+      var script = document.createElement("script");
+      zoyoe.ui.dialog_name = 'form-report';
+      var form_obj = document.forms(zoyoe.ui.dialog_name);
+      script.setAttribute("type","text/javascript"); 
+      if (form_obj.address.value.length != 0){
+        script.setAttribute("src",map_comp.SearchUri(form_obj.address.value+',NSW,Australia')
+        +"&jsonp=AddReportJSON");    
+        document.body.appendChild(script);
+      }
+      else{
+        zoyoe.ui.GeneralAlert("You need give us a valid address for the restaurant","",null,false);
+        zoyoe.ui.BuildErrorMsg('Please enter address !!');
+      }
     }
   }
   return admin;
@@ -630,6 +646,49 @@ function AddService(form_obj){
     zoyoe.ui.BuildErrorMsg('Please enter address !!');
   }
   document.body.appendChild(script);
+}
+function BuildResultAddress(form_obj,result){
+  if(result.resourceSets){
+    if(result.resourceSets[0].estimatedTotal == 0){
+      zoyoe.ui.BuildErrorMsg('Address Not Found !!');
+      return null;
+    }
+    else if(result.resourceSets[0].estimatedTotal == 1){
+      var resources = result.resourceSets[0].resources;
+      if(resources[0].address.formattedAddress == "New South Wales"){
+        zoyoe.ui.BuildErrorMsg("Address Not Found !!");
+        return null;
+      }else if(resources.length == 1){
+        zoyoe.ALERT(resources[0].address.formattedAddress);
+        form_obj.address.value = resources[0].address.formattedAddress; 
+        var c = resources[0].point.coordinates;
+        return c;
+      }else{
+        zoyoe.ui.BuildErrorMsg('Ambiguious Address,Please Make It Clear !!');
+        return null;
+      }
+    }
+    else{
+      var resources = result.resourceSets[0].resources;
+      zoyoe.ui.BuildErrorMsg('Multi Address Found,Please Make It Clear !!');
+      return null;
+    }
+  }
+}
+function AddReportJSON(result){
+  var form_obj = document.forms(zoyoe.ui.dialog_name);
+  var c = BuildResultAddress(form_obj,result);
+  if(c){
+    var add_report_config = {
+      method: 'POST',
+      data:'latitude='+c[0]+"&longitude="+c[1],
+      form: {id:form_obj}
+    }
+    var add_report_uri = "/core/data/addreport/";
+    var request = zoyoe.ui.ResponseDialog(add_report_uri,add_report_config,true,null);
+  }else{
+    return;
+  }
 }
 function AddServiceJSON(result){
   var form_obj = document.getElementById(zoyoe.ui.dialog_name);

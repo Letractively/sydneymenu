@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Adult Service Distribution 133:99700a65a126</title>
+  <title>Food Distribution 133:99700a65a126</title>
   <META name="description" content="Sydney Adult Services Distribution"></META>
   <link rel="stylesheet" href="/css/{{CSS_ROOT}}/map.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
@@ -53,7 +53,7 @@
   </style>
 </head>
 
-<body onload = "map_document_load({{LOC.x}},{{LOC.y}});">
+<body onload = "document_load();">
 <div id="map-info" style="z-index:10;position:fixed;top:0px;left:0px;
   bottom:0px;right:235px;">
 </div>
@@ -65,7 +65,7 @@
     <div class="lane">
      <div class="icon"></div>
     </div>
-    <h5>Local Top Rate</h5>
+    <h5>Local Restaurants</h5>
     <div class="split"></div>
     <div class="icons"></div>
     <h5>recent activity</h5>
@@ -82,100 +82,96 @@
     </div>
   </div>
 </div>
+
+<div id="report-bar">
+  <form name="form-report">
+  <div class="head">
+  <h5>Sharing Your Experience:</h5>
+  </div>
+  <div class='window-container'>
+  <label>OF:</label>
+  {{"type"|select|style:"width:240px;float:left;margin-bottom:2px;"|addfield:"Breakfast"|addfield:"Lunch"|addfield:"Dinnner"|render|safe}}
+  </div>
+  <div class='window-container'>
+  <label>IN(restaurant name):</label>
+  <input class="normal" type="textfield" name="name"></input>
+  </div>
+  <div class='window-container'>
+  <label>AT(address):</label>
+  {{"address"|auto_complete|style:"width:240px;height:30px;float:left;margin-bottom:2px;"|render|safe}}
+  </div>
+  <div class='window-container'>
+  <label>FOR(what food you've ordered):</label>
+  <input class="normal" type="textfield" name="item"></input>
+  </div>
+  <div class='window-container'>
+  <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
+  </div>
+  </form>
+</div>
+ 
 <div id="title-bar">
   <div class="section" id="page">
     <div class="nav">
       <div class="brand">
-        <a href="/search/"><img src="/res/map_logo_5.png" width="153px" height="26px"/></a>
+        <a href="/search/"><img src="/res/design_required.png" width="153px" height="26px"/></a>
       </div>
+     <ul class="config-menu">
+        <li><img src="/res/setting.png"></img>
+        <div id="config-bar">
+        <div class='window-container'>
+          <div id='type-select'>
+            <div class='vbar'>
+              <span>Category:</span>
+              <a class='selected'><span></span>Report</a><a class='selected'><span></span>Shop</a>
+            </div>
+            </div><!-- group the buttons -->
+            <div class='vbar' id='sort-select'>
+              <span> Sort By:</span>
+              <a><span></span>Rating</a><a class='selected'><span></span>Active</a>
+            </div>
+            <div class='vbar' id='history-select'>
+              <span> History:</span>
+              <a><span></span>Recent</a><a class='selected'><span></span>Today</a>
+            </div>
+            <div class='vbar' id='gallery-select'>
+              <span> Gallery:</span>
+              <a><span></span>Global</a><a class='selected'><span></span>Local</a>
+            </div>
+          </div>
+        <div class='window-container'>
+          <div class='vbar'><span> Working Days:</span></div>
+          <div class='vbar2' id='working-days'>
+            <a class='selected'><span></span>Mon</a>
+            <a class='selected'><span></span>Tue</a>
+            <a class='selected'><span></span>Wed</a>
+            <a class='selected'><span></span>Thu</a>
+            <a class='selected'><span></span>Fri</a>
+            <a class='selected'><span></span>Sat</a>
+            <a class='selected'><span></span>Sun</a>
+           </div>
+          <br style="clear:both"></br>
+        </div>
+       </div>
+      </li>
+      </ul>
       <ul class="menu">
         <!-- <li><a onclick="ShowFilter">Filter</a></li>-->
-        <li><a href="/forum/">Forum</a></li>
-        <li onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Quick Publish</a></li>
+        <li class="item"><a href="/forum/">Forum</a></li>
+        <li class="item" onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Quick Publish</a></li>
         {% if user.is_authenticated %}
-        <li><a href="a">Welcome {{user.username}}</a></li>
-        <li onclick ="Logout()" style="border:none"><a>Logout</a></li>
+        <li class="item"><a href="a">Welcome {{user.username}}</a></li>
+        <li class="item" onclick ="Logout()"rder:none"><a>Logout</a></li>
         {% else %}
-        <li onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-        <li onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
+        <li class="item" onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+        <li class="item" onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
         {% endif %}
       </ul>
       <ul class="menu" id="about-us">
-        <li><a href="a">About Us</a></li>
+        <li class="item"><a href="a">About Us</a></li>
       </ul>
     </div>
   </div>
-</div>
-<div id='config-bar'>
-    <div class='window-title'>
-      FILTERS
-      <a onclick="SwitchPanel(this)">&#9666;</a>
-    </div>
-    <div class='dummy'>
-    </div>
-    <div class='window-container'>
-      <div id='type-select'>
-        <div class='vbar'>
-          <span> Service Type:</span>
-          <a class='selected'><span></span>Brothel</a><a class='selected'><span></span>Escort</a>
-        </div>
-        <div class='vbar'>
-          </span>
-          <a class='selected'><span></span>Club</a><a class='selected'><span></span>Massage</a>
-        </div>
-      </div><!-- group the buttons -->
-      <div class='vbar' id='sort-select'>
-        <span> Sort By:</span>
-        <a><span></span>Rating</a><a class='selected'><span></span>Active</a></div>
-      <div class='vbar' id='history-select'>
-        <span> History:</span>
-        <a><span></span>Recent</a><a class='selected'><span></span>Today</a></div>
-      <div class='vbar' id='gallery-select'>
-        <span> Gallery:</span>
-        <a><span></span>Global</a><a class='selected'><span></span>Local</a></div>
-    </div>
-    <div class='window-container'>
-      <div class='vbar'>
-        <span> Age Range:</span>
-        <span id='age-range-hint'>All</span>
-        <div class='vscroll' id = 'age-scroll'>
-          <div class='blank'></div>
-          <div class='drag'></div>
-          <div class='fill'></div>
-          <div class='drag'></div>
-        </div>
-      </div>
-      <div class='vbar'>
-        <span> Rate Range:</span>
-        <span id='rate-range-hint'>All</span>
-        <div class='vscroll' id = 'rate-scroll'>
-          <div class='blank'></div>
-          <div class='drag'></div>
-          <div class='fill'></div>
-          <div class='drag'></div>
-        </div>
-      </div>
-    </div>
-    <div class='window-container'>
-      <div class='vbar'><span> Working Days:</span></div>
-      <div class='vbar2' id='working-days'>
-        <a class='selected'><span></span>Mon</a>
-        <a class='selected'><span></span>Tue</a>
-        <a class='selected'><span></span>Wed</a>
-        <a class='selected'><span></span>Thu</a>
-        <a class='selected'><span></span>Fri</a>
-        <a class='selected'><span></span>Sat</a>
-        <a class='selected'><span></span>Sun</a>
-      </div>
-      <br style="clear:both"></br>
-    </div>
-    <div class='window-container'>
-      <div class='suburb'>
-      <label>Concerete Address:</label>
-      <a>GO</a>
-      {{"suburb"|auto_complete|style:"clear:both;padding-top:0px;display:block;width:242px;margin:2px;"|render|safe}}
-      </div>
-    </div>
 </div>
 <div id='zsk' class='msk'>
 </div>
@@ -233,7 +229,7 @@
 </div>
 <div id='dialog'>
   <div class='dialog'>
-    <div class='dialog-hint'>
+    <div class='dialog-hint'><a></a><h5></h5>
     </div>
     <div class='dialog-content'>
     </div>

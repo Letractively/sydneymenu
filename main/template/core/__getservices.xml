@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+{% load comp_filters %}
+{% load hash_filters %}
 <SERVICES>
-  {% for service in DATA%}
+  {% for service in SERVICES%}
   <SERVICE name='{{service.name}}' type='{{service.type}}' phone='{{service.phone}}' email='{{service.email}}' grade='{{service.grade}}' privilege='{{service.privilege}}' icon='{{service.icon}}' activity='{{service.activity}}'>
     <latlong>{{service.latitude}},{{service.longitude}}</latlong>
     <address>{{service.address}}</address>
@@ -8,5 +10,7 @@
     <days>{{service.days}}</days>
     <age>{{service.aveage}}</age>
   </SERVICE>
+  {% endfor %}
+  {% for report in REPORTS%}{{report|hs_explain_xml|safe}}
   {% endfor %}
 </SERVICES>

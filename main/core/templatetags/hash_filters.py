@@ -1,4 +1,6 @@
 from django import template
+from user import * 
+from glue.forum import *
 
 register = template.Library()
 
@@ -13,7 +15,21 @@ def HistoryExplain(hs):
     return hs.who + " added girl info: '" + hs.para + "'"
   elif (hs.type == "GIRL_REMOVE"):
     return hs.who + " removed girl info: '" + hs.para + "'"
+  elif (hs.type == "REPORT"):
+    plist = json.loads(hs.para)
+    [address,lat,lon,t] = plist
+    return hs.who + " shared his experience of %s in %s"%(unquote(t),hs.service)
  
+def HistoryExplainXML(hs):
+  if(hs.type == "REPORT"):
+    plist = json.loads(hs.para)
+    [address,lat,lon,t] = plist
+    ret_str = """<REPORT name='%s' who='%s' type='%s'><latlong>%d,%d</latlong><address>%s</address></REPORT>"""%(hs.service,hs.who,t,lat,lon,address)
+    return ret_str
+  else:
+    return "<REF/>"
+ 
+
 @register.filter("hash")
 def hash(dict,key):
   "Return the value of a key in a dictionary. "
@@ -36,3 +52,7 @@ def attr(obj,key):
 @register.filter("hs_explain")
 def attr(obj):
     return HistoryExplain(obj)
+
+@register.filter("hs_explain_xml")
+def attr(obj):
+    return HistoryExplainXML(obj)

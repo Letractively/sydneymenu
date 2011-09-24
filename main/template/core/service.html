@@ -36,7 +36,7 @@ function Init(){
   var basic_info = document.getElementById('info');
   var time_table = document.getElementById('timetable');
   var roster = document.getElementById('roster');
-  var girls = document.getElementById('girls');
+  var items = document.getElementById('items');
   var icon = document.getElementById('icon');
   var gallery = document.getElementById('gallery');
   var news = document.getElementById('news');
@@ -46,14 +46,14 @@ function Init(){
   MarkAsArrangeV(mid,time_table.parentNode,GetTitle(time_table));
   MarkAsArrangeV(mid,roster.parentNode,GetTitle(roster));
   MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
-  MarkAsArrangeV(left,girls.parentNode,GetTitle(girls));
+  MarkAsArrangeV(left,items.parentNode,GetTitle(items));
   MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
   MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
   
   YUI().use('node','io-form',function(Y){
     zoyoe.InitZoyoe(false,Y);
     zoyoe.service_name = '{{SERVICE.name}}';
-    zoyoe.comps['GIRLS'] = InitGirls(zoyoe);
+    zoyoe.comps['ITEMS'] = InitItems(zoyoe);
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
     zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
     zoyoe.comps['POST'] = InitPost(zoyoe);
@@ -70,36 +70,32 @@ function Init(){
 </script>
 </head>
 <body onload='Init()'>
-<div class = 'page'>
-  <div id='title-bar'>
-    <div class='nav'>
-      <ul>
-        {% if user.is_authenticated %}
-        <li class='menu' style="width:60px;">
-          <a>Actions
-          <ul class='submenu'>
-          {% if HAS_AUTHORITY %}
-          <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].SaveLayout()"><a>Save Current Layout</a></li>
-          <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
-          <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
-          <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
-          {% endif %}
-          <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
-          </ul>
-          </a>
-        </li>
-        <li class='menu' onclick ="Logout()"><a>Logout</a></li>
-        {% else %}
-          <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-          <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-        {% endif %}
-        <li class='menu'><a href='/search/'>Home</a></li>
+<div class='nav'>
+  <ul>
+    {% if user.is_authenticated %}
+    <li class='menu' style="width:60px;">
+      <a>Actions</a>
+      <ul class='submenu'>
+      {% if HAS_AUTHORITY %}
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].SaveLayout()"><a>Save Current Layout</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
+      {% endif %}
+      <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
       </ul>
-      <div class='title'>
-        <a href="/map/"><img src="/res/map_logo_5.png" width="236px" height="40px"/></a>
-      </div>
-    </div>
-  </div>
+      </a>
+    </li>
+    <li class='menu' onclick ="Logout()"><a>Logout</a></li>
+    {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+    {% endif %}
+    <li class='menu'><a href='/search/'>Home</a></li>
+  </ul>
+</div>
+
+<div class = 'page'>
   <div id="left-section" class='left-section'>
   {% include "comp/_comp_list_left.html" %}
   </div><!-- end of left section -->

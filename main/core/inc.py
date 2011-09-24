@@ -2,6 +2,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import Context, loader, RequestContext
 from django.core.exceptions import ValidationError
 from django.views.decorators.cache import cache_page,cache_control
+from django.utils.http import urlquote
+from django.utils.http import urlencode
+from urllib import unquote
 from models import *
 from patten import *
 from config import *

@@ -54,15 +54,17 @@ class HistoryHelper:
     today = date.today()
     now = datetime.now()
     hist = History() 
-    hist.time = now.strftime("(%d/%m/%Y)%H:%M:%S")
     hist.type = acttype
     hist.service = sname
     hist.who = GetUsr(request) 
     hist.para = para
     hist.save()
-    service = ServiceCore.objects.get(name = sname)
-    service.activity = service.activity + 1
-    service.save()
+    try:
+      service = ServiceCore.objects.get(name = sname)
+      service.activity = service.activity + 1
+      service.save()
+    except ServiceCore.DoesNotExist:
+      pass
 
   @staticmethod
   def GetHistory(sname,acttype,usrname,max):

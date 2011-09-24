@@ -6,7 +6,7 @@ from settings import ROOT
 #(r'^test/','test.Test'),
 
 urlpatterns = patterns('',
-    (r'^/{0,1}$','main.core.views.Map'),
+    (r'^/{0,1}$','main.core.views.Search'),
     (r'^map/','main.core.views.Map'),
     (r'^log/','main.core.log.index'),
     (r'^search/','main.core.views.Search'),

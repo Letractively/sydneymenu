@@ -3,8 +3,8 @@ function BuildPoint(x,y){
 }
 
 function Service(element){
-  this.name = element.getAttribute("name");
   this.type = element.getAttribute("type");
+  this.name = element.getAttribute("name");
   this.email= element.getAttribute("email");
   this.phone= element.getAttribute("phone");
   this.grade = element.getAttribute("grade");
@@ -21,27 +21,41 @@ function Service(element){
   for(var i=0;i<working_days.length;i++){
      this.days[working_days[i]] = true;   
   }
-  var aveage = element.getElementsByTagName("age")[0].firstChild.data.split("-",2);
+/*  var aveage = element.getElementsByTagName("age")[0].firstChild.data.split("-",2);
   this.age = new function(){
     this.low = parseInt(aveage[0]); 
     this.high = parseInt(aveage[1]);
   }
+*/
   this.active = true;
   this.WorkingDaysStr = function(){
     var ret = [];
     var ds = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        for(var i=0;i<ds.length;i++){
-          if(this.days[ds[i]]){
-            ret.push(ds[i]);
-          }
-        }
-        return ret.join(','); 
+    for(var i=0;i<ds.length;i++){
+      if(this.days[ds[i]]){
+        ret.push(ds[i]);
       }
+    }
+    return ret.join(','); 
+  }
 }
+
+function ServiceReport(element){
+  this.type = "Report";
+  this.name = element.getAttribute("name");
+  this.dishtype = element.getAttribute("type");
+  this.who = element.getAttribute("who");
+  this.address =  element.getElementsByTagName("address")[0].firstChild.data;
+  var loc_string = element.getElementsByTagName("latlong")[0].firstChild.data.split(",",2);
+  this.loc = BuildPoint(parseFloat(loc_string[0])/1000000,parseFloat(loc_string[1])/1000000);
+  this.active = true;
+}
+
 function AgeFilter(low,high){
     this.low = low;
     this.high = high;
     this.filt = function (service){
+      return true;
       if (service.age.high >= this.low && service.age.low <= this.high){
         return true;
       }else{
@@ -53,18 +67,26 @@ function WorkingDayFilter(){
   this.slots = {'Mon':true,'Tue':true,'Wed':true,'Thu':true,'Fri':true,'Sat':true,'Sun':true};
   this.keys = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   this.filt = function (service){
-    for(var i=0;i<this.keys.length;i++){
-      if(this.slots[this.keys[i]] && service.days[this.keys[i]]){
-        return true
+    if(service.type == "Report"){
+      return true;
+    }else{
+      for(var i=0;i<this.keys.length;i++){
+        if(this.slots[this.keys[i]] && service.days[this.keys[i]]){
+          return true
+        }
       }
     }
     return false;
   }
 }
 function TypeFilter(){
-  this.check = {'mixed':true,'Brothel':true,'Escort':true,'Massage':true,'Club':true}
+  this.check = {'mixed':true,'Shop':true,'Report':true}
   this.filt = function(service){
-    if(this.check[service.type] == true){
+    var type = service.type;
+    if(type != "Report"){
+       type = "Shop"
+    }
+    if(this.check[type] == true){
       return true;
     }else{
       return false;
@@ -126,36 +148,55 @@ function ServiceGeoGroup(service){
   var self = this;
   this.loc = service.loc;
   this.service_list = new Array();
-  this.service_list.push(service);
+  this.report_list = new Array();
   this.pushpin = new Microsoft.Maps.Pushpin(this.loc,{anchor:{x:15,y:15},height:30,width:30});
   this.mouseover = Microsoft.Maps.Events.addHandler(this.pushpin,'click',
-          function(e){
-            if(zoyoe){
+    function(e){
+      if(zoyoe){
 	      var gp = zoyoe.map.map.tryLocationToPixel(self.loc,Microsoft.Maps.PixelReference.page);
-            zoyoe.ShowShortCut(gp,self.service_list);
-            }
-          });
+            zoyoe.ShowShortCut(gp,self.service_list,self.report_list);
+      }
+    });
   this.BuildIcon = function(ctr){
-    var count = 0;
-    var name_list = "";
+    var s_count = 0;
+    var r_count = 0;
     for(var i=0;i<this.service_list.length;i++){
       if(this.service_list[i].active){
-        count++;
-        name_list+=this.service_list[i].name+'/';
+        s_count++;
       }
     } 
-    if(count>0){
-      this.pushpin.setOptions({icon:"/res/pushpin/pushpin.png",text:''+count});
+    for(var i=0;i<this.report_list.length;i++){
+      if(this.report_list[i].active){
+        r_count++;
+      }
+    } 
+   var act_pin = null;
+   var inact_pin = null; 
+   if(r_count !=0 && s_count ==0){
+      act_pin = "/res/pushpin/burger.png";
+      inact_pin = "/res/pushpin/burger_inactive.png";
     }else{
-      this.pushpin.setOptions({icon:"/res/pushpin/pushpin_inactive.png",text:'?'});
+      act_pin = "/res/pushpin/pushpin.png";
+      inact_pin = "/res/pushpin/pushpin_inactive.png";
+    }
+    if(s_count>0){
+      this.pushpin.setOptions({icon:act_pin,text:''+s_count});
+    }else if(r_count>0){
+      this.pushpin.setOptions({icon:act_pin,text:''+r_count});
+    }else{
+      this.pushpin.setOptions({icon:inact_pin,text:'?'});
     }
   }
   this.Absorb = function(service){
     var weight = this.service_list.length;
-		this.service_list.push(service);
+    if (service.type != "Report"){
+		  this.service_list.push(service);
+    }else{
+		  this.report_list.push(service);
+    }
 		this.BuildIcon(false);
   }
-  this.BuildIcon(false);
+  this.Absorb(service);
 }
 function Layer(){
 	this.geo_service_group = new Array();
@@ -238,12 +279,10 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
   }
 /* Check whether a service is near a group or not */
 	this.NeighbourAtCurrentZoom = function(group,service){
-	    var gp = this.map.tryLocationToPixel(group.loc,Microsoft.Maps.PixelReference.page);
-		var sp = this.map.tryLocationToPixel(service.loc,Microsoft.Maps.PixelReference.page);
-		return (Math.abs(gp.x-sp.x)<=15&&Math.abs(gp.y-sp.y)<=15);
+    var gp = this.map.tryLocationToPixel(group.loc,Microsoft.Maps.PixelReference.page);
+    var sp = this.map.tryLocationToPixel(service.loc,Microsoft.Maps.PixelReference.page);
+    return (Math.abs(gp.x-sp.x)<=15&&Math.abs(gp.y-sp.y)<=15);
 	}
-
-  
   
 	this.TargetPlace = function(where,cbname){
     var script = document.createElement("script");
@@ -466,7 +505,7 @@ function MapInfoCore2(callback,address,container_id,x,y,zoom,disable_handler){
   }
 /* Check whether a service is near a group or not */
 	this.NeighbourAtCurrentZoom = function(group,service){
-	    var gp = this.map.tryLocationToPixel(group.loc,Microsoft.Maps.PixelReference.page);
+	  var gp = this.map.tryLocationToPixel(group.loc,Microsoft.Maps.PixelReference.page);
 		var sp = this.map.tryLocationToPixel(service.loc,Microsoft.Maps.PixelReference.page);
 		return (Math.abs(gp.x-sp.x)<=15&&Math.abs(gp.y-sp.y)<=15);
 	}

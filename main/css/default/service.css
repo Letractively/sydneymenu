@@ -4,17 +4,16 @@ margin: 0px;
 font-family: "Trebuchet MS", sans-serif; 
 list-style-type:none;
 }
-.nav ul li a:link { color:white; text-decoration:none; }
-.nav ul li a:visited { color:white; text-decoration:none; }
-.nav ul li a:hover {color:white; text-decoration:none;}
+
 div.page{
 margin:auto;
+margin-top:30px;
 width:960px;
 }
 #title-bar{
 width:100%;
 margin-bottom:60px;
-border-bottom:1px solid #333333;
+border-bottom:1px solid steelblue;
 }
 
 div.section{
@@ -26,6 +25,7 @@ div.section > div.title{
 div.section > div.title > h3{
   display:inline;
   cursor:move;
+  color:steelblue;
 }
 div.section h3.split{
 }
@@ -108,22 +108,65 @@ div.tail{
 
 
 body{
-background:url("/res/service_background.png") repeat;
+}
+.nav {
+  width:100%;
+  height:30px;
+  background-color:steelblue;
+  text-align:center;
 }
 
-div.nav {
-height:50px;
+.nav ul {
+  display:block;
+  margin:auto;
+  list-style-type:none; 
+  color:white;
+  font-family:Arial;
+  font-size:15px; 
+  font-weight:100;
+  color:white;
+  padding-left:10px;
 }
 
-div.nav div.title h3{
-  padding:10px 0 0 10px;
-  margin:0px;
-  font-size:28px;
-  color:#cccccc;
-  font-weight:300;
+.nav > ul > li {
+  display:block;
+  height:20px;
+  float:left;
+  margin: 2px 0 0 0px;
+  padding:4px 10px 4px 10px;
+  text-align:center;
+  cursor:pointer;
 }
-div.nav div.title img {padding:6px 3px 3px 3px;border:none;}
-div.nav div.title a {text-decoration:none;border:none;}
+
+.nav ul li a{
+  text-decoration:none;
+  font-weight:100;
+  padding:4px
+}
+
+.nav ul li:hover {
+  background-color:ghostwhite;
+}
+.nav ul li a{
+  color:white;
+}
+.nav ul li:hover a{
+  color:steelblue;
+}
+
+.nav ul li:hover a:visited {
+  color:steelblue;
+}
+
+.nav ul li:hover a:active {
+  color:steelblue;
+}
+.nav ul li:hover a:link {
+  color:steelblue;
+}
+
+.nav div.title img {padding:6px 3px 3px 3px;border:none;}
+.nav div.title a {text-decoration:none;border:none;}
 
 
 
@@ -131,8 +174,9 @@ div.nav div.title a {text-decoration:none;border:none;}
 margin-bottom:30px;
 }
 .mid-section .section{
-  border:7px solid #262626;
-  background-color:#333333;
+  border:1px solid steelblue; 
+  border-top:5px solid steelblue;
+  background-color:ghostwhite;
   padding:10px;
 }
 .mid-section .section div.title{
@@ -140,36 +184,36 @@ margin-bottom:30px;
 }
 .mid-section .section div.title h3{
   font-size:18px;
-  color:#cccccc;
+  color:steelblue;
   font-weight:300;
 }
 
 .mid-section .section div.title div.menu{
-  border-bottom:1px solid #262626;
+  border-bottom:1px solid steelblue;
   text-align:right;
   position:relative;
   top:-10px;
 }
 .mid-section .section div.title a.tab{
-  background-color:#262626;
+  background-color:steelblue;
   margin:0px;
   font-size:14px;
   padding:3px 3px 0 3px;
   font-weight:100;
-  color:#939393;
+  color:white;
 }
 .mid-section .section div.title a.focus{
-  background-color:#cccccc;
-  color:#262626;
+  background-color:white;
+  color:steelblue;
 }
 
 .mid-section .section h3.split{
-  background-color:#262626;
+  background-color:steelblue;
   margin:0px;
   font-size:14px;
   padding:3px;
   font-weight:100;
-  color:#939393;
+  color:white;
 }
 
 .mid-section .section h3.split span.select{
@@ -177,7 +221,7 @@ margin-bottom:30px;
 }
 
 .mid-section .section div.info-block {
-  color:#939393;
+  color:steelblue;
   padding-bottom:5px;
 }
 .mid-section .section div.info-block ul li{
@@ -186,7 +230,7 @@ margin-bottom:30px;
 .mid-section .section div.info-block ul.border-split li{
   font-size:14px;
   border-top:1px solid #1b1b1b;
-  color:#939393;
+  color:steelblue;
 }
 .mid-section .section div.info-block ul.border-split li#service-name a{
   color: #ff25a5;
@@ -222,13 +266,13 @@ margin-top:5px;
 }
 
 div.tail h3{
-  border-right:7px solid #262626;
-  border-bottom:2px solid #262626;
-  border-left:7px solid #262626;
-  background-color:#262626;
+  border-right:7px solid steelblue;
+  border-bottom:2px solid steelblue;
+  border-left:7px solid steelblue;
+  background-color:steelblue;
   font-size:12px;
   font-weight:100;
-  color:#939393;
+  color:white;
 }
 
 div.tail h3 a:hover {
@@ -241,14 +285,14 @@ margin-bottom:50px;
 
 .left-section .section div.title{
   padding-bottom:3px;
-  border-bottom:1px solid #333333;
+  border-bottom:1px solid steelblue;
   text-align:right;
   text-transform:uppercase;
   margin-bottom:10px;
 }
 .left-section .section div.title h3{
   font-size:24px;
-  color:white;
+  color:steelblue;
   font-weight:300;
 }
 .left-section div.info-block ul li div.gicon{
@@ -305,7 +349,7 @@ margin-top:5px;
 }
 
 .left-section .tail{
-  border-top:1px solid #333333;
+  border-top:1px solid steelblue;
   margin-top:5px;
 }
 div.img-frame iframe{
@@ -314,19 +358,20 @@ div.img-frame iframe{
   margin:auto;
   width:202px;
   height:202px;
-  background-color:#cccccc;
+  background-color:steelblue;
 }
 div.img-frame{
-border:2px solid #cccccc;
-padding:2px;
+border:1px solid steelblue;
+padding:3px;
 }
 
 .right-section .section-container{
 margin-bottom:30px;
 }
 .right-section .section{
-  border:7px solid #262626;
-  background-color:#333333;
+  border:1px solid steelblue;
+  border-top:5px solid steelblue;
+  background-color: ghostwhite;
   padding:10px;
 }
 .right-section .section div.title{
@@ -334,7 +379,7 @@ margin-bottom:30px;
 }
 .right-section .section div.title h3{
   font-size:18px;
-  color:#cccccc;
+  color:steelblue;
   font-weight:300;
 }
 .right-section .section div.info-block{
@@ -462,49 +507,53 @@ height:210px;
 padding:none;
 margin:15px 10px 15px 0;
 }
-div.nav {
-}
-.nav > ul {
-  float:right;
-  display:block;list-style-type:none; margin:0; padding:0 0 13px 0; 
-  font-family: "proxima-nova-extra-condensed", "Trebuchet MS", sans-serif; 
-  color:white;
-  font-size:13px; font-weight:100; text-transform:uppercase; 
-  border-bottom:0px solid #bb6848;
-}
+
 .nav ul li.menu{
   display:block;
   height:20px;
   cursor:pointer;
+  overflow:show;
 }
-div.nav ul li.menu{
-  float:left;
-  padding:10px;
-  position:relative;
-  top:20px;
-}
-div.nav ul.submenu{
-  display:none;
+.nav ul li.menu:hover .submenu{
+  display:block;
 }
 
-div.nav ul li.menu:hover ul.submenu{
+div.nav ul.submenu:hover {
   display:block;
-  width:200px;
-  padding:10px;
+}
+
+div.nav ul.submenu{
+  display:none;
+  color:steelblue;
+  width:250px;
+  background-color:ghostwhite;
   position:relative;
   top:5px;
-  left:-20px;
+  left:-10px;
   clear:both;
   float:left;
-  border:1px solid #3b3b3b;
-  background-color: #1b1b1b;
+  border-top:2px solid steelblue;
+  border-bottom:1px solid steelblue;
+  border-left:1px solid steelblue;
+  border-right:1px solid steelblue;
+  padding:0px 0px 5px 0px;
 }
 div.nav ul.submenu li{
- padding:3px;
+ display:block;
+ clear:both;
+ color:steelblue;
+ padding:2px 2px 4px 10px;
+ text-align:left;
+}
+div.nav ul.submenu li a{
+ color:steelblue;
 }
 div.nav ul.submenu li:hover {
- padding-bottom:5px;
- background-color:black;
+ color:white;
+ background-color:steelblue;
+}
+div.nav ul.submenu li:hover a{
+ color:white;
 }
 #dialog{
  position:fixed;

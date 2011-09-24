@@ -19,8 +19,8 @@ def Add(request,sname):
         girls = Girls.InitGirlsConfig(gnode.getroot())
         if (girls.AddGirl(girl_attr['name'],girl_attr,desc) != None):
           SaveConfig(sname,gnode)
-          HistoryHelper.Record(request,aut['s'].name,"GIRL_ADD",girl_attr['name'])
-          return GeneralXMLResponse(request,command_error,"Girl Add Successfully, Press Ok To Refresh The Page!!")
+          HistoryHelper.Record(request,aut['s'].name,"ITEM_ADD",girl_attr['name'])
+          return GeneralXMLResponse(request,command_error,"ITEM Add Successfully, Press Ok To Refresh The Page!!")
         else:
           command_error['MISC'] = "COMMAND FAIL,REASON UNKNOW"
           return GeneralXMLResponse(request,command_error)
@@ -40,8 +40,8 @@ def Remove(request,sname,gname):
         girls = Girls.InitGirlsConfig(gnode.getroot())
         girls.RemoveGirl(gname)
         SaveConfig(sname,gnode)
-        HistoryHelper.Record(request,aut['s'].name,"GIRL_REMOVE",gname)
-        return GeneralXMLResponse(request,command_error,"Girl " +gname +"  Delete Successfully")
+        HistoryHelper.Record(request,aut['s'].name,"ITEM_REMOVE",gname)
+        return GeneralXMLResponse(request,command_error,"ITEM " +gname +"  Delete Successfully")
     else:
         command_error['MISC'] = "SERVICE NOT ACTIVATED"
         return GeneralXMLResponse(request,command_error,'Service' + sname + ' Not Activated')

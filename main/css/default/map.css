@@ -6,8 +6,9 @@ body {overflow:hidden;}
   position:fixed;
   top:0px;
   left:0px;
-  background: url('/res/css/hd_bg.png') repeat-x;
+  background-color: steelblue;
   font-family:"Arial",sans-serif;
+  height:35px;
 }
 #raw-left{
   z-index:21;
@@ -51,27 +52,39 @@ body {overflow:hidden;}
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
   opacity:0.3;
 }
+ul.config-menu{
+  padding:0px;
+  top:-3px;
+  width:20px;
+  float:left;
+}
+ul.config-menu img{
+  height:20px;
+  width:20px;
+}
+ul.config-menu:hover #config-bar{
+  display:block;
+}
 #config-bar {
+  display:none;
+  margin:7px 0 0 0;
   width:260px;
-  padding:15px;
-  z-index:22;position:fixed;top:55px;left:0px;
-  background:#232323;
+  padding:5px 15px 15px 15px;
+  left:-20px;
+  background:steelblue;
   color:white;
   overflow:show;
-  font-family:"Arial",sans-serif;
-  font-size:13px;
+  font-size:11px;
   font-weight:normal;
-  -moz-box-shadow:3px 3px 3px 1px #888;
-  -webkit-box-shadow:3px 3px 3px 1px #888;
-  box-shadow:3px 3px 3px 1px #888;
-  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
-  opacity:0.85;
+  float:left;
+  border-top:1px solid gray;
+  border-left:2px solid gray;
+  border-right:2px solid gray;
+  border-bottom:3px solid gray;
 }
 #config-bar:hover {}
 #config-bar .window-container {
-  padding:5px;
-  border-top:1px solid #757575;
-  border-bottom:1px solid #2c2c2c;
+  margin-top:3px;
 }
 #config-bar .window-container div.vbar {
   height:20px;
@@ -86,7 +99,7 @@ body {overflow:hidden;}
 }
 #config-bar .window-container div.vbar a {
   display:block;
-  width:75px;
+  width:85px;
   margin-right:5px;
   float:right;
   cursor:pointer;
@@ -174,7 +187,6 @@ body {overflow:hidden;}
   margin:3px 0 0px 0px;
   clear:both; 
   list-style-type:none; 
-  font-family:"proxima-nova-extra-condensed","Trebuchet MS",sans-serif;
   color:white;
   font-size:13px;
   text-transform:uppercase; 
@@ -188,10 +200,70 @@ body {overflow:hidden;}
 }
 .vbar ul li.selected {background-color:black;}
 .vbar ul li:hover {background-color:black;}
+#report-bar {
+  opacity:0.9;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  z-index:22;
+  display:block;
+  width:260px;
+  top:80px;
+  padding:5px 5px 15px 15px;
+  overflow:show;
+  font-size:12px;
+  font-weight:normal;
+  color:steelblue;
+  background-color:ghostwhite;
+  position:fixed;
+  border-top:3px solid steelblue;
+  border-left:2px solid steelblue;
+  border-right:2px solid steelblue;
+  border-bottom:3px solid steelblue;
+}
+#report-bar .head{
+  padding:5px;
+  margin-right:10px;
+  border-bottom: 1px solid gray;
+}
+#report-bar label{
+  font-size: 14px;
+  padding:3px;
+  display:block;
+  font-weight: bold;
+}
+
+#report-bar input.normal,
+#report-bar .extension-auto-complete input{
+  border: 1px solid gray;
+  clear:both;
+  height:20px;
+  width:236px;
+}
+#report-bar .window-container{
+  clear:both;
+  padding:5px;
+}
+#report-bar input.report-btn {
+ display:block;
+ padding:3px 10px 3px 10px;
+ float:right;
+ font-size:16px;
+ text-transform:uppercase;
+ background-color: steelblue;
+ margin:5px 10px 0 0px;
+ cursor:pointer;
+ color:#eeeeee;
+ border:2px solid #999999;
+}
+#report-bar .head h5{
+  padding:0px;
+  margin:0px;
+  font-size:17px;
+}
 div.div-scroll {
   height:100%;
   clear:both;
   overflow:hidden;
+  left:-4px;
 }
 div.div-scroll div.cursor {
   display:relative;
@@ -209,7 +281,7 @@ div.div-scroll div.cursor {
   top:0px;
   bottom:2px;
   left:2px;
-  background-color:#1b1b1b;
+  background-color:steelblue;
   border:1px solid #343434;
 }
 
@@ -271,9 +343,7 @@ div.div-scroll div.cursor {
   top:0px;
   bottom:0px;
   right:0px;
-  background:#181818;
-  opacity:0.90;
-  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  background:ghostwhite;
 }
 #right-bar-dock {
   width:235px;
@@ -291,8 +361,8 @@ div.div-scroll div.cursor {
   margin-bottom:5px;
   margin-left:10px;
   clear:both;
-  border-top:1px solid #1b1b1b;
-  border-bottom:1px solid gray;
+  border-top:1px solid lightcyan;
+  border-bottom:1px solid steelblue;
 }
 #right-bar-dock div.lane{
   display:block;
@@ -386,7 +456,7 @@ div.div-scroll div.cursor {
   margin:20px 0px 0px 20px;
   padding:0px;
   clear:both;
-  color:#999999;
+  color:black;
   font-size:14px;
   text-transform:uppercase;
 }
@@ -434,12 +504,12 @@ div.nav {width:100%;height:35px;}
 .nav div.brand img {padding:1px 3px 1px 3px;border:none;}
 .nav div.brand a {text-decoration:none;border:none;}
 .nav ul li {display:block;cursor:pointer;}
-.nav ul.menu li{margin-top:-2px;float:left;border-right:1px solid #757575;}
+.nav ul.menu li{margin-top:-2px;float:left;border-left:1px solid ghostwhite;}
 .nav ul.dock-menu li{float:right;border-left:1px solid #757575;}
-.nav ul li a {padding:0 10px 0px 10px;}
-.nav ul li a:link {color:white;text-decoration:none;}
-.nav ul li a:visited {color:white;text-decoration:none;}
-.nav ul li a:hover {background:white;color:black;text-decoration:none;}
+.nav ul li.item a {padding:0 10px 0px 10px;}
+.nav ul li.item a:link {color:white;text-decoration:none;}
+.nav ul li.item a:visited {color:white;text-decoration:none;}
+.nav ul li.item a:hover {background:white;color:black;text-decoration:none;}
 #about-us {
   margin-right:26px; 
   float:right; 

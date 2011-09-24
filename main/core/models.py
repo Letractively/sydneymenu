@@ -16,7 +16,6 @@ class ServiceCore(models.Model):
   description = models.CharField(max_length = 1024)
   address = models.CharField(max_length = 256)
   icon = models.CharField(max_length = 128)
-  aveage = models.CharField(max_length = 5)
   days = models.CharField(max_length = 256)
   nation = models.CharField(max_length = 256, default = 'MIXED')
   pricelow = models.IntegerField(default = 20)
@@ -33,7 +32,7 @@ class UserCore(models.Model):
   password = models.CharField(max_length = 64)
 
 class History(models.Model):
-  time = models.CharField(max_length = 32)
+  time = models.DateField(auto_now_add = True)
   type = models.CharField(max_length = 32)
   who = models.CharField(max_length = 64)
   service = models.CharField(max_length = 128)

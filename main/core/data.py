@@ -16,6 +16,18 @@ def CrunchImage(folder,img_name,img_type):
     crop = crop.resize((150,150),Image.ANTIALIAS)
   crop.save(img_sc_full_path)
 
+def Report(request):
+  command_error = {}
+  r_data = {}
+  command_error = model_obj_builder(r_data,request.REQUEST,report_handler)
+  if command_error:
+    return GeneralXMLResponse(request,command_error,"Invalid Infomation Provided")
+  else:
+    info = """["%s",%d,%d,"%s"]"""%(urlquote(r_data['address']),
+          r_data['latitude'],r_data['longitude'],urlquote(r_data['type']))
+    HistoryHelper.Record(request,r_data['name'],"REPORT",info)
+    return GeneralXMLResponse(request,command_error,"Thank You For Sharing Your Valuable Experience!")
+
 def RemoveService(request,sname):
   aut = HasAuthority(request,sname)
   command_error = {}
@@ -121,8 +133,9 @@ def ModifyService(request,sname):
 def GetServices(request):
 # The get service will always provides all the services
     services = ServiceCore.objects.all()
+    reports = History.objects.filter(type="REPORT")
     data_t = loader.get_template('core/__getservices.xml')
-    c = Context({'DATA':services})
+    c = Context({'SERVICES':services,"REPORTS":reports})
     response = HttpResponse(data_t.render(c),mimetype = "text/xml")
     response['Cache-Control'] = 'no-cache'
     return response

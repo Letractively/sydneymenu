@@ -21,7 +21,7 @@ def ModifyService(request):
     c = Context({"REQUEST":request.REQUEST})
     return HttpResponse(form_t.render(c))
 
-def AddGirl(request,sname):
+def AddItem(request,sname):
     service = GetService(sname)
     gallery_info = None
     dic = {"REQUEST":request.REQUEST,"SERVICE":sname}
@@ -30,7 +30,7 @@ def AddGirl(request,sname):
       gallery = Gallery.InitGalleryConfig(gnode.getroot())
       gallery_info = gallery.BasicInfo()
       dic['GALLERY_INFO'] = gallery_info
-    form_t = loader.get_template('core/_addgirl.html')
+    form_t = loader.get_template('core/_additem.html')
     c = Context(dic)
     return HttpResponse(form_t.render(c))
 

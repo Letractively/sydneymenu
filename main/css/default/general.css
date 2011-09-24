@@ -381,12 +381,14 @@ color:#555555;
 }
 
 #dialog{
+  position:absolute;
   z-index:103;top:0px;left:0px;
   width:100%;padding-top:10px;display:none;
 }
 #dialog div.dialog{
   margin:auto;border:0px;position:relative;padding:0px;width:400px;
-  background-color:#1b1b1b;
+  background-color:ghostwhite;
+  border:1px solid steelblue;
 }
 #dialog div.dialog-content{
 width:388px;
@@ -424,7 +426,8 @@ color:#555555;
 }
 
 #dialog div.dialog-hint h2{
-  color:white;margin:0 0 0 10px;padding-top:10px;
+  color:steelblue;
+  margin:0 0 0 10px;padding-top:10px;
 }
 #dialog div.dialog-hint a{
   text-align:right;
@@ -433,7 +436,7 @@ color:#555555;
   width:200px;
   height:30px;
   padding:10px 0px 10px 10px;
-  color:white;
+  color:steelblue;
 }
 
 #dialog div.dialog-hint a img{

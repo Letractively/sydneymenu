@@ -8,7 +8,7 @@
         <div class='info-block'>
         <ul>
           {% for n,v in GIRLS_INFO.iteritems %}
-          <li onclick="Select('GIRLS','{{n}}',this)">
+          <li onclick="Select('ITEMS','{{n}}',this)">
             <div class='info'>
               <ul class='border-split'>
                  <li>{{n}}</li>
@@ -28,7 +28,7 @@
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['GIRLS'].ShowAddDialog()">add</a><a onclick="zoyoe.comps['GIRLS'].DelGirlSelect()">del</a></h3>
+        <h3><a onclick="zoyoe.comps['ITEMS'].ShowAddDialog()">add</a><a onclick="zoyoe.comps['ITEMS'].DelGirlSelect()">del</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}

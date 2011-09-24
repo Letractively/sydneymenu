@@ -37,28 +37,16 @@ function sdist(ret_map){
         var service = new Service(element);
         ret_map.AddService(service);
       }
+      var s_element = o.responseXML.documentElement.getElementsByTagName('REPORT');
+      for(var i=0;i<s_element.length;i++){
+        var element = s_element[i];
+        var report = new ServiceReport(element);
+        ret_map.AddService(report);
+      }
+ 
       ret_map.ShiftZoom(true);
       zoyoe.SwitchDockStyle('ICON');
       InitDrag();
-      MarkAsScroll(document.getElementById('age-scroll'),
-        function cb(lp,hp){
-          document.getElementById('age-range-hint').innerHTML = parseInt(lp/3+18)+'/'+parseInt(hp/3+18);
-        },
-        function dcb(lp,hp){
-        var low = parseInt(lp/3+18);
-        var high = parseInt(hp/3+18);
-        document.getElementById('age-range-hint').innerHTML = low+"/"+high;
-        ret_map.ResetAgeFilter(low,high);
-        }
-      );
-      MarkAsScroll(document.getElementById('rate-scroll'),
-        function (lp,hp){
-          document.getElementById('rate-range-hint').innerHTML = parseInt(lp)+'/'+parseInt(hp);
-        },
-        function (lp,hp){
-          document.getElementById('rate-range-hint').innerHTML = parseInt(lp)+'/'+parseInt(hp);
-        }
-      );
       var scroll_h = Y.one('#right-bar-dock .div-scroll div.hscroll');
       var scroll_h_ele = Y.Node.getDOMNode(scroll_h);
       MarkAsScrollH(scroll_h_ele);
