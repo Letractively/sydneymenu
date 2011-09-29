@@ -26,16 +26,19 @@ class ServiceCore(models.Model):
   privilege = models.CharField(max_length = 32)
   extend = models.ForeignKey(ServiceRel)
 
-class UserCore(models.Model):
-  name = models.CharField(max_length = 64,unique = True)
-  email = models.CharField(max_length = 64,primary_key = True)
-  password = models.CharField(max_length = 64)
-
 class History(models.Model):
   time = models.DateField(auto_now_add = True)
   type = models.CharField(max_length = 32)
   who = models.CharField(max_length = 64)
   service = models.CharField(max_length = 128)
   para = models.CharField(max_length = 1024)
+
+class Info(models.Model):
+  time = models.DateField(auto_now_add = True)
+  type = models.CharField(max_length = 64)
+  path = models.CharField(max_length = 64)
+  service = models.CharField(max_length = 128)
+  info = models.CharField(max_length = 1024)
+  
   
 #1mnjwdck@dolav_1iuy)-d^20$&b@c&_u7h_4$5slhfhz9k8jh

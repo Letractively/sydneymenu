@@ -9,8 +9,6 @@ name_patten = re.compile("^[a-zA-Z\s_\-0-9,]+$")
 type_patten = re.compile("^[a-zA-Z]+$")
 email_patten = re.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
 phone_patten = re.compile("[0-9\(\)\s]+")
-grade_patten = re.compile("[0-9]+")
-privilege_patten = re.compile("[a-zA-Z]+")
 description_patten = re.compile(".+")
 address_patten = re.compile("[a-zA-Z0-9\s]+")
 url_patten = re.compile("((https?):((//)|(\\\\)))?[\w\d:#@%/;$()~_?\+-=\\\.&]*")
@@ -19,6 +17,7 @@ number_patten = re.compile("[0-9-]+")  #FIX ME: This is really buggy
 day_patten = re.compile("((Sun)|(Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|,)+")  #FIX ME: This is really buggy
 layout_patten = re.compile("[a-zA-Z-]+")  #FIX ME: This is really buggy
 time_range_patten = re.compile("[0-9]{1,2}:[0-9]{2}")
+
 #
 # Validate groups used to validate request input
 #
@@ -31,13 +30,9 @@ addserv_handler = {
   ,'longitude':(latlong_patten,(lambda x: int(eval(x)*1000000)),lambda x, v: setattr(x,'longitude',v))
   ,'name':(name_patten,(lambda x:x),lambda x, v:setattr(x,'name',v))
   ,'type':(type_patten,(lambda x:x),lambda x, v:setattr(x,'type',v))
-  ,'privilege':(privilege_patten,(lambda x:x),lambda x, v:setattr(x,'privilege',v))
   ,'email':(email_patten,(lambda x:x),lambda x, v:setattr(x,'email',v))
   ,'phone':(phone_patten,(lambda x:x),lambda x, v:setattr(x,'phone',v))
-#  ,'grade':(grade_patten,(lambda x:eval(x)),lambda x, v:setattr(x,'grade',v))
-  ,'aveage':(number_patten,(lambda x:x),lambda x, v:setattr(x,'aveage',v))
   ,'days':(day_patten,(lambda x:x),lambda x, v:setattr(x,'days',v))
-#  ,'privilege':(privilege_patten,(lambda x:x),lambda x, v:setattr(x,'privilege',v))
   ,'description':(description_patten,(lambda x:x),lambda x, v:setattr(x,'description',v))
   ,'address':(address_patten,(lambda x:x),lambda x, v:setattr(x,'address',v))
   ,'icon':(url_patten,(lambda x:x),lambda x, v:setattr(x,'icon',v))}

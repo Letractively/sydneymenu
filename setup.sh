@@ -33,7 +33,7 @@ fi
 echo " === Done ==="
 
 echo "Getting Res Folder"
-wget http://sydney-scent.googlecode.com/files/res.tar.gz
+wget http://sydneymenu.googlecode.com/files/res.tar.gz
 if [ $? -gt 0 ]; then
   echo "Can not get res folder, check your internet connection ...";
   exit 1;

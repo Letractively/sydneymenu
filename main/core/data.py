@@ -138,6 +138,9 @@ def GetServices(request):
     c = Context({'SERVICES':services,"REPORTS":reports})
     response = HttpResponse(data_t.render(c),mimetype = "text/xml")
     response['Cache-Control'] = 'no-cache'
+    response['Access-Control-Allow-Origin'] = '*'
+    response['Access-Control-Allow-Methods'] = 'GET'
+    response['Access-Control-Allow-Headers'] = 'X-Requested-With'
     return response
 
 def ActivateService(request,name):

@@ -262,27 +262,26 @@ ul.config-menu:hover #config-bar{
 div.div-scroll {
   height:100%;
   clear:both;
-  overflow:hidden;
-  left:-4px;
+  overflow:show;
 }
 div.div-scroll div.cursor {
   display:relative;
-  width:6px;
-  height:8px;
+  width:13px;
+  height:28px;
   margin:2px 0 2px 0;
-  left:-3px;
+  left:-3px; 
   background-color:white;
   border:1px solid #343434;
+  cursor:move;
 }
 #right-bar-dock div.div-scroll div.hscroll {
-  width:2px;
+  width:10px;
   clear:both;
   position:absolute;
   top:0px;
-  bottom:2px;
-  left:2px;
+  bottom:0px;
+  left:-10px;
   background-color:steelblue;
-  border:1px solid #343434;
 }
 
 #config-bar .window-container div.suburb {
@@ -336,7 +335,7 @@ div.div-scroll div.cursor {
   cursor:pointer;
 }
 #right-bar {
-  width:230px;
+  width:220px;
   padding:35px 0 0 5px;
   z-index:20;
   position:fixed;
@@ -346,7 +345,7 @@ div.div-scroll div.cursor {
   background:ghostwhite;
 }
 #right-bar-dock {
-  width:235px;
+  width:225px;
   padding-left:5px;
   z-index:21;
   position:fixed;
@@ -366,7 +365,7 @@ div.div-scroll div.cursor {
 }
 #right-bar-dock div.lane{
   display:block;
-  width:220px;
+  width:225px;
   height:180px;
   margin:auto;
   padding:10px 0px 10px 0px;
