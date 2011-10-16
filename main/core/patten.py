@@ -7,9 +7,11 @@ from ModelHelper import *
 latlong_patten = re.compile("^-?\d+\.(\d)+$")
 name_patten = re.compile("^[a-zA-Z\s_\-0-9,]+$")
 type_patten = re.compile("^[a-zA-Z]+$")
+path_patten = re.compile("^[a-zA-Z]+$")
 email_patten = re.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
 phone_patten = re.compile("[0-9\(\)\s]+")
 description_patten = re.compile(".+")
+data_patten = re.compile(".+")
 address_patten = re.compile("[a-zA-Z0-9\s]+")
 url_patten = re.compile("((https?):((//)|(\\\\)))?[\w\d:#@%/;$()~_?\+-=\\\.&]*")
 password_patten = re.compile("[a-zA-Z\d#@%]+")
@@ -45,8 +47,6 @@ report_handler = {
   ,'longitude':(latlong_patten,(lambda x: int(eval(x)*1000000)),lambda x, v: (x.update(longitude = v)))
   }
 
-
-
 mdyserv_handler = {
    'type':(type_patten,(lambda x:x),lambda x, v:setattr(x,'type',v))
   ,'phone':(phone_patten,(lambda x:x),lambda x, v:setattr(x,'phone',v))
@@ -55,12 +55,11 @@ mdyserv_handler = {
   ,'description':(description_patten,(lambda x:x),lambda x, v:setattr(x,'description',v))}
 
 
-addgirl_handler = {'name':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))
-  ,'age':(number_patten,(lambda x:x),lambda x, v:(x.update(age = v)))
-  ,'size':(number_patten,(lambda x:x),lambda x, v:(x.update(size = v)))
+additem_handler = {'category':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))
+  ,'path':(path_patten,(lambda x:x),lambda x, v:(x.update(path = v)))
   ,'description':(description_patten,(lambda x:x),lambda x, v:(x.update(description = v)))
-  ,'icon':(url_patten,(lambda x:x),lambda x, v:(x.update(icon = v)))
-  ,'nation':(name_patten,(lambda x:x),lambda x, v:(x.update(nation = v)))}
+  ,'type':(url_patten,(lambda x:x),lambda x, v:(x.update(type = v)))
+  ,'data':(data_patten,(lambda x:x),lambda x, v:(x.update(data = v)))}
 
 addgallery_handler = {'name':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))}
 

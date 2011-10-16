@@ -2,6 +2,16 @@ select{
 font-size:12px;
 border:1px solid #959595;
 }
+.input-fine {display:none;}
+form.xsd-form {padding:10px;margin:0px;font-size:14px;}
+form.xsd-form div{margin:10px 10px 0px 10px;}
+form.xsd-form div.attribute-cell input{
+  border:1px solid #959595;
+  margin-top:5px;width:340px;display:block;font-size:15px;}
+form.xsd-form label{display:block;}
+form.xsd-form label:first-letter {text-transform:uppercase;}
+form.xsd-form textarea{font-size:15px;border:1px solid #959595;width:340px;height:100px;margin-top:5px;}
+
 
 
 

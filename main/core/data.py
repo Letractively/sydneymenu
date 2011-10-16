@@ -74,7 +74,7 @@ def AddService(request):
     s_data.grade = 1
     s_data.privilege = 'normal'
     s_data.activate = True
-    rel = ServiceRel.objects.get(name='undefined')
+    rel = ServiceConfig.objects.get(name='default')
     s_data.extend = rel
     Permission.CreateService(request,s_data,command_error)
     if command_error:
@@ -313,10 +313,3 @@ def Resource(request,sname,res):
       return response
     except ServiceCore.DoesNotExist:
       return HttpResponseRedirect('/res/res_error.png')
-
-
-
-
-
-
-

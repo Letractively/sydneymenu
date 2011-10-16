@@ -7,6 +7,7 @@ from lxml import etree
 from datetime import date 
 from datetime import datetime
 from config import *
+from models import *
 
 
 def SaveConfig(sname,node):
@@ -14,6 +15,71 @@ def SaveConfig(sname,node):
   fd = os.open(CONFIG.SERVICES_PATH + sname+'/config.xml',os.O_CREAT|os.O_WRONLY)
   os.write(fd,etree.tostring(node,pretty_print = True))
   os.close(fd)
+
+def CreateExtension(ext_name,xslt_str,xsd_str):
+  xsd_doc = etree.parse(xsd_str) 
+  xslt_doc = etree.parse(xslt_str)
+  schema = etree.XMLSchema(xsd_doc)
+  xslt = etree.XSLT(xslt_doc)
+  ext = ServiceConfig()
+  # make sure the ext_name has not been used
+  ext.name = ext_name 
+  ext.xslt = etree.tostring(xslt_doc.getroot(),pretty_print = True) 
+  ext.xsd = etree.tostring(xsd_doc.getroot(),pretty_print = True)
+  ext.version = 0
+  ext.save()
+  return ext 
+
+def ModifyExtension(ext_name,xslt_str,xsd_str):
+  try:
+    ext = ServiceConfig.objects.get(name = ext_name)
+    xsd_doc = etree.parse(xsd_str) 
+    xslt_doc = etree.parse(xslt_str)
+    schema = etree.XMLSchema(xsd_doc)
+    xslt = etree.XSLT(xslt_doc)
+    ext.xslt = xslt_str
+    ext.xsd = xsd_str
+    ext.version = ext.version + 1 
+    ext.save()
+    return ext 
+  except ServiceConfig.DoesNotExist:
+    return None #Does not return any usefull info, run check.py
+  except:
+    return None #Does not return any usefull info, run check.py
+
+def FormFromXSD(path,xsd):
+  # make sure there is no exception throw here, runing test before put it into use
+  try:
+    form_xslt_io = open(CONFIG.XSLT_FORM_PATH)
+    xslt_doc = etree.parse(form_xslt_io)
+    xslt = etree.XSLT(xslt_doc)
+    form = xslt(xsd,name="'"+path+"'")
+    return form 
+  finally:
+    form_xslt_io.close()
+
+def XMLTemplateFromXSD(path,xsd):
+  # make sure there is no exception throw here, runiing test before put it into use
+  try:
+    template_xslt_io = open(CONFIG.XSLT_TEMPLATE_PATH)
+    xslt_doc = etree.parse(template_xslt_io)
+    xslt = etree.XSLT(xslt_doc)
+    template = xslt(xsd,name="'"+path+"'")
+    return template
+  finally:
+    template_xslt_io.close()
+
+def CreateNewInfo(service,xml,path):
+  xsd_doc = service.extend.GetXSDDoc()
+  schema = etree.XMLSchema(xsd_doc)
+  schema.assertValidate(xml)
+  info = Info()
+  info.version = service.extend.version
+  info.path = path
+  info.service = service.name 
+  info.data = str(xml)
+  info.save()
+  return info
 
 def InitNode(node,path,name):
   al = node.xpath("./"+path)

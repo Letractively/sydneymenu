@@ -52,6 +52,7 @@ def main():
   except getopt.error, msg:
     print msg
     print "for help use --help"
+    exit(1)
   for o, a in opts:
     if o in ("-h","--help"):
       print __doc__

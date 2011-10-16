@@ -1,4 +1,15 @@
 from inc import *
+
+def XSDDialog(request,sname,path):
+    s_data = GetService(sname) 
+    if(s_data == None):
+      return HttpResponse('Service Not Exist')
+    else:
+      s_xsd = s_data.extend.GetXSDDoc()
+      xsd_dialog_t = loader.get_template('core/_xsd_dialog.html')
+      form_doc = FormFromXSD(path,s_xsd)
+      return HttpResponse(form_doc,mimetype="text/xml")
+
 def Register(request):
     u_data = UserCore()
     register_t = loader.get_template('core/_register.html')
@@ -19,19 +30,6 @@ def AddService(request):
 def ModifyService(request):
     form_t = loader.get_template('core/_mdyservice.html')
     c = Context({"REQUEST":request.REQUEST})
-    return HttpResponse(form_t.render(c))
-
-def AddItem(request,sname):
-    service = GetService(sname)
-    gallery_info = None
-    dic = {"REQUEST":request.REQUEST,"SERVICE":sname}
-    if service:
-      gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
-      gallery = Gallery.InitGalleryConfig(gnode.getroot())
-      gallery_info = gallery.BasicInfo()
-      dic['GALLERY_INFO'] = gallery_info
-    form_t = loader.get_template('core/_additem.html')
-    c = Context(dic)
     return HttpResponse(form_t.render(c))
 
 def AddPost(request,sname):

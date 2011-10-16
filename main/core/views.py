@@ -65,7 +65,7 @@ def Service(request,name):
     comp_dict = {'news':'comp/_news.html',
                  'icon':'comp/_icon.html',
                  'gallery':'comp/_gallery.html',
-                 'girls':'comp/_girls.html',
+                 'items':'comp/_items.html',
                  'timetable':'comp/_timetable.html',
                  'roster':'comp/_roster.html'}
     aut = HasAuthority(request,name)
@@ -88,6 +88,7 @@ def Service(request,name):
     try:
       data = ServiceCore.objects.get(name=name)
       dic['SERVICE'] = data
+      dic['COMP'] = data.BuildComp()
       if (aut['r'] == True):
         dic['HAS_AUTHORITY'] = True
         dic['TIME_STAMP'] = tstamp
@@ -98,13 +99,11 @@ def Service(request,name):
       timetable = TimeTable.InitTimeTableConfig(gnode.getroot())
       post = Post.InitPostConfig(gnode.getroot())
       forum_info = XMLForum.InitForumConfig(layout.RightNode())
-      girls_info = girls.BasicInfo()
       gallery_info = gallery.BasicInfo()
       timetable_info = timetable.BasicInfo()
       post_info = post.BasicInfo()
       layout_info = layout.GetLayout()
       dic['GALLERY_INFO'] = gallery_info
-      dic['GIRLS_INFO'] = girls_info
       dic['ROSTER_INFO'] = timetable_info[dic['WEEK_DAY']]['roster']
       dic['TIMETABLE_INFO'] = timetable_info
       dic['POST_INFO'] = post_info

@@ -322,23 +322,26 @@ function InitItems(env){
       }
     }
     this.ShowAddDialog = function(){
-      var dialog_uri = "/core/dialog/additem/"+env.service_name;
+      var dialog_uri = "/core/dialog/xsd/"+env.service_name+"/item/";
       env.ui.InfoCollectDialog("AddItem",
         dialog_uri,"form-additem",
         function(form_obj){
           env.comps['ITEMS'].AddItem(form_obj);
-        },
-        function(dialog){
-          YUI().use('node',function(Y){
-             var input = dialog.one("div.extension-dict-select input");
-             var icon = dialog.one("#icon-view img");
-             var dom_input = Y.Node.getDOMNode(input);
-             dom_input.ext_onchange = function(value){
-               var prefix = "/core/data/res/"+env.service_name+"/"+value;
-               icon.set("src",prefix+"/?sc=large");
-             }
-         });
+        }
+      );
+/*
+      function(dialog){
+        YUI().use('node',function(Y){
+           var input = dialog.one("div.extension-dict-select input");
+           var icon = dialog.one("#icon-view img");
+           var dom_input = Y.Node.getDOMNode(input);
+           dom_input.ext_onchange = function(value){
+             var prefix = "/core/data/res/"+env.service_name+"/"+value;
+             icon.set("src",prefix+"/?sc=large");
+           }
+        });
       });
+*/
     }
   }
   return item_comp;

@@ -5,3 +5,4 @@ class CONFIG:
   WEEK_DAY_NAME = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
   CSS_TEMPLATE_PATH = 'default'
   LOG_PATH = '/var/www/sydneymenu/log/'
+  XSLT_FORM_PATH = '/var/www/sydneymenu/config/form.xslt'

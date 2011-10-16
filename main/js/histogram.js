@@ -150,8 +150,8 @@ function MarkAsScrollH(obj){
     drag.style.top = "0px";
   }
   function drag_handler(offset_x,offset_y){
-    if(offset_y > conv.offsetHeight - drag.offsetTop -12){
-       offset_y = conv.offsetHeight - drag.offsetTop -12;
+    if(offset_y > conv.offsetHeight - drag.offsetTop - drag.offsetHeight){
+       offset_y = conv.offsetHeight - drag.offsetTop - drag.offsetHeight;
        return false;
     }
     else if(offset_y + drag.offsetTop < 0){

@@ -1,34 +1,24 @@
+{% load hash_filters %}
+{% load comp_filters %}
 {% if ROOT %}
     <div class='section-container'>
 {% endif %}
       <div class='section' id="items">
         <div class='title'>
-           <h3>Menu</h3>
+           <h3>items</h3>
         </div>
         <div class='info-block'>
         <ul>
-          {% for n,v in GIRLS_INFO.iteritems %}
-          <li onclick="Select('ITEMS','{{n}}',this)">
-            <div class='info'>
-              <ul class='border-split'>
-                 <li>{{n}}</li>
-                 <li>Age: {{v.age}}
-                     </br>
-                     Nation: {{v.nation}}
-                     </br>
-                     Size: {{v.size}}
-                 </li>
-              </ul>
-            </div>
-            <div class='icon'><img src='/core/data/res/{{SERVICE.name}}/{{v.icon}}/?sc=True'></img></div>
-          </li>
+          {% for ITEM in COMP|hash:"ITEMS"|hash:"item" %}
+          {{ITEM}}
+          {{COMP|hash:"RENDER"}}
           {% endfor %}
         </ul>
         </div>
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['ITEMS'].ShowAddDialog()">add</a><a onclick="zoyoe.comps['ITEMS'].DelGirlSelect()">del</a></h3>
+        <h3><a onclick="zoyoe.comps['ITEMS'].ShowAddDialog()">add</a><a onclick="zoyoe.comps['ITEMS'].DelItemSelect()">del</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}

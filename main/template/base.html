@@ -2,25 +2,24 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
     <title>{% block title %}forum{% endblock %}</title>
 </head>
 <body>
+<div class='nav'>
+  <ul>
+    {% if user.is_authenticated %}
+    <li class='menu' onclick ="zoyoe.adimin.Logout()"><a>Logout</a></li>
+    {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+    {% endif %}
+    <li class='menu'><a href='/search/'>Home</a></li>
+  </ul>
+</div>
 <div class = 'page'>
-  <div id='title-bar'>
-    <div class='nav'>
-      <ul>
-        {% if user.is_authenticated %}
-        <li class='menu' onclick ="Logout()"><a>Logout</a></li>
-        {% else %}
-        <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-        <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-        {% endif %}
-        <li class='menu'><a href='/search/'>Home</a></li>
-      </ul>
-      <div class='title'>
-        <a href="/map/"><img src="/res/map_logo_5.png" width="236px" height="40px"/></a>
-      </div>
-    </div>
+  <div class='title'>
+    <a href="/map/"><img src="/res/map_logo_5.png" width="236px" height="40px"/></a>
   </div>
   <div id="left-section" class='left-section'>
     <div id="crumbs">

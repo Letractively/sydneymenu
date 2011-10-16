@@ -3,17 +3,16 @@ from user import *
 
 def Add(request,sname):
     command_error = {}
-    girl_attr = {}
-    command_error = model_obj_builder(girl_attr,request.REQUEST,addgirl_handler)
+    item_attr = {}
+    command_error = model_obj_builder(item_attr,request.REQUEST,additem_handler)
     aut = HasAuthority(request,sname)
     if (aut['r'] == False):
         command_error['AUTHORITY'] = 'NO_AUTHORITY'
         return GeneralXMLResponse(request,command_error)
     if (command_error):
         return GeneralXMLResponse(request,command_error)
-    data = aut['s']
-    desc = girl_attr['description']
-    del girl_attr['description']
+    data = item_attr['data']
+    category = item_attr['category']
     if (data.activate == True):
         gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
         girls = Girls.InitGirlsConfig(gnode.getroot())

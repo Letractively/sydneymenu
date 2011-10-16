@@ -57,4 +57,4 @@ cd ..
 echo "Initialize DB"
 python dbinit.py
 
-echo "All done! Enjoy your sydney-scent"
+echo "All done! Enjoy your sydneymenu"

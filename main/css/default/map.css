@@ -201,8 +201,6 @@ ul.config-menu:hover #config-bar{
 .vbar ul li.selected {background-color:black;}
 .vbar ul li:hover {background-color:black;}
 #report-bar {
-  opacity:0.9;
-  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
   z-index:22;
   display:block;
   width:260px;

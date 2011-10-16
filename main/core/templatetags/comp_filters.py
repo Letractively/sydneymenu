@@ -146,3 +146,7 @@ def callback(ele_config,cb):
 @register.filter("render")
 def render(ele_config):
   return ele_config.Render()
+
+@register.filter("xslt")
+def xslt(item,xslt):
+  return xslt(item)

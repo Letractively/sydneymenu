@@ -38,8 +38,6 @@ def HasAuthority(request, s_name):
         return {'r':True,'m':'','s':service_data,'u':u_data}
       else:
         return {'r':False,'m':service_data.email+"["+u_data['name']+'|'+u_data['email']+"]"}
-    except UserCore.DoesNotExist:
-      return {'r':False,'m':"Usr with email " + u_data['email'] + " does not exists"}
     except ServiceCore.DoesNotExist:
       return {'r':False,'m':"Service "+s_name+" does not exists"}
   else:

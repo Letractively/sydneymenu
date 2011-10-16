@@ -2,5 +2,5 @@
 <IMG name='icon' url='icon.png'/>
   <GALLERY>
   </GALLERY>
-<LAYOUT><LEFT><icon/><girls/></LEFT><MID><info/><timetable/><roster/><news/></MID><RIGHT><forum/><gallery/></RIGHT></LAYOUT>
+<LAYOUT><LEFT><icon/><items/></LEFT><MID><info/><timetable/><roster/><news/></MID><RIGHT><forum/><gallery/></RIGHT></LAYOUT>
 </CONFIG>
