@@ -299,7 +299,15 @@ padding: 20px 0 35px 0;
   width:80px;
   float:left;
 }
-
+div.invalid-hint{
+  background-color:orange;
+  color:white;
+  font-size:12px;
+  position:absolute;
+  padding:5px;
+  left:108px;
+  top:6px;
+}
 #search-btn {
  display:block;
 /*

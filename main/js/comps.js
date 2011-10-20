@@ -280,10 +280,10 @@ function InitItems(env){
     this.cache = null;
     this.info_cache = null;
     this.del_item_uri = function(){
-      return "/core/item/"+env.service_name+'/remove/';
+      return "/xml/add/"+env.service_name+'/item/';
     }
     this.add_item_uri = function(){
-      return "/core/item/"+env.service_name+'/add/';
+      return "/xml/remove/"+env.service_name+'/item/';
     }
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
@@ -316,9 +316,9 @@ function InitItems(env){
       var request = env.ui.ResponseDialog(uri,config,true
         ,new update_info("/core/service/" + env.service_name + "/?comp=items","items"));
     }
-    this.DelGirlSelect = function(){
+    this.DelItemSelect = function(){
       if(this.info_cache){
-        this.DelGirl(this.info_cache);
+        this.DelItem(this.info_cache);
       }
     }
     this.ShowAddDialog = function(){

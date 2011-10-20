@@ -6,3 +6,4 @@ class CONFIG:
   CSS_TEMPLATE_PATH = 'default'
   LOG_PATH = '/var/www/sydneymenu/log/'
   XSLT_FORM_PATH = '/var/www/sydneymenu/config/form.xslt'
+  XSLT_TEMPLATE_PATH = '/var/www/sydneymenu/config/template.xslt'

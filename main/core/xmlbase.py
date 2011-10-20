@@ -60,6 +60,7 @@ def FormFromXSD(path,xsd):
 
 def XMLTemplateFromXSD(path,xsd):
   # make sure there is no exception throw here, runiing test before put it into use
+  template_xslt_io = None
   try:
     template_xslt_io = open(CONFIG.XSLT_TEMPLATE_PATH)
     xslt_doc = etree.parse(template_xslt_io)
@@ -67,17 +68,19 @@ def XMLTemplateFromXSD(path,xsd):
     template = xslt(xsd,name="'"+path+"'")
     return template
   finally:
-    template_xslt_io.close()
+    if template_xslt_io:
+      template_xslt_io.close()
 
-def CreateNewInfo(service,xml,path):
+def CreateNewInfo(service,xml_str,path):
   xsd_doc = service.extend.GetXSDDoc()
   schema = etree.XMLSchema(xsd_doc)
-  schema.assertValidate(xml)
+  xml_doc = etree.parse(StringIO(xml_str))
+  schema.assertValid(xml_doc)
   info = Info()
   info.version = service.extend.version
   info.path = path
   info.service = service.name 
-  info.data = str(xml)
+  info.data = xml_str
   info.save()
   return info
 

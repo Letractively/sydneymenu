@@ -1,4 +1,5 @@
 #zsk.msk{
+      <div class="switch"></div>
   z-index:102;
   display:none;
   position:fixed;
@@ -33,8 +34,9 @@ background: white url("/res/loading.gif") no-repeat center center;
 }
 
 #float-info{
+  font-family:arial;
   z-index:102;
-  border:1px solid #2b2b2b; 
+  border:1px solid steelblue; 
   width:300px;
   font-size:12px;
   display:none;
@@ -48,9 +50,30 @@ background: white url("/res/loading.gif") no-repeat center center;
   height:16px;
   border:none;
   font-size:12px;
-  background-color: #262626;
+  background-color:steelblue;
   padding:0px 2px 0 40px;
-  color:#939393;
+  color:white;
+}
+#float-info div.nest a{
+  float:left;
+}
+#float-info div.nest div.switch-on{
+  height:5px;
+  width:5px;
+  float:left;
+  margin:3px 0px 0px 45px;
+  border:1px solid white;
+  background-color:white;
+  cursor:pointer;
+}
+#float-info div.nest div.switch-off{
+  height:5px;
+  width:5px;
+  float:left;
+  background-color:steelblue;
+  margin:3px 0px 0px 5px;
+  border:1px solid #999999;
+  cursor:pointer;
 }
 #float-info div.nest span{
   font-size:20px;
@@ -62,7 +85,7 @@ background: white url("/res/loading.gif") no-repeat center center;
   height:30px;
   left:-33px;
   top:-18px;
-  color:#9925a5;
+  color:steelblue;
   font-weight:800;
   background:url("/res/pushpin/pushpin_inactive.png") no-repeat center center;
 }
@@ -80,7 +103,7 @@ background: white url("/res/loading.gif") no-repeat center center;
   width:105px;
   height:105px;
   position:absolute;
-  background-color:black;
+  background-color:steelblue;
   top:-106px;
   left:-1px;
   cursor:pointer;
@@ -178,9 +201,9 @@ background: white url("/res/loading.gif") no-repeat center center;
 #float-info div.img1 img{
 width:100px;
 height:100px;
-border-top:5px solid #262626;
-border-left:5px solid #262626;
-border-right:5px solid #262626;
+border-top:5px solid steelblue;
+border-left:5px solid steelblue;
+border-right:5px solid steelblue;
 }
 #float-info div.img2 img{
 position:relative;
@@ -211,25 +234,25 @@ width:15px;
 height:15px;
 }
 #float-info .section{
-  border:2px solid #262626;
-  border-bottom:10px solid #262626;
-  background-color:#333333;
-  padding:0 0 10px 0;
+  border:2px solid steelblue;
+  border-bottom:10px solid steelblue;
+  background-color: ghostwhite;
+  padding:0 0 0px 0;
   display:relative;
 }
 #float-info .section h3.split{
-  background-color:#262626;
   margin:0px;
   font-size:12px;
   padding:3px 0 3px 6px;
+  background-color:steelblue;
   margin-left:2px;
   margin-right:2px;
   font-weight:100;
-  color:#939393;
+  color:white;
 }
 
 #float-info .section div.info-block {
-  color:#939393;
+  color:black;
   max-height:120px;
   padding:8px 5px 5px 10px;
 }
@@ -241,20 +264,30 @@ height:15px;
 }
 
 #float-info .section div.info-block-scroll .description {
-  color:#939393;
+  color:#black;
   margin:0px 10px 0px 10px;
   min-height:100px;
 }
+#float-info div.div-scroll div.cursor {
+  display:relative;
+  width:10px;
+  height:10px;
+  margin:2px 0 2px 0;
+  background-color:steelblue;
+  border:1px solid ghostwhite;
+  border-radius: 5px;
+  cursor:move;
+}
 
-#float-info .section div.info-block-scroll div.div-scroll div.hscroll {
-  width:2px;
+#float-info div.div-scroll div.hscroll {
+  width:12px;
   clear:both;
   position:absolute;
-  top:5px;
+  top:0px;
+  right:3px;
   bottom:0px;
-  right:4px;
-  background-color:#1b1b1b;
-  border:1px solid #343434;
+  border-radius: 5px;
+  border:1px solid gray;
 }
 
 #float-info .section div.info-block div{

@@ -12,7 +12,7 @@
     </xsl:for-each>
     <xsl:for-each select = "./xs:sequence/xs:element|./xs:element">
      <xsl:element name="{./@name}">
-     {{REQUEST|hash:<xsl:value-of select="./@name"/>}}
+     {{REQUEST.<xsl:value-of select="./@name"/>}}
      </xsl:element>
     </xsl:for-each>
    </xsl:element>

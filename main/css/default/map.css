@@ -262,7 +262,7 @@ div.div-scroll {
   clear:both;
   overflow:show;
 }
-div.div-scroll div.cursor {
+#right-bar-dock div.div-scroll div.cursor {
   display:relative;
   width:13px;
   height:28px;
@@ -281,6 +281,7 @@ div.div-scroll div.cursor {
   left:-10px;
   background-color:steelblue;
 }
+
 
 #config-bar .window-container div.suburb {
   display:relative;

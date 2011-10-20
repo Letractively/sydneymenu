@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
 {% endblock %}
 
 {% block js_link %}
@@ -15,7 +16,6 @@
           src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
   </script>
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-  <!--<script type="text/javascript" src="/js/admin.js"></script>-->
   <script type="text/javascript" src="/js/comps.js"></script>
   <script type="text/javascript" src="/js/dialog.js"></script>
   <script type="text/javascript" src="/js/ele.js"></script>
@@ -37,10 +37,20 @@
         new MapInfoCore(function(rmap){
            sdist(rmap);
         },center,"map-info",zoom,true);
+        if(zoyoe.ElementExtension){
+          zoyoe.ElementExtension.BuildExtensionElements();
+        }
+        var input = Y.one("div.extension-auto-complete").one("input");
+        var dom_input = Y.Node.getDOMNode(input);
+        dom_input.ext_onchange = function(searchStr){
+          if(zoyoe.map){
+            zoyoe.map.TargetPlace(searchStr,"AutoCompJSON");
+          }else{
+            zoyoe.ALERT("Map not loaded");
+          }
+        }
         zoyoe.InitZoyoe(false,Y);
       });
-      hrefStr = "/map/?location={\"x\":" + {{LOC.x}} + ",\"y\":" + {{LOC.y}} + "}";
-      document.getElementById("map-link").href= hrefStr;
     }
     function sdist(ret_map){
       YUI().use('io-form',function(IO){
@@ -67,13 +77,14 @@
 
 {% block nav %}
   <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
   {% if user.is_authenticated %}
   <li class='menu' onclick ="Logout()"><a>Logout</a></li>
   {% else %}
   <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
   <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
   {% endif %}
-  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
 {% endblock %}
  
 {% block content %}

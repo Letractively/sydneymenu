@@ -1,5 +1,7 @@
 from core import xmlbase
-from core.models i
+from core.models import *
+from core.user import *
+from django.template import Template
 
 def Add(request,sname,path):
   aut = HasAuthority(request,sname)
@@ -10,12 +12,13 @@ def Add(request,sname,path):
       command_error['AUTHORITY'] = 'NO_AUTHORITY'
       return GeneralXMLResponse(request,command_error)
   else:
-    xsd = aut['s'].extend.GetXSD()
+    xsd = aut['s'].extend.GetXSDDoc()
     template_doc = XMLTemplateFromXSD(path,xsd)
     xml_t = Template(str(template_doc))
     c = Context({"REQUEST":request.REQUEST})
     xml_data = xml_t.render(c)
-    xmlbase.CreateNewInfo(aut['s'],xml_data,path)
+    info = xmlbase.CreateNewInfo(aut['s'],xml_data,path)
+    return HttpResponse(info.data,mimetype="text/xml")
     return GeneralXMLResponse(request,command_error)
     
 def Remove(request,sname,path):

@@ -106,45 +106,6 @@ float:right;
   background:white;
 }
 
-.nav {
-  width:100%;
-  background-color:steelblue;
-  text-align:center;
-}
-
-.nav ul {
-  display:block;
-  margin:auto;
-  list-style-type:none; 
-  color:white;
-  font-family:Arial;
-  font-size:15px; 
-  font-weight:100;
-  overflow:hidden;
-}
-
-.nav ul li {
-  display:block;
-  height:20px;
-  float:left;
-  padding:4px 20px 4px 4px;
-  cursor:pointer;
-}
-
-.nav ul li a{
-  color:white;
-  text-decoration:none;
-  font-weight:100;
-}
-
-.nav ul li:hover {
-  background-color:#ab0020;
-  color:white;
-}
-
-.nav ul li a:visited {
-  color:white;
-}
 #report-bar {
   display:block;
   width:260px;

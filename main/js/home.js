@@ -8,7 +8,6 @@ function document_load(){
     new MapInfoCore(function(rmap){
       sdist(rmap)
     },null,"map-info")
-    ShowRightSideBar();
   });
 }
 
@@ -22,7 +21,6 @@ function map_document_load(x, y) {
     new MapInfoCore2(function(rmap){
       sdist(rmap)
     },null,"map-info",x,y)
-    ShowRightSideBar();
   });
 }
 
@@ -56,13 +54,11 @@ function sdist(ret_map){
       InitControlPanel();
       window.onresize = function(){
         //ret_map.map.Resize();
-        ShowRightSideBar();
       }
     }
     Y.on('io:complete',complete);
     var request = Y.io(uri);
   });
-  /*xslt.load("service_list_xslt.xsl");*/
   return true;
 }
 
@@ -96,17 +92,6 @@ function ResetShortCut(i){
     icon_containers.item(i).set('innerHTML','');
     icon_containers.item(i).set('innerHTML',innerHTML);
   });
-}
-
-function ShowRightSideBar(){
-  document.getElementById('right-bar').style.display = "block";
-  document.getElementById('right-bar-dock').style.display = "block";
-  zoyoe.has_right_dock = true;
-}
-
-function HideRightSideBar(){
-  document.getElementById('right-bar').style.display = "none";
-  document.getElementById('right-bar-dock').style.display = "none";
 }
 
 function ShowServiceInRightDock(service,style,main_tag){

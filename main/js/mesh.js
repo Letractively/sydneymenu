@@ -284,7 +284,7 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
     return (Math.abs(gp.x-sp.x)<=15&&Math.abs(gp.y-sp.y)<=15);
 	}
   
-	this.TargetPlace = function(where,cbname){
+ this.TargetPlace = function(where,cbname){
     var script = document.createElement("script");
     script.setAttribute("type","text/javascript"); 
     script.setAttribute("src",this.SearchUri(where+' ,NSW ,Australia')+"&jsonp="+cbname);
