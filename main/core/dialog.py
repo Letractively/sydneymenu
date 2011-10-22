@@ -6,7 +6,6 @@ def XSDDialog(request,sname,path):
       return HttpResponse('Service Not Exist')
     else:
       s_xsd = s_data.extend.GetXSDDoc()
-      xsd_dialog_t = loader.get_template('core/_xsd_dialog.html')
       form_doc = FormFromXSD(path,s_xsd)
       return HttpResponse(form_doc,mimetype="text/xml")
 

@@ -9,9 +9,8 @@
         </div>
         <div class='info-block'>
         <ul>
-          {% for ITEM in COMP|hash:"ITEMS"|hash:"item" %}
-          {{ITEM}}
-          {{COMP|hash:"RENDER"}}
+          {% for item in COMP|hash:"ITEMS"|hash:"item" %}
+          {{COMP|hash:"RENDER"|xslt:item}}
           {% endfor %}
         </ul>
         </div>

@@ -157,6 +157,7 @@ function ZOYOE_UI(env,yui,static_dialog){
     function complete(id,o,args){
       ClearHint();
       var data = o.responseXML;
+      alert(o.responseText);
       ENV.ALERT(o.responseText);
       if(data){
         if(data.documentElement.tagName == 'SUCC'){

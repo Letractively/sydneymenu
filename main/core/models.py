@@ -55,7 +55,7 @@ class ServiceCore(models.Model):
     for item in db_items:
       if (not items.has_key(item.path)):
         items[item.path] = []
-      comp[item.path].append(etree.parse(StringIO(item.data)))
+      items[item.path].append(etree.parse(StringIO(item.data)))
     comp['CONFIG'] = db_config
     comp['RENDER'] = db_config.GetXSLT()
     return comp

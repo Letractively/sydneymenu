@@ -280,10 +280,10 @@ function InitItems(env){
     this.cache = null;
     this.info_cache = null;
     this.del_item_uri = function(){
-      return "/xml/add/"+env.service_name+'/item/';
+      return "/xml/remove/"+env.service_name+'/item/';
     }
     this.add_item_uri = function(){
-      return "/xml/remove/"+env.service_name+'/item/';
+      return "/xml/add/"+env.service_name+'/item/';
     }
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
@@ -324,7 +324,7 @@ function InitItems(env){
     this.ShowAddDialog = function(){
       var dialog_uri = "/core/dialog/xsd/"+env.service_name+"/item/";
       env.ui.InfoCollectDialog("AddItem",
-        dialog_uri,"form-additem",
+        dialog_uri,"xsd-item-form",
         function(form_obj){
           env.comps['ITEMS'].AddItem(form_obj);
         }

@@ -1,5 +1,6 @@
 from django import template
 import os
+from lxml import etree
 from .. import inc 
 
 register = template.Library()
@@ -148,5 +149,5 @@ def render(ele_config):
   return ele_config.Render()
 
 @register.filter("xslt")
-def xslt(item,xslt):
-  return xslt(item)
+def xslt(xslt,item):
+  return etree.tostring(xslt(item.getroot()))

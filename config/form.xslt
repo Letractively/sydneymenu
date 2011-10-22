@@ -5,7 +5,7 @@
 <xsl:param name="name"/>
 
 <xsl:template name="main" match = "/">
- <form id="xsd_{$name}_form" class="xsd-form">
+ <form id="xsd-{$name}-form" class="xsd-form">
  <xsl:for-each select="//xs:complexType[@name=$name]"> 
    <xsl:for-each select = "./xs:attribute">
     <div class="attribute-cell">
