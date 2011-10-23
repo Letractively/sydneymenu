@@ -10,6 +10,8 @@ class Info(models.Model):
   path = models.CharField(max_length = 64)
   service = models.CharField(max_length = 128)
   data = models.CharField(max_length = 1024)
+  def GetDataDoc(self):
+    return etree.parse(StringIO(self.data))
 
 class ServiceConfig(models.Model):
   name = models.CharField(max_length = 128, unique = True)

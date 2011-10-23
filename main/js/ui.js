@@ -20,6 +20,7 @@ function ZOYOE_UI(env,yui,static_dialog){
   this.static_dialog = static_dialog;
   this.dialog_commit_btn = this.dialog.one(".button-lane input.commit");
   this.dialog_cancel_btn = this.dialog.one(".button-lane input.cancel");
+  this.panel = YUI.one("#panel")
 
 
   function DialogStyleCommit(){
@@ -157,7 +158,6 @@ function ZOYOE_UI(env,yui,static_dialog){
     function complete(id,o,args){
       ClearHint();
       var data = o.responseXML;
-      alert(o.responseText);
       ENV.ALERT(o.responseText);
       if(data){
         if(data.documentElement.tagName == 'SUCC'){
@@ -262,6 +262,29 @@ function ZOYOE_UI(env,yui,static_dialog){
         break;
       }
   }
+  function LoadContent(content,uri){
+    function complete(id,o,args){
+      var data = o.responseText;
+      ENV.ALERT(o.responseText);
+      content.set("innerHTML",data);
+    }
+    var config = {
+      method: 'get',
+    }
+    StartIO(uri,config,complete);
+  }
+  this.LoadFrameForm = function(uri){
+    function complete(id,o,args){
+      var data = o.responseText;
+      ENV.ALERT(o.responseText);
+      var btnlane = YUI.one('#panel .button-lane');
+      btnlane.set("innerHTML",data);
+    }
+    var config = {
+      method: 'get',
+    }
+    StartIO(uri,config,complete);
+  }
   this.SubmitForm = function(){
     var form_obj = document.getElementById(UI.dialog_name);
     if(form_obj!=null){
@@ -280,7 +303,7 @@ function ZOYOE_UI(env,yui,static_dialog){
           if(UI.update){
             if(UI.update.comp_id){
               var config = {
-                method: 'GET',
+                method: 'get',
               }
               var p = document.getElementById(UI.update.comp_id).parentNode;
               p.innerHTML = 'loading';
@@ -303,4 +326,96 @@ function ZOYOE_UI(env,yui,static_dialog){
       }
     }
   }
+  this.ShowPanel = function(panel_name,args){
+  /* Currently only two kinds of panel is supported
+   * 1. Gallery Panel (Resource Panel)
+   * 2. Data Panel
+   */
+  
+  /* First Of All, Hibernate the content */
+    this.HibernateContent();
+
+  /* Prepare the content */
+  var panel = YUI.one('#panel .panel-content');
+  var hint = YUI.one('#panel .panel-hint');
+  var btnlane = YUI.one('#panel .button-lane');
+  if(panel_name == "gallery"){
+    btnlane.set("innerHTML","<a onclick=\"zoyoe.comps['GALLERY'].Select(0,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(1,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(2,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(3,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(4,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(5,this)\" class='gicon'></a>"
+      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(6,this)\" class='gicon'></a>")
+    var tstamp = "";
+    if(ENV){
+      tstamp = "&tstamp="+ENV.TimeStamp();
+    }
+    /* The Uri Where We Get The Photo Data */
+    var info_uri = "/core/dialog/"+service_name+"/gallery/?" + tstamp;
+    function complete(io,o,args){
+      var icon_containers = ENV.all('#panel .gicon')
+      var gs = o.responseXML.getElementsByTagName('G');
+      var g = null;
+      var name = args[0];
+      for (var i=0;i<gs.length;i++){
+        if(gs[i].getAttribute('name') == name){
+          g = gs[i];
+        }
+      }
+      if(g == null){return;}
+      else{
+        var urls = g.getElementsByTagName('IMG'); 
+        var gname = g.getAttribute('name');
+        var prefix = "/core/data/res/"+service_name+"/"+gname;
+        var idx = 0;
+        var name_list = [];
+        for(;idx<7&&idx<urls.length;idx++){
+          var name = urls[idx].getAttribute('name');
+          icon_containers.item(idx).set('innerHTML',
+            "<img src='"
+            +prefix + '/' + name + "/?sc=small" + tstamp + "'></img>");
+          name_list.push(name);
+        }
+        for(var i = idx;i<7;i++){
+          icon_containers.item(i).set('innerHTML','');
+        }
+        zoyoe.comps['GALLERY'].ManageGallery(gname,name_list,function(innerHTML){
+          panel.set('innerHTML',innerHTML);
+        });
+      }
+    }
+    var config = {
+      method: 'GET',
+    }
+    StartIO(info_uri,config,complete);
+    var d_hint = "<a class='gbutton' onclick=\"zoyoe.HidePanel();zoyoe.comps['GALLERY'].DelGallery('"
+                  + gname + "')\">delete this gallery</a>"
+    var c_hint = "<a class='gbutton' onclick=\"zoyoe.comps['GALLERY'].AddImg()\">"
+                  + "upload new image</a>"
+    var m_hint = "<a class='gbutton' onclick=\"zoyoe.comps['GALLERY'].ModifyImg()\">"
+                  + "change current image</a>"
+    var ghint = "<a class='gbutton' onclick='zoyoe.HidePanel()'>&#9746</a>"
+                  + d_hint + m_hint + c_hint + "<h2>Gallery:"+gname+"</h2>"
+    hint.set('innerHTML',ghint);
+    YUI.one('#panel').setStyle('display','block');
+  }else if(panel_name == "data"){
+    var path = args.path; /* convension used here */ 
+    var render_uri = "/xml/rend/"+ENV.service_name+"/"+path+"/";
+    var add_uri = "/xml/add/"+ENV.service_name+"/"+path+"/";
+    var ghint = "<a class='gbutton' onclick='zoyoe.ui.HidePanel()'>&#9746</a>"
+                 + "<h2>DataPanel: "+path+"</h2>"
+    hint.set('innerHTML',ghint);
+    LoadContent(panel,render_uri);
+    YUI.one('#panel').setStyle('display','block');
+  }else{
+    alert("fatal error");
+    UI.ActivateContent();
+    return;
+  }
+ }
+ this.HidePanel = function(){
+   UI.panel.setStyle('display','none');
+   UI.ActivateContent();
+ }
 }

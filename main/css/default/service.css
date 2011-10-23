@@ -5,6 +5,11 @@ font-family: "Trebuchet MS", sans-serif;
 list-style-type:none;
 }
 
+body{
+ height:100%;
+ width:100%;
+}
+
 div.page{
 margin:auto;
 margin-top:30px;
@@ -449,4 +454,19 @@ margin:15px 10px 15px 0;
 
 #dialog{
  position:fixed;
+}
+
+#items ul{
+  height:80px;
+}
+#items ul li{
+  height:30px;
+}
+
+#items ul div.icon{
+  float:left;
+  height:40px;
+  width:40px;
+  margin:10px;
+  border:1px solid gray;
 }

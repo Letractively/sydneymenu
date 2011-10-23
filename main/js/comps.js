@@ -285,18 +285,23 @@ function InitItems(env){
     this.add_item_uri = function(){
       return "/xml/add/"+env.service_name+'/item/';
     }
+    this.add_form_uri = function(){
+      return "/core/dialog/xsd/"+zoyoe.service_name+"/item/";
+    }
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
-        ele.className='';
+        ele.className='datalane';
         this.info_cache = null;
         this.cache = null;
+        zoyoe.ui.DisableFrameForm();
       }else{
         if(this.cache){
-          this.cache.className='';
+          this.cache.className='datalane';
         }
         ele.className='select';
         this.cache = ele;
         this.info_cache = info;
+        zoyoe.ui.LoadFrameForm(this.add_form_uri());
       }
     }
     this.AddItem = function(form_obj){
@@ -321,14 +326,8 @@ function InitItems(env){
         this.DelItem(this.info_cache);
       }
     }
-    this.ShowAddDialog = function(){
-      var dialog_uri = "/core/dialog/xsd/"+env.service_name+"/item/";
-      env.ui.InfoCollectDialog("AddItem",
-        dialog_uri,"xsd-item-form",
-        function(form_obj){
-          env.comps['ITEMS'].AddItem(form_obj);
-        }
-      );
+    this.ShowModifyDialog = function(){
+      zoyoe.ui.ShowPanel('data',{path:"item"});
 /*
       function(dialog){
         YUI().use('node',function(Y){

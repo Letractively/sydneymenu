@@ -23,11 +23,11 @@ import getopt
 import sys
 
 def InitServiceConfig():
+  default = None
   try:
     default = ServiceConfig.objects.get(name='default')
-    ServiceConfig.delete(default)
   except ServiceConfig.DoesNotExist:
-    pass
+    default = ServiceConfig() 
   try:
     xslt_io = open ("./config/default.xslt")
     xsd_io = open("./config/default.xsd")
@@ -35,11 +35,11 @@ def InitServiceConfig():
     print "Parsing defautl.xslt"
     test_doc = etree.parse(test_io)
     print "Create extension defautl.xslt"
-    ext = xmlbase.CreateExtension('default',xslt_io,xsd_io)
+    xmlbase.SetExtension(default,'default',xslt_io,xsd_io)
     xslt_io.close()
     xsd_io.close()
     test_io.close()
-    rslt = ext.GetXSLT()
+    rslt = default.GetXSLT()
     print "Initial default Service Config Successful"
     print "testing rending ..."
     print etree.tostring(rslt(test_doc).getroot(),pretty_print = True)

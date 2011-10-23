@@ -306,18 +306,67 @@ height:15px;
 }
 
 #panel{
-  z-index:103;position:fixed;top:0px;left:0px;width:100%;padding-top:55px;display:none;
+  z-index:103;position:fixed;
+  top:0px;
+  left:0px;
+  height:100%;
+  width:100%;
+  display:none;
 }
 #panel div.panel{
-  margin:auto;border:0px;padding:0px;width:560px;
-  background-color:#1b1b1b;
+  border:0px;padding:0px;
+  position:absolute;
+  top:40px;left:20px;
+  right:20px;
+  bottom:20px;
+  background-color:ghostwhite;
+  border-top:1px solid steelblue;
+  border-right:1px solid steelblue;
+  border-left:1px solid steelblue;
+  border-bottom:5px solid steelblue;
+  overflow:hidden;
+  color:white;
 }
+
+#panel table.shortcut{
+  color:black;
+  border-collapse:collapse;
+  width:100%;
+}
+
+#panel table.shortcut td.btn div.pick{
+  margin:5px;
+  width:5px;
+  height:5px;
+  border:1px solid #AAAAAA;
+}
+#panel table.shortcut td.btn{
+  width:30px;
+}
+#panel table.shortcut tr.title td{
+  color:steelblue; 
+  border-bottom:1px solid black;
+  height:30px;
+}
+
+#panel table.shortcut tr.datalane td,
+#panel table.shortcut tr.select td{
+  color:#3b3b3b; 
+  border-bottom:1px solid #AAAAAA;
+  height:25px;
+}
+#panel table.shortcut tr.select td{
+  background-color:ghostwhite;
+}
+
 #panel div.panel-content{
-width:540px;
-margin:auto;
+position:absolute;
+left:300px;
+top:35px;
+right:10px;
+bottom:20px;
 background-color:#EEEEEE;
 border:1px solid #AAAAAA;
-height:300px;
 overflow:hidden;
 text-align:center;
 }
@@ -325,7 +374,6 @@ text-align:center;
 padding:5px;
 font-size:20px;
 background-color:#900;
-color:white;
 margin:20px 10px 20px 10px;
 font-weight:400;
 }
@@ -336,7 +384,8 @@ color:white;
 margin:0px 10px 0px 10px;
 }
 #panel div.panel-hint{
-height:40px;
+height:30px;
+background-color:steelblue;
 }
 #panel div.panel-hint h2{
 font-size:18px;
@@ -345,8 +394,13 @@ padding:0px;
 margin:0px;
 }
 #panel div.button-lane{
-height:100px;
-padding-right:20px;
+position:absolute;
+left:5px;
+width:290px;
+top:35px;
+bottom:20px;
+background-color:#EEEEEE;
+border:1px solid #AAAAAA;
 }
 #panel div.button-lane a.gicon{
   height:65px;width:65px;
@@ -359,8 +413,8 @@ padding-right:20px;
 }
 
 #panel div.panel-content iframe{
-  width:580px;
-  height:300px;
+  width:100%;
+  height:100%;
   padding:0px;
   margin:0px;
   border:0px solid white;
@@ -385,30 +439,19 @@ padding-right:20px;
   width:80px;
   cursor:pointer;
 }
-#panel div.button-lane input{
-float:right;display:block;
-margin:5px;font-size:15px;
-font-family:"Times New Roman", Times, Sans-serif;
-text-transform:uppercase;
-border:1px solid gray;
-width:100px;
-background-color:white;
-color:#555555;
-}
 
 #panel div.panel-hint h2{
-  color:white;margin:10px 0 0 10px;
+  color:white;margin:3px 5px 5px 10px;
 }
 #panel div.panel-hint a{
   float:right;
-  margin:10px 10px 0 0;
-  font-size:12px;
+  margin:4px 10px 0 0;
   color:white;
 }
 #panel div.panel-hint a.gbutton{
   display:block;
   cursor:pointer;
-  font-size:10px;
+  font-size:18px;
 }
 #panel div.panel-hint a.gbutton:hover {
 }
@@ -484,4 +527,19 @@ color:#555555;
   width:10px;
   display:inline;
 }
+
+form.xsd-form{
+  padding:10px;
+  margin:0px;
+  font-size:14px;
+  color:black;
+}
+form.xsd-form div{margin:10px 10px 0px 10px;}
+form.xsd-form div.attribute-cell input{
+  border:1px solid #959595;
+  margin-top:5px;width:240px;display:block;font-size:15px;}
+form.xsd-form label{display:block;}
+form.xsd-form label:first-letter {text-transform:uppercase;}
+form.xsd-form textarea{font-size:15px;border:1px solid #959595;width:240px;height:100px;margin-top:5px;}
+
 

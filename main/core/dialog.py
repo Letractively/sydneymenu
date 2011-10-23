@@ -10,13 +10,11 @@ def XSDDialog(request,sname,path):
       return HttpResponse(form_doc,mimetype="text/xml")
 
 def Register(request):
-    u_data = UserCore()
     register_t = loader.get_template('core/_register.html')
     c = Context({"REQUEST":request.REQUEST})
     return HttpResponse(register_t.render(c))
 
 def ChangePWD(request):
-    u_data = UserCore()
     register_t = loader.get_template('core/_change_pwd.html')
     c = Context({"REQUEST":request.REQUEST})
     return HttpResponse(register_t.render(c))

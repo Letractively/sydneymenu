@@ -5,19 +5,17 @@
 {% endif %}
       <div class='section' id="items">
         <div class='title'>
-           <h3>items</h3>
+           <h3>Menu</h3>
         </div>
         <div class='info-block'>
-        <ul>
           {% for item in COMP|hash:"ITEMS"|hash:"item" %}
-          {{COMP|hash:"RENDER"|xslt:item}}
+          {{COMP|hash:"RENDER"|xslt:item|safe}}
           {% endfor %}
-        </ul>
         </div>
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['ITEMS'].ShowAddDialog()">add</a><a onclick="zoyoe.comps['ITEMS'].DelItemSelect()">del</a></h3>
+        <h3><a onclick="zoyoe.comps['ITEMS'].ShowModifyDialog()">modify</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}

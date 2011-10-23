@@ -16,19 +16,17 @@ def SaveConfig(sname,node):
   os.write(fd,etree.tostring(node,pretty_print = True))
   os.close(fd)
 
-def CreateExtension(ext_name,xslt_str,xsd_str):
+def SetExtension(ext,ext_name,xslt_str,xsd_str):
   xsd_doc = etree.parse(xsd_str) 
   xslt_doc = etree.parse(xslt_str)
   schema = etree.XMLSchema(xsd_doc)
   xslt = etree.XSLT(xslt_doc)
-  ext = ServiceConfig()
   # make sure the ext_name has not been used
   ext.name = ext_name 
   ext.xslt = etree.tostring(xslt_doc.getroot(),pretty_print = True) 
   ext.xsd = etree.tostring(xsd_doc.getroot(),pretty_print = True)
   ext.version = 0
   ext.save()
-  return ext 
 
 def ModifyExtension(ext_name,xslt_str,xsd_str):
   try:

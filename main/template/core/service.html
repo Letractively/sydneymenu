@@ -52,7 +52,8 @@ function Init(){
   MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
   
   YUI().use('node','io-form',function(Y){
-    zoyoe.InitZoyoe(false,Y);
+    zoyoe.InitZoyoe(true,Y);
+    //zoyoe.InitZoyoe(false,Y);
     zoyoe.service_name = '{{SERVICE.name}}';
     zoyoe.comps['ITEMS'] = InitItems(zoyoe);
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
@@ -118,13 +119,6 @@ function Init(){
     <div class='panel-content'>
     </div>
     <div class='button-lane'>
-      <a onclick="zoyoe.comps['GALLERY'].Select(0,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(1,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(2,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(3,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(4,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(5,this)" class='gicon'></a>
-      <a onclick="zoyoe.comps['GALLERY'].Select(6,this)" class='gicon'></a>
     </div>
   </div>
 </div>

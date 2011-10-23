@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^add/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Add'),
     (r'^modify/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Modify'),
     (r'^remove/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Remove'),
+    (r'^rend/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Rend'),
     # Example:
     # (r'^sdist/', include('sdist.foo.urls')),
 
