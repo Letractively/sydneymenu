@@ -282,11 +282,15 @@ function InitItems(env){
     this.del_item_uri = function(){
       return "/xml/remove/"+env.service_name+'/item/';
     }
-    this.add_item_uri = function(){
-      return "/xml/add/"+env.service_name+'/item/';
+    this.form_uri = function(info){
+      if(info){
+        return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/?id="+info;
+      }else{
+        return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/";
+      }
     }
-    this.add_form_uri = function(){
-      return "/core/dialog/xsd/"+zoyoe.service_name+"/item/";
+    this.add_uri = function(){
+      return "/xml/add/"+env.service_name+'/item/';
     }
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
@@ -301,7 +305,7 @@ function InitItems(env){
         ele.className='select';
         this.cache = ele;
         this.info_cache = info;
-        zoyoe.ui.LoadFrameForm(this.add_form_uri());
+        zoyoe.ui.LoadFrameForm(this.form_uri(info));
       }
     }
     this.AddItem = function(form_obj){

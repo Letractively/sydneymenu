@@ -1,19 +1,18 @@
 <xsl:stylesheet version="1.0" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs ="http://www.w3.org/2001/XMLSchema">
-
 <xsl:param name="name"/>
-
-<xsl:template name="main" match = "/">
+<xsl:template name="main" match = "/xs:schema">
  <form id="xsd-{$name}-form" class="xsd-form">
- <xsl:for-each select="//xs:complexType[@name=$name]"> 
+ <xsl:for-each select="./xs:complexType[@name=$name]"> 
    <xsl:for-each select = "./xs:attribute">
     <div class="attribute-cell">
       <label><xsl:value-of select="./@name"/></label>
       <input type="textfield">
-      <xsl:attribute name = "name">
-        <xsl:value-of select="./@name"/>
-      </xsl:attribute>
+        <xsl:attribute name = "name">
+          <xsl:value-of select="./@name"/>
+        </xsl:attribute>
+        <xsl:attribute name = "value">{{ITEM|xattr:'/item/@<xsl:value-of select="./@name"/>'}}</xsl:attribute>
       </input>
     </div>
    </xsl:for-each>

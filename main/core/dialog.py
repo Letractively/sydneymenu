@@ -1,13 +1,5 @@
 from inc import *
-
-def XSDDialog(request,sname,path):
-    s_data = GetService(sname) 
-    if(s_data == None):
-      return HttpResponse('Service Not Exist')
-    else:
-      s_xsd = s_data.extend.GetXSDDoc()
-      form_doc = FormFromXSD(path,s_xsd)
-      return HttpResponse(form_doc,mimetype="text/xml")
+from django.template import Template
 
 def Register(request):
     register_t = loader.get_template('core/_register.html')

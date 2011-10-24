@@ -5,9 +5,10 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^dialog/xsd/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.dialog.XSDDialog'),
     (r'^add/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Add'),
     (r'^modify/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Modify'),
-    (r'^remove/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Remove'),
+    (r'^remove/(?P<sname>[^/]*)/(?P<id>.*)/$','xmldata.data.Remove'),
     (r'^rend/(?P<sname>[^/]*)/(?P<path>.*)/$','xmldata.data.Rend'),
     # Example:
     # (r'^sdist/', include('sdist.foo.urls')),

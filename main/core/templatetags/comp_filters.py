@@ -151,3 +151,10 @@ def render(ele_config):
 @register.filter("xslt")
 def xslt(xslt,item):
   return etree.tostring(xslt(item.getroot()))
+
+@register.filter("xattr")
+def xattr(item,path):
+  if item:
+    return item.xpath(path)[0]
+  else:
+    return "None" 

@@ -20,8 +20,22 @@ def Add(request,sname,path):
     info = xmlbase.CreateNewInfo(aut['s'],xml_data,path)
     return GeneralXMLResponse(request,command_error,"Info has been recorded successfully")
     
-def Remove(request,sname,path):
-  return "NotImplemented"
+def Remove(request,sname,id):
+  aut = HasAuthority(request,sname)
+  command_error = {}
+  if command_error:
+      return GeneralXMLResponse(request,command_error)
+  elif (aut['r'] == False):
+      command_error['AUTHORITY'] = 'NO_AUTHORITY'
+      return GeneralXMLResponse(request,command_error)
+  else:
+    try:
+      info = Info.objects.get(service=sname,id=id)
+      Info.delete(info)
+      return GeneralXMLResponse(request,command_error,"Info has been removed successfully")
+    except Info.DoesNotExist,e:
+      command_error['FAIL'] = "Data Does Not Exist"
+      return GeneralXMLResponse(request,command_error)
 
 def Modify(request,sname,path):
   return "NotImplemented"
