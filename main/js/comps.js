@@ -279,11 +279,9 @@ function InitItems(env){
   var item_comp = new function(){
     this.cache = null;
     this.info_cache = null;
-    this.del_item_uri = function(){
-      return "/xml/remove/"+env.service_name+'/item/';
-    }
+    this.form_name = "xsd-item-form";
     this.form_uri = function(info){
-      if(info){
+      if(info  && 0 <= info){
         return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/?id="+info;
       }else{
         return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/";
@@ -292,6 +290,13 @@ function InitItems(env){
     this.add_uri = function(){
       return "/xml/add/"+env.service_name+'/item/';
     }
+    this.modify_uri = function(id){
+      return "/xml/modify/"+env.service_name+'/item/?id='+id;
+    }
+    this.delete_uri = function(id){
+      return "/xml/remove/"+env.service_name+'/'+id+"/";
+    }
+ 
     this.Select = function(info,ele){
       if(this.cache == ele && ele.className == 'select'){
         ele.className='datalane';
@@ -305,46 +310,47 @@ function InitItems(env){
         ele.className='select';
         this.cache = ele;
         this.info_cache = info;
+        zoyoe.ui.ClearButtons();
         zoyoe.ui.LoadFrameForm(this.form_uri(info));
+        if(info == -1){
+          zoyoe.ui.LoadButton("Commit",function(){
+            item_comp.AddItem();
+          });
+        }else{
+          zoyoe.ui.LoadButton("Save",function(){
+            item_comp.ModifyItem();
+          });
+          zoyoe.ui.LoadButton("Delete",function(){
+            item_comp.DeleteItem();
+          });
+        }
       }
     }
-    this.AddItem = function(form_obj){
+    this.ModifyItem = function(dbid){
       var config = {
         method: 'GET',
-        form: {id:form_obj}
+        form: {id:item_comp.form_name}
       }
-      var uri = this.add_item_uri();
-      var request = env.ui.GeneralDialogCont(uri,config,true
-        ,new update_info("/core/service/" + env.service_name + "/?comp=items","items"));
+      var uri = this.modify_uri(this.info_cache);
+      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
     }
-    this.DelItem = function(gname){
+    this.AddItem = function(){
+      var config = {
+        method: 'GET',
+        form: {id:item_comp.form_name}
+      }
+      var uri = this.add_uri();
+      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
+    }
+    this.DeleteItem = function(){
       var config = {
          method: 'GET',
       }
-      var uri = this.del_girl_uri() + gname;
-      var request = env.ui.ResponseDialog(uri,config,true
-        ,new update_info("/core/service/" + env.service_name + "/?comp=items","items"));
-    }
-    this.DelItemSelect = function(){
-      if(this.info_cache){
-        this.DelItem(this.info_cache);
-      }
+      var uri = this.delete_uri(this.info_cache);
+      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
     }
     this.ShowModifyDialog = function(){
       zoyoe.ui.ShowPanel('data',{path:"item"});
-/*
-      function(dialog){
-        YUI().use('node',function(Y){
-           var input = dialog.one("div.extension-dict-select input");
-           var icon = dialog.one("#icon-view img");
-           var dom_input = Y.Node.getDOMNode(input);
-           dom_input.ext_onchange = function(value){
-             var prefix = "/core/data/res/"+env.service_name+"/"+value;
-             icon.set("src",prefix+"/?sc=large");
-           }
-        });
-      });
-*/
     }
   }
   return item_comp;

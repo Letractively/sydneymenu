@@ -55,12 +55,6 @@ mdyserv_handler = {
   ,'description':(description_patten,(lambda x:x),lambda x, v:setattr(x,'description',v))}
 
 
-additem_handler = {'category':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))
-  ,'path':(path_patten,(lambda x:x),lambda x, v:(x.update(path = v)))
-  ,'description':(description_patten,(lambda x:x),lambda x, v:(x.update(description = v)))
-  ,'type':(url_patten,(lambda x:x),lambda x, v:(x.update(type = v)))
-  ,'data':(data_patten,(lambda x:x),lambda x, v:(x.update(data = v)))}
-
 addgallery_handler = {'name':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))}
 
 addpost_handler = {'name':(name_patten,(lambda x:x),lambda x, v: (x.update(name = v)))}
@@ -85,6 +79,7 @@ savelayout_handler = {'left':(layout_patten,(lambda x:x),lambda x, v: (x.update(
   ,'right':(layout_patten,(lambda x:x),lambda x, v: (x.update(right = v.split(','))))}
 
 
+xml_data_handler = {'id':(number_patten,(lambda x:x),lambda x, v: (x.update(name = v)))}
 
 #UNIT TEST
 if __name__ == "__main__":

@@ -20,6 +20,7 @@ function ZOYOE_UI(env,yui,static_dialog){
   this.static_dialog = static_dialog;
   this.dialog_commit_btn = this.dialog.one(".button-lane input.commit");
   this.dialog_cancel_btn = this.dialog.one(".button-lane input.cancel");
+  this.panel_name = null;
   this.panel = YUI.one("#panel")
 
 
@@ -266,7 +267,7 @@ function ZOYOE_UI(env,yui,static_dialog){
     function complete(id,o,args){
       var data = o.responseText;
       ENV.ALERT(o.responseText);
-      content.set("innerHTML",data);
+      content.one('div.panel-content').set("innerHTML",data);
     }
     var config = {
       method: 'get',
@@ -277,13 +278,23 @@ function ZOYOE_UI(env,yui,static_dialog){
     function complete(id,o,args){
       var data = o.responseText;
       ENV.ALERT(o.responseText);
-      var btnlane = YUI.one('#panel .button-lane');
+      var btnlane = YUI.one('#panel .panel-left');
       btnlane.set("innerHTML",data);
     }
     var config = {
       method: 'get',
     }
     StartIO(uri,config,complete);
+  }
+  this.ClearButtons = function(){
+    var btn_lane = YUI.one('#panel .button-lane');
+    btn_lane.set("innerHTML","");
+  }
+  this.LoadButton = function(str,callback){
+    var btn_lane = YUI.one('#panel .button-lane');
+    ele = YUI.Node.create("<input type='button' value='"+str+"'></input>"); 
+    ele.on('click',callback);
+    btn_lane.append(ele);
   }
   this.SubmitForm = function(){
     var form_obj = document.getElementById(UI.dialog_name);
@@ -339,8 +350,9 @@ function ZOYOE_UI(env,yui,static_dialog){
   var panel = YUI.one('#panel .panel-content');
   var hint = YUI.one('#panel .panel-hint');
   var btnlane = YUI.one('#panel .button-lane');
+  var pleft = YUI.one('#panel .panel-left');
   if(panel_name == "gallery"){
-    btnlane.set("innerHTML","<a onclick=\"zoyoe.comps['GALLERY'].Select(0,this)\" class='gicon'></a>"
+    pleft.set("innerHTML","<a onclick=\"zoyoe.comps['GALLERY'].Select(0,this)\" class='gicon'></a>"
       + "<a onclick=\"zoyoe.comps['GALLERY'].Select(1,this)\" class='gicon'></a>"
       + "<a onclick=\"zoyoe.comps['GALLERY'].Select(2,this)\" class='gicon'></a>"
       + "<a onclick=\"zoyoe.comps['GALLERY'].Select(3,this)\" class='gicon'></a>"
@@ -400,13 +412,14 @@ function ZOYOE_UI(env,yui,static_dialog){
     hint.set('innerHTML',ghint);
     YUI.one('#panel').setStyle('display','block');
   }else if(panel_name == "data"){
+    this.panel_name = "data";
     var path = args.path; /* convension used here */ 
     var render_uri = "/xml/rend/"+ENV.service_name+"/"+path+"/";
     var add_uri = "/xml/add/"+ENV.service_name+"/"+path+"/";
     var ghint = "<a class='gbutton' onclick='zoyoe.ui.HidePanel()'>&#9746</a>"
                  + "<h2>DataPanel: "+path+"</h2>"
     hint.set('innerHTML',ghint);
-    LoadContent(panel,render_uri);
+    LoadContent(UI.panel,render_uri);
     YUI.one('#panel').setStyle('display','block');
   }else{
     alert("fatal error");
@@ -414,6 +427,19 @@ function ZOYOE_UI(env,yui,static_dialog){
     return;
   }
  }
+ this.PanelFormSubmit =function (uri,config,left_ref,right_ref){
+  function complete(id,o,args){
+    if(left_ref){
+      UI.panel.one('div.panel-left').set("innerHTML",o.responseText);
+    }
+    if(right_ref){
+      var render_uri = "/xml/rend/"+ENV.service_name+"/"+right_ref+"/";
+      LoadContent(UI.panel,render_uri);
+    }
+  }
+  StartIO(uri,config,complete);
+ }
+
  this.HidePanel = function(){
    UI.panel.setStyle('display','none');
    UI.ActivateContent();

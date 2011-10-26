@@ -82,6 +82,21 @@ def CreateNewInfo(service,xml_str,path):
   info.save()
   return info
 
+def ModifyInfo(service,xml_str,path,id):
+  xsd_doc = service.extend.GetXSDDoc()
+  schema = etree.XMLSchema(xsd_doc)
+  xml_doc = etree.parse(StringIO(xml_str))
+  schema.assertValid(xml_doc)
+  info = Info.objects.get(id=id)
+  info.version = service.extend.version
+  info.path = path
+  info.service = service.name 
+  info.data = xml_str
+  info.save()
+  return info
+
+
+
 def InitNode(node,path,name):
   al = node.xpath("./"+path)
   an = None
