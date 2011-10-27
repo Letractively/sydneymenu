@@ -275,23 +275,24 @@ function InitRoster(env,day){
   return roster_comp;
 }
 
-function InitItems(env){
+function InitItems(env,p){
   var item_comp = new function(){
+    var path = p;
     this.cache = null;
     this.info_cache = null;
-    this.form_name = "xsd-item-form";
+    this.form_name = "xsd-"+path+"-form";
     this.form_uri = function(info){
       if(info  && 0 <= info){
-        return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/?id="+info;
+        return "/xml/dialog/xsd/"+zoyoe.service_name+"/" + path + "/?id="+info;
       }else{
-        return "/xml/dialog/xsd/"+zoyoe.service_name+"/item/";
+        return "/xml/dialog/xsd/"+zoyoe.service_name+"/" + path + "/";
       }
     }
     this.add_uri = function(){
-      return "/xml/add/"+env.service_name+'/item/';
+      return "/xml/add/"+env.service_name+'/' + path + '/';
     }
     this.modify_uri = function(id){
-      return "/xml/modify/"+env.service_name+'/item/?id='+id;
+      return "/xml/modify/"+env.service_name+'/' + path + '/?id='+id;
     }
     this.delete_uri = function(id){
       return "/xml/remove/"+env.service_name+'/'+id+"/";
@@ -332,7 +333,7 @@ function InitItems(env){
         form: {id:item_comp.form_name}
       }
       var uri = this.modify_uri(this.info_cache);
-      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
+      var request = env.ui.PanelFormSubmit(uri,config,true,path)
     }
     this.AddItem = function(){
       var config = {
@@ -340,17 +341,17 @@ function InitItems(env){
         form: {id:item_comp.form_name}
       }
       var uri = this.add_uri();
-      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
+      var request = env.ui.PanelFormSubmit(uri,config,true,path)
     }
     this.DeleteItem = function(){
       var config = {
          method: 'GET',
       }
       var uri = this.delete_uri(this.info_cache);
-      var request = env.ui.PanelFormSubmit(uri,config,true,'item')
+      var request = env.ui.PanelFormSubmit(uri,config,true,path)
     }
     this.ShowModifyDialog = function(){
-      zoyoe.ui.ShowPanel('data',{path:"item"});
+      zoyoe.ui.ShowPanel('data',{path:path});
     }
   }
   return item_comp;

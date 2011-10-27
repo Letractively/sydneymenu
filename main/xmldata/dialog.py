@@ -13,6 +13,6 @@ def XSDDialog(request,sname,path):
       s_xsd = s_data.extend.GetXSDDoc()
       form_t = Template("{% load comp_filters %}\n" +
         "{%load hash_filters %}\n" +
-        str(FormFromXSD(path,s_xsd)))
-      c = Context({"ITEM":item})
+        etree.tostring(FormFromXSD(path,s_xsd)))
+      c = Context({"ITEM":item,"PATH":path})
       return HttpResponse(form_t.render(c),mimetype="text")

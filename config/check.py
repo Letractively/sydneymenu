@@ -25,11 +25,19 @@ try:
   html_xslt = etree.XSLT(html_xslt_doc)
   
   print "Gen HTML:"
-  print etree.tostring(html_xslt(valid_doc).getroot(),pretty_print = True)
+  print etree.tostring(html_xslt(valid_doc.getroot()[0]).getroot(),pretty_print = True)
   
   print "Form XSLT:"
-  form = form_xslt(schema_doc,name="'item'")
+  form = form_xslt(schema_doc,name="'timetable'")
   print etree.tostring(form.getroot(),pretty_print = True)
+
+  print "Parse template render:"
+  template_xslt_doc = etree.parse(template_xslt_file)
+  template_xslt = etree.XSLT(template_xslt_doc)
+  
+  print "Gen Template:"
+  print etree.tostring(template_xslt(schema_doc,name="'item'").getroot(),pretty_print = True)
+  
 except etree.XMLSyntaxError, e:
   print e
 except etree.DocumentInvalid, e:

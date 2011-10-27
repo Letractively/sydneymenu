@@ -42,7 +42,7 @@ def InitServiceConfig():
     rslt = default.GetXSLT()
     print "Initial default Service Config Successful"
     print "testing rending ..."
-    print etree.tostring(rslt(test_doc).getroot(),pretty_print = True)
+    print etree.tostring(rslt(test_doc.getroot()[0]).getroot(),pretty_print = True)
     xsd_io = open("./config/default.xsd")
     form = xmlbase.FormFromXSD('item',etree.parse(xsd_io))
     xsd_io.close()

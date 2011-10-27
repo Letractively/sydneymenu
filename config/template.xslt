@@ -4,8 +4,8 @@
 
 <xsl:param name="name"/>
 
-<xsl:template name="main" match = "/">
- <xsl:for-each select="//xs:complexType[@name=$name]"> 
+<xsl:template name="main" match = "/xs:schema">
+ <xsl:for-each select="./xs:complexType[@name=$name]"> 
    <xsl:element name="{$name}">
     <xsl:for-each select="./xs:attribute">
      <xsl:attribute name="{./@name}">{{REQUEST.<xsl:value-of select="./@name"/>}}</xsl:attribute>

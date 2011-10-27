@@ -12,7 +12,7 @@
         <xsl:attribute name = "name">
           <xsl:value-of select="./@name"/>
         </xsl:attribute>
-        <xsl:attribute name = "value">{{ITEM|xattr:'/item/@<xsl:value-of select="./@name"/>'}}</xsl:attribute>
+        <xsl:attribute name = "value">{%with '/'|add:PATH|add:'/@<xsl:value-of select="./@name"/>' as XPATH%}{%xattr ITEM XPATH %}{%endwith%}</xsl:attribute>
       </input>
     </div>
    </xsl:for-each>

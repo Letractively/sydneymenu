@@ -152,7 +152,7 @@ def render(ele_config):
 def xslt(xslt,item):
   return etree.tostring(xslt(item.getroot()))
 
-@register.filter("xattr")
+@register.simple_tag
 def xattr(item,path):
   if item:
     return item.xpath(path)[0]

@@ -55,14 +55,14 @@ function Init(){
     zoyoe.InitZoyoe(true,Y);
     //zoyoe.InitZoyoe(false,Y);
     zoyoe.service_name = '{{SERVICE.name}}';
-    zoyoe.comps['ITEMS'] = InitItems(zoyoe);
+    zoyoe.comps['item'] = InitItems(zoyoe,'item');
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
     zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
     zoyoe.comps['POST'] = InitPost(zoyoe);
     zoyoe.comps['LAYOUT'] = InitLayout(zoyoe);
     zoyoe.comps['ICON'] = InitIcon(zoyoe);
     zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
-    zoyoe.comps['TIME_TABLE'] = InitTimeTable(zoyoe);
+    zoyoe.comps['timetable'] = InitItems(zoyoe,'timetable');
     zoyoe.admin = InitAdmin(zoyoe);
     if(zoyoe.ElementExtension){
       zoyoe.ElementExtension.BuildExtensionElements();

@@ -14,7 +14,7 @@ def Add(request,sname,path):
   else:
     xsd = aut['s'].extend.GetXSDDoc()
     template_doc = XMLTemplateFromXSD(path,xsd)
-    xml_t = Template(str(template_doc))
+    xml_t = Template(etree.tostring(template_doc))
     c = Context({"REQUEST":request.REQUEST})
     xml_data = xml_t.render(c)
     info = xmlbase.CreateNewInfo(aut['s'],xml_data,path)
@@ -73,13 +73,13 @@ def Rend(request,sname,path):
       table_str +="<td>"+attr.get("name")+"</td>"
     table_str += "</tr>"
     for item in db_items:
-      table_str +="<tr class='datalane' onclick=\"zoyoe.comps['ITEMS'].Select('"+ str(item.id) +"',this)\">"
+      table_str +="<tr class='datalane' onclick=\"zoyoe.comps['" + path +"'].Select('"+ str(item.id) +"',this)\">"
       table_str +="<td class='btn'><div class='pick'></div></td>"
       for attr in attrs:
         table_str +="<td>"+item.GetDataDoc().getroot().get(attr.get("name"))+"</td>"
       table_str +="</tr>"
     table_str += "</table>"
-    table_str +="<div class='datalane' onclick=\"zoyoe.comps['ITEMS'].Select(-1,this)\">Append Data </div>"
+    table_str +="<div class='datalane' onclick=\"zoyoe.comps['" + path + "'].Select(-1,this)\">Append Data </div>"
     return HttpResponse(table_str)
   except ServiceCore.DoesNotExist:
     return HttpResponse("Service is " + sname + " Does Not Exist")
