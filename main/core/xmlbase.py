@@ -85,7 +85,7 @@ def CreateNewInfo(service,xml_str,path):
 def ModifyInfo(service,xml_str,path,id):
   xsd_doc = service.extend.GetXSDDoc()
   schema = etree.XMLSchema(xsd_doc)
-  xml_doc = etree.parse(StringIO(xml_str))
+  xml_doc = etree.parse(StringIO("<zoyoe>"+xml_str+"</zoyoe>"))
   schema.assertValid(xml_doc)
   info = Info.objects.get(id=id)
   info.version = service.extend.version

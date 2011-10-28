@@ -21,8 +21,7 @@
 <xsl:template match = "/timetable">
   <li>
    <span class='label'><xsl:value-of select="./@day"/>:</span>
-   <a><xsl:value-of select="./@from"/></a>
-   <a><xsl:value-of select="./@to"/></a>
+   <a><xsl:value-of select="./@from"/> - <xsl:value-of select="./@to"/></a>
   </li>
 </xsl:template>
 

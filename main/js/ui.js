@@ -43,11 +43,11 @@ function ZOYOE_UI(env,yui,static_dialog){
   }
 
   /* Set the complete function */
-  YUI.on('io:complete',function(id,o,args){
-    UI.complete(id,o,args)
-  });
-  function StartIO(uri,config,call_back){
-    UI.complete = call_back;
+ function StartIO(uri,config,call_back,paras){
+    var sub = YUI.on('io:complete',function(id,o,args){
+      call_back(id,o,args);
+      sub.detach();
+    },YUI,paras);
     var request = YUI.io(uri,config);
   }
   function BuildGeneralMsg(msg,url,error_hint){
@@ -352,6 +352,7 @@ function ZOYOE_UI(env,yui,static_dialog){
   var btnlane = YUI.one('#panel .button-lane');
   var pleft = YUI.one('#panel .panel-left');
   if(panel_name == "gallery"){
+    var gname = args[0];
     pleft.set("innerHTML","<a onclick=\"zoyoe.comps['GALLERY'].Select(0,this)\" class='gicon'></a>"
       + "<a onclick=\"zoyoe.comps['GALLERY'].Select(1,this)\" class='gicon'></a>"
       + "<a onclick=\"zoyoe.comps['GALLERY'].Select(2,this)\" class='gicon'></a>"
@@ -364,14 +365,14 @@ function ZOYOE_UI(env,yui,static_dialog){
       tstamp = "&tstamp="+ENV.TimeStamp();
     }
     /* The Uri Where We Get The Photo Data */
-    var info_uri = "/core/dialog/"+service_name+"/gallery/?" + tstamp;
+    var info_uri = "/core/dialog/"+ENV.service_name+"/gallery/?" + tstamp;
     function complete(io,o,args){
-      var icon_containers = ENV.all('#panel .gicon')
+      var icon_containers = UI.panel.all(' .gicon')
       var gs = o.responseXML.getElementsByTagName('G');
       var g = null;
-      var name = args[0];
+      gname = args[0]; 
       for (var i=0;i<gs.length;i++){
-        if(gs[i].getAttribute('name') == name){
+        if(gs[i].getAttribute('name') == gname){
           g = gs[i];
         }
       }
@@ -379,7 +380,7 @@ function ZOYOE_UI(env,yui,static_dialog){
       else{
         var urls = g.getElementsByTagName('IMG'); 
         var gname = g.getAttribute('name');
-        var prefix = "/core/data/res/"+service_name+"/"+gname;
+        var prefix = "/core/data/res/"+ENV.service_name+"/"+gname;
         var idx = 0;
         var name_list = [];
         for(;idx<7&&idx<urls.length;idx++){
@@ -400,16 +401,13 @@ function ZOYOE_UI(env,yui,static_dialog){
     var config = {
       method: 'GET',
     }
-    StartIO(info_uri,config,complete);
-    var d_hint = "<a class='gbutton' onclick=\"zoyoe.HidePanel();zoyoe.comps['GALLERY'].DelGallery('"
-                  + gname + "')\">delete this gallery</a>"
-    var c_hint = "<a class='gbutton' onclick=\"zoyoe.comps['GALLERY'].AddImg()\">"
-                  + "upload new image</a>"
-    var m_hint = "<a class='gbutton' onclick=\"zoyoe.comps['GALLERY'].ModifyImg()\">"
-                  + "change current image</a>"
-    var ghint = "<a class='gbutton' onclick='zoyoe.HidePanel()'>&#9746</a>"
-                  + d_hint + m_hint + c_hint + "<h2>Gallery:"+gname+"</h2>"
+    StartIO(info_uri,config,complete,[gname]);
+   var ghint = "<a class='gbutton' onclick='zoyoe.ui.HidePanel()'>&#9746</a>"
+                   + "<h2>Gallery:"+gname+"</h2>"
     hint.set('innerHTML',ghint);
+    this.LoadButton("Del Gallery",function(){zoyoe.ui.HidePanel();zoyoe.comps['GALLERY'].DelGallery(gname);});
+    this.LoadButton("Create New",function(){zoyoe.comps['GALLERY'].AddImg()});
+    this.LoadButton("Modify Current",function(){zoyoe.comps['GALLERY'].ModifyImg(gname);});
     YUI.one('#panel').setStyle('display','block');
   }else if(panel_name == "data"){
     this.panel_name = "data";

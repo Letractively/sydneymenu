@@ -422,7 +422,7 @@ bottom:30px;
 background-color:#EEEEEE;
 border:1px solid #AAAAAA;
 }
-#panel div.button-lane a.gicon{
+#panel div.panel-left a.gicon{
   height:65px;width:65px;
   margin-top:12px;
   margin-left:10px;
@@ -444,12 +444,12 @@ border:1px solid #AAAAAA;
   max-height:300px;
 }
 
-#panel div.button-lane a.gicon img{
+#panel div.panel-left a.gicon img{
   background-color:white;
   height:65px;
   width:65px;
 }
-#panel div.button-lane a.gbutton{
+#panel div.panel-left a.gbutton{
   height:80px;width:80px;
   margin:10px;
   float:right;

@@ -52,8 +52,8 @@ function Init(){
   MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
   
   YUI().use('node','io-form',function(Y){
-    zoyoe.InitZoyoe(true,Y);
-    //zoyoe.InitZoyoe(false,Y);
+    //zoyoe.InitZoyoe(true,Y);
+    zoyoe.InitZoyoe(false,Y);
     zoyoe.service_name = '{{SERVICE.name}}';
     zoyoe.comps['item'] = InitItems(zoyoe,'item');
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);

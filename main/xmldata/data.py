@@ -51,7 +51,7 @@ def Modify(request,sname,path):
     try:
       xsd = aut['s'].extend.GetXSDDoc()
       template_doc = XMLTemplateFromXSD(path,xsd)
-      xml_t = Template(str(template_doc))
+      xml_t = Template(etree.tostring(template_doc))
       c = Context({"REQUEST":request.REQUEST})
       xml_data = xml_t.render(c)
       info = xmlbase.ModifyInfo(aut['s'],xml_data,path,request.REQUEST['id'])

@@ -9,7 +9,7 @@
           <ul>
             {% for n,v in GALLERY_INFO.iteritems %}
             <li>
-              <div class='gicon' onclick="zoyoe.ShowPanel('photo','{{SERVICE.name}}','{{n}}')">
+              <div class='gicon' onclick="zoyoe.ui.ShowPanel('gallery',['{{n}}'])">
               {% if v %}
                 <img src='/core/data/res/{{SERVICE.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
               {% else %}
