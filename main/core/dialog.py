@@ -42,19 +42,6 @@ def Login(request):
     c = Context({"REQUEST":request.REQUEST})
     return HttpResponse(login_t.render(c))
 
-def GetGallery(request,sname):
-    try:
-      data = ServiceCore.objects.get(name = sname)
-      if (data.activate == True):
-        fd = os.open(CONFIG.SERVICES_PATH + sname+'/config.xml',os.O_RDWR)
-        gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
-        gallery = Gallery.InitGalleryConfig(gnode.getroot())
-        return HttpResponse(gallery.XML(),mimetype = "text/xml")
-      else:
-        return HttpResponse("<FAIL>Service not activated</FAIL>") 
-    except ServiceCore.DoesNotExist:
-        return HttpResponse("<FAIL>Service not existed</FAIL>")
-
 def AddGallery(request,sname):
     addgallery_t = loader.get_template('core/_addgallery.html')
     c = Context({"REQUEST":request.REQUEST})

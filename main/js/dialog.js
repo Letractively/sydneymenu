@@ -2,18 +2,6 @@
 /* The implementation need some convention in html design, so just internal use only */
 /* The implementation does not use css path to find elements, it depends on the function getElementById */
 
-/* The following tiny functions only take care of the display attribut */
-
-var hint_addservice_title = "<a></a><h2>PUBLISH</h2>";
-var hint_register_title = "<a></a><h2>REGISTER</h2>";
-var hint_login_title = "<a></a><h2>LOGIN</h2>";
-var hint_addservice_succ = "<a/><h2>Your Service Has Been Published</h2>";
-var hint_error = "<a></a><h2>Some Error Occurred</h2>";
-var hint_addgirl = "<a></a><h2>Add Girl</h2>";
-var TimeStep = function(){
-}
-
-
 /* Current Is The Main Object That We Provide For All Of Our Pages */
 var zoyoe = new function(){
   this.debug = false;
@@ -149,32 +137,6 @@ var zoyoe = new function(){
 
   
 /* The following function need YUI3 to succeed */
-
-var add_service_uri = "/core/data/addservice/";
-
-function Reload(){
-  if(document.forms['reload']){
-    document.forms['reload'].submit();
-  }else{
-    zoyoe.ALERT('Try alternative Reload Function');
-    location.reload(true);
-  }
-}
-
-function Logout(){
-  var logout_uri = "/core/user/logout/";
-  YUI().use("io-form",function(Y){
-    uri = logout_uri;
-    var logout_config = {
-      method: 'GET',
-    }
-    function complete(id,o,args){
-      Reload();
-    }
-    Y.on('io:complete',complete);
-    var request = Y.io(logout_uri,logout_config);
-  });
-}
 
   var config = new function(){
      this.choice = new Array();
@@ -350,12 +312,7 @@ function SwitchPanel(h){
  * Component
  */
 
-function Select(cname,info,html_ele){
-  if(zoyoe.comps[cname]){
-    var comp = zoyoe.comps[cname];
-    comp.Select(info,html_ele);
-  } 
-}
+
 function SwitchPlaceJSON(result){
   if(result.resourceSets){
     if(result.resourceSets[0].estimatedTotal = 0){

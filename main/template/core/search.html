@@ -20,6 +20,7 @@
   <!-- Project Components -->
 
   <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/comps.js"></script>
   <script type="text/javascript" src="/js/ele.js"></script>
   <script type="text/javascript" src="/js/surburb.js"></script>
   <script type="text/javascript" src="/js/search.js"></script>
@@ -31,6 +32,9 @@
   <div class='brand'>
    <img src="/res/none_design.png"></img>
   </div>
+  <iframe src="http://www.facebook.com/plugins/like.php?href=www.sydneyscent.com"
+     scrolling="no" frameborder="0"
+  style="border:none;position:absolute; width:450px; height:80px;top:300px;"></iframe>
 {% endblock %}
 
 {% block nav %}
@@ -46,13 +50,13 @@
     <form id="search"><!-- Just for convenience, Not very useful -->
     <div id = "match-option" class="option">
       <label>Search By:</label>
-      <a class="select">Address</a>
-      <a>Dish Name</a>
-      <a>Restaurant Name</a>
+      <a class="select" onclick="zoyoe.search.SetPreference('/address')">Address</a>
+      <a onclick="zoyoe.search.SetPreference('/extend/item')">Dish Name</a>
+      <a onclick="zoyoe.search.SetPreference('/name')">Restaurant Name</a>
     </div>
     <div id = "share-option" class='option'>
-      <label>Share Your Choice On:</label>
-      <a>Facebook</a>
+      <label>sharing and recording your choice with our :</label>
+      <a>facebook application</a>
     </div>
     <div id="search-bar">
       <div class="invalid-hint">Invalid Query String</div>

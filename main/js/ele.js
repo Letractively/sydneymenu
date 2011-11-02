@@ -6,7 +6,25 @@ if(zoyoe){
     this.BuildExtensionElements = function(root){
       YUI().use('node',function(Y){
         if(!root){root = Y.one("body");}
-      	/* Build Drop List */
+        var photo_list_exts = root.all('div.extension-photo-player'); 
+        photo_list_exts.each(function(container){
+          var input = container.one('input');
+          var iframe_container = Y.Node.create("<div></div>");
+          var iframe = Y.Node.create("<iframe></iframe>");
+          iframe_container.append(iframe);
+          iframe.setStyle("display","none");
+          iframe.on('load',function(){
+            iframe.setStyle("display","block");
+            iframe.setStyle("width","100%");
+            iframe.setStyle("height","100%");
+          }); 
+          iframe.set("src",'/core/gallery/'+zoyoe.service_name+"/play/" + input.get("value") + "/");
+          container.append(iframe_container);
+        });
+
+/* Build Drop List 
+
+ */
       	var drop_list_exts = root.all('div.extension-drop-list');
       	drop_list_exts.each(function(container){
           var input = container.one('input');
@@ -111,6 +129,11 @@ if(zoyoe){
             }
           });
         });
+
+/* 
+    ZOYOE Extension AutoComplete
+    lable = "div.extension-auto-complete"
+ */
         var auto_complete_exts = root.all('div.extension-auto-complete');
         auto_complete_exts.each(function(container){
           var input = container.one("input");
@@ -168,6 +191,7 @@ if(zoyoe){
             }
           });
         });
+/* Finish YUI.use */
       });
     }
   }

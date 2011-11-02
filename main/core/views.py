@@ -66,6 +66,7 @@ def Service(request,name):
                  'icon':'comp/_icon.html',
                  'gallery':'comp/_gallery.html',
                  'items':'comp/_items.html',
+                 'photos':'comp/_photos.html',
                  'timetable':'comp/_timetable.html',
                  'roster':'comp/_roster.html'}
     aut = HasAuthority(request,name)
@@ -95,18 +96,13 @@ def Service(request,name):
       gnode = etree.parse(CONFIG.SERVICES_PATH + name+'/config.xml')
       layout = Layout.InitLayoutConfig(gnode.getroot())
       gallery = Gallery.InitGalleryConfig(gnode.getroot())
-      girls = Girls.InitGirlsConfig(gnode.getroot())
-      timetable = TimeTable.InitTimeTableConfig(gnode.getroot())
-      post = Post.InitPostConfig(gnode.getroot())
       forum_info = XMLForum.InitForumConfig(layout.RightNode())
       gallery_info = gallery.BasicInfo()
-      timetable_info = timetable.BasicInfo()
-      post_info = post.BasicInfo()
       layout_info = layout.GetLayout()
+      photo_info = PhotoPlay.InitPhotoPlayConfig(gnode.getroot()).BasicInfo()
       dic['GALLERY_INFO'] = gallery_info
-      dic['ROSTER_INFO'] = timetable_info[dic['WEEK_DAY']]['roster']
-      dic['TIMETABLE_INFO'] = timetable_info
-      dic['POST_INFO'] = post_info
+      dic['PHOTO_INFO'] = photo_info
+      dic['ROSTER_INFO'] = {}
       dic['LAYOUT_INFO'] = layout_info
       dic['FORUM'] = forum_info.IsEnabled(name)
       dic['HIST'] = HistoryHelper.GetHistory(name,None,None,10) 

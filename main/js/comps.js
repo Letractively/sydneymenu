@@ -151,54 +151,6 @@ function InitPost(env,day){
   return post_comp;
 }
 
-function InitTimeTable(env){
-  var time_table = new function(){
-    this.cache = null;
-    this.info_cache = null;
-    this.modify_uri = function(day){
-      return "/core/timetable/"+env.service_name+'/'+this.info_cache+'/';
-    }
-    this.dialog_mdy_uri = function(){
-      return "/core/dialog/mdytimetable/";
-    }
-    this.Select = function(info,ele){
-      if(this.cache == ele && ele.className == 'select'){
-        ele.className='';
-        this.info_cache = null;
-        this.cache = null;
-      }else{
-        if(this.cache){
-          this.cache.className='';
-        }
-        ele.className='select';
-        this.cache = ele;
-        this.info_cache = info;
-      }
-    }
-    this.Modify = function(form_obj){
-      var config = {
-        method:'GET',
-        form:{id:form_obj}
-      }
-      var uri = this.modify_uri(this.info_cache);
-      var request = env.ui.GeneralDialogCont(uri,config,true,
-        new update_info("/core/service/"+env.service_name + "/?comp=timetable","timetable"));
-    }
-    this.ShowModifyDialog = function(){
-      var self = this;
-      if(this.info_cache != null){
-        env.ui.InfoCollectDialog("Modify",
-        self.dialog_mdy_uri(), 
-        "form-mdytimetable",
-        function(form_obj){
-          self.Modify(form_obj);
-        });
-      }
-    }
-  }
-  return time_table;
-}
-
 function InitRoster(env,day){
   function InfoCache(day,select){
     this.day = day;
@@ -432,7 +384,7 @@ function InitGallery(env){
     }
     this.AddImg = function(){
       if(this.showing_gallery == null){
-      }else if(this.image_handler.length==7){
+      }else if(this.image_handler.length==9){
         this.content_setter("<h1>Oops!!! This Gallery is Full at the Moment. </h1>"
           + "<p>For information about how to manage the gallery please visit our help page</p>"
           + "<br/> <p>To delete this gallery click button 'delete this gallery'</p>")
@@ -467,8 +419,8 @@ function InitGallery(env){
           +"/photo" + length+"'></img>"); 
         //alert(SUCC[0].getElementsByTagName('HTMLMSG')[0].firstChild.data);
         //Update Component
-        env.HidePanel();
-        env.ShowPanel('photo',env.service_name,this.showing_gallery);
+        env.ui.HidePanel();
+        env.ui.ShowPanel('gallery',[this.showing_gallery]);
       }
     }
     this.ModifyImgProgress = function(iframe,length){
@@ -483,8 +435,8 @@ function InitGallery(env){
           +"/photo" + length+"'></img>"); 
         //alert(SUCC[0].getElementsByTagName('HTMLMSG')[0].firstChild.data);
         //Update Component
-        env.HidePanel();
-        env.ShowPanel('photo',env.service_name,this.showing_gallery);
+        env.ui.HidePanel();
+        env.ui.ShowPanel('gallery',[this.showing_gallery]);
       }
     }
   }
@@ -750,3 +702,9 @@ function AddServiceJSON(result){
   }
 }
 
+function InitSearch(opt_ele_container,option_path){
+  var search = new function(){
+    this.option = option_path;
+  };
+  return search;
+}

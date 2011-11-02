@@ -92,132 +92,16 @@ def GeneralXMLResponse(request,command_error,msg=None):
     response['Cache-Control'] = 'no-cache'
     return response
 
-class TimeTable:
+class PhotoPlay:
   @staticmethod
-  def InitTimeTableConfig(node):
-    return TimeTable(InitNode(node,"TIMETABLE","TIMETABLE"))
-  
-  def __init__(self,node):
-    self.gnode = node
-
-  def XML(self):
-    return etree.tostring(self.gnode,pretty_print = True)
-
-  def GetDay(self,day):
-    day_name = CONFIG.WEEK_DAY_NAME[day]
-    if (day_name):
-      return InitNode(self.gnode,day_name,day_name)
-    else:
-      return None
-
-  def SetRange(self,day,e,l):
-    d = self.GetDay(day)
-    d.set('FROM',e)
-    d.set('TO',l)
-    return d
-    
-  def AddRoster(self,day,girl):
-    d = self.GetDay(day)
-    if ( d != None ):
-      g = InitNode(d,"GIRL[@name='"+girl+"']","GIRL")
-      g.set('name',girl)
-      return d
-    else:
-      return None
-  
-  def RemoveRoster(self,day,girl):
-    d = self.GetDay(day)
-    if (d):
-      g = InitNode(d,"GIRL[@name='"+girl+"']","GIRL")
-      d.remove(g)
-      return d
-    else:
-      return None
-
-  def BasicInfo(self):
-    t = {}
-    for d in range(7):
-      dname = CONFIG.WEEK_DAY_NAME[d]
-      dinfo = {'roster':[],'timeslot':"4:00-8:00"}
-      day_nodes = self.gnode.xpath("./"+dname);
-      if(len(day_nodes) != 0):
-        day = day_nodes[0]
-        fr = day.get('FROM')
-        to = day.get('TO')
-        if(fr and to):
-          dinfo['timeslot'] = fr + "-" + to
-      for a in self.gnode.xpath("./"+dname+"/GIRL"):
-        dinfo['roster'].append(a.get('name'))
-      t[dname] = dinfo
-    return t    
-
-class Post:
-  @staticmethod
-  def InitPostConfig(node):
-    return Post(InitNode(node,"POST","POST"))
+  def InitPhotoPlayConfig(node):
+    return PhotoPlay(InitNode(node,"PHOTOS","PHOTOS"))
 
   def __init__(self,node):
     self.gnode = node
 
-  def XML(self):
-    return etree.tostring(self.gnode,pretty_print = True)
-
-  def HasPost(self,name):
-    gs = self.gnode.xpath("./P[@name='"+name+"']")
-    return (not (len(gs) == 0))
-
-  def AddPost(self,name,d):
-    g = InitNode(self.gnode,"P[@name='"+name+"']","P")
-    g.set("name",name)
-    g.set("date",d)
-    return g
-
-  def RemovePost(self,name):
-    g = InitNode(self.gnode,"P[@name='"+name+"']","GIRL")
-    self.gnode.remove(g)
-  
   def BasicInfo(self):
-    g = {}
-    for a in self.gnode.xpath("./P"):
-      g[a.get('name')] = a.get('date')
-    return g
-
-class Girls:
-  @staticmethod
-  def InitGirlsConfig(node):
-    return Girls(InitNode(node,"GIRLS","GIRLS"))
-
-  def __init__(self,node):
-    self.gnode = node
-
-  def XML(self):
-    return etree.tostring(self.gnode,pretty_print = True)
-   
-  def HasGirl(self,name):
-    gs = self.gnode.xpath("./GIRL[@name='"+name+"']")
-    return (not (len(gs) == 0))
-
-  def AddGirl(self,name,attr_dict,desc):
-    g = InitNode(self.gnode,"GIRL[@name='"+name+"']","GIRL")
-    for (u,v) in attr_dict.items():
-      g.set(u,v)
-    return g
-
-  def RemoveGirl(self,name):
-    g = InitNode(self.gnode,"GIRL[@name='"+name+"']","GIRL")
-    self.gnode.remove(g)
-
-  def BasicInfo(self):
-    g = {}
-    for a in self.gnode.xpath("./GIRL"):
-        info = {}
-        info['name'] = a.get("name")
-        info['age'] = a.get("age")
-        info['nation'] = a.get("nation")
-        info['icon'] = a.get("icon")
-        info['size'] = a.get("size")
-        g[a.get('name')] = info
-    return g
+    return self.gnode.get("gallery")
 
 class Gallery:
   @staticmethod
@@ -305,11 +189,11 @@ class Gallery:
       nodes = self.gnode.xpath("//G[@name='"+gname+"']/IMG[@name='"+iname+"']")
       if(len (nodes) == 1):
         nodes[0].set("url",url)
-        return True
+        return nodes[0] 
       else:
-        return False
+        return None 
     else:
-      return False
+      return None 
 
 def InitServiceDir(s_name,data = None):
     copytree(CONFIG.SERVICES_PATH + 'init',CONFIG.SERVICES_PATH + s_name)

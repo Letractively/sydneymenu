@@ -11,19 +11,6 @@ function document_load(){
   });
 }
 
-function map_document_load(x, y) {
-  YUI().use('node','io-form',function(Y){
-    if(zoyoe.ElementExtension){
-      zoyoe.ElementExtension.BuildExtensionElements();
-    }
-    zoyoe.InitZoyoe(false,Y);
-    zoyoe.admin = InitAdmin(zoyoe);
-    new MapInfoCore2(function(rmap){
-      sdist(rmap)
-    },null,"map-info",x,y)
-  });
-}
-
 function sdist(ret_map){
   YUI().use('io-form','node',function(Y){
     var uri = ("/core/data/getservices/?tstmp={{TIME_STAMP}}");

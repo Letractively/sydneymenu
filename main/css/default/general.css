@@ -265,7 +265,7 @@ height:15px;
 
 #float-info .section div.info-block-scroll .description {
   color:#black;
-  margin:0px 10px 0px 10px;
+  margin:0px 20px 0px 10px;
   min-height:100px;
 }
 #float-info div.div-scroll div.cursor {
@@ -477,7 +477,7 @@ border:1px solid #AAAAAA;
 }
 
 #dialog{
-  position:absolute;
+  position:fixed;
   z-index:103;top:0px;left:0px;
   width:100%;padding-top:10px;display:none;
 }

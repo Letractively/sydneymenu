@@ -1,3 +1,6 @@
+.extension-photo-player input{
+  display:none;
+}
 .extension-dict-select{
   color:#1b1b1b;
   margin-right:10px;

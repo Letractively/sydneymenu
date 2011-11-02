@@ -194,6 +194,9 @@ def ImageLink(request,sname,rname):
             url = iname + '.' + image_type;
             gallery = Gallery.InitGalleryConfig(gnode.getroot())
             o_url = gallery.GetImageFile(gname,iname)
+            if (o_url == None):
+              command_error['MISC'] = "Can Not Get Image File:"+gname+','+iname
+              return GeneralXMLResponse(request,command_error)
             node = gallery.SetImagePath(rname,url)
             if(node == None):
               command_error['MISC'] = 'RES NOT EXIST'

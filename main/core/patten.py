@@ -16,6 +16,7 @@ address_patten = re.compile("[a-zA-Z0-9\s]+")
 url_patten = re.compile("((https?):((//)|(\\\\)))?[\w\d:#@%/;$()~_?\+-=\\\.&]*")
 password_patten = re.compile("[a-zA-Z\d#@%]+")
 number_patten = re.compile("[0-9-]+")  #FIX ME: This is really buggy
+number_range_patten = re.compile("([0-9-]+)\-([0-9]+)")  #FIX ME: This is really buggy
 day_patten = re.compile("((Sun)|(Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|,)+")  #FIX ME: This is really buggy
 layout_patten = re.compile("[a-zA-Z-]+")  #FIX ME: This is really buggy
 time_range_patten = re.compile("[0-9]{1,2}:[0-9]{2}")
@@ -47,10 +48,14 @@ report_handler = {
   ,'longitude':(latlong_patten,(lambda x: int(eval(x)*1000000)),lambda x, v: (x.update(longitude = v)))
   }
 
+def cpt_price(x,v):
+  setattr(x,'pricelow',v.split('-')[0])
+  setattr(x,'pricehigh',v.split('-')[1])
+
 mdyserv_handler = {
    'type':(type_patten,(lambda x:x),lambda x, v:setattr(x,'type',v))
   ,'phone':(phone_patten,(lambda x:x),lambda x, v:setattr(x,'phone',v))
-  ,'aveage':(number_patten,(lambda x:x),lambda x, v:setattr(x,'aveage',v))
+  ,'price':(number_range_patten,(lambda x:x),cpt_price)
   ,'days':(day_patten,(lambda x:x),lambda x, v:setattr(x,'days',v))
   ,'description':(description_patten,(lambda x:x),lambda x, v:setattr(x,'description',v))}
 

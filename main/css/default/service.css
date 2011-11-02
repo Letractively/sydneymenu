@@ -470,3 +470,7 @@ margin:15px 10px 15px 0;
   margin:10px;
   border:1px solid gray;
 }
+
+div.extension-photo-player div{
+  height:200px;
+}

@@ -1,6 +1,35 @@
 from user import *
 #NOTICE: This is the top level module, do not import this file
 
+def GetGallery(request,sname):
+    try:
+      data = ServiceCore.objects.get(name = sname)
+      if (data.activate == True):
+        fd = os.open(CONFIG.SERVICES_PATH + sname+'/config.xml',os.O_RDWR)
+        gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
+        gallery = Gallery.InitGalleryConfig(gnode.getroot())
+        return HttpResponse(gallery.XML(),mimetype = "text/xml")
+      else:
+        return HttpResponse("<FAIL>Service not activated</FAIL>") 
+    except ServiceCore.DoesNotExist:
+        return HttpResponse("<FAIL>Service not existed</FAIL>")
+
+def Play(request,sname,gname):
+    play_t = loader.get_template('comp/photoplayer.html')
+    data = ServiceCore.objects.get(name = sname)
+    if (data.activate == True):
+        gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
+        gallery = Gallery.InitGalleryConfig(gnode.getroot())
+        basic_info = gallery.BasicInfo()
+        if(basic_info.has_key(gname)):
+          c = Context({'GALLERY':basic_info[gname]})
+          return HttpResponse(play_t.render(c),mimetype="text/html")
+        else:
+          return HttpResponse("Gallery " + gname + " not found")
+    else:
+        return HttpResponse("Service Not Activated") 
+
+
 def Rename(request,sname,gname,n_gname):
     aut = HasAuthority(request,sname)
     if (aut['r'] == False):

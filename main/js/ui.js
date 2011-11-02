@@ -351,21 +351,24 @@ function ZOYOE_UI(env,yui,static_dialog){
   var hint = YUI.one('#panel .panel-hint');
   var btnlane = YUI.one('#panel .button-lane');
   var pleft = YUI.one('#panel .panel-left');
+
+  /* Clear The Content */
+  btnlane.set("innerHTML","");
+  pleft.set("innerHTML","");
+  panel.set("innerHTML","");
   if(panel_name == "gallery"){
     var gname = args[0];
-    pleft.set("innerHTML","<a onclick=\"zoyoe.comps['GALLERY'].Select(0,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(1,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(2,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(3,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(4,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(5,this)\" class='gicon'></a>"
-      + "<a onclick=\"zoyoe.comps['GALLERY'].Select(6,this)\" class='gicon'></a>")
+    var icon9 = "";
+    for (var i=0;i<9;i++){
+      icon9 += "<a onclick=\"zoyoe.comps['GALLERY'].Select("+i+",this)\" class='gicon'></a>"
+    };
+    pleft.set("innerHTML",icon9);
     var tstamp = "";
     if(ENV){
       tstamp = "&tstamp="+ENV.TimeStamp();
     }
     /* The Uri Where We Get The Photo Data */
-    var info_uri = "/core/dialog/"+ENV.service_name+"/gallery/?" + tstamp;
+    var info_uri = "/core/gallery/"+ENV.service_name+"/?" + tstamp;
     function complete(io,o,args){
       var icon_containers = UI.panel.all(' .gicon')
       var gs = o.responseXML.getElementsByTagName('G');
@@ -390,7 +393,7 @@ function ZOYOE_UI(env,yui,static_dialog){
             +prefix + '/' + name + "/?sc=small" + tstamp + "'></img>");
           name_list.push(name);
         }
-        for(var i = idx;i<7;i++){
+        for(var i = idx;i<9;i++){
           icon_containers.item(i).set('innerHTML','');
         }
         zoyoe.comps['GALLERY'].ManageGallery(gname,name_list,function(innerHTML){
@@ -402,7 +405,7 @@ function ZOYOE_UI(env,yui,static_dialog){
       method: 'GET',
     }
     StartIO(info_uri,config,complete,[gname]);
-   var ghint = "<a class='gbutton' onclick='zoyoe.ui.HidePanel()'>&#9746</a>"
+    var ghint = "<a class='gbutton' onclick='zoyoe.ui.HidePanel()'>&#9746</a>"
                    + "<h2>Gallery:"+gname+"</h2>"
     hint.set('innerHTML',ghint);
     this.LoadButton("Del Gallery",function(){zoyoe.ui.HidePanel();zoyoe.comps['GALLERY'].DelGallery(gname);});

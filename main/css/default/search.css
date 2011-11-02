@@ -240,9 +240,10 @@ padding: 20px 0 35px 0;
 }
 
 #share-option{
+font-size:12px;
 display:block;
 float:left;
-margin:0px 0px 0px 160px;
+margin:0px 0px 0px 60px;
 color:#666666;
 padding: 20px 0 35px 0;
 }

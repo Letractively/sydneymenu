@@ -50,6 +50,8 @@ function document_load(){
        }
      }
      types.set("innerHTML","<ul>"+type_html+"</ul>");
+     var search_option = Y.one("#match-option");
+     zoyoe.search = InitSearch(search_option,"/address");
   });
 }
 
