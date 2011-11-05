@@ -54,7 +54,7 @@
 </head>
 
 <body onload = "document_load();">
-<div id="map-info" style="z-index:10;position:fixed;top:0px;left:0px;
+<div id="map-info" style="z-index:10;position:fixed;top:35px;left:0px;
   bottom:0px;right:235px;">
 </div>
 <div id='right-bar'>
@@ -166,6 +166,9 @@
         <li class="item" onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
         <li class="item" onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
         {% endif %}
+      </ul>
+      <ul class="menu" >
+        <li class="item"><a href="javascript:zoyoe.map.ResetData()">Reset</a></li>
       </ul>
       <ul class="menu" id="about-us">
         <li class="item"><a href="a">About Us</a></li>

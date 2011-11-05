@@ -13,6 +13,7 @@ function ZOYOE_UI(env,yui,static_dialog){
   this.submit_cb = null;
   this.refresh = false;
   this.dialog = YUI.one('#dialog');
+  this.replydata = null;
   this.update = null;
   this.complete = null;
   this.dialog_title = null;
@@ -164,7 +165,8 @@ function ZOYOE_UI(env,yui,static_dialog){
         if(data.documentElement.tagName == 'SUCC'){
          var msg = data.documentElement.getElementsByTagName('HTMLMSG')[0].firstChild.data;
          BuildGeneralMsg(msg,null);
-         UI.refresh = true;
+         UI.refresh = refresh;
+         UI.replydata = data;
          UI.update = info;
          DialogStyleSucc();
         }else{
@@ -325,8 +327,10 @@ function ZOYOE_UI(env,yui,static_dialog){
                 UI.HideDialog();
               }
               StartIO(UI.update.uri,config,complete);
-            }else{
+            }else if(UI.update.uri){
               ENV.Redirect(UI.update.uri);
+            }else if(typeof(UI.update) == "function"){
+              UI.update(UI.replydata);
             }
           }else{
             location.reload(true); 

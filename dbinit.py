@@ -22,35 +22,46 @@ import os
 import getopt
 import sys
 
+def CleanData(version):
+  from django.db import connection, transaction
+  cursor = connection.cursor()
+  cursor.execute("DELETE FROM core_info where version<%s",[version])
+  transaction.commit_unless_managed()
+
 def InitServiceConfig():
   default = None
   try:
     default = ServiceConfig.objects.get(name='default')
   except ServiceConfig.DoesNotExist:
     default = ServiceConfig() 
+    default.version = 0
   try:
+    old_version = default.version
     xslt_io = open ("./config/default.xslt")
     xsd_io = open("./config/default.xsd")
-    test_io = open("./config/test.xml")
-    print "Parsing defautl.xslt"
-    test_doc = etree.parse(test_io)
-    print "Create extension defautl.xslt"
+    xsd_io2 = open("./config/default.xsd")
+    test_io = open("./config/test.xml") 
+    print "Set Default Extension:"
     xmlbase.SetExtension(default,'default',xslt_io,xsd_io)
-    xslt_io.close()
-    xsd_io.close()
-    test_io.close()
-    rslt = default.GetXSLT()
     print "Initial default Service Config Successful"
     print "testing rending ..."
+    test_doc = etree.parse(test_io)
+    rslt = default.GetXSLT()
     print etree.tostring(rslt(test_doc.getroot()[0]).getroot(),pretty_print = True)
-    xsd_io = open("./config/default.xsd")
-    form = xmlbase.FormFromXSD('item',etree.parse(xsd_io))
-    xsd_io.close()
+    form = xmlbase.FormFromXSD('item',etree.parse(xsd_io2))
     print form
+    print "Clean data in info before version %s" % default.version
+    CleanData(default.version)
     return True
   except etree.XMLSyntaxError,e:
     print e
     return False
+  finally:
+    xslt_io.close()
+    xsd_io.close()
+    xsd_io2.close()
+    test_io.close()
+ 
 
 def InitForum():
   try:

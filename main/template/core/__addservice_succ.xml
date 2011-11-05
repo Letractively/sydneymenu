@@ -7,4 +7,11 @@
   <HTMLMSG>
       Congratulation! Your service has been published. However, since you are not a registered user, we will not show your service permenantly. To show your service permenantly you need to activate your account and fill in some details about your service. An email has been send to your email address, using the link in your email to activate your account and fill in the details about your service and after that your service infomation will be shown permenantly.
   </HTMLMSG>
+  <SERVICE name='{{service.name}}' type='{{service.type}}' phone='{{service.phone}}' email='{{service.email}}' grade='{{service.grade}}' privilege='{{service.privilege}}' icon='{{service.icon}}' activity='{{service.activity}}'>
+    <latlong>{{service.latitude}},{{service.longitude}}</latlong>
+    <address>{{service.address}}</address>
+    <description>{{service.description}}</description>
+    <days>{{service.days}}</days>
+    <price>{{service.pricelow}}-{{service.pricehigh}}</price>
+  </SERVICE>
 </SUCC>

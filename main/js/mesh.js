@@ -193,9 +193,9 @@ function ServiceGeoGroup(service){
   this.Absorb(service);
 }
 function Layer(){
-	this.geo_service_group = new Array();
-	this.layer = null;
-	this.status = "not_ready";
+  this.geo_service_group = new Array();
+  this.layer = null;
+  this.status = "not_ready";
   this.BuildIcons = function(){
     for(var i=0;i<this.geo_service_group.length;i++){
       this.geo_service_group[i].BuildIcon(true);
@@ -206,6 +206,14 @@ function Layer(){
   }
   this.Hide = function(){
     this.layer.setOptions({visible:false});
+  }
+  this.Reset = function(){
+    for(var i=0;i<this.geo_service_group.length;i++){
+      g = this.geo_service_group[i];
+      this.layer.remove(g.pushpin);
+    }
+    this.geo_service_group = new Array();
+    this.status = "not_ready";
   }
 }
 
@@ -226,6 +234,10 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
     this.pushpin_layers[i] = new Layer();
   }
   this.services_cache = new Array();
+
+  this.ResetServiceCache = function(){
+    this.services_cache = [];
+  }
 
 /* All Filter Reset functions*/
   this.filterlist = new Array(new AgeFilter(16,45),new WorkingDayFilter(),new TypeFilter());
@@ -289,19 +301,19 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
 	}
   /* Always use the current function to get the current layer */
   this.GetCurrentLayer = function(){
-		var layer_id = this.map.getZoom();
-		if(layer_id >= 20){
-			return null;// Should never go here;
-		}else if(this.pushpin_layers[layer_id].filled == true){
+	var layer_id = Math.round(this.map.getZoom());
+	if(layer_id >= 20 || ! is_int(layer_id)){
+		return null;// Should never go here;
+    }else if(this.pushpin_layers[layer_id].filled == true){
       return this.pushpin_layers[layer_id];
     }else{
       return null;// Should never go here;
     }
   }
   this.GetServicesInSquare = function(left,top,width,height){
-		for(idx = 0;idx < self.services_cache.length;idx++){
-		 var service = self.services_cache[idx];
-     service.in_square = false;
+    for(idx = 0;idx < self.services_cache.length;idx++){
+      var service = self.services_cache[idx];
+      service.in_square = false;
     }
     var pdx = 0;
     var groups= new Array();
@@ -318,80 +330,98 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
     }
     return groups;
   }
-	this.AbsorbService = function(service){
-		var layer_id = this.map.getZoom();
-		if(layer_id >= 20){
-			return false;
-		}else if(this.pushpin_layers[layer_id].filled == true){
-			return false;
-		}else{
-			var layer = this.pushpin_layers[layer_id];
-			if(layer.layer == null){
-				layer.layer = new VEShapeLayer();
-			}
-			var pdx = 0;
-			for(pdx = 0;pdx <layer.geo_service_group.length;pdx++){
-				var service_group = layer.geo_service_group[pdx]
-				if(this.NeighbourAtCurrentZoom(service_group,service)){
-					service_group.Absorb(service);
-					break;
-				}
-			}
-			if(pdx == layer.geo_service_group.length){
-				var group = new ServiceGeoGroup(service);
-				layer.geo_service_group.push(group);
-				layer.layer.push(group.pushpin);
-			}
-		}
-	}
-	this.InitServices = function(){
-		var layer_id = this.map.getZoom();
-		if(layer_id >= 20){
-			return false;
-		}else if(this.pushpin_layers[layer_id].filled == true){
-			return false;
-		}else{
-		  var idx = 0;
-		  for(idx = 0;idx < self.services_cache.length;idx++){
-			  var service = self.services_cache[idx];
-			  self.AbsorbService(service);
-		  }
+  this.AbsorbService = function(service){
+    var layer_id = Math.round(this.map.getZoom());
+    if(layer_id >= 20){
+      return false;
+    }else if(this.pushpin_layers[layer_id].filled == true){
+      return false;
+    }else{
+      var layer = this.pushpin_layers[layer_id];
+      if(layer.layer == null){
+        layer.layer = new VEShapeLayer();
+      }
+      var pdx = 0;
+      for(pdx = 0;pdx <layer.geo_service_group.length;pdx++){
+        var service_group = layer.geo_service_group[pdx]
+        if(this.NeighbourAtCurrentZoom(service_group,service)){
+          service_group.Absorb(service);
+          break;
+        }
+      }
+      if(pdx == layer.geo_service_group.length){
+        var group = new ServiceGeoGroup(service);
+        layer.geo_service_group.push(group);
+        layer.layer.push(group.pushpin);
+      }
+    }
+  }
+  this.InitServices = function(){
+    var layer_id = Math.round(this.map.getZoom());
+    if(layer_id >= 20){
+      return false;
+    }else if(this.pushpin_layers[layer_id].filled == true){
+      return false;
+	}else{
+      var idx = 0;
+      for(idx = 0;idx < self.services_cache.length;idx++){
+        var service = self.services_cache[idx];
+        self.AbsorbService(service);
+      }
       this.pushpin_layers[layer_id].filled = true;
       this.Refilt();
     }
-	}
-	this.PreviewService = function(service){
-	}
-	this.ShiftZoom = function(force){
-		var zoom = this.map.getZoom();
-    if (zoom != self.current_zoom || force){
-		  if (self.current_zoom !=null){
-			  if (self.pushpin_layers[self.current_zoom] !=null){
-				  var layer = self.pushpin_layers[self.current_zoom];
-				  if(layer.status == 'ready'){
-					  layer.Hide();
-				  }
-			  }
-		  }
-		  if(this.pushpin_layers[zoom] !=null){
-			  var layer = this.pushpin_layers[zoom];
+  }
+  this.PreviewService = function(service){
+  }
+  this.ResetData = function(service_list){
+    if(!service_list){
+      service_list = [];
+    }
+    for(var i=0;i<this.pushpin_layers.length;i++){
+      layer = this.pushpin_layers[i];
+      layer.Reset();
+    }
+    this.ResetServiceCache();
+    var self = this;
+    foreach(service_list,function(service){
+      self.AddService(service);
+    });
+    this.ShiftZoom(true)
+  }
+  this.ShiftZoom = function(force){
+    var zoom = Math.round(this.map.getZoom());
+    if ((zoom != self.current_zoom || force) && is_int(zoom)){
+      if (self.current_zoom !=null){
+        if (self.pushpin_layers[self.current_zoom] !=null){
+          var layer = self.pushpin_layers[self.current_zoom];
+          if(layer.status == 'ready'){
+            layer.Hide();
+          }
+        }
+      }
+      if(this.pushpin_layers[zoom] !=null){
+        var layer = this.pushpin_layers[zoom];
         layer.BuildIcons();
-			  if(layer.status == 'ready'){
-				  layer.Show();
-			  }else{
-				  this.InitServices();
-				  layer.status = 'ready';
-				  layer.Show();
-			  }
-		  }else{alert("not_supported:"+zoom);}
-		  self.current_zoom = zoom;
+        if(layer.status == 'ready'){
+          layer.Show();
+        }else{
+          this.InitServices();
+          layer.status = 'ready';
+          layer.Show();
+        }
+      }else{
+        alert("not_supported:"+zoom);
+      }
+      self.current_zoom = zoom;
     }else{
     }
-	}
+  }
   this.key = "Av6myMPPl0Aix9wsk-YXGQ23bvY1A3I2dmHJ44GAVYwlF_70J4OJdmv_SqM1rFJd";
-  this.map_options = {credentials:this.key,showDashboard:false,mapTypeId:Microsoft.Maps.MapTypeId.road
+  this.map_options = {credentials:this.key,showDashboard:false,showBreadcrumb:true
+  ,mapTypeId:Microsoft.Maps.MapTypeId.road
   ,disableUserInput:false,showCopyright:false,showScalebar:false
-  ,enableSearchLogo:false,enableSearchLogo:false
+  ,enableSearchLogo:false
   ,zoom:this.default_zoom,center:this.default_address_point}
   if(disable_handler){
     this.map_options.disableUserInput = true;
@@ -420,10 +450,15 @@ function MapInfoCore(callback,address,container_id,zoom,disable_handler){
         service.active = false;
       }
     }
-		var zoom = this.map.getZoom();
+    var zoom = Math.round(this.map.getZoom());
     if(this.pushpin_layers[zoom]){
       this.pushpin_layers[zoom].BuildIcons();
     }
+  }
+  this.AddFocusService = function(service){
+    var services = this.services_cache;
+    services.push(service);
+    this.ResetData(services);
   }
   if(container_id){
     this.map = new Microsoft.Maps.Map(document.getElementById(container_id),this.map_options);

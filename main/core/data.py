@@ -104,7 +104,7 @@ def AddService(request):
           InitServiceDir(sname,None)
           CrunchImage(CONFIG.SERVICES_PATH + sname,'icon','png')
           service_t = loader.get_template('core/__addservice_succ.xml')
-          c = Context({'REQUEST':request.REQUEST})
+          c = Context({'REQUEST':request.REQUEST,'service':s_data})
           return HttpResponse(service_t.render(c),mimetype = "text/xml")
         except ValidationError, e:
           service_t = loader.get_template('core/__addservice_fail.xml')

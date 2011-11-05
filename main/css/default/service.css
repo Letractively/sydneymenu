@@ -254,8 +254,6 @@ margin-bottom:50px;
   color:#939393;
 }
 .left-section .section div.info-block ul li{
-  padding:3px 3px 3px 8px;
-  cursor:pointer;
 }
 
 
@@ -460,13 +458,13 @@ margin:15px 10px 15px 0;
   height:80px;
 }
 #items ul li{
-  height:30px;
+  height:24px;
 }
 
 #items ul div.icon{
   float:left;
-  height:40px;
-  width:40px;
+  height:60px;
+  width:60px;
   margin:10px;
   border:1px solid gray;
 }

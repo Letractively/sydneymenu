@@ -37,7 +37,7 @@ function Init(){
   var basic_info = document.getElementById('info');
   var time_table = document.getElementById('timetable');
   var roster = document.getElementById('roster');
-  var photos = document.getElementById('photo-player');
+  var photos = document.getElementById('photoplayer');
   var items = document.getElementById('items');
   var icon = document.getElementById('icon');
   var gallery = document.getElementById('gallery');
@@ -60,7 +60,6 @@ function Init(){
     zoyoe.comps['item'] = InitItems(zoyoe,'item');
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
     zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
-    zoyoe.comps['POST'] = InitPost(zoyoe);
     zoyoe.comps['LAYOUT'] = InitLayout(zoyoe);
     zoyoe.comps['ICON'] = InitIcon(zoyoe);
     zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
@@ -90,7 +89,7 @@ function Init(){
       </ul>
       </a>
     </li>
-    <li class='menu' onclick ="Logout()"><a>Logout</a></li>
+    <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
     {% else %}
     <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
     <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>

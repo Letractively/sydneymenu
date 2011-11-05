@@ -25,7 +25,7 @@ def SetExtension(ext,ext_name,xslt_str,xsd_str):
   ext.name = ext_name 
   ext.xslt = etree.tostring(xslt_doc.getroot(),pretty_print = True) 
   ext.xsd = etree.tostring(xsd_doc.getroot(),pretty_print = True)
-  ext.version = 0
+  ext.version = ext.version + 1 
   ext.save()
 
 def ModifyExtension(ext_name,xslt_str,xsd_str):
@@ -35,8 +35,8 @@ def ModifyExtension(ext_name,xslt_str,xsd_str):
     xslt_doc = etree.parse(xslt_str)
     schema = etree.XMLSchema(xsd_doc)
     xslt = etree.XSLT(xslt_doc)
-    ext.xslt = xslt_str
-    ext.xsd = xsd_str
+    ext.xslt = etree.tostring(xslt_doc.getroot(),pretty_print = True) 
+    ext.xsd = etree.tostring(xsd_doc.getroot(),pretty_print = True)
     ext.version = ext.version + 1 
     ext.save()
     return ext 

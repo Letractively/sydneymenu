@@ -8,7 +8,7 @@
     <address>{{service.address}}</address>
     <description>{{service.description}}</description>
     <days>{{service.days}}</days>
-    <age>{{service.aveage}}</age>
+    <price>{{service.pricelow}}-{{service.pricehigh}}</price>
   </SERVICE>
   {% endfor %}
   {% for report in REPORTS%}{{report|hs_explain_xml|safe}}

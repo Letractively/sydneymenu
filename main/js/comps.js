@@ -81,75 +81,6 @@ function InitLayout(env){
   }
   return layout;
 }
-function InitPost(env,day){
-  var post_comp = new function(){
-    this.info = null;/* Used for post content */
-    this.cache = null;/* Used for selected Element */
-    this.info_cache = null; /* Used for content-title */
-    this.dialog_add_uri = function(){
-      return "/core/dialog/addpost/"+env.service_name;
-    }
-    this.add_post_uri = function(){
-      return "/core/post/"+env.service_name+'/add/';
-    }
-    this.del_post_uri = function(pname){
-      return "/core/post/"+env.service_name+'/remove/'+pname;
-    }
-    this.ShowAddDialog = function(){
-      /*CKEDITOR.instances.post.updateElement();
-      //alert(document.forms['form-post'].post.value);*/
-      //self.info =document.forms['form-post'].post.value;
-      var self = this;
-      env.ui.InfoCollectDialog("Post",
-        self.dialog_add_uri(), 
-        "form-addpost",
-        function(form_obj){
-          self.AddPost(form_obj)
-        }
-      );
-    }
-    this.AddPost = function(form_obj){
-      var editor_frame = form_obj.getElementsByTagName('iframe')[0];
-      var doc_container = editor_frame.contentWindow || editor_frame.contentDocument;
-      var doc = doc_container.document;
-      var inner_form =  doc.getElementById('editor'); 
-      inner_form.ck_editor.instances.post.updateElement();
-      var info = escape(doc.forms['editor'].post.value);
-      env.ALERT(info);
-      var config = {
-        method: 'GET',
-        data:"name=" + form_obj.name.value + "&post=" + info
-      }
-      var request = env.ui.GeneralDialogCont(this.add_post_uri(),config,true,null);
-        //,new update_info(this.update_uri(),""));
-    }
-    this.Select = function(info,ele){
-      if(this.cache == ele && ele.className == 'select'){
-        ele.className='';
-        this.info_cache.select = null;
-        this.cache = null;
-      }else{
-        if(this.cache){
-          this.cache.className='';
-        }
-        ele.className='select';
-        this.cache = ele;
-        this.info_cache = info;
-      }
-    }
-    this.DelPost = function(gname){
-      var config = {
-         method: 'GET',
-      }
-      if(this.info_cache){
-        var uri = this.del_post_uri(this.info_cache);
-        var request = env.ui.ResponseDialog(uri,config,true
-          ,new update_info("/core/service/" + env.service_name + "/?comp=post_list","post_list"));
-      }
-    }
-  }
-  return post_comp;
-}
 
 function InitRoster(env,day){
   function InfoCache(day,select){
@@ -594,6 +525,28 @@ function InitAdmin(zo){
         zoyoe.ui.BuildErrorMsg('Please enter address !!');
       }
     }
+    function Reload(){
+      if(document.forms['reload']){
+        document.forms['reload'].submit();
+      }else{
+        zoyoe.ALERT('Try alternative Reload Function');
+        location.reload(true);
+      }
+    }
+    this.Logout = function(){
+      var logout_uri = "/core/user/logout/";
+      YUI().use("io-form",function(Y){
+        uri = logout_uri;
+        var logout_config = {
+          method: 'GET',
+        }
+        function complete(id,o,args){
+          Reload();
+        }
+        Y.on('io:complete',complete);
+        var request = Y.io(logout_uri,logout_config);
+      });
+    }
   }
   return admin;
 }
@@ -658,6 +611,7 @@ function AddReportJSON(result){
 function AddServiceJSON(result){
   var form_obj = document.getElementById(zoyoe.ui.dialog_name);
   var days = new Array();
+  var add_service_uri = "/core/data/addservice/";
   if(result.resourceSets){
     if(result.resourceSets[0].estimatedTotal == 0){
       zoyoe.ui.BuildErrorMsg('Address Not Found !!');
@@ -684,7 +638,16 @@ function AddServiceJSON(result){
           form: {id:form_obj}
         }
         zoyoe.ui.HideDialog();
-        zoyoe.ui.GeneralDialogCont(add_service_uri,add_service_config,true,null);
+        zoyoe.ui.GeneralDialogCont(add_service_uri,add_service_config,
+          true,function(dom){
+          alert(dom);
+          var ss = dom.documentElement.getElementsByTagName('SERVICE');
+          foreach(ss,function(ele){
+            var service = new Service(ele);
+            alert(service.name+","+service.phone+","+this.email);
+            zoyoe.map.AddFocusService(service);
+          });
+        });
       }else{
         zoyoe.ui.BuildErrorMsg('Ambiguious Address,Please Make It Clear !!');
       }

@@ -347,3 +347,24 @@ function SwitchPlaceJSON(result){
     }
   }
 }
+
+/* Useful functions */
+foreach = function(list,fun){
+  var len = list.length;
+  if (typeof fun != "function"){
+    throw new TypeError();
+  }
+  var thisp = arguments[1];
+  for (var i = 0; i < len; i++){
+    if (i in list){
+      fun.call(thisp, list[i], i, list);
+    }
+  }
+};
+function is_int(value){ 
+  if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+      return true;
+  } else { 
+      return false;
+  } 
+}

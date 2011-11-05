@@ -23,14 +23,12 @@ function sdist(ret_map){
         ret_map.AddService(service);
       }
       var s_element = o.responseXML.documentElement.getElementsByTagName('REPORT');
-      for(var i=0;i<s_element.length;i++){
-        var element = s_element[i];
+      foreach(s_element,function(element){
         var report = new ServiceReport(element);
         ret_map.AddService(report);
-      }
+      });
  
       ret_map.ShiftZoom(true);
-      zoyoe.SwitchDockStyle('ICON');
       InitDrag();
       var scroll_h = Y.one('#right-bar-dock .div-scroll div.hscroll');
       var scroll_h_ele = Y.Node.getDOMNode(scroll_h);
