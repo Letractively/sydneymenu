@@ -640,11 +640,9 @@ function AddServiceJSON(result){
         zoyoe.ui.HideDialog();
         zoyoe.ui.GeneralDialogCont(add_service_uri,add_service_config,
           true,function(dom){
-          alert(dom);
           var ss = dom.documentElement.getElementsByTagName('SERVICE');
           foreach(ss,function(ele){
             var service = new Service(ele);
-            alert(service.name+","+service.phone+","+this.email);
             zoyoe.map.AddFocusService(service);
           });
         });
