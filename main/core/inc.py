@@ -43,14 +43,6 @@ def GetService(s_name):
 def Rad(x):
   return math.radians(x)
 
-def ComputeDistance(latlong1,latlong2):
-  r = 6371
-  dlat = Rad(latlong1['lat'] - latlong2['lat'])
-  dlong = Rad(latlong1['long'] - latlong2['long'])
-  a = math.sin(dlat/2)*math.sin(dlat/2) + math.cos(Rad(latlong1['lat']))*math.cos(Rad(latlong2['lat']))*math.sin(dlong/2)*math.sin(dlong/2)
-  c = 2*math.atan2(math.sqrt(a),math.sqrt(1-a));
-  return r*c 
-
 def GetCacheData(sname):
   gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml').getroot()
   cache = InitNode(gnode,'CACHE','CACHE')

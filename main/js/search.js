@@ -1,6 +1,7 @@
 var filter = {LOCATION:{x:0,y:0},
-                   STYPE:'Brothel',
-                   NATION:'Caucasion',
+                   MAIN:'',
+                   STYPE:'',
+                   NATION:'',
                    RADIUS:1,
                    PRICE:{MIN:40,MAX:90}
                   }
@@ -75,26 +76,39 @@ function doRefine(address, refiner) {
   return address;
 }
 
-function PreSearch(){
-  YUI().use("json-stringify","node",function (Y) {
-    var searchStr = Y.Node.getDOMNode(Y.one("#search-bar input")).value;
-    var patten = new RegExp("[a-zA-Z]+");
-    if(patten.test(searchStr) == false){
-      MarkInvalidate("Invalid Query String");
-      return;/* early return here, since the search string is empty */
+function InitSearch(opt_ele_container,option_path){
+  var search = new function(){
+    var self = this;
+    this.option = option_path;
+    this.optcontainer = opt_ele_container;
+    this.SetPreference = function(path,idx){
+      self.optcontainer.all('a').set('className','');
+      self.optcontainer.all('a').item(idx).set('className','select');
     }
-    searchStr = refineAddress(searchStr);
-    filter.STYPE = NonePadding(Y.Node.getDOMNode(Y.one("#service-type input")).value);
-    filter.NATION = NonePadding(Y.Node.getDOMNode(Y.one("#nationality input")).value);
-    var radius_str = Y.Node.getDOMNode(Y.one("#radius input")).value;
-    filter.RADIUS = NonePadding(parseInt(radius_str));
-    filter.PRICE.MIN = NonePadding(document.forms['search'].min.value);
-    filter.PRICE.MAX = NonePadding(document.forms['search'].max.value);
-    var filterStr = Y.JSON.stringify(filter);
-    zoyoe.ALERT(searchStr);
-    zoyoe.map.TargetPlace(searchStr,"Search")
-  });
+    this.SearchByAddress = function(){
+    YUI().use("json-stringify","node",function (Y) {
+      var searchStr = Y.Node.getDOMNode(Y.one("#search-bar input")).value;
+      var patten = new RegExp("[a-zA-Z]+");
+      if(patten.test(searchStr) == false){
+        MarkInvalidate("Invalid Query String");
+        return;/* early return here, since the search string is empty */
+      }
+      searchStr = refineAddress(searchStr);
+      filter.STYPE = NonePadding(Y.Node.getDOMNode(Y.one("#service-type input")).value);
+      filter.NATION = NonePadding(Y.Node.getDOMNode(Y.one("#nationality input")).value);
+      var radius_str = Y.Node.getDOMNode(Y.one("#radius input")).value;
+      filter.RADIUS = NonePadding(parseInt(radius_str));
+      filter.PRICE.MIN = NonePadding(document.forms['search'].min.value);
+      filter.PRICE.MAX = NonePadding(document.forms['search'].max.value);
+      var filterStr = Y.JSON.stringify(filter);
+      zoyoe.ALERT(searchStr);
+      zoyoe.map.TargetPlace(searchStr,"Search")
+    });
+    }
+  };
+  return search;
 }
+
 
 function Search(result){
   if(result && result.resourceSets){

@@ -27,11 +27,11 @@
       YUI().use('node','io-form',function(Y){
        	var zoom = 15;
       	var center = null;
+        {% if LOC %}
         if({{LOC.x}} != 0 && {{LOC.y}} != 0){
           center = new Microsoft.Maps.Location({{LOC.x}},{{LOC.y}});
-        }else{
-          zoom = 11;
         }
+        {% endif %}
         zoyoe.admin = InitAdmin(zoyoe);
         zoyoe.service_name = '{{SERVICE.name}}';
         new MapInfoCore(function(rmap){

@@ -663,9 +663,4 @@ function AddServiceJSON(result){
   }
 }
 
-function InitSearch(opt_ele_container,option_path){
-  var search = new function(){
-    this.option = option_path;
-  };
-  return search;
-}
+

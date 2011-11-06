@@ -1,6 +1,8 @@
 # Create your views here.
 from user import * 
 from glue.forum import *
+from django.db.models import Q
+from search import *
 # NOTICE: This is the top level module, do not import this file.
 
 def ShortCut(request,name):
@@ -24,7 +26,15 @@ def Admin(request):
 def List(request):
     filter_str = request.REQUEST['filter']
     filter_dict = json.loads(filter_str)
-    services = ServiceCore.objects.all();
+    services = ServiceCore.objects;
+    results = []
+    distances = {}
+    loc = None
+    if(filter_dict.has_key('MAIN')):
+      sstr = filter_dict['MAIN']
+      dsp_reg = BuildQueryReg(sstr,None)
+      query = Q(description__regex = dsp_reg) | Q(type__regex = dsp_reg) | Q(name__regex = dsp_reg)
+      services = services.filter(query)
     if(filter_dict.has_key('NATION') and filter_dict['NATION'] != 'MIXED'):
       nations = filter_dict['NATION'].split(',')
       nations.append("MIXED")
@@ -37,25 +47,15 @@ def List(request):
     if(filter_dict.has_key('PRICE') 
       and filter_dict['PRICE'].has_key('MAX')): 
       services = services.filter(pricelow__lte = (int (filter_dict['PRICE']['MAX'])))
-    results = []
-    distances = {}
     if(filter_dict.has_key('LOCATION') and filter_dict.has_key('RADIUS')):
       llbase = {'lat':float(filter_dict['LOCATION']['x']),'long':float(filter_dict['LOCATION']['y'])}
-      if llbase['lat'] and llbase['long'] and filter_dict['RADIUS']:
-        for service in services:
-          llinc = {'lat':float(service.latitude)/1000000,'long':float(service.longitude)/1000000}
-          dis = ComputeDistance(llbase,llinc)
-          if(dis < int(filter_dict['RADIUS'])):
-            distances[service.name] = dis
-            results.append(service)
-      else:
-        for service in services:
-          results.append(service)
+      result = FiltByDistance(services,llbase,int(filter_dict['RADIUS']))
     else:
       for service in services:
-        results.append(services)
+        results.append(service)
+    if(filter_dict.has_key('LOCATION')):
+      loc = filter_dict['LOCATION']
     data_t = loader.get_template('core/admin.html')
-    loc = filter_dict['LOCATION']
     c = RequestContext(request,{'DATA':results,"LOC":loc,"DIS":distances})
     response = HttpResponse(data_t.render(c),mimetype = "text/html")
     response['Cache-Control'] = 'no-cache'
