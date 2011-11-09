@@ -30,12 +30,10 @@ function document_load(){
      var input = Y.one("div.extension-auto-complete").one("input");
      var dom_input = Y.Node.getDOMNode(input);
      dom_input.ext_onchange = function(searchStr){
-       if(zoyoe.map){
-          zoyoe.map.TargetPlace(searchStr,"AutoCompJSON");
-       } else {
-       zoyoe.ALERT("Map not loaded");
+       if(zoyoe.search){
+         zoyoe.search.AutoComplete(searchStr);
        }
-      var patten = new RegExp("[a-zA-Z]+");
+     var patten = new RegExp("[a-zA-Z]+");
       if(patten.test(searchStr)){
         MarkValidate();
       }else{
@@ -52,6 +50,7 @@ function document_load(){
      }
      types.set("innerHTML","<ul>"+type_html+"</ul>");
      var search_option = Y.one("#match-option");
+     zoyoe.debug = true;
      zoyoe.search = InitSearch(search_option,"/address");
   });
 }
@@ -84,6 +83,39 @@ function InitSearch(opt_ele_container,option_path){
     this.SetPreference = function(path,idx){
       self.optcontainer.all('a').set('className','');
       self.optcontainer.all('a').item(idx).set('className','select');
+      self.option = path;
+    }
+    this.AutoComplete = function(searchStr){
+      if(zoyoe.map && this.option == "/address"){
+        zoyoe.map.TargetPlace(searchStr,"AutoCompJSON");
+      }else{
+        zoyoe.ALERT("Map not loaded");
+      }
+    }
+    this.PreSearch = function(){
+      if(this.option == "/address"){
+        this.SearchByAddress();
+      }else{
+        this.NormalSearch();
+      }
+    }
+    this.NormalSearch = function(){
+    YUI().use("json-stringify","node",function (Y) {
+      var searchStr = Y.Node.getDOMNode(Y.one("#search-bar input")).value;
+      var patten = new RegExp("[a-zA-Z]+");
+      if(patten.test(searchStr) == false){
+        MarkInvalidate("Invalid Query String");
+        return;/* early return here, since the search string is empty */
+      }
+      filter.MAIN = searchStr;
+      filter.STYPE = NonePadding(Y.Node.getDOMNode(Y.one("#service-type input")).value);
+      filter.NATION = NonePadding(Y.Node.getDOMNode(Y.one("#nationality input")).value);
+      filter.PRICE.MIN = NonePadding(document.forms['search'].min.value);
+      filter.PRICE.MAX = NonePadding(document.forms['search'].max.value);
+      delete filter.RADIUS
+      var filterStr = Y.JSON.stringify(filter);
+      window.location.href = "/core/services/?"+"filter=" + filterStr;
+    });
     }
     this.SearchByAddress = function(){
     YUI().use("json-stringify","node",function (Y) {

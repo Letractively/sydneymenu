@@ -37,8 +37,9 @@ urlpatterns = patterns('',
 # gallery 
     (r'^gallery/(?P<sname>[^/]*)/$','core.gallery.GetGallery'),
     (r'^gallery/(?P<sname>[^/]*)/add/$','core.gallery.Add'),
+    (r'^gallery/(?P<sname>[^/]*)/default/$','core.gallery.Default'),
     (r'^gallery/(?P<sname>[^/]*)/remove/(?P<gname>.*)/$','core.gallery.Remove'),
-    (r'^gallery/(?P<sname>[^/]*)/play/(?P<gname>.*)/$','core.gallery.Play'),
+    (r'^gallery/(?P<sname>[^/]*)/play/$','core.gallery.Play'),
 # layout
     (r'^layout/(?P<sname>[^/]*)/save/$','core.layout.Save'),
     (r'^shortcut/(?P<name>.*)/$','core.views.ShortCut'),

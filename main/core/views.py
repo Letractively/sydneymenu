@@ -33,8 +33,9 @@ def List(request):
     if(filter_dict.has_key('MAIN')):
       sstr = filter_dict['MAIN']
       dsp_reg = BuildQueryReg(sstr,None)
-      query = Q(description__regex = dsp_reg) | Q(type__regex = dsp_reg) | Q(name__regex = dsp_reg)
-      services = services.filter(query)
+      if(dsp_reg):
+        query = Q(description__regex = dsp_reg) | Q(type__regex = dsp_reg) | Q(name__regex = dsp_reg)
+        services = services.filter(query)
     if(filter_dict.has_key('NATION') and filter_dict['NATION'] != 'MIXED'):
       nations = filter_dict['NATION'].split(',')
       nations.append("MIXED")

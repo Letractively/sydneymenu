@@ -118,6 +118,29 @@ class Gallery:
         g[a.get('name')].append(v.get('name'))
     return g
   
+  def GetDefault(self):
+    for a in self.gnode.xpath("//G[@defaul='true']"):
+      return a.get('name')
+    return None
+
+  def HasGallery(self,gname):
+    nodes = self.gnode.xpath("//G[@name='"+gname+"']")
+    if (len(nodes) == 0):
+        return False
+    else:
+        return True;
+
+  def SetDefault(self,gname):
+    for a in self.gnode.xpath("//G[@defaul='true']"):
+      return a.set('default','false')
+    nodes = self.gnode.xpath("//G[@name='"+gname+"']")
+    if (len(nodes) == 0):
+      return None 
+    else:
+      for a in nodes:
+        a.set('default','true')
+        return a.get('name')
+    
   def XML(self):
     return etree.tostring(self.gnode,pretty_print = True)
 
@@ -159,13 +182,6 @@ class Gallery:
       else:
         return None
   
-  def HasGallery(self,gname):
-    nodes = self.gnode.xpath("//G[@name='"+gname+"']")
-    if (len(nodes) == 0):
-        return False
-    else:
-        return True;
-
   def GetImageFile(self,gname,iname):
     nodes = self.gnode.xpath("//G[@name='"+gname+"']/IMG[@name='"+iname+"']")
     if (len(nodes) == 0):

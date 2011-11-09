@@ -18,7 +18,7 @@ if(zoyoe){
             iframe.setStyle("width","100%");
             iframe.setStyle("height","100%");
           }); 
-          iframe.set("src",'/core/gallery/'+zoyoe.service_name+"/play/" + input.get("value") + "/");
+          iframe.set("src",'/core/gallery/'+zoyoe.service_name+"/play/");
           container.append(iframe_container);
         });
 
@@ -172,7 +172,6 @@ if(zoyoe){
               zoyoe.ElementExtension.inputValue = getText;
               return;
             } else if(e.keyCode == 13) {
-              PreSearch();
               return;
             }
             if(input.get("value") == zoyoe.ElementExtension.inputValue) {

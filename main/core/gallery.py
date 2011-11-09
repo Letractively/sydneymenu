@@ -14,18 +14,18 @@ def GetGallery(request,sname):
     except ServiceCore.DoesNotExist:
         return HttpResponse("<FAIL>Service not existed</FAIL>")
 
-def Play(request,sname,gname):
+def Play(request,sname):
     play_t = loader.get_template('comp/photoplayer.html')
     data = ServiceCore.objects.get(name = sname)
     if (data.activate == True):
         gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
         gallery = Gallery.InitGalleryConfig(gnode.getroot())
-        basic_info = gallery.BasicInfo()
-        if(basic_info.has_key(gname)):
-          c = Context({'GALLERY':basic_info[gname]})
+        gname = gallery.GetDefault()
+        if(gname):
+          c = Context({'GALLERY':gallery.BasicInfo()[gname]})
           return HttpResponse(play_t.render(c),mimetype="text/html")
         else:
-          return HttpResponse("Gallery " + gname + " not found")
+          return HttpResponse("Default Gallery Not Specified")
     else:
         return HttpResponse("Service Not Activated") 
 
@@ -47,6 +47,22 @@ def Rename(request,sname,gname,n_gname):
           return HttpResponse("Gallery Not Found")
     else:
         return HttpResponse("Service Not Activated") 
+
+def Default(request,sname,gname):
+    aut = HasAuthority(request,sname)
+    if (aut['r'] == False):
+        return HttpResponse(aut['m'])
+    data = ServiceCore.objects.get(name = sname)
+    if (data.activate == True):
+        gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
+        gallery = Gallery.InitGalleryConfig(gnode.getroot())
+        if gallery.SetDefault(gname):
+          return HttpResponse("Default Gallery For Play Is Set Successfully")
+        else:
+          return HttpResponse("Gallery %s Not Found"%(gname))
+    else:
+        return HttpResponse("Service Not Activated") 
+
 
 def Add(request,sname):
     command_error = {}
