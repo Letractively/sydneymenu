@@ -280,9 +280,9 @@ margin-bottom:50px;
   overflow:hidden;
 }
 
-.left-section .section div.info-block ul li div.icon img{
-  width:75px;
-  height:75px;
+.left-section .section div.info-block ul div.icon img{
+  width:100%;
+  height:100%;
 }
 .left-section .section div.info-block ul li div.info{
 float:right;
