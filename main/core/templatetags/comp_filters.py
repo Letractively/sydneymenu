@@ -2,39 +2,39 @@ from django import template
 import os
 from lxml import etree
 from .. import inc 
+import json
 
 register = template.Library()
+def do_select(parser,token):
+  nodelist = parser.parse('endselect')
+  parser.delete_first_token()
+  return SelectNode(nodelist)
 
-class SelectRender:
-  def __init__(self,name):
-    self.name = name
-    self.style = "" 
-    self.fields = []
-    self.default = None 
-  def Render(self):
+class SelectNode(template.Node):
+  def __init__(self,nodelist):
+    self.nodelist = nodelist
+  def render(self,context):
+    data_str = self.nodelist.render(context)
+    data = json.loads(data_str)
     default = "NIL"
     dstr = ""
-    if(self.default):
-      default = self.default
-      dstr = self.default
+    if(data.has_key('default')):
+      default = data['default']
+      dstr = default 
     rend_result = """\
 <div class="extension-drop-list" style="%s">\
 <input type="textfield" style="display:none" name="%s" value="%s"></input>\
 <div class='current'>%s</div><ul>"""\
-    % (self.style,self.name,dstr,default)
-    for field in self.fields:
-      if (field == self.default):
+    % (data['style'],data['name'],dstr,default)
+    for field in data['fields']:
+      if (field == default):
         rend_result += "<li><h5>"+field+"</h5><span>&#9746</span></li>"
       else:
         rend_result += "<li><h5>"+field+"</h5><span>&#9744</span></li>"
     tail = """</ul></div>"""
     return rend_result+tail
-  def AddField(self,field_name):
-    self.fields.append(field_name)
-    if (self.default == None):
-      self.default = field_name
-  def SetStyle(self,style):
-    self.style = style
+
+register.tag("select",do_select)
 
 class ComboRender:
   def __init__(self, name):
@@ -123,11 +123,6 @@ def post(pname,sname):
 @register.filter("template")
 def template(cname):
   return "comp/_"+cname+".html"
-
-
-@register.filter("select")
-def select(selectname):
-  return SelectRender(selectname)
 
 @register.filter("style")
 def style(ele_config,style):

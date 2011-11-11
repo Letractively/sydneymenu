@@ -119,7 +119,7 @@ class Gallery:
     return g
   
   def GetDefault(self):
-    for a in self.gnode.xpath("//G[@defaul='true']"):
+    for a in self.gnode.xpath("//G[@default='true']"):
       return a.get('name')
     return None
 
@@ -131,8 +131,8 @@ class Gallery:
         return True;
 
   def SetDefault(self,gname):
-    for a in self.gnode.xpath("//G[@defaul='true']"):
-      return a.set('default','false')
+    for a in self.gnode.xpath("//G[@default='true']"):
+      a.set('default','false')
     nodes = self.gnode.xpath("//G[@name='"+gname+"']")
     if (len(nodes) == 0):
       return None 

@@ -4,8 +4,6 @@ border:1px solid #959595;
 }
 .input-fine {display:none;}
 
-
-
 #form-mdytimetable {padding:20px 0 0 0;margin:0px;}
 #form-mdytimetable {font-size:12px;}
 #form-mdytimetable input{border:1px solid #959595;}
@@ -15,14 +13,12 @@ border:1px solid #959595;
 #form-mdytimetable #to{float:right;margin-right:30px;margin-bottom:10px;}
 #form-mdytimetable #to select{display:block;width:155px;font-size:15px;margin-top:5px;}
 
-#form-addpost {padding:0px;margin:0px;}
-#form-addpost {font-size:12px;}
-#form-addpost input{border:1px solid #959595;}
-#form-addpost > div{padding:0px;margin:0 0 0 20px;display:block;}
-#form-addpost textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;}
-#form-addpost p {margin-left:20px;}
-#form-addpost p input{margin-top:5px;width:340px;display:block;font-size:15px;}
-#form-addpost #name{float:left;margin-left:20px;}
+#form-mdy-default-gallery {padding:0px;margin:0px;}
+#form-mdy-default-gallery > div{padding:0px;margin:0 20px 0 20px;display:block;}
+#form-mdy-default-gallery {font-size:12px;}
+#form-mdy-default-gallery p {margin-left:20px;}
+#form-mdy-default-gallery p input{margin-top:5px;width:300px;display:block;font-size:15px;}
+#form-mdy-default-gallery input{border:1px solid #959595;}
 
 #form-addgallery {padding:0px;margin:0px;}
 #form-addgallery {font-size:12px;}

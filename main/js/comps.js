@@ -257,8 +257,33 @@ function InitGallery(env){
     this.add_gallery_uri = function(){
       return "/core/gallery/"+env.service_name+'/add/';
     }
+    this.default_gallery_uri = function(){
+      return "/core/gallery/"+env.service_name+'/default/';
+    }
     this.dialog_add_uri = function(){
       return "/core/dialog/addgallery/"+env.service_name;
+    }
+    this.dialog_default_uri = function(){
+      return "/core/dialog/defaultgallery/"+env.service_name;
+    }
+    this.ShowModifyDefaultDialog = function(){
+      var self = this;
+      env.ui.InfoCollectDialog("Default Gallery",
+        self.dialog_default_uri(), 
+        "form-mdy-default-gallery",
+        function(form_obj){
+          self.ModifyDefaultGallery(form_obj)
+        }
+      );
+    }
+    this.ModifyDefaultGallery = function (form_obj){
+      var config = {
+         method: 'GET',
+         form: {id:form_obj}
+      }
+      var uri = this.default_gallery_uri();
+      var request = env.ui.ResponseDialog(uri,config,true
+        ,new update_info("/core/service/"+env.service_name+"/?comp=photoplayer","photoplayer"));
     }
     this.Select = function(idx,ele){
      if(idx<this.image_handler.length){

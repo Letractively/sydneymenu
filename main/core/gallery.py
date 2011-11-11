@@ -22,7 +22,7 @@ def Play(request,sname):
         gallery = Gallery.InitGalleryConfig(gnode.getroot())
         gname = gallery.GetDefault()
         if(gname):
-          c = Context({'GALLERY':gallery.BasicInfo()[gname]})
+          c = Context({'GALLERY':gname,'SERVICE':sname,'PHOTOS':gallery.BasicInfo()[gname]})
           return HttpResponse(play_t.render(c),mimetype="text/html")
         else:
           return HttpResponse("Default Gallery Not Specified")
@@ -48,16 +48,23 @@ def Rename(request,sname,gname,n_gname):
     else:
         return HttpResponse("Service Not Activated") 
 
-def Default(request,sname,gname):
+def Default(request,sname):
     aut = HasAuthority(request,sname)
     if (aut['r'] == False):
         return HttpResponse(aut['m'])
+    gname = "" 
+    if (request.REQUEST.has_key("gname")):
+      gname = request.REQUEST['gname']
+    else:
+      return HttpResponse("Gallery Not Found")
     data = ServiceCore.objects.get(name = sname)
     if (data.activate == True):
         gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
         gallery = Gallery.InitGalleryConfig(gnode.getroot())
         if gallery.SetDefault(gname):
-          return HttpResponse("Default Gallery For Play Is Set Successfully")
+          SaveConfig(sname,gnode)
+          return GeneralXMLResponse(request,{},
+            "Default Gallery For Play Is Set Successfully")
         else:
           return HttpResponse("Gallery %s Not Found"%(gname))
     else:

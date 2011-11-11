@@ -318,13 +318,16 @@ function ZOYOE_UI(env,yui,static_dialog){
               var config = {
                 method: 'get',
               }
-              var p = document.getElementById(UI.update.comp_id).parentNode;
-              p.innerHTML = 'loading';
+              var p = YUI.one("#"+UI.update.comp_id).get('parentNode');
+              p.set('innerHTML','loading');
               function complete(id,o,args){
                 zoyoe.ALERT(o.responseText);
-                p.innerHTML = o.responseText;
+                p.set('innerHTML',o.responseText);
                 UI.update = null;
                 UI.HideDialog();
+                if(zoyoe.ElementExtension){
+                  zoyoe.ElementExtension.BuildExtensionElements(p);
+                }
               }
               StartIO(UI.update.uri,config,complete);
             }else if(UI.update.uri){

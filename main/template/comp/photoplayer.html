@@ -25,8 +25,8 @@ InitPlayer = function(){
 <body onload="InitPlayer()">
 <div class="player">
   <div id = "player">
-   {% for img in GALLERY %}
-   <img src="/core/data/res/test/test/{{img}}/">
+   {% for img in PHOTOS %}
+   <img src="/core/data/res/{{SERVICE}}/{{GALLERY}}/{{img}}/">
    {% endfor %}
    </img>
   </div>

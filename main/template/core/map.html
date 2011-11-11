@@ -90,7 +90,12 @@
   </div>
   <div class='window-container'>
   <label>OF:</label>
-  {{"type"|select|style:"width:240px;float:left;margin-bottom:2px;"|addfield:"Breakfast"|addfield:"Lunch"|addfield:"Dinnner"|render|safe}}
+    {% select %}
+    {"name":"type",
+     "style":"width:240px;float:left;margin-bottom:2px;",
+     "fields":["Breakfast","Lunch","Dinnner"],
+     "default":"Breakfast"}
+    {% endselect %}
   </div>
   <div class='window-container'>
   <label>IN(restaurant name):</label>

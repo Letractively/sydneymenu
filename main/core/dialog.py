@@ -47,6 +47,17 @@ def AddGallery(request,sname):
     c = Context({"REQUEST":request.REQUEST})
     return HttpResponse(addgallery_t.render(c))
 
+def ModifyDefaultGallery(request,sname):
+    mdy_t = loader.get_template('core/_mdydefaultgallery.html')
+    service = GetService(sname)
+    if(service):
+        gnode = etree.parse(CONFIG.SERVICES_PATH + sname+'/config.xml')
+        gallery = Gallery.InitGalleryConfig(gnode.getroot())
+        c = Context({'GALLERYS':json.dumps(gallery.BasicInfo().keys()),'DEFAULT':'None'})
+        return HttpResponse(mdy_t.render(c),mimetype="text/html")
+    else:
+        return HttpResponse("Service %s not exist"%(sname))
+
 def AddResource(request,sname,respath):
     addgallery_t = None
     if(request.REQUEST.has_key('quick')):

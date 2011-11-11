@@ -67,7 +67,7 @@ def Service(request,name):
                  'icon':'comp/_icon.html',
                  'gallery':'comp/_gallery.html',
                  'items':'comp/_items.html',
-                 'photo-player':'comp/_photos.html',
+                 'photoplayer':'comp/_photos.html',
                  'timetable':'comp/_timetable.html',
                  'roster':'comp/_roster.html'}
     aut = HasAuthority(request,name)

@@ -2,11 +2,21 @@
     <form id='form-mdyservice' action="">
       <div id="age">
         <label for ="price">Price Range:</label>
-        {{"price"|select|style:"width:152px;margin-top:5px;"|addfield:"10-20"|addfield:"20-40"|addfield:"40-160"|render|safe}}
+        {% select %}
+        {"name":"price",
+         "style":"width:152px;margin-top:5px;",
+         "fields":["10-20","20-40","40-160"],
+         "default":"10-20"}
+        {% endselect %}
       </div>
       <div id="type">
         <label for='type'>Service Type:</label>
-        {{"type"|select|style:"width:152px;margin-top:5px;"|addfield:"FastFood"|addfield:"Cafe"|addfield:"Vegetarian"|addfield:"Normal"|render|safe}}
+        {% select %}
+        {"style":"width:152px;margin-top:5px;",
+         "fields":["FastFood","Cafe","Vegetarian","Normal"],
+         "default":"FastFood",
+         "name":"type"}
+        {% endselect %}
       </div>
       <div id="phone">
         <label for='phone'>Phone:</label>
