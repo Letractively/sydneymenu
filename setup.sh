@@ -55,6 +55,6 @@ python manage.py syncdb
 cd ..
 
 echo "Initialize DB"
-python dbinit.py
+python dbinit.py setup
 
 echo "All done! Enjoy your sydneymenu"
