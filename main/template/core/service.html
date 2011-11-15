@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/element.css" type="text/css" media="all" charset="utf-8"/>
 
+<!-- Microsoft Bingmap -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 
 <!-- YUI Components --> 
 <script type="text/javascript" charset="utf-8"
@@ -42,6 +44,7 @@ function Init(){
   var icon = document.getElementById('icon');
   var gallery = document.getElementById('gallery');
   var news = document.getElementById('news');
+  var preview = document.getElementById('map-preview');
   InitDrag(document.getElementById('dd-shadow'));
 
   MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
@@ -50,6 +53,7 @@ function Init(){
   MarkAsArrangeV(mid,photos.parentNode,GetTitle(photos));
   MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
   MarkAsArrangeV(left,items.parentNode,GetTitle(items));
+  MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
   MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
   MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
   
@@ -64,6 +68,7 @@ function Init(){
     zoyoe.comps['ICON'] = InitIcon(zoyoe);
     zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
     zoyoe.comps['timetable'] = InitItems(zoyoe,'timetable');
+    zoyoe.comps['preview'] = InitPreview(zoyoe,'preview');
     zoyoe.admin = InitAdmin(zoyoe);
     if(zoyoe.ElementExtension){
       zoyoe.ElementExtension.BuildExtensionElements();

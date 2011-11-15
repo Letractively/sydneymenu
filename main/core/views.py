@@ -69,7 +69,8 @@ def Service(request,name):
                  'items':'comp/_items.html',
                  'photoplayer':'comp/_photos.html',
                  'timetable':'comp/_timetable.html',
-                 'roster':'comp/_roster.html'}
+                 'roster':'comp/_roster.html',
+                 'preview':'comp/_map_preview.html',}
     aut = HasAuthority(request,name)
     service_t = None
     today = date.today()
