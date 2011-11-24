@@ -10,7 +10,25 @@
  *
  * Initial version: October 21, 2004
  */
-
+function neighbours(cells){
+  var cs = cells;
+  var r = cells[0].length;
+  function edg(x,y){
+    xr = Math.floor(x/r);
+    xl = x % r;
+    yr = Math.floor(y/r);
+    yl = y % r;
+    var c1 = cs[Math.floor(r)]; 
+    if(x % r == 0){
+      return (y == x + 1 || Math.abs(x - y) == r || Math.abs(x + 1 - y) == r); 
+    }else if(y % r == 0){
+      return (x == y + 1 || Math.abs(x - y) == r || Math.abs(y + 1 - x) == r); 
+    }else{
+      return (xr-yr)*(xr-yr)+(xl-yl)*(xl-yl) < 4;
+    }
+  }
+  return edg;
+}
 function edges(cells){
   var cs = cells;
   var r = cells[0].length;

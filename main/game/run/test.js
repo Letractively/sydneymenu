@@ -1,99 +1,10 @@
-var game = {}
-game.VOID = 0;
-game.PATH = 1;
-game.OBSTCAL = 2;
-game.ITEM = 2;
-game.BLOCK_SZ = 100;
-game.path = {}
-game.obstcal = {}
-game.actor = {}
-game.path.NORMAL_IMG = "res/path/normal.png";
-game.path.NORMAL_CENTER = {top:0,left:0};
-game.obstcal.BOWL_IMG = "res/obstcal/bowl.png";
-game.obstcal.MSTC_IMG = "res/obstcal/monster_container.png";
-game.actor.MAIN_IMG = "res/actor/mainactor.png";
-game.actor.MONSTER_IMG = "res/actor/monster1.png";
-game.actor.BOMB_IMG = "res/actor/bomb.png";
 
-game.path.normal = function(){
-  return null;
-}
-game.obstcal.mstc = function(name){
-  var ele = $("<div class='block-normal'><img src='"+game.obstcal.MSTC_IMG+"'></image></div>").get(0);
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
-  var clip = (new zoyoe.clip(name,ele));
-  return clip;
-}
-game.obstcal.bowl = function(){
-  var ele = $("<div class='block-normal'><img src='"+game.obstcal.BOWL_IMG+"'></image></div>").get(0);
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
-  var img = ele.getElementsByTagName("img")[0];
-  img.style.position = "relative";
-  img.style.left = "-20px";
-  var clip = (new zoyoe.clip(zoyoe.newName(),ele));
-  return clip;
-}
-game.actor.bomb = function(){
-  var ele = $("<div class='block-normal'><img src='"+game.actor.BOMB_IMG+"'></image></div>").get(0);
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
-  var img = ele.getElementsByTagName("img")[0];
-  img.style.position = "relative";
-  img.style.top = "48px";
-  img.style.left = "35px";
-  var clip = (new zoyoe.clip(zoyoe.newName(),ele));
-  return clip;
-}
-game.actor.main = function(name){
-  var ele = $("<div class='block-normal'><img src='"+game.actor.MAIN_IMG+"'></image></div>").get(0);
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
-  var img = ele.getElementsByTagName("img")[0];
-  img.style.position = "relative";
-  img.style.left = "8px";
-  var clip = (new zoyoe.clip(name,ele));
-  return clip;
-}
-game.actor.monster = function(name){
-  var ele = $("<div class='block-normal'><img src='"+game.actor.MONSTER_IMG+"'></image></div>").get(0);
-  ele.style.overflow = "hidden";
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
-  var img = ele.getElementsByTagName("img")[0];
-  img.style.position = "relative";
-  img.style.left = "8px";
-  var clip = (new zoyoe.clip(name,ele));
-  return clip;
-}
-
-game.map = function(inst,clip){
-  this.generate = function(){
-    var cells = this.instance.cells;
-    for(var r=0;r<cells.length;r++){
-      for (var l=0;l<cells[r].length;l++){
-        var cell = inst.itemInit(cells[r][l]);
-        if(cell){
-          clip.insertClip(cell);
-          var pos = this.instance.cell2pixel(r,l);
-          var p = cell.position(pos.top,pos.left);
-          var frame = clip.getFrame(0);
-          var cliptrack = clip.trackClip(frame,cell);
-        }
-      }
-    }
-    inst.initStage(this.clip);
-  };
-  this.instance = inst;
-  this.clip = clip;
-}
 function Instance(){
    var self = this;
    var parent = null;
-   var cm1 = [3,"m1"];
-   var cm2 = [4,"mc1"];
-   var cm3 = [4,"mc2"];
+   var cm1 = [3,"m1",{vt:2,vl:0}];
+   var cm2 = [4,"mc2",{vt:0,vl:2}];
+   var cm3 = [4,"mc3",{vt:0,vl:2}];
    var cmain = [2,"main"];
    this.cells = 
    [
@@ -105,6 +16,7 @@ function Instance(){
     [1,1,  0,  0,0,0,    0,0,1],
     [0,1,  0,  1,0,1,    1,1,0],
    ]
+   var ns = neighbours(this.cells);
    this.path = 
    [
     [1,1,0,0,1,0,0,0,1],
@@ -119,7 +31,7 @@ function Instance(){
      for(var i=0;i<ps.length;i++){
        if (ps[i].x < 0 || this.cells.length <= ps[i].x
             || ps[i].y < 0 || this.cells[0].length <= ps[i].y
-            || this.cells[ps[i].x][ps[i].y] == 1){return false;}
+            || this.path[ps[i].x][ps[i].y] == 1){return false;}
      }
      return true;
    }; 
@@ -135,6 +47,11 @@ function Instance(){
              {x:Math.floor(top/100),y:Math.floor((left + 99)/100)},
              {x:Math.floor((top + 99)/100),y:Math.floor(left/100)},
              {x:Math.floor((top+99)/100),y:Math.floor((left+99)/100)}]
+   };
+   this.pixel2targets = function(top,left,vtop,vleft){
+     var vt = game.sign(vtop); 
+     var vl = game.sign(vleft); 
+     return [{x:Math.floor((top+50+50*vt)/100),y:Math.floor((left+50+50*vl)/100)}]
    };
    this.pathExtractor = function(x,y){
      var cells = this.path;
@@ -174,34 +91,25 @@ function Instance(){
         main.moveBottom = function(e){
           main.targets.push({remain:20,vtop:5,vleft:0,ele:e});
         }
-        main.clearTailTargets = function(){
-          while(main.targets.length > 1){
-            var target = main.targets.pop();
-            target.ele.remove();
-          }
-          var rt = 0;
-          var rl = 0;
-          if(main.targets.length > 0){
-            rt = main.targets[0].vtop*main.targets[0].remain;
-            rl = main.targets[0].vleft*main.targets[0].remain;
-          }
-          return {top:main.top()+rt,left:main.left()+rl};
-        }
         return main;
       }
     case 3: 
-       var monster = new game.actor.monster(info[1]);
+       var monster = new game.actor.monster(info[1],info[2]);
        this.actors[info[1]] = monster;
        return monster;
     case 4: 
-       var monster_container = new game.obstcal.mstc(info[1]);
+       var monster_container = new game.obstcal.mstc(info[1],info[2]);
        this.actors[info[1]] = monster_container;
        return monster_container;
  
     }
   }
   this.plantBomb = function(idx){
+    var self = this;
     var main = this.actors['main']; 
+    if(main.targets.length > 0){
+      return;
+    }
     var p = main.position();
     var actcell = this.pixel2cell(p.top,p.left);
     var pos = this.cell2pixel(actcell.x,actcell.y);
@@ -209,9 +117,33 @@ function Instance(){
     if(bomb){
       bomb.position(pos.top,pos.left);
       var frame = parent.getFrame(0);
-      parent.trackClip(frame,bomb);
+      var track = parent.trackClip(frame,bomb);
+      track.counting = 120; 
       $("#panel .bomb .number").html(this.bombs.length);
       this.path[actcell.x][actcell.y] = 1;
+      track.action = function(){
+        var fame = parent.getFrame(0);
+        if(track.counting > 0 ){
+          track.counting -= 1;
+        }else if(track.counting == 0){
+          track.counting -= 1;
+          var tracks = frame.getClips();
+          var srcidx = self.cells[0].length * actcell.x + actcell.y;
+          for( t in tracks){
+            var cell = self.pixel2cell(tracks[t].top,tracks[t].left);
+            var cellidx = self.cells[0].length * cell.x + cell.y;
+            if(ns(srcidx,cellidx)){
+              if(tracks[t].bomb!=undefined){
+                tracks[t].bomb();
+              }
+            }
+          }
+          frame.untrackClip(track);
+          self.path[actcell.x][actcell.y] = 0;
+        }else{
+          return;
+        } 
+      }
     }
   }
   this.route_eles = [];
@@ -219,7 +151,7 @@ function Instance(){
   this.onMouseClick = function(top,left){
     var cell = this.pixel2cell(top,left);
     var main = this.actors['main'];
-    var p = main.clearTailTargets();
+    var p = parent.getFrame(0).getTrack(this.actors['main'].name()).clearTailTargets();
     var actcell = this.pixel2cell(p.top,p.left); 
     var path = self.pathExtractor(actcell.x,actcell.y)(cell.x,cell.y);
     var st = '';
@@ -275,32 +207,74 @@ function Instance(){
         }
       }
     }
-    var m1track = frame.getTrack(this.actors['m1'].name()); 
-    m1track.clip.targets = [{vtop:2,vleft:0}];
-    m1track.action = function(){
-      var top = this.top + this.clip.targets[0].vtop;
-      var left = this.left;
-      var ps = self.pixel2cells(top,left);
-      if(self.acquire(ps)){
-        this.top += this.clip.targets[0].vtop;
-      }else{
-        this.clip.targets[0].vtop = 0 - this.clip.targets[0].vtop;
+    maintrack.clearTailTargets = function(){
+      var main = this.clip;
+      while(main.targets.length > 1){
+        var target = main.targets.pop();
+        target.ele.remove();
+      }
+      var rt = 0;
+      var rl = 0;
+      if(main.targets.length > 0){
+        rt = main.targets[0].vtop*main.targets[0].remain;
+        rl = main.targets[0].vleft*main.targets[0].remain;
+      }
+      return {top:this.top+rt,left:this.left+rl};
+    } 
+    function initMonster(mtrack,v){
+      mtrack.clip.targets = [{vtop:v.vt,vleft:v.vl}];
+      mtrack.action = function(){
+        var top = this.top + this.clip.targets[0].vtop;
+        var left = this.left + this.clip.targets[0].vleft;
+        var ps = self.pixel2targets(top,left,this.clip.targets[0].vtop,this.clip.targets[0].vleft);
+        if(self.acquire(ps)){
+          this.left += this.clip.targets[0].vleft;
+          this.top += this.clip.targets[0].vtop;
+        }else{
+          this.clip.targets[0].vtop = 0 - this.clip.targets[0].vtop;
+          this.clip.targets[0].vleft = 0 - this.clip.targets[0].vleft;
+        }
       }
     }
-/*
-    var m2track = frame.getTrack(this.actors['m2'].name()); 
-    m2track.clip.targets = [{vtop:0,vleft:2}];
-    m2track.action = function(){
-      var left = this.left + this.clip.targets[0].vleft;
-      var top = this.top;
-      var ps = self.pixel2cells(top,left);
-      if(self.acquire(ps)){
-        this.left += this.clip.targets[0].vleft;
-      }else{
-        this.clip.targets[0].vleft = 0 - this.clip.targets[0].vleft;
+    function initMContainer(name,mname,v){
+      var mctrack = frame.getTrack(name); 
+      var cell = self.pixel2cell(mctrack.top,mctrack.left);
+      mctrack.clip.targets = [{vtop:v.vt,vleft:v.vl}];
+      mctrack.bomb = function(){
+        var m = new game.actor.monster(mname,v);
+        self.actors['mname'] = m;
+        parent.insertClip(m);
+        var frame = parent.getFrame(0);
+        m.position(this.top,this.left);
+        var track = frame.trackClip(m);
+        mctrack.action = function(){
+          frame.untrackClip(mctrack);
+          track.clip.targets = [{vtop:v.vt,vleft:v.vl}];
+          track.action = function(){
+            var left = this.left + this.clip.targets[0].vleft;
+            var top = this.top + this.clip.targets[0].vtop;
+            var ps = self.pixel2targets(top,left,this.clip.targets[0].vtop,this.clip.targets[0].vleft);
+            if(self.acquire(ps)){
+              this.left += this.clip.targets[0].vleft;
+              this.top += this.clip.targets[0].vtop;
+            }else{
+              this.clip.targets[0].vleft = 0 - this.clip.targets[0].vleft;
+              this.clip.targets[0].vtop = 0 - this.clip.targets[0].vtop;
+            }
+          }
+          self.path[cell.x][cell.y] = 0;
+          mctrack.action = function(){return;};
+        }
       }
     }
-*/
+    for (var n in this.actors){
+      if (this.actors[n].type == game.actortype.GENERAL_MONSTER){
+         var mtrack = frame.getTrack(this.actors[n].name()); 
+         initMonster(mtrack,this.actors[n].para);
+      }else if(this.actors[n].type == game.actortype.GENERAL_MONSTER_CONTAINER){
+         initMContainer(this.actors[n].name(),zoyoe.game.newName(),this.actors[n].para);
+      }
+    }
     for(var i=0;i<3;i++){
       var b = new game.actor.bomb();
       this.bombs.push(b);
@@ -323,22 +297,33 @@ $.fn.extend({
 function buildInfo(inst){
   $("#panel .bomb .number").html(inst.bombs.length);
 }
+function bindClickHandler(element,handler){
+  if(window.Touch){
+    element.addEventListener("touchstart",handler,false)
+  }else{
+    element.addEventListener("click",handler,false)
+  }
+}
 function test(){
     var singleton = {};
     singleton.inst = new Instance();
     var jq_root = $('#root');
-	var env = new zoyoe.env($('#root').get(0),30,10,0);
-    $("#root").click(function(e){
+	var env = new zoyoe.game.env($('#root').get(0),30,10,0);
+    bindClickHandler($("#root").get(0),function(e){
+        var touch = e;
+        if(e.type == "touchstart"){
+          touch = e.touches[0];
+        }
         e.stopPropagation();
         e.cancelBubble = true;
         e.preventDefault();
         var p = jq_root.offset();
-        singleton.inst.onMouseClick(e.pageY - p.top,e.pageX - p.top);
+        singleton.inst.onMouseClick(touch.pageY - p.top,touch.pageX - p.top);
     });
     $("body").get(0).ontouchmove = function(e){
       e.preventDefault();
     }
-    $("#panel .bomb").click(function(e){
+    $("#panel .bombtouch").click(function(e){
       singleton.inst.plantBomb();
     });
     $("#panel .replay").click(function(e){
@@ -346,7 +331,7 @@ function test(){
       var inst = new Instance();
       singleton.inst = inst;
       var root = env.root();
-      var clip = new zoyoe.clip('move',$("<div></div>").get(0));
+      var clip = new zoyoe.game.clip('move',$("<div></div>").get(0));
       var map = new game.map(inst ,clip);
       map.generate();
       root.insertClip(clip);
@@ -355,7 +340,7 @@ function test(){
       env.run();
     });
     var root = env.root();
-    var clip = new zoyoe.clip('move',$("<div></div>").get(0));
+    var clip = new zoyoe.game.clip('move',$("<div></div>").get(0));
     var map = new game.map(singleton.inst ,clip);
     map.generate();
     root.insertClip(clip);

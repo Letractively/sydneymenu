@@ -1,3 +1,4 @@
+{% load pybb_tags %}
 {% if ROOT %}
     <div class='section-container'>
 {% endif %}
@@ -7,9 +8,14 @@
         </div>
         <div class='info-block' style="text-align:center">
           {% if FORUM %}
-          <a style="border:0px solid white" href = "/forum/forum/{{FORUM.id}}/">
-          <img src = "/res/forum-icon.png" style="display:block;margin:auto;"></img>
-          </a>
+          {% pybb_load_last_topics as last_topics with forum = FORUM.id %}
+          {% for topic in last_topics %}
+          <p><a href="{{ topic.get_absolute_url }}">{{ topic }}</a>
+            </br> - {% pybb_time topic.created %}</p>
+          {% endfor %}
+          <p><a style="border:0px solid white;" href = "/forum/forum/{{FORUM.id}}/"> 
+          Enter Forum 
+          </a></p>
           {% else %}
           <img src = "/res/forum-icon.png" style="display:block;margin:auto;"></img>
           <span style = "font-size:16px;font-family:'Arial', Times, serif;font-weight:bold;color:#bbbbbb;">

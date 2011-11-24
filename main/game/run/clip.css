@@ -53,6 +53,8 @@ div.panel div{
   margin:5px;
   cursor:pointer;
 }
-div.panel div.bomb{
+div.panel div.bombtouch{
  height:100px;
+ background: url('res/actor/bomb.png') top no-repeat;
+ background-size: 100px 100px;
 }

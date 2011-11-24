@@ -1,21 +1,25 @@
-var MOTION = new function(){
-	this.NULL = 0;
-	this.TRANSLATION = 1;
+var zoyoe = document.zoyoe;
+if(zoyoe == undefined){
+  zoyoe = {};
+}
+zoyoe.game = {};
+zoyoe.game.MOTION = new function(){
+  this.NULL = 0;
+  this.TRANSLATION = 1;
 };
+zoyoe.game.PAUSE = 1;
+zoyoe.game.RUN = 0;
+
 function n2px(n){
   return n+"px";
 }
-zoyoe = {};
 
-zoyoe.PAUSE = 1;
-zoyoe.RUN = 0;
- 
-zoyoe.noopFrame = function(parent,idx){
+zoyoe.game.noopFrame = function(parent,idx){
 	var index = idx;
 	var clip = parent;
 	var iskeyframe = false;
 	var clips = {};
-    var status = zoyoe.RUN;
+    var status = zoyoe.game.RUN;
     this.tracked = function(c){
       if(clips[c.name()]){
         return true;
@@ -36,11 +40,18 @@ zoyoe.noopFrame = function(parent,idx){
         if(clips[clip.name()]!=undefined){
           return clips[clip.name()];
         }else{
-		  clips[clip.name()] = new zoyoe.clipprox(clip);
+		  clips[clip.name()] = new zoyoe.game.clipprox(clip);
 		  iskeyframe = true;
           return clips[clip.name()];
         }
 	};
+    this.untrackClip = function(clip){
+       if(clips[clip.clip.name()] == clip){
+          delete clips[clip.clip.name()];
+       }else{
+          throw "Clip Not Found"
+       }
+    }
 	this.keyframe = function (){
 		return iskeyframe;
 	};
@@ -52,10 +63,12 @@ zoyoe.noopFrame = function(parent,idx){
     }
 	this.render = function(){
 		if(iskeyframe){
-			for(c in clips){
-                clips[c].action();
-				clips[c].clip.position(clips[c].top,clips[c].left);
-			}
+		  for(c in clips){
+             var track = clips[c];
+             track.clip.position(clips[c].top,clips[c].left);
+             /* Since action might delete him self, so should preform action last */
+             track.action();
+          }
 		}else{
           var pk = clip.getPreKey(index);
           var nk = clip.getNextKey(index);
@@ -67,7 +80,7 @@ zoyoe.noopFrame = function(parent,idx){
               var nc = ncs[key];
               if(nc){
                 switch(pc.motion){
-                case MOTION.TRANSLATION:
+                case zoyoe.game.MOTION.TRANSLATION:
                   var lambda = (this.getIndex()-pk.getIndex())/(nk.getIndex()-pk.getIndex());
                   var top = pc.top*(1-lambda) + nc.top*lambda;
                   var left = pc.left*(1-lambda) + nc.left*lambda;
@@ -81,15 +94,15 @@ zoyoe.noopFrame = function(parent,idx){
 	/* It is not implemented well */
 	};
 };
-zoyoe.clip = function (n,ele,top,left){
+zoyoe.game.clip = function (n,ele,top,left){
   var relative_top = 0;
   var relative_left = 0;
   var element = ele;
   var clips = [];
-  var frames = [new zoyoe.noopFrame(this,0)];
+  var frames = [new zoyoe.game.noopFrame(this,0)];
   var idx = 0;
   var name = n;
-  var status = zoyoe.RUN;
+  var status = zoyoe.game.RUN;
   ele.id = n;
   if(!isNaN(top)){
     relative_top = top;
@@ -100,9 +113,9 @@ zoyoe.clip = function (n,ele,top,left){
   this.reset = function(){
     element.innerHTML = "";
     clips = [];
-    frames = [new zoyoe.noopFrame(this,0)];
+    frames = [new zoyoe.game.noopFrame(this,0)];
     idx = 0;
-    status = zoyoe.RUN;
+    status = zoyoe.game.RUN;
   }
   this.clips = function(){
 	  return clips;
@@ -151,7 +164,7 @@ zoyoe.clip = function (n,ele,top,left){
 	  }
   };
   this.step = function(){
-    if(status == zoyoe.RUN){
+    if(status == zoyoe.game.RUN){
 	  var frame = frames[idx];
 	  frame.render(this);
       var keyframe = this.getPreKey(idx);
@@ -171,6 +184,7 @@ zoyoe.clip = function (n,ele,top,left){
           }
         }
       }
+      frame.action();
       this.render();
       this.inc();
     }else{
@@ -178,10 +192,10 @@ zoyoe.clip = function (n,ele,top,left){
     }
   };
   this.play = function(){
-    status = zoyoe.RUN;
+    status = zoyoe.game.RUN;
   };
   this.stop = function(){
-    status = zoyoe.PAUSE;
+    status = zoyoe.game.PAUSE;
   };
   this.gotoAndPlay = function(){
     /* not implemented */
@@ -198,7 +212,7 @@ zoyoe.clip = function (n,ele,top,left){
   this.appendFrames = function(n){
     var start = frames.length;
     for(var i=0;i<n;i++){
-      frames.push(new zoyoe.noopFrame(this,start+i));
+      frames.push(new zoyoe.game.noopFrame(this,start+i));
     }
     return start;
   };
@@ -212,17 +226,17 @@ zoyoe.clip = function (n,ele,top,left){
     return relative_left;
   }
 }
-zoyoe.clipprox = function(clip){
+zoyoe.game.clipprox = function(clip){
 	this.clip = clip;
 	this.top = clip.top();
 	this.left = clip.left();
-	this.motion = MOTION.NULL;
+	this.motion = zoyoe.game.MOTION.NULL;
     this.action = function(){
       return;
     }
 }
 
-zoyoe.newName = function(){
+zoyoe.game.newName = function(){
   if(!zoyoe.ninc){
     zoyoe.ninc = 0;
   }
@@ -231,10 +245,10 @@ zoyoe.newName = function(){
   return name;
 }
  
-zoyoe.env = function(ele,fps,top,left){
+zoyoe.game.env = function(ele,fps,top,left){
   var delaywindow = 1000/fps;
   var status = zoyoe.PAUSE;
-  var topclip = new zoyoe.clip('root',ele,top,left);
+  var topclip = new zoyoe.game.clip('root',ele,top,left);
   var topele = ele;
   var self = this;
   var timer = null;
