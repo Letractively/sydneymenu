@@ -1,8 +1,8 @@
+echo off
 echo "Welcome using sydney-scent project ..."
+wget="wget"
 
 uname | grep 'Darwin'
-
-wget="wget"
 if [[ $? -eq 0 ]] ; then
   wget="curl -O"
   echo 'Darwin'
@@ -58,11 +58,11 @@ echo " === Done ==="
 
 echo "Making Symbolic Links"
 cd ./main
-rm -f pybb
-rm -f common
-rm -f core
-rm -f xmlbase
-rm -f zoyoe
+rm -rf pybb
+rm -rf common
+rm -rf core
+rm -rf xmlbase
+rm -rf js
 ln -s ../pybb/pybb ./
 ln -s ../django-common/common ./
 ln -s ../res ./
