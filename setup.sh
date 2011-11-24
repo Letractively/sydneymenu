@@ -61,13 +61,13 @@ cd ./main
 rm -rf pybb
 rm -rf common
 rm -rf core
-rm -rf xmlbase
+rm -rf xmldata
 rm -rf js
 ln -s ../pybb/pybb ./
 ln -s ../django-common/common ./
 ln -s ../res ./
 ln -s ../zoyoe/core ./core
-ln -s ../zoyoe/xmlbase ./xmlbase
+ln -s ../zoyoe/xmldata ./xmldata
 ln -s ../zoyoe/js ./js
 
 echo "Synchronize DB"
