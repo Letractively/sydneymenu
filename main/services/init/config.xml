@@ -1,0 +1,6 @@
+<CONFIG version = '1.0'>
+<IMG name='icon' url='icon.png'/>
+  <GALLERY>
+  </GALLERY>
+<LAYOUT><LEFT><icon/><items/><preview/></LEFT><MID><info/><photoplayer/><timetable/><roster/><news/></MID><RIGHT><forum/><gallery/></RIGHT></LAYOUT>
+</CONFIG>

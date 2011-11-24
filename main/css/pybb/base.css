@@ -1,0 +1,48 @@
+body, div, iframe {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  position:relative;
+}
+#crumbs a:link { color:black; text-decoration:none; }
+#crumbs a:visited { color:black; text-decoration:none; }
+#crumbs a:hover {color:black; text-decoration:none;}
+
+body {
+  width:100%;
+}
+#crumbs{
+  border-bottom: 1px solid #1b1b1b;
+}
+
+div.page{
+margin:auto;
+width:960px;
+}
+table{
+}
+table thead th{
+text-align:left;
+border-bottom:1px solid gray;
+border-top:1px solid gray;
+}
+table thead th.name{
+width:140px;
+}
+
+table thead th.feed{
+width:40px;
+}
+
+table thead th.post-count{
+width:40px;
+}
+table thead th.recent-info{
+width:200px;
+}
+
+div.controls{
+text-align:right;
+}
+
+

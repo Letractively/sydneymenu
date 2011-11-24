@@ -1,0 +1,32 @@
+{% if ROOT %}
+    <div class='section-container'>
+{% endif %}
+      <div id='gallery' class='section'>
+        <div class='title'>
+          <h3>Gallery</h3>
+        </div>
+        <div class='info-block'>
+          <ul>
+            {% for n,v in GALLERY_INFO.iteritems %}
+            <li>
+              <div class='gicon' onclick="zoyoe.ui.ShowPanel('gallery',['{{n}}'])">
+              {% if v %}
+                <img src='/core/data/res/{{SERVICE.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
+              {% else %}
+                <img src='/core/data/res/{{SERVICE.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
+              {% endif %}
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <br style="clear:both"/>
+      </div>
+{% if HAS_AUTHORITY %}
+      <div class='tail'>
+       <h3><a onclick="zoyoe.comps['GALLERY'].ShowAddDialog()">add</a></h3>
+      </div>
+{% endif %}
+{% if ROOT %}
+    </div>
+{% endif %}

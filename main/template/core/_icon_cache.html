@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<style type="text/css">
+body,div{
+padding:0px;
+margin:0px;
+}
+div.icon{
+width:{{REQUEST.size}}px;
+height:{{REQUEST.size}}px
+}
+img{
+width:100%;
+height:100%;
+}
+div.hform{
+position:fixed;
+top:0px;
+left:0px;
+overflow:hidden;
+opacity:0;
+width:{{REQUEST.size}}px;
+height:{{REQUEST.size}}px;
+}
+input{
+font-size:{{REQUEST.size}}px
+}
+</style>
+</head>
+<body>
+<div class='icon'>
+<img src='/core/imagecache/data'></img>
+</div>
+<div class='hform'>
+<form action="/core/imagecache/cache/?size={{REQUEST.size}}" name='hform'
+  enctype="multipart/form-data" 
+  name="imagecache" method="post">{% csrf_token %}
+<input type="file" name='cache' onchange="document.forms['hform'].submit();"></input>
+</form>
+</div>
+</body>
+</html>

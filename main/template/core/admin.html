@@ -1,0 +1,183 @@
+{% extends 'core/clean.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} Sydney Menu {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/default/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','io-form',function(Y){
+       	var zoom = 15;
+      	var center = null;
+        {% if LOC %}
+        if({{LOC.x}} != 0 && {{LOC.y}} != 0){
+          center = new Microsoft.Maps.Location({{LOC.x}},{{LOC.y}});
+        }
+        {% endif %}
+        zoyoe.admin = InitAdmin(zoyoe);
+        zoyoe.service_name = '{{SERVICE.name}}';
+        new MapInfoCore(function(rmap){
+           sdist(rmap);
+        },center,"map-info",zoom,true);
+        if(zoyoe.ElementExtension){
+          zoyoe.ElementExtension.BuildExtensionElements();
+        }
+        var input = Y.one("div.extension-auto-complete").one("input");
+        var dom_input = Y.Node.getDOMNode(input);
+        dom_input.ext_onchange = function(searchStr){
+          if(zoyoe.map){
+            zoyoe.map.TargetPlace(searchStr,"AutoCompJSON");
+          }else{
+            zoyoe.ALERT("Map not loaded");
+          }
+        }
+        zoyoe.InitZoyoe(false,Y);
+      });
+    }
+    function sdist(ret_map){
+      YUI().use('io-form',function(IO){
+        var uri = ("/core/data/getservices/?tstmp={{TIME_STAMP}}");
+        zoyoe.map = ret_map;
+        function complete(io,o,args){
+          var s_element = o.responseXML.documentElement.getElementsByTagName('SERVICE');
+          for(var i=0;i<s_element.length;i++){
+            var element = s_element[i];
+            var service = new Service(element);
+            ret_map.AddService(service);
+          }
+          ret_map.ShiftZoom(true);
+        }
+        IO.on('io:complete',complete);
+        var request = IO.io(uri);
+      });
+    }
+  </script>
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="Logout()"><a>Logout</a></li>
+  {% else %}
+  <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+  <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+{% endblock %}
+ 
+{% block content %}
+  <div class='mid'>
+   <div class='mid-section'>
+    <div style="float:left;">
+      <div class="map-title">
+        <div><img src="/res/pushpin_tiny.png">
+       Try our distribution map and sharing your experience with us
+        </div>
+        <div id="map-bot" style="z-index:20;position:relative;top:315px;">
+        </div>
+      </div>
+      <div id="map-info" style="width:672px;height:300px;z-index:10;">
+      </div>
+    </div>
+    <div id="report-bar">
+      <form name="form-report">
+        <div class="head">
+        <h5>Sharing Your Experience:</h5>
+        </div>
+        <div class='window-container'>
+          <label>OF:</label>
+          {% select %}
+          {"name":"type",
+           "style":"width:240px;float:left;margin-bottom:2px;",
+           "fields":["Breakfast","Lunch","Dinnner"],
+           "default":"Breakfast"}
+          {% endselect %}
+        </div>
+        <div class='window-container'>
+          <label>IN(restaurant name):</label>
+          <input class="normal" type="textfield" name="name"></input>
+        </div>
+        <div class='window-container'>
+          <label>AT(address):</label>
+          {{"address"|auto_complete|style:"width:240px;height:30px;float:left;margin-bottom:2px;"|render|safe}}
+        </div>
+        <div class='window-container'>
+          <label>FOR(what food you've ordered):</label>
+          <input class="normal" type="textfield" name="item"></input>
+        </div>
+        <div class='window-container'>
+          <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
+        </div>
+        </form>
+     </div>
+   </div>
+   <div class='mid-section' style="width:100%;clear:both;">
+      <div class="title" style="width:100%;border-bottom:1px solid ;">
+        <h3>Search Results</h3>
+        <h4>page [1]</h4>
+      </div>
+      <ul id="slist">
+        {% for service in DATA%}
+              <li style="clear:both;">
+                <div style="float:left">
+                  <a href="/core/service/{{service.name}}/">
+                  <img src='/core/data/res/{{service.name}}/{{service.icon}}/?sc=true'>
+                  </img></a>
+                </div>
+                <div class="content">
+                  <h3><a href="/core/service/{{service.name}}/">{{service.name}}</a>
+                   (type:<span>{{service.type}}</span>,
+                    phone:<span>{{service.phone}}</span>)
+                    <span style="float:right">{{service.address}}</span>
+                  </h3>
+                   <div style="height:40px;float:left;">
+                    <p>{{service.description}}</p>
+                   </div>
+                </div>
+             </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div><!-- page -->
+ </div>
+{% endblock %}
+
+{% block tail %}
+ <div id='zsk' class='msk'>
+  </div>
+ <!-- Following is just for dialog support -->
+ <div id='dialog'>
+    <div class='dialog'>
+    <div class='dialog-hint'>
+    </div>
+    <div class='dialog-content'>
+    </div>
+    <div class='button-lane'>
+      <input type='button' class="commit" value='ok' onclick='zoyoe.ui.SubmitForm();'></input>
+      <input type='button' class="cancel" value='cancel' onclick='zoyoe.ui.HideDialog();'></input>
+    </div>
+  </div>
+<!-- End dialog Support -->
+{% endblock %}

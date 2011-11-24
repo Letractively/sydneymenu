@@ -1,0 +1,50 @@
+{% extends 'core/clean.html'%}
+{% block css_link %}
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/search.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block tittle %}login in{% endblock %}
+
+{% block js_link %}
+  <!-- YUI Components --> 
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+
+  <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+
+  <script type="text/javascript">
+  function document_load(){
+    YUI().use('node','io-form',function(Y){
+      zoyoe.InitZoyoe(false,Y,true);
+      zoyoe.admin = InitAdmin(zoyoe);
+      zoyoe.ui.dialog_name = 'form-register';
+      zoyoe.ui.dialog_title = 'Register';
+      zoyoe.ui.submit_cb = zoyoe.admin.RegisterCallback('/accounts/login/'+window.location.search);
+    });
+  }
+  </script>
+{% endblock %}
+
+
+{% block content %}
+<div id='dialog' style="display:block;margin-top:100px;margin-bottom:100px;">
+  <div class='dialog'>
+    <div class='dialog-hint'>
+    <h2>Register</h2>
+    </div>
+    <div class='dialog-content'>
+     {% include "core/_register.html" %}
+    </div>
+    <div class='button-lane'>
+      <input type='button' class="commit" value='continue' onclick='zoyoe.ui.SubmitForm()'></input>
+      <input type='button' class="cancel" value='login' onclick="zoyoe.Redirect('/accounts/login/'+window.location.search)"></input>
+    </div>
+  </div>
+</div>
+{% endblock %}
