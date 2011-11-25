@@ -134,11 +134,11 @@
      </div>
    </div>
    <div class='mid-section' style="width:100%;clear:both;">
-      <div class="title" style="width:100%;border-bottom:1px solid ;">
-        <h3>Search Results</h3>
-        <h4>page [1]</h4>
-      </div>
-      <ul id="slist">
+     <div class="title" style="width:100%;border-bottom:1px solid ;">
+       <h3>Related Services</h3>
+       <h4>page [1]</h4>
+     </div>
+     <ul id="slist">
         {% for service in DATA%}
               <li style="clear:both;">
                 <div style="float:left">
@@ -158,8 +158,19 @@
                 </div>
              </li>
         {% endfor %}
-      </ul>
-    </div>
+     </ul>
+   </div>
+   <div class='mid-section' style="width:100%;clear:both;">
+     <div class="title" style="width:100%;border-bottom:1px solid ;">
+       <h3>Related Items</h3>
+       <h4>page [1]</h4>
+     </div>
+     <ul id="slist">
+        {% for info in SIDEDATA%}
+        {{info.data}}
+        {% endfor %}
+     </ul>
+   </div>
   </div><!-- page -->
  </div>
 {% endblock %}
