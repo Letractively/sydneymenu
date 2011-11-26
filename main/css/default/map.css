@@ -1,4 +1,4 @@
-body,div,iframe,ul {margin:0px;padding:0px;border:0px;position:relative;}
+body,div,iframe,ul {position:relative;}
 body {overflow:hidden;}
 #title-bar {
   width:100%;
