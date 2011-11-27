@@ -63,18 +63,21 @@ def main():
       f = os.fork()
       if f == 0:
         output.write("Server Is Running...\n")
+        output.flush()
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.bind((HOST,PORT))
         s.listen(1)
         while 1:
           conn, addr = s.accept()
           output.write("""Connected by:%s\n""" % addr.__str__())
+          output.flush()
           while 1:
             data = conn.recv(1024)
             if not data:
               break
             try:
               output.write("data:%s\n"%(data))
+              output.flush()
               cmd_obj = json.loads(data)
               cmd = cmd_obj[0]
               if cmd == "SEND_MAIL":
@@ -89,6 +92,7 @@ def main():
                 pass
             except ValueError:
               output.write("ValueError\n")
+              output.flush()
           conn.close()          
       else:
         exit(0)
