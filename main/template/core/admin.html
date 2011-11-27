@@ -135,8 +135,8 @@
    </div>
    <div class='mid-section' style="width:100%;clear:both;">
      <div class="title" style="width:100%;border-bottom:1px solid ;">
-       <h3>Related Services</h3>
        <h4>page [1]</h4>
+       <h3>Related Services</h3>
      </div>
      <ul id="slist">
         {% for service in DATA%}
@@ -162,12 +162,35 @@
    </div>
    <div class='mid-section' style="width:100%;clear:both;">
      <div class="title" style="width:100%;border-bottom:1px solid ;">
-       <h3>Related Items</h3>
        <h4>page [1]</h4>
+       <h3>Related Items</h3>
      </div>
      <ul id="slist">
         {% for info in SIDEDATA%}
-        {{info.data}}
+          {% with info|info as data %}
+          {% with data|hash:"ATTRS" as attrs %}
+          {% with data|hash:"TEXT" as description %}
+              <li style="clear:both;">
+                <div style="float:left">
+                  <a href="/core/service/{{info.service}}/">
+                  <img src="{{attrs|hashout:'icon'}}/?sc=true">
+                  </img></a>
+                </div>
+                <div class="content">
+                  <h3><a href="/core/service/{{info.service}}/">{{attrs|hashout:'name'}}</a>
+                  {% for attr in attrs %}
+                    {{attr}}:<span>{{attrs|hash:attr}}</span>,
+                  {% endfor %}
+                  <span style="float:right">collected in <a href="/core/service/{{info.service}}/">{{info.service}}</a></span>
+                  </h3>
+                  <div style="height:40px;float:left;">
+                   <p>{{description}}</p>
+                  </div>
+                </div>
+             </li>
+          {%endwith%}
+          {%endwith%}
+          {%endwith%}
         {% endfor %}
      </ul>
    </div>
