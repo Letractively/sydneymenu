@@ -1,12 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link rel="stylesheet" href = "/css/{{CSS_ROOT}}/window.css" type="text/css" media="all" charset="utf-8"/>
-</head>
-<body class="window" style="background-color:black;color:white;">
-<div class='map_window_cxt'>
+<div id = 'float-info' class='float-info'>
+  <div class='smap' id='float-info-location'></div>
+  <div class='nest'>
+    <div><span>3</span>
+    <a>Services Nested Here.</a>
+    <div class="switch-on"></div>
+    <div class="switch-off"></div>
+    <div class="switch-off"></div>
+    <div class="switch-off"></div>
+    </div>
+  </div>
+  <div class='msk'></div>
+  <div class='section'>
+   <div class='img'>
+     <div class='img1'>
+     </div>
+   </div>
+   <div class='info-block'>
+   <ul>
+      <li><a class='name'>name</a></li>
+      <li><a class='phone'>phone</a></li>
+      <li><a class='email'>email</a></li>
+      <li><a class='wds'>wds</a></li>
+    </ul>
+   </div>
+   <div style="width:300px;clear:both;">
+    <h3 class='split'>Address:</h3>
+    <div class='info-block'>
+      <div class='address'>Sydney Center</div>
+    </div>
+    <h3 class='split'>Description:</h3>
+    <div class='info-block-scroll'>
+      <div class='div-scroll'>
+      <!-- content -->
+        <div class='description'>Put your description here</div>
+      <!-- end content -->
+        <div class='hscroll'>
+        <div class='cursor'></div>
+      </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  <div class='center' onclick="zoyoe.CloseShortCut()">
+    <img src='/res/close.png' alt='-'></img>
+  </div>
 </div>
-<div>{{DATA.description}}
-</div>
-</body>
-</html>
+
