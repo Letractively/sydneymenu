@@ -166,7 +166,7 @@
         <li class="item" onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Quick Publish</a></li>
         {% if user.is_authenticated %}
         <li class="item"><a href="a">Welcome {{user.username}}</a></li>
-        <li class="item" onclick ="Logout()"rder:none"><a>Logout</a></li>
+        <li class="item" onclick ="zoyoe.admin.Logout()"rder:none"><a>Logout</a></li>
         {% else %}
         <li class="item" onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
         <li class="item" onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
@@ -191,55 +191,6 @@
 </div>
 <div id='raw-bottom' class='raw'>
 </div>
-<div id = 'float-info' class='float-info'>
-  <div class='msk'></div>
-  <div class='left'>
-    <div class='img1'>
-    </div>
-    <div class='img4'>
-    </div>
-    <div class='img3'>
-    </div>
-    <div class='img2'>
-    </div>
-  </div>
-  <div class='section'>
-    <div class='nest'>
-      <div><span>3</span>
-      <a>Services Nested Here.</a>
-      <div class="switch-on"></div>
-      <div class="switch-off"></div>
-      <div class="switch-off"></div>
-      <div class="switch-off"></div>
-      </div>
-    </div>
-    <div class='info-block'>
-    <ul>
-      <li><span class='label'>Service Name:</span><a class='name'>name</a></li>
-      <li><span class='label'>Contact Number:</span><a class='phone'>phone</a></li>
-      <li><span class='label'>Emai Address:</span><a class='email'>email</a></li>
-      <li><span class='label'>Working Days:</span><a class='wds'>wds</a></li>
-    </ul>
-    </div>
-    <h3 class='split'>Address:</h3>
-    <div class='info-block'>
-      <div class='address'>Sydney Center</div>
-    </div>
-    <h3 class='split'>Description:</h3>
-    <div class='info-block-scroll'>
-      <div class='div-scroll'>
-      <!-- content -->
-        <div class='description'>Put your description here</div>
-      <!-- end content -->
-        <div class='hscroll'>
-        <div class='cursor'></div>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class='center' onclick="zoyoe.CloseShortCut()">
-    <img src='/res/close.png' alt='-'></img>
-  </div>
-</div>
+{% include "core/shortcut.html" %}
 </body>
 </html>
