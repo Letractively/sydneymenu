@@ -9,15 +9,19 @@ body, div, iframe {
 #crumbs a:hover {color:black; text-decoration:none;}
 
 body {
-  width:100%;
+width:100%;
+background-color:whiteSmoke;
 }
 #crumbs{
   border-bottom: 1px solid #1b1b1b;
 }
 
 div.page{
-margin:auto;
 width:960px;
+margin:auto;
+}
+div.title{
+height:100px;
 }
 table{
 }

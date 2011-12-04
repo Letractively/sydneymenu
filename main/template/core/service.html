@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+
 
 <!-- Microsoft Bingmap -->
 <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
@@ -44,7 +46,7 @@ function Init(){
   var icon = document.getElementById('icon');
   var gallery = document.getElementById('gallery');
   var news = document.getElementById('news');
-  var preview = document.getElementById('map-preview');
+  var preview = document.getElementById('mappreview');
   InitDrag(document.getElementById('dd-shadow'));
 
   MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
@@ -104,15 +106,27 @@ function Init(){
   </ul>
 </div>
 
-<div class = 'page'>
+<div class='container_16' style="padding:20px;">
   <div id="left-section" class='left-section'>
-  {% include "comp/_comp_list_left.html" %}
+  {% for v in LAYOUT_INFO|hash:'LEFT' %}
+    {% with TEMPLATE|component:v as path %} 
+      {% include path %}
+    {% endwith %}
+  {% endfor %}
   </div><!-- end of left section -->
   <div id="mid-section" class='mid-section'>
-  {% include "comp/_comp_list_mid.html" %}
+  {% for v in LAYOUT_INFO|hash:'MID' %}
+    {% with TEMPLATE|component:v as path %} 
+      {% include path %}
+    {% endwith %}
+  {% endfor %}
   </div><!-- end mid section -->
   <div id="right-section" class='right-section'>
-  {% include "comp/_comp_list_right.html" %}
+  {% for v in LAYOUT_INFO|hash:'RIGHT' %}
+    {% with TEMPLATE|component:v as path %} 
+      {% include path %}
+    {% endwith %}
+  {% endfor %}
   </div><!-- end of right section -->
   <br style="clear:both"/>
 </div>
