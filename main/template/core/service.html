@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/nav.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
-<link rel="stylesheet" href="/css/{{CSS_ROOT}}/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
 
 
@@ -48,17 +48,23 @@ function Init(){
   var news = document.getElementById('news');
   var preview = document.getElementById('mappreview');
   InitDrag(document.getElementById('dd-shadow'));
-
-  MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
-  MarkAsArrangeV(mid,time_table.parentNode,GetTitle(time_table));
-  MarkAsArrangeV(mid,roster.parentNode,GetTitle(roster));
-  MarkAsArrangeV(mid,photos.parentNode,GetTitle(photos));
-  MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
-  MarkAsArrangeV(left,items.parentNode,GetTitle(items));
-  MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
-  MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
-  MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
-  
+  if(false){
+  if(mid){
+    MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
+    MarkAsArrangeV(mid,time_table.parentNode,GetTitle(time_table));
+    MarkAsArrangeV(mid,roster.parentNode,GetTitle(roster));
+    MarkAsArrangeV(mid,photos.parentNode,GetTitle(photos));
+    MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
+  }
+  if(left){
+    MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
+    MarkAsArrangeV(left,items.parentNode,GetTitle(items));
+    MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
+  }
+  if(right){
+    MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
+  }
+  }
   YUI().use('node','io-form',function(Y){
     //zoyoe.InitZoyoe(true,Y);
     zoyoe.InitZoyoe(false,Y);
@@ -87,6 +93,7 @@ function Init(){
       <a>Actions</a>
       <ul class='submenu'>
       {% if HAS_AUTHORITY %}
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Template</a></li>
       <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].SaveLayout()"><a>Save Current Layout</a></li>
       <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
       <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
@@ -106,30 +113,9 @@ function Init(){
   </ul>
 </div>
 
-<div class='container_16' style="padding:20px;">
-  <div id="left-section" class='left-section'>
-  {% for v in LAYOUT_INFO|hash:'LEFT' %}
-    {% with TEMPLATE|component:v as path %} 
-      {% include path %}
-    {% endwith %}
-  {% endfor %}
-  </div><!-- end of left section -->
-  <div id="mid-section" class='mid-section'>
-  {% for v in LAYOUT_INFO|hash:'MID' %}
-    {% with TEMPLATE|component:v as path %} 
-      {% include path %}
-    {% endwith %}
-  {% endfor %}
-  </div><!-- end mid section -->
-  <div id="right-section" class='right-section'>
-  {% for v in LAYOUT_INFO|hash:'RIGHT' %}
-    {% with TEMPLATE|component:v as path %} 
-      {% include path %}
-    {% endwith %}
-  {% endfor %}
-  </div><!-- end of right section -->
-  <br style="clear:both"/>
-</div>
+{% with TEMPLATE|component:"main" as main %} 
+{% include main %}
+{% endwith %}
 
 <div id='zsk' class='msk'>
 </div>
