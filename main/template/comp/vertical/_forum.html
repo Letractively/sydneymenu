@@ -1,0 +1,29 @@
+{% load pybb_tags %}
+{% if ROOT %}
+    <div class='section-container close'>
+{% endif %}
+      <div id='forum' class='section'>
+        <div class='title'>
+          <h3>Forum</h3>
+        </div>
+        <div class='info-block' style="text-align:center">
+          {% if FORUM %}
+          {% pybb_load_last_topics as last_topics with forum = FORUM.id %}
+          {% for topic in last_topics %}
+          <p><a href="{{ topic.get_absolute_url }}">{{ topic }}</a>
+            </br> - {% pybb_time topic.created %}</p>
+          {% endfor %}
+          <p><a style="border:0px solid white;" href = "/forum/forum/{{FORUM.id}}/"> 
+          Enter Forum 
+          </a></p>
+          {% else %}
+          <img src = "/res/forum-icon.png" style="display:block;margin:auto;"></img>
+          <span style = "font-size:16px;font-family:'Arial', Times, serif;font-weight:bold;color:#bbbbbb;">
+          Not Enabled</span>
+          {% endif %}
+        </div>
+        <br style="clear:both"/>
+      </div>
+{% if ROOT %}
+    </div>
+{% endif %}
