@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block pybb_crumbs %}
-<a href="">Начало</a> &raquo;
-<a href="{% url pybb_index %}">Форум</a> &raquo;
+<a href="">SydneyMenu</a> &raquo;
+<a href="{% url pybb_index %}">Forum</a> &raquo;
 <a href="{{ topic.forum.category.get_absolute_url }}">{{ topic.forum.category }}</a> &raquo;
 <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>
 {% endblock %}
