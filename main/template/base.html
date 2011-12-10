@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
     <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
     <title>{% block title %}forum{% endblock %}</title>
 </head>
 <body>
@@ -17,17 +18,18 @@
     <li class='menu'><a href='/search/'>Home</a></li>
   </ul>
 </div>
-<div class = 'page'>
-  <div class='title'>
-    <a href="/map/"><img src="/res/map_logo_5.png" width="236px" height="40px"/></a>
-  </div>
-  <div id="left-section" class='left-section'>
-    <div id="crumbs">
+<div id="crumbs" class='nav-sup'>
         {% block pybb_crumbs %}{% endblock %}
-      <span style="float:right"> &#9668; </span>
-    </div>
+</div>
+<div class = 'page'>
+  <div id="left-section" class='left-section'>
+   {% block sidebar %}{% endblock %}
+  </div>
+  <div id="mid-section" class='mid-section'>
     <div id="content">
         {% block pybb_content %}{% endblock %}
     </div>
+  </div>
+  <div style="clear:both">
 </body>
 </html>
