@@ -138,9 +138,9 @@ div.clip ul li.name{
 }
 div.clip ul li.fade{
   color:gray;
-  margin-bottom:15px;
 }
 div.clip ul li.dscp{
+  margin-top:15px;
   color:gray;
   margin-top:5px;
   word-break:break-all;
