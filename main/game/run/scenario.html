@@ -16,10 +16,14 @@
         src="element.js">
 </script>
 <script type="text/javascript" charset="utf-8"
-        src="test.js">
+        src="instance.js">
+</script>
+<script type="text/javascript" charset="utf-8"
+        src="scenario.js">
 </script>
 </head>
-<body onload = "test()">
+<body onload = "loadScenario()">
+<div class="playground">
 <div id = 'root' class = "env">
 </div>
 <div id = 'panel' class = "panel">
@@ -28,7 +32,8 @@
 <div class= 'energy'>energy * <span class='number'>3</span> </div>
 <div class= 'quest-item'>quest item * <span class='number'>0</span> </div>
 <div class= 'replay'>replay</div>
-<div class= 'menu'>menu</div>
+<div class= 'menu'><a href="menu.html">menu</a></div>
+</div>
 </div>
 </body>
 </html>

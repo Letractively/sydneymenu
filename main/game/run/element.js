@@ -49,6 +49,7 @@ game.actor.bomb = function(){
   img.style.width = "100px";
   img.style.height = "100px";
   var clip = (new zoyoe.game.clip(zoyoe.game.newName(),ele));
+  clip.stop();
   return clip;
 }
 game.actor.main = function(name){
@@ -57,8 +58,81 @@ game.actor.main = function(name){
   ele.style.height = n2px(game.BLOCK_SZ);
   var img = ele.getElementsByTagName("img")[0];
   img.style.position = "relative";
-  img.style.left = "8px";
+  img.style.width = "100px";
+  img.style.left = "0px";
   var clip = (new zoyoe.game.clip(name,ele));
+  clip.appendFrames(160);
+  var mainframe = clip.getFrame(0); 
+  var moveTop = [clip.getFrame(1),clip.getFrame(6),
+    clip.getFrame(11),clip.getFrame(16),clip.getFrame(20)];
+  var moveBottom = [clip.getFrame(21),clip.getFrame(26),
+    clip.getFrame(31),clip.getFrame(36),clip.getFrame(40)];
+  var moveRight = [clip.getFrame(41),clip.getFrame(46),
+    clip.getFrame(51),clip.getFrame(56),clip.getFrame(60)];
+  var moveLeft = [clip.getFrame(61),clip.getFrame(66),
+    clip.getFrame(71),clip.getFrame(76),clip.getFrame(80)];
+ 
+  var top = 1600;
+  for(var i=0;i<4;i++){
+    moveLeft[i].setKeyframe(true);
+    moveLeft[i].tmp = top;
+    moveLeft[i].action = function(){
+      img.style.top = "-"+this.tmp+"px";
+    }
+    top -= 100;
+  }
+  moveLeft[4].action = function(){
+    clip.gotoAndPlay(61);
+  }
+  for(var i=0;i<4;i++){
+    moveRight[i].setKeyframe(true);
+    moveRight[i].tmp = top;
+    moveRight[i].action = function(){
+      img.style.top = "-"+this.tmp+"px";
+    }
+    top -= 100;
+  }
+  moveRight[4].action = function(){
+    clip.gotoAndPlay(41);
+  }
+  for(var i=0;i<4;i++){
+    moveBottom[i].setKeyframe(true);
+    moveBottom[i].tmp = top;
+    moveBottom[i].action = function(){
+      img.style.top = "-"+this.tmp+"px";
+    }
+    top -= 100;
+  }
+  moveBottom[4].action = function(){
+    clip.gotoAndPlay(21);
+  }
+  for(var i=0;i<4;i++){
+    moveTop[i].setKeyframe(true);
+    moveTop[i].tmp = top;
+    moveTop[i].action = function(){
+      img.style.top = "-"+this.tmp+"px";
+    }
+    top -= 100;
+  }
+  moveTop[4].action = function(){
+    clip.gotoAndPlay(1);
+  }
+  clip.stop();
+  clip.towardsTop = function(){
+    clip.gotoAndPlay(1);
+  }
+  clip.towardsRight = function(){
+    clip.gotoAndPlay(41);
+  }
+  clip.towardsLeft = function(){
+    clip.gotoAndPlay(61);
+  }
+  clip.towardsBottom = function(){
+    clip.gotoAndPlay(21);
+  }
+  clip.stand = function(){
+    clip.gotoAndStop(0);
+  }
   return clip;
 }
 game.actor.monster = function(name,para){
