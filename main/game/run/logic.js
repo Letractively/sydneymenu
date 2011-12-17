@@ -55,6 +55,9 @@ zoyoe.game.noopFrame = function(parent,idx){
 	this.keyframe = function (){
 		return iskeyframe;
 	};
+    this.setKeyframe = function(b){
+        isKeyframe = b;
+    };
     this.clips = function(){
         return clips;
     }
@@ -164,31 +167,30 @@ zoyoe.game.clip = function (n,ele,top,left){
 	  }
   };
   this.step = function(){
-    if(status == zoyoe.game.RUN){
-	  var frame = frames[idx];
-	  frame.render(this);
-      var keyframe = this.getPreKey(idx);
-      for(var c in clips){
-        if(keyframe.tracked(clips[c])){
-		  clips[c].step();
-          if(clips[c].element().parentNode == element){
-            /* don know what to do here */
-          }else{
-            element.appendChild(clips[c].element());
-          } 
+	var frame = frames[idx];
+	frame.render(this);
+    var keyframe = this.getPreKey(idx);
+    for(var c in clips){
+      if(keyframe.tracked(clips[c])){
+	 clips[c].step();
+        if(clips[c].element().parentNode == element){
+          /* don know what to do here */
         }else{
-          try {
-            element.removeChild(clips[c].element());
-          }catch(exception) {
-            /* pass silently here */
-          }
+          element.appendChild(clips[c].element());
+        } 
+      }else{
+        try {
+          element.removeChild(clips[c].element());
+        }catch(exception) {
+          /* pass silently here */
         }
       }
-      frame.action();
-      this.render();
+    }
+    frame.action();
+    this.render();
+    if(status == zoyoe.game.RUN){
       this.inc();
     }else{
-      alert(name+" not running");
     }
   };
   this.play = function(){
@@ -197,7 +199,13 @@ zoyoe.game.clip = function (n,ele,top,left){
   this.stop = function(){
     status = zoyoe.game.PAUSE;
   };
-  this.gotoAndPlay = function(){
+  this.gotoAndStop = function(frame_number){
+    idx = frame_number;
+    status = zoyoe.game.PAUSE;
+  };
+  this.gotoAndPlay = function(frame_number){
+    idx = frame_number;
+    status = zoyoe.game.RUN;
     /* not implemented */
   };
   this.insertClip = function(clip){

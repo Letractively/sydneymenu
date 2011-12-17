@@ -6,8 +6,15 @@ body,div{
  select:none;
 }
 body{
-width:1024px;
-height:768px;
+position:absolute;
+height:100%;
+width:100%;
+}
+div.playground{
+width:1020px;
+height:704px;
+border:2px solid gray;
+position:absolute;
 }
 div.env{
   position:absolute;
@@ -57,4 +64,8 @@ div.panel div.bombtouch{
  height:100px;
  background: url('res/actor/bomb.png') top no-repeat;
  background-size: 100px 100px;
+}
+
+div.block-normal {
+ overflow:hidden;
 }

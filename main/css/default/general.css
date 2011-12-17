@@ -10,6 +10,9 @@ margin: 0px;
 padding: 0px;
 border: 0px;
 }
+ul{
+  list-style-type:none;
+}
 #zsk.msk{
   z-index:102;
   display:none;
@@ -468,11 +471,13 @@ height:50px;
 background-color:whiteSmoke;
 border-bottom:1px solid #E5E5E5;
 }
+
 #dialog div.button-lane{
 height:35px;
 margin-top:10px;
 margin-right:10px;
 }
+
 #dialog div.button-lane input{
 float:right;display:block;
 margin:5px;font-size:15px;
@@ -525,4 +530,6 @@ form.xsd-form label{display:block;}
 form.xsd-form label:first-letter {text-transform:uppercase;}
 form.xsd-form textarea{font-size:15px;border:1px solid #959595;width:240px;height:100px;margin-top:5px;}
 
-
+div.foot{
+clear:both;
+}

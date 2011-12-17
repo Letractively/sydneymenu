@@ -8,6 +8,7 @@ from settings import ROOT
 urlpatterns = patterns('',
     (r'^/{0,1}$','main.core.views.Search'),
     (r'^map/','main.core.views.Map'),
+    (r'^mark/','main.core.views.Mark'),
     (r'^log/','main.core.log.index'),
     (r'^search/','main.core.views.Search'),
     (r'^core/', include('main.core.urls')),
