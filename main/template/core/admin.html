@@ -23,6 +23,24 @@
   <script type="text/javascript" src="/js/ui.js"></script>
 
   <script type="text/javascript">
+    zoyoe.maptoggle = 0;
+    function mapToggle(){
+      zoyoe.maptoggle = 1 - zoyoe.maptoggle;
+      YUI().use('node','anim',function(Y){
+        if(zoyoe.maptoggle == 1){
+          var anim = new Y.Anim({
+            node:'#map-lane',
+            to:{height:"380px"},
+            duration:0.2,
+          });
+          anim.run();
+          Y.one('#rslt-block').setStyle('marginTop',"400px");
+        }else{
+          Y.one('#rslt-block').setStyle('marginTop',"120px");
+          Y.one('#map-lane').setStyle('height',"100px");
+        } 
+      });
+    }
     function document_load(){
       YUI().use('node','io-form',function(Y){
        	var zoom = 15;
@@ -50,6 +68,10 @@
           }
         }
         zoyoe.InitZoyoe(false,Y);
+        Y.one('#report-bar').on('click',function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        });
       });
     }
     function sdist(ret_map){
@@ -76,21 +98,21 @@
 {% endblock %}
 
 {% block nav %}
-  <li class='menu'><a href='/search/'>Home</a></li>
-  <li class='menu'><a href='/map/'>Distribution</a></li>
-  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
   {% if user.is_authenticated %}
   <li class='menu' onclick ="Logout()"><a>Logout</a></li>
   {% else %}
   <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
   <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
   {% endif %}
+  <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/mark/'>Recommandations</a></li>
+  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
 {% endblock %}
  
 {% block content %}
-  <div class='mid'>
-   <div class='mid-section'>
-    <div style="float:left;">
+  <div id='map-lane' onclick="mapToggle()">
+    <div class='dense' style="float:left;">
       <div class="map-title">
         <div><img src="/res/pushpin_tiny.png">
        Try our distribution map and sharing your experience with us
@@ -98,7 +120,7 @@
         <div id="map-bot" style="z-index:20;position:relative;top:315px;">
         </div>
       </div>
-      <div id="map-info" style="width:672px;height:300px;z-index:10;">
+      <div id="map-info" style="height:300px;z-index:10;">
       </div>
     </div>
     <div id="report-bar">
@@ -130,71 +152,50 @@
         <div class='window-container'>
           <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
         </div>
-        </form>
-     </div>
-   </div>
-   <div class='mid-section' style="width:100%;clear:both;">
-     <div class="title" style="width:100%;border-bottom:1px solid ;">
-       <h4>page [1]</h4>
-       <h3>Related Services</h3>
-     </div>
-     <ul id="slist">
-        {% for service in DATA%}
-              <li style="clear:both;">
-                <div style="float:left">
-                  <a href="/core/service/{{service.name}}/">
-                  <img src='/core/data/res/{{service.name}}/{{service.icon}}/?sc=true'>
-                  </img></a>
-                </div>
-                <div class="content">
-                  <h3><a href="/core/service/{{service.name}}/">{{service.name}}</a>
-                   (type:<span>{{service.type}}</span>,
-                    phone:<span>{{service.phone}}</span>)
-                    <span style="float:right">{{service.address}}</span>
-                  </h3>
-                   <div style="float:left;">
-                    <p>{{service.description}}</p>
-                   </div>
-                </div>
-             </li>
+      </form>
+    </div>
+  </div>
+  <div id='rslt-block' style="margin-top:120px;">
+   <div class='mid-section' style="clear:both;">
+       {% for service in DATA%}
+          <div class='clip'>
+          <img src="/core/data/res/{{service.name}}/icon/?"></img>
+          <ul>
+          <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
+          <li class='fade'>{{service.email}}</li>
+          <li class='dscp'>{{service.description}}</li>
+          </ul>
+        </div>
         {% endfor %}
-     </ul>
    </div>
-   <div class='mid-section' style="width:100%;clear:both;">
-     <div class="title" style="width:100%;border-bottom:1px solid ;">
-       <h4>page [1]</h4>
-       <h3>Related Items</h3>
-     </div>
-     <ul id="slist">
+   <div class='mid-section' style="clear:both;">
         {% for info in SIDEDATA%}
           {% with info|info as data %}
           {% with data|hash:"ATTRS" as attrs %}
           {% with data|hash:"TEXT" as description %}
-              <li style="clear:both;">
-                <div style="float:left">
-                  <a href="/core/service/{{info.service}}/">
-                  <img src="{{attrs|hashout:'icon'}}/?sc=true">
-                  </img></a>
-                </div>
-                <div class="content">
-                  <h3><a href="/core/service/{{info.service}}/">{{attrs|hashout:'name'}}</a>
-                  {% for attr in attrs %}
-                    {{attr}}:<span>{{attrs|hash:attr}}</span>,
-                  {% endfor %}
-                  <span style="float:right">collected in <a href="/core/service/{{info.service}}/">{{info.service}}</a></span>
-                  </h3>
-                  <div style="height:40px;float:left;">
-                   <p>{{description}}</p>
-                  </div>
-                </div>
-             </li>
+            <div class='clip'>
+              <a href="/core/service/{{info.service}}/">
+               <img src="{{attrs|hashout:'icon'}}/?sc=true">
+               </img>
+              </a>
+              <ul>
+              <li class='name'><a href="/core/service/{{info.service}}/">{{attrs|hashout:'name'}}</a>
+              {% for attr in attrs %}
+                <li class='fade'>{{attr}}:<span>{{attrs|hash:attr}}</span></li>
+              {% endfor %}
+              <li class='fade'>collected in <a href="/core/service/{{info.service}}/">{{info.service}}</a></span></li>
+              <li class='dscp'>{{description}}</li>
+              </ul>
+           </div>
           {%endwith%}
           {%endwith%}
           {%endwith%}
         {% endfor %}
-     </ul>
    </div>
   </div><!-- page -->
+ </div>
+ <div id="search-result">
+ <span class='snum'>0</span> services and items found,<span class='inum'> 0</span> showed. <span class='btn'>show more</span>
  </div>
 {% endblock %}
 
