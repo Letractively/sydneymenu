@@ -5,8 +5,8 @@
 
 {% block css_link %}
   <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
 {% endblock %}
@@ -23,8 +23,12 @@
   <script type="text/javascript" src="/js/ui.js"></script>
 
   <script type="text/javascript">
+   {% if DATA|length == 0 and SIDEDATA|length == 0 %}
+    zoyoe.maptoggle = 1;
+   {% else %}
     zoyoe.maptoggle = 0;
-    function mapToggle(){
+   {% endif %}
+   function mapToggle(){
       zoyoe.maptoggle = 1 - zoyoe.maptoggle;
       YUI().use('node','anim',function(Y){
         if(zoyoe.maptoggle == 1){
@@ -42,7 +46,11 @@
       });
     }
     function document_load(){
-      YUI().use('node','anim','io-form',function(Y){
+      YUI().use('node','event','anim','io-form',function(Y){
+        if(zoyoe.maptoggle == 1){
+          zoyoe.maptoggle = 0;
+          mapToggle();
+        }
        	var zoom = 15;
       	var center = null;
         {% if LOC %}
@@ -67,6 +75,7 @@
             zoyoe.ALERT("Map not loaded");
           }
         }
+        zoyoe.ArrangeClips('services','data')
         zoyoe.InitZoyoe(false,Y);
         Y.one('#report-bar').on('click',function(e){
             e.preventDefault();
@@ -156,8 +165,10 @@
     </div>
   </div>
   <div id='rslt-block' style="margin-top:120px;">
-   <div class='mid-section' style="clear:both;">
-       {% for service in DATA%}
+   <div class='mid-section' id='services' style="clear:both;">
+   </div>
+   <div id='data' class='tmp'>
+       {% for service in DATA %}
           <div class='clip'>
           <img src="/core/data/res/{{service.name}}/icon/?"></img>
           <ul>
@@ -168,7 +179,9 @@
         </div>
         {% endfor %}
    </div>
-   <div class='mid-section' style="clear:both;">
+   <div class='mid-section' id = "items" style="clear:both;">
+   </div>
+   <div id = 'sidedata' class='tmp'>
         {% for info in SIDEDATA%}
           {% with info|info as data %}
           {% with data|hash:"ATTRS" as attrs %}
@@ -194,9 +207,15 @@
    </div>
   </div><!-- page -->
  </div>
+ {% if DATA|length == 0 and SIDEDATA|length == 0 %}
+   <div id="research-hint">
+   No Results Found, Try Our Recommendations Or Distribution Map ?
+   </div>
+ {% else %}
  <div id="search-result">
- <span class='snum'>0</span> services and items found,<span class='inum'> 0</span> showed. <span class='btn'>show more</span>
+ <span class='snum'>{{DATA|length}}</span> services and <span class='snum'>{{SIDEDATA|length}}</span> items found,<span class='inum'> 0</span> showed. <span class='btn'>show more</span>
  </div>
+ {% endif %}
 {% endblock %}
 
 {% block tail %}

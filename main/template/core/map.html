@@ -163,6 +163,7 @@
       <ul class="menu">
         <!-- <li><a onclick="ShowFilter">Filter</a></li>-->
         <li class="item"><a href="/forum/">Forum</a></li>
+        <li class="item"><a href="/mark/">Recommandations</a></li>
         <li class="item" onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Quick Publish</a></li>
         {% if user.is_authenticated %}
         <li class="item"><a href="a">Welcome {{user.username}}</a></li>
@@ -171,9 +172,6 @@
         <li class="item" onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
         <li class="item" onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
         {% endif %}
-      </ul>
-      <ul class="menu" >
-        <li class="item"><a href="javascript:zoyoe.map.ResetData()">Reset</a></li>
       </ul>
       <ul class="menu" id="about-us">
         <li class="item"><a href="a">About Us</a></li>

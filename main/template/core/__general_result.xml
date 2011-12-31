@@ -6,13 +6,13 @@
   </ERROR>
   {% endfor %}
   <HTMLMSG>
-  {{MSG}}
+  {{MSG|safe}}
   </HTMLMSG>
 </FAIL>
 {% else %}
 <SUCC timestamp='{{TIME_STAMP}}'>
   <HTMLMSG>
-  {{MSG}}
+  {{MSG|safe}}
   </HTMLMSG>
 </SUCC>
 {% endif %}
