@@ -5,9 +5,9 @@
 <head>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/service.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/nav.css" type="text/css" media="all" charset="utf-8"/>
-<link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
 
 
@@ -65,7 +65,7 @@ function Init(){
     MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
   }
   }
-  YUI().use('node','io-form',function(Y){
+  YUI().use('node','io-form','event',function(Y){
     //zoyoe.InitZoyoe(true,Y);
     zoyoe.InitZoyoe(false,Y);
     zoyoe.service_name = '{{SERVICE.name}}';

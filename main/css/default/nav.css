@@ -114,14 +114,18 @@ div.nav ul.submenu li:hover a{
  color:white;
 }
 
+
+div.vlane{
+width:220px;
+margin:0px 0px 0px 20px;
+float:left;
+}
 div.clip{
 background:white url("/res/clipbtm.png") no-repeat 0 100%;
 padding-bottom:5px!important;
 min-height:200px;
 overflow:hidden;
-width:220px;
-float:left;
-margin:0px 0 20px 20px;
+margin:0px 0 20px 0px;
 }
 
 div.clip img{

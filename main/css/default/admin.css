@@ -14,7 +14,6 @@ body{
 #page {
   width:100%;
   margin:auto;
-  min-height:800px;
 }
 
 #page div.mid {
@@ -253,3 +252,12 @@ float:right;
   float:right;
   cursor:pointer;
 }
+#research-hint {
+  width:600px;
+  margin:auto;
+  background-color:steelblue;
+  color:white;
+  padding:10px 20px 10px 20px;
+  border:1px solid whiteSmoke;
+}
+
