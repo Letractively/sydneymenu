@@ -42,7 +42,7 @@ function Init(){
   var time_table = document.getElementById('timetable');
   var roster = document.getElementById('roster');
   var photos = document.getElementById('photoplayer');
-  var items = document.getElementById('items');
+  var item = document.getElementById('item');
   var icon = document.getElementById('icon');
   var gallery = document.getElementById('gallery');
   var news = document.getElementById('news');
@@ -58,7 +58,7 @@ function Init(){
   }
   if(left){
     MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
-    MarkAsArrangeV(left,items.parentNode,GetTitle(items));
+    MarkAsArrangeV(left,item.parentNode,GetTitle(item));
     MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
   }
   if(right){
@@ -88,6 +88,9 @@ function Init(){
 <body onload='Init()'>
 <div class='nav'>
   <ul>
+  <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/mark/'>Recommandations</a></li>
     {% if user.is_authenticated %}
     <li class='menu' style="width:60px;">
       <a>Actions</a>
@@ -98,19 +101,16 @@ function Init(){
       <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
       <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
       <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
       {% endif %}
       <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
       </ul>
       </a>
     </li>
-    <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
     {% else %}
     <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
     <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
     {% endif %}
-    <li class='menu'><a href='/search/'>Home</a></li>
-    <li class='menu'><a href='/map/'>Distribution</a></li>
-    <li class='menu'><a href='/mark/'>Recommandations</a></li>
   </ul>
 </div>
 

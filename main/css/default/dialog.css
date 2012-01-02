@@ -39,22 +39,20 @@ border:1px solid #959595;
 #form-addroster #name{float:left;margin-left:20px;}
 
 .input-fine {display:none;}
-#form-addgirl {padding:0px;margin:0px;}
-#form-addgirl {font-size:12px;}
-#form-addgirl input{border:1px solid #959595;}
-#form-addgirl > div{padding:0px;margin:0 0 0 0;display:block;}
-#form-addgirl textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;}
-#form-addgirl p {margin-left:20px;}
-#form-addgirl p input{margin-top:5px;width:340px;display:block;font-size:15px;}
-#form-addgirl #icon-view{width:125px;height:125px;float:left;border:1px solid #757575; overflow:hidden;}
-#form-addgirl #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
-#form-addgirl #icon {clear:both;margin:5px 10px 15px 20px;}
-#form-addgirl #icon input{display:block;width:340px;font-size:15px;margin-top:5px;}
-#form-addgirl div.right{float:right;margin-top:10px;width:210px;border-left:1px solid gray;}
-#form-addgirl div.left{float:left;width:120px;margin-top:15px;padding:15px 5px 5px 25px;}
-#form-addgirl div.right div{margin: 0 0 5px 25px;}
-#form-addgirl div.right div input{display:block;width:155px;font-size:15px;margin-top:5px;}
-#form-addgirl #description {clear:both;margin:5px 10px 5px 20px;}
+#form-mdy-icon {padding:0px;margin:0px;}
+#form-mdy-icon {font-size:12px;}
+#form-mdy-icon input{border:1px solid #959595;height:26px}
+#form-mdy-icon > div{padding:0px;margin:0 0 0 0;display:block;}
+#form-mdy-icon textarea{margin:5px 0 0 0;width:340px;height:200px;font-size:14px;border:1px solid #959595;}
+#form-mdy-icon p {margin-left:20px;}
+#form-mdy-icon p input{margin-top:5px;width:340px;display:block;font-size:14px;}
+#form-mdy-icon #icon-view{width:125px;height:125px;float:left;border:1px solid #757575; overflow:hidden;}
+#form-mdy-icon #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
+#form-mdy-icon div.right{float:right;margin-top:20px;width:210px;border-left:1px solid gray;}
+#form-mdy-icon div.left{float:left;width:120px;margin-top:15px;padding:15px 5px 5px 25px;}
+#form-mdy-icon div.right > div{margin: 0 0 5px 25px;}
+#form-mdy-icon div.right div input{display:block;width:155px;font-size:14px;margin-top:5px;}
+#form-mdy-icon #description {clear:both;margin:20px 10px 5px 20px;}
 
 
 #form-addservice {padding:0px;margin:0px;}
