@@ -346,15 +346,15 @@ margin-bottom:30px;
   margin:auto;
 }
 
-#items ul{
+#item ul{
   height:80px;
   clear:both;
 }
-#items ul li{
+#item ul li{
   height:24px;
 }
 
-#items ul div.icon{
+#item ul div.icon{
   float:left;
   height:60px;
   width:60px;
