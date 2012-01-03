@@ -1,0 +1,36 @@
+{% load comp_filters %}
+<form id='form-mdy-icon' action="">
+   <div class="left">
+      <div id='icon-view'>
+      <img src='/res/dft_icon.png'></img>
+      </div>
+   </div>
+   <div class="right">
+      <div id="name">
+        <label for='name'>Name:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='name' value='{{REQUEST.name}}'/>
+      </div>
+      <div id='icon'>
+      <label for='icon'>Icon Path in Gallery:</label>
+       {{"icon"|dictionary|style:"width:160px;padding-top:5px;"|addfield:GALLERY|render|safe}}
+      </div>
+      <div id="size">
+        <label for='size'>Size:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='size' value='default'/>
+      </div>
+   </div>
+   <div id='description'>
+     <label for="description">Description:</label>
+     <span class='input-fine'>
+     &#9746
+     </span>
+     <textarea name='description'></textarea>
+   </div>
+   <br style="clear:both"/>
+</form>
