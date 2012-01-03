@@ -3,7 +3,7 @@
 {% if ROOT %}
     <div class='section-container open'>
 {% endif %}
-      <div class='section' id="items">
+      <div class='section' id="item">
         <div class='title'>
            <h3>Menu</h3>
         </div>
@@ -15,7 +15,7 @@
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['item'].ShowModifyDialog()">modify</a></h3>
+        <h3><a onclick="zoyoe.comps['item'].ShowModifyDialog('item')">modify</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}
