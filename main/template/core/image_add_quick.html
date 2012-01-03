@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"-->
+<html>
+<head>
+<style type="text/css">
+body,div{
+padding:0px;
+margin:0px;
+}
+body{
+width:100%;
+overflow:hidden;
+}
+div.hform{
+padding-top:10px;
+padding-bottom:10px;
+}
+div.left{
+  float:left;
+  width:120px;
+  padding-top:30px;
+  padding-right:10px;
+  padding-left:10px;
+  padding-bottom:30px;
+}
+div.img-container{
+  border:1px solid #cccccc;
+  width:100px;
+  height:100px;
+  margin:auto;
+}
+div.img-container img{
+  height:100px;
+  width:100px;
+}
+div.right{
+  border-left:1px solid #cccccc;
+  float:left;
+  padding:0 0 15px 15px;
+  font-family:arial, helvetica, sans-serif;
+  font-size:14px;
+}
+input.file{
+display:block;
+margin:10px 0 10px 0;
+border:0px;
+}
+div.res-name{
+height:15px;
+margin:10px 0 10px 0;
+border:1px solid #cccccc;
+font-size:14px;
+display:block;
+width:200px;
+padding:4px;
+color:green;
+}
+div.progress-bar{
+margin:10px 0 10px 0;
+width:148px;
+float:left;
+}
+h2{
+padding:2px 5px 2px 5px;
+margin:10px 0 0 0;
+font-size:20px;
+font-weight:400;
+clear:both;
+}
+h2.ready{
+  color:white;
+  background-color:green;
+}
+h2.progress{
+  color:white;
+  background-color:#990000;
+}
+div.progress{
+  height:100%;
+  width:0%;
+  background-color:#0066cc;
+}
+div.progress-block{
+border:1px solid #0066cc;
+margin-left:2px;
+height:21px;
+width:6px;
+display:block;
+float:left;
+}
+h2.not-ready{
+  color:white;
+  background-color:gray;
+}
+h2 span{
+float:right;
+margin:4px 0 0 0;
+font-size:14px;
+}
+div.file-input{
+width:138px;
+height:13px;
+margin:10px 0 10px 0;
+border:1px solid #cccccc;
+float:left;
+font-size:14px;
+padding:5px;
+color:green;
+overflow:hidden;
+}
+div.upload-flash{
+margin:10px 0 10px 0;
+width:60px;
+float:left;
+position:relative;
+top:-1px;
+}
+div.button{
+margin:10px 0 10px 0;
+width:60px;
+height:20px;
+float:left;
+position:relative;
+background-color:#0066cc;
+color:white;
+font-weight:600;
+font-size:14px;
+text-align:center;
+padding:3px 0 0 0;
+font-family:times,sans-serif;
+}
+
+a.ready-to-confirm{
+  font-weight:800px;
+  color:white;
+  text-transform:uppercase;
+}
+
+</style>
+<script type="text/javascript">
+  function commit(){
+    return false;/*document.forms['hform'].submit();*/
+  }
+</script>
+<script type="text/javascript" charset="utf-8" src='/js/flash.js'></script>
+<script type='text/javascript'>
+   function Upload(){
+     var uploader = getFComp('uploader');
+     //alert(uploader);
+     uploader.UploadFile();
+   }
+   function OpenHandler(){
+     //alert('File Open');
+   }
+   function SelectHandler(name){
+     var uploader = getFComp('uploader');
+     //alert (uploader.Status());
+     document.getElementById('file-input').innerHTML = name;
+     document.getElementById('s2').className = 'ready';
+     document.getElementById('s3').className = 'progress';
+   }
+   function ProgressHandler(cur,total){
+     var blocks = document.getElementById('progress').getElementsByTagName('DIV');
+     for(var i=0;i<(14*cur/total)&&i<14;i++){
+        blocks[i].style.backgroundColor = "#0066cc";
+     }
+   }
+   function CompleteHandler(data){
+     document.getElementById('s3').className = 'ready';
+     document.getElementById('s4').className = 'progress';
+     document.getElementById('img-container').innerHTML = "<img src='/core/imagecache/{{SERVICE}}/data'></img>"
+     document.zoyoe = {dialog:'complete'}
+   }
+   function ErrorHandler(){
+     alert('error');
+   }
+   function InitUploader(){
+     SetUploader("{{SERVICE}}");
+   }
+   </script>
+</head>
+<body>
+<div class='hform'>
+  <div class='left'>
+    <div id='img-container' class='img-container'>
+    </div>
+  </div>
+  <div class='right'>
+    <h2 id='s2' class='progress'>Step 1:<span>Choose Source File</h2>
+    <div class='file-input' id='file-input'></div>
+    <div class='upload-flash' id="upload-flash">
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="60" height="25" id='ie_uploader'>
+        <param name="movie" value="/res/main.swf" />
+        <param name="FlashVars" value="RequestUri=192.168.1.6"/>
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#869ca7" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <embed src="/res/main.swf" quality="high" bgcolor="#869ca7" id="uploader"
+             width="60" height="25" name="uploader" align="middle"
+             play="true" loop="false" quality="high" allowScriptAccess="sameDomain"
+             type="application/x-shockwave-flash" FlashVars="RequestUri=abc" 
+             pluginspage="http://www.macromedia.com/go/getflashplayer">
+        </embed>
+     </object>
+    </div>
+    <h2 id='s3' class='not-ready'>Step 2:<span>Upload and Preview</h2>
+    <div id='progress' class='progress-bar'>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+    </div>
+    <div class='button' onclick='Upload()'>upload</div>
+    <h2 id='s4' class='not-ready'>Step 3:<span><a id='confirm'>Press 'OK' to confirm</a></span></h2>
+    <div></div>
+  </div>
+  <br style="clear:both"></br>
+</div>
+</body>
+</html>

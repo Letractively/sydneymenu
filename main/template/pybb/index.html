@@ -1,0 +1,14 @@
+{% extends 'pybb/base.html' %}
+
+{% block pybb_title %}SydneyMenu{% endblock %}
+
+{% block pybb_crumbs %}
+<a href="/">SydneyMenu</a> &raquo;
+<a href="{% url pybb_index %}">Category</a>
+{% endblock %}
+
+{% block pybb_content %}
+<ul class="category-list">
+    {% for category in cats %}{% include "pybb/_category_row.html" %}{% endfor %}
+</ul>
+{% endblock %}

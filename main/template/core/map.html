@@ -1,0 +1,194 @@
+{% load comp_filters %}
+{% load hash_filters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Food Distribution 133:99700a65a126</title>
+  <META name="description" content="Sydney Adult Services Distribution"></META>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/map.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+
+  <!-- YUI Components --> 
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <!-- need finally make a new js file contain all the info manage script -->	
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <script type="text/javascript" src="/js/histogram.js"></script>
+  <!-- Project Components -->
+
+  <script type="text/javascript" src="/js/ui.js"></script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/surburb.js"></script>
+  <script type="text/javascript" src="/js/home.js"></script>
+
+
+<!-- FIX ME:Do not put craps here -->
+  <style type="text/css">
+    .map-icon {
+      opacity:0.9;
+      font-size:12px;
+      width:30px;height:30px;
+      padding-top:7px;
+      text-align:center;
+      color:white;
+      background:url('/js/res/pushpin.png') no-repeat
+    }
+    .map-icon-inactive {
+      opacity:0.7;
+      font-size:12px;
+      width:30px;
+      height:30px;
+      padding-top:7px;
+      text-align:center;
+      color:white;
+      background:url('/js/res/pushpin_inactive.png') no-repeat
+    }
+  </style>
+</head>
+
+<body onload = "document_load();">
+<div id="map-info" style="z-index:10;position:fixed;top:35px;left:0px;
+  bottom:0px;right:235px;">
+</div>
+<div id='right-bar'>
+</div>
+<div id='right-bar-dock'>
+  <div class='div-scroll'>
+    <div><!-- content -->
+    <div class="lane">
+     <div class="icon"></div>
+    </div>
+    <h5>Local Restaurants</h5>
+    <div class="split"></div>
+    <div class="icons"></div>
+    <h5>recent activity</h5>
+    <div class="split"></div>
+    <div class="news">
+    {% for v in HIST %}
+      <div>{{v.time}}:</br>
+      {{v|hs_explain}}</div>
+    {% endfor %}
+    </div>
+    </div><!-- end content -->
+    <div class='hscroll'>
+    <div class='cursor'></div>
+    </div>
+  </div>
+</div>
+
+<div id="report-bar">
+  <form name="form-report">
+  <div class="head">
+  <h5>Sharing Your Experience:</h5>
+  </div>
+  <div class='window-container'>
+  <label>OF:</label>
+    {% select %}
+    {"name":"type",
+     "style":"width:240px;float:left;margin-bottom:2px;",
+     "fields":["Breakfast","Lunch","Dinnner"],
+     "default":"Breakfast"}
+    {% endselect %}
+  </div>
+  <div class='window-container'>
+  <label>IN(restaurant name):</label>
+  <input class="normal" type="textfield" name="name"></input>
+  </div>
+  <div class='window-container'>
+  <label>AT(address):</label>
+  {{"address"|auto_complete|style:"width:240px;height:30px;float:left;margin-bottom:2px;"|render|safe}}
+  </div>
+  <div class='window-container'>
+  <label>FOR(what food you've ordered):</label>
+  <input class="normal" type="textfield" name="item"></input>
+  </div>
+  <div class='window-container'>
+  <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
+  </div>
+  </form>
+</div>
+ 
+<div id="title-bar">
+  <div class="section" id="page">
+    <div class="nav">
+      <div class="brand">
+        <a href="/search/"><img src="/res/design_required.png" width="153px" height="26px"/></a>
+      </div>
+     <ul class="config-menu">
+        <li><img src="/res/setting.png"></img>
+        <div id="config-bar">
+        <div class='window-container'>
+          <div id='type-select'>
+            <div class='vbar'>
+              <span>Category:</span>
+              <a class='selected'><span></span>Report</a><a class='selected'><span></span>Shop</a>
+            </div>
+            </div><!-- group the buttons -->
+            <div class='vbar' id='sort-select'>
+              <span> Sort By:</span>
+              <a><span></span>Rating</a><a class='selected'><span></span>Active</a>
+            </div>
+            <div class='vbar' id='history-select'>
+              <span> History:</span>
+              <a><span></span>Recent</a><a class='selected'><span></span>Today</a>
+            </div>
+            <div class='vbar' id='gallery-select'>
+              <span> Gallery:</span>
+              <a><span></span>Global</a><a class='selected'><span></span>Local</a>
+            </div>
+          </div>
+        <div class='window-container'>
+          <div class='vbar'><span> Working Days:</span></div>
+          <div class='vbar2' id='working-days'>
+            <a class='selected'><span></span>Mon</a>
+            <a class='selected'><span></span>Tue</a>
+            <a class='selected'><span></span>Wed</a>
+            <a class='selected'><span></span>Thu</a>
+            <a class='selected'><span></span>Fri</a>
+            <a class='selected'><span></span>Sat</a>
+            <a class='selected'><span></span>Sun</a>
+           </div>
+          <br style="clear:both"></br>
+        </div>
+       </div>
+      </li>
+      </ul>
+      <ul class="menu">
+        <!-- <li><a onclick="ShowFilter">Filter</a></li>-->
+        <li class="item"><a href="/forum/">Forum</a></li>
+        <li class="item"><a href="/mark/">Recommandations</a></li>
+        <li class="item" onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Quick Publish</a></li>
+        {% if user.is_authenticated %}
+        <li class="item"><a href="a">Welcome {{user.username}}</a></li>
+        <li class="item" onclick ="zoyoe.admin.Logout()"rder:none"><a>Logout</a></li>
+        {% else %}
+        <li class="item" onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+        <li class="item" onclick ="zoyoe.admin.ShowRegisterDialog()" style="border:none"><a>Register</a></li>
+        {% endif %}
+      </ul>
+      <ul class="menu" id="about-us">
+        <li class="item"><a href="a">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id='zsk' class='msk'>
+</div>
+<div id='raw-left' class='raw'>
+</div>
+<div id='raw-right' class='raw'>
+</div>
+<div id='raw-top' class='raw'>
+</div>
+<div id='raw-bottom' class='raw'>
+</div>
+{% include "core/shortcut.html" %}
+</body>
+</html>

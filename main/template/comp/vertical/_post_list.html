@@ -1,0 +1,28 @@
+{% load comp_filters %}
+{% if ROOT %}
+    <div class='section-container'>
+{% endif %}
+      <div id='post_list' class='section'>
+        <div class='title'>
+          <h3>Forum Topics:</h3>
+        </div>
+        </br>
+        {% for n,v in POST_INFO.iteritems %}
+          <h3 class='split'>{{v}}:
+            <span class='label' onclick="zoyoe.comps['POST'].Select('{{n}}',this)">
+            {{n}}</span>
+          </h3>
+          <div class='info-block'>
+          {{n|post:SERVICE.name|safe}}
+          </div>
+        {% endfor %}
+      </div>
+{% if HAS_AUTHORITY %}
+      <div class='tail'>
+        <h3><a onclick="zoyoe.comps['POST'].DelPost()">del</a></h3>
+      </div>
+{% endif %}
+{% if ROOT %}
+    </div>
+{% endif %}
+

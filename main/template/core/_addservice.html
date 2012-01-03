@@ -1,0 +1,76 @@
+{% load comp_filters %}
+    <form id='form-addservice' action="">
+      <div id='icon-view'>
+        <img id='icon-cover' src='/res/dft_icon.png'></img>
+      </div>
+      <div id='misc'>
+        <label for"type">Type:</label>
+        {% select %}
+        {"style":"width:140px;float:right;",
+         "fields":["FastFood","Cafe","Vegetarian","Normal"],
+         "default":"FastFood",
+         "name":"type"}
+        {% endselect %}
+        <label for"price">Price:</label>
+        {% select %}
+        {"name":"price",
+        "style":"width:140px;float:right;",
+        "fields":["10-20","20-40","40-160"],
+        "default":"10-20"}
+        {% endselect %}
+      </div>
+      <div id='icon'>
+        <input type='textfield' name='icon' value='icon'/> 
+      </div>
+      <p id='email'>
+        <label for="email">Email:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='email' value='{{REQUEST.email}}'/> 
+      </p>
+      <div id="name">
+        <label for='name'>Service Name:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='name' value='{{REQUEST.name}}'/>
+      </div>
+      <div id="phone">
+        <label for='phone'>Phone:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
+      </div>
+      <p id='address'>
+        <label for="address">Address:</label>
+        <span class='input-fine'>
+          &#9746
+        </span>
+        <input type='textfield' name='address' id='address-input' value='{{REQUEST.phone}}'/>
+      </p>
+      <div id='description'>
+        <label for="description">Description:</label>
+        <span class='input-fine'>
+        &#9746
+        </span>
+        <textarea name='description' value='{{REQUEST.phone}}'></textarea>
+      </div>
+      <div id='days'>
+        <a>Working Days:</a></br>
+          <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
+          <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
+          <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
+          <input type = checkbox name='Thu' value = 'Thu'>Thu.</input>
+          <input type = checkbox name='Fri' value = 'Fri'>Fri.</input>
+          <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
+          <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
+      </div>
+      <p id='grade'>
+        <input type='textfield' name='grade' value='1'/>
+      </p>
+      <p id='privilege'>
+        <input type='textfield' name='privilege' value='normal'/>
+      </p>
+    </form>

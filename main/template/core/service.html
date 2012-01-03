@@ -1,0 +1,142 @@
+{% load hash_filters %}
+{% load comp_filters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmln = "http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" href="/css/{{CSS_ROOT}}/service.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/{{CSS_ROOT}}/nav.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+
+
+<!-- Microsoft Bingmap -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+<!-- YUI Components --> 
+<script type="text/javascript" charset="utf-8"
+        src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+</script>
+<script type="text/javascript" src="/js/histogram.js"></script>
+<script type="text/javascript" src="/js/comps.js"></script>
+<script type="text/javascript" src="/js/ui.js"></script>
+<script type="text/javascript" src="/js/dialog.js"></script>
+<script type="text/javascript" src="/js/ele.js"></script>
+
+<script type="text/javascript">
+function GetTitle(obj){
+  var ns = obj.getElementsByTagName('div');
+  for(var i=0;i<ns.length;i++){
+    if(ns[i].className == 'title'){
+      return ns[i].getElementsByTagName('h3')[0];
+    }
+  }
+  return null;
+}
+function Init(){
+  var mid = document.getElementById('mid-section');
+  var left = document.getElementById('left-section');
+  var right = document.getElementById('right-section');
+  var basic_info = document.getElementById('info');
+  var time_table = document.getElementById('timetable');
+  var roster = document.getElementById('roster');
+  var photos = document.getElementById('photoplayer');
+  var items = document.getElementById('items');
+  var icon = document.getElementById('icon');
+  var gallery = document.getElementById('gallery');
+  var news = document.getElementById('news');
+  var preview = document.getElementById('mappreview');
+  InitDrag(document.getElementById('dd-shadow'));
+  if(false){
+  if(mid){
+    MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
+    MarkAsArrangeV(mid,time_table.parentNode,GetTitle(time_table));
+    MarkAsArrangeV(mid,roster.parentNode,GetTitle(roster));
+    MarkAsArrangeV(mid,photos.parentNode,GetTitle(photos));
+    MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
+  }
+  if(left){
+    MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
+    MarkAsArrangeV(left,items.parentNode,GetTitle(items));
+    MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
+  }
+  if(right){
+    MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
+  }
+  }
+  YUI().use('node','io-form','event',function(Y){
+    //zoyoe.InitZoyoe(true,Y);
+    zoyoe.InitZoyoe(false,Y);
+    zoyoe.service_name = '{{SERVICE.name}}';
+    zoyoe.comps['item'] = InitItems(zoyoe,'item');
+    zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
+    zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
+    zoyoe.comps['LAYOUT'] = InitLayout(zoyoe);
+    zoyoe.comps['ICON'] = InitIcon(zoyoe);
+    zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
+    zoyoe.comps['timetable'] = InitItems(zoyoe,'timetable');
+//    zoyoe.comps['preview'] = InitPreview(zoyoe,'preview');
+    zoyoe.admin = InitAdmin(zoyoe);
+    if(zoyoe.ElementExtension){
+      zoyoe.ElementExtension.BuildExtensionElements();
+    }
+  });
+}
+</script>
+</head>
+<body onload='Init()'>
+<div class='nav'>
+  <ul>
+    {% if user.is_authenticated %}
+    <li class='menu' style="width:60px;">
+      <a>Actions</a>
+      <ul class='submenu'>
+      {% if HAS_AUTHORITY %}
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Template</a></li>
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].SaveLayout()"><a>Save Current Layout</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
+      {% endif %}
+      <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
+      </ul>
+      </a>
+    </li>
+    <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+    {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+    {% endif %}
+    <li class='menu'><a href='/search/'>Home</a></li>
+    <li class='menu'><a href='/map/'>Distribution</a></li>
+    <li class='menu'><a href='/mark/'>Recommandations</a></li>
+  </ul>
+</div>
+
+{% with TEMPLATE|component:"main" as main %} 
+{% include main %}
+{% endwith %}
+
+<div id='zsk' class='msk'>
+</div>
+<div id = 'panel'>
+  <div class='panel'>
+    <div class='panel-hint'>
+    </div>
+    <div class='panel-content'>
+    </div>
+    <div class='panel-left'>
+    </div>
+    <div class='button-lane'>
+    </div>
+  </div>
+</div>
+<div id='dd-container' style="z-index:99;opacity:0.8;position:absolute;black;display:none;">
+</div>
+<div id='dd-shadow' class='section-container' style="position:absolute;border:1px dashed gray;display:none;">
+</div>
+<br style="clear:both"/>
+<form name='reload' url='/core/service/{{SERVICE.name}}/'></form>
+</body>
+</html>

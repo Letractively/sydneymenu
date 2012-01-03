@@ -1,0 +1,154 @@
+.nav-sup {
+  background-color:whiteSmoke;
+  padding: 40px 20px 15px 20px;
+  border-bottom:1px solid white;
+  border-top:1px solid #EAEAEA;
+  font-size:16px;
+  font-family:Comic Sans MS, sans, Serif;
+}
+
+.nav {
+  width:100%;
+  height:30px;
+  background-color:steelblue;
+  text-align:center;
+}
+
+.nav ul {
+  display:block;
+  margin:auto;
+  list-style-type:none; 
+  color:white;
+  font-family:Arial;
+  font-size:15px; 
+  font-weight:100;
+  color:white;
+  padding-left:10px;
+}
+
+.nav > ul > li {
+  display:block;
+  height:20px;
+  float:left;
+  margin: 2px 0 0 0px;
+  padding:4px 10px 4px 10px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.nav ul li a{
+  text-decoration:none;
+  font-weight:100;
+  padding:4px
+}
+
+.nav ul li:hover {
+  background-color:ghostwhite;
+}
+.nav ul li a{
+  color:white;
+}
+.nav ul li:hover a{
+  color:steelblue;
+}
+
+.nav ul li:hover a:visited {
+  color:steelblue;
+}
+
+.nav ul li:hover a:active {
+  color:steelblue;
+}
+.nav ul li:hover a:link {
+  color:steelblue;
+}
+
+.nav div.title img {padding:6px 3px 3px 3px;border:none;}
+.nav div.title a {text-decoration:none;border:none;}
+
+.nav ul li.menu{
+  display:block;
+  height:20px;
+  cursor:pointer;
+  overflow:show;
+}
+.nav ul li.menu:hover .submenu{
+  display:block;
+}
+
+div.nav ul.submenu:hover {
+  display:block;
+}
+
+div.nav ul.submenu{
+  display:none;
+  color:steelblue;
+  width:250px;
+  background-color:ghostwhite;
+  position:relative;
+  top:5px;
+  left:-10px;
+  clear:both;
+  float:left;
+  border-top:2px solid steelblue;
+  border-bottom:1px solid steelblue;
+  border-left:1px solid steelblue;
+  border-right:1px solid steelblue;
+  padding:0px 0px 5px 0px;
+}
+div.nav ul.submenu li{
+ display:block;
+ clear:both;
+ color:steelblue;
+ padding:2px 2px 4px 10px;
+ text-align:left;
+}
+div.nav ul.submenu li a{
+ color:steelblue;
+}
+div.nav ul.submenu li:hover {
+ color:white;
+ background-color:steelblue;
+}
+div.nav ul.submenu li:hover a{
+ color:white;
+}
+
+
+div.vlane{
+width:220px;
+margin:0px 0px 0px 20px;
+float:left;
+}
+div.clip{
+background:white url("/res/clipbtm.png") no-repeat 0 100%;
+padding-bottom:5px!important;
+min-height:200px;
+overflow:hidden;
+margin:0px 0 20px 0px;
+}
+
+div.clip img{
+  width:200px;
+  margin:9px;
+  border:1px solid whiteSmoke;
+}
+
+div.clip ul{
+  padding:5px 15px 15px 15px;
+  font:14px arial,sans-serif
+}
+
+div.clip ul li.name{
+}
+div.clip ul li.fade{
+  color:gray;
+}
+div.clip ul li.dscp{
+  margin-top:15px;
+  color:gray;
+  margin-top:5px;
+  word-break:break-all;
+  max-height:220px;
+  overflow:hidden;
+}

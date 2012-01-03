@@ -1,0 +1,397 @@
+{% load comp_filters %}
+<!DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--DOCTYPE html PUBLIC "-//W2C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"-->
+<html>
+<head>
+<style type="text/css">
+body,div{
+padding:0px;
+margin:0px;
+}
+body{
+width:100%;
+}
+div.hform{
+padding-top:10px;
+padding-bottom:10px;
+min-width:530px;
+}
+div.left{
+  float:left;
+  width:180px;
+  padding-top:30px;
+  padding-right:10px;
+  padding-left:10px;
+  padding-bottom:30px;
+}
+div.img-crunch{
+  border:1px solid #cccccc;
+  width:160px;
+  height:160px;
+  overflow:hidden;
+  margin:auto;
+}
+div.img-crunch img{
+  position:relative;
+}
+div.img-container{
+  text-align:center;
+  position:absolute;
+  clear:both;
+  top:345px;
+  left:20px;
+  width:505px;
+  border:1px solid #cccccc;
+  background-color: whiteSmoke;
+}
+div.select{
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0px;
+  left:0px;
+  display:none;
+}
+div.select div.select-area{
+  border:1px dashed white;
+  position:absolute;
+}
+div.select div.corner{
+  width:10px;
+  height:10px;
+  background-color:white;
+  position:absolute;
+  top:-100px;
+  left:-100px;
+  z-index:10; 
+}
+div.img-container img{
+  max-width:505px;
+}
+div.img-container img.flip-both{
+    -moz-transform: scale(-1,-1);
+    -o-transform: scale(-1,-1);
+    -webkit-transform: scale(-1,-1);
+    -ms-transform:scale(-1,-1); 
+    transform: scale(-1,-1);
+}
+div.img-container img.flip-vertical{
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    -ms-transform:scaleY(-1); 
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+div.img-container img.flip-horizontal{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+div.right{
+  border-left:1px solid #cccccc;
+  float:left;
+  padding:0 0 15px 15px;
+  font-family:arial, helvetica, sans-serif;
+  font-size:14px;
+  width:310px;
+}
+input.file{
+display:block;
+margin:10px 0 10px 0;
+border:0px;
+}
+input.res-name{
+height:15px;
+margin:10px 0 10px 0;
+border:1px solid #cccccc;
+font-size:14px;
+display:block;
+width:300px;
+padding:4px;
+color:black;
+}
+div.progress-bar{
+margin:10px 0 10px 0;
+width:248px;
+float:left;
+}
+h2{
+padding:6px 5px 4px 5px;
+margin:10px 0 0 0;
+font-size:16px;
+font-weight:400;
+clear:both;
+}
+h2.ready{
+  color:white;
+  background-color:#1E4F76;
+}
+h2.progress{
+  color:white;
+  background-color:#990000;
+}
+div.progress{
+  height:100%;
+  width:0%;
+  background-color:#0066cc;
+}
+div.progress-block{
+border:1px solid #0066cc;
+margin-left:2px;
+height:21px;
+width:6px;
+display:block;
+float:left;
+}
+h2.not-ready{
+  color:white;
+  background-color:gray;
+}
+h2 span{
+float:right;
+margin:4px 0 0 0;
+font-size:14px;
+}
+div.adjust{
+  height:45px;
+}
+div.adjust a{
+  display:block;
+  margin:8px 2px 3px 0px;
+  float:right;
+  height:32px;
+  width:32px;
+}
+div.adjust a:hover{
+  background-color:white;
+}
+div.file-input{
+width:238px;
+height:15px;
+margin:10px 0 10px 0;
+border:1px solid #cccccc;
+float:left;
+font-size:14px;
+padding:4px;
+color:green;
+}
+div.upload-flash{
+margin:10px 0 10px 0;
+width:60px;
+float:left;
+position:relative;
+top:-1px;
+}
+div.button{
+margin:10px 0 10px 0;
+width:60px;
+height:20px;
+float:left;
+position:relative;
+background-color:#0066cc;
+color:white;
+font-weight:600;
+font-size:14px;
+text-align:center;
+padding:3px 0 0 0;
+font-family:times,sans-serif;
+cursor: pointer;
+}
+
+a.ready-to-confirm{
+  font-weight:800px;
+  color:white;
+  text-transform:uppercase;
+}
+</style>
+
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+<script type="text/javascript">
+  function commit(){
+    return false;/*document.forms['hform'].submit();*/
+  }
+</script>
+<script type="text/javascript" charset="utf-8"
+        src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+</script>
+<script type="text/javascript" charset="utf-8" src='/js/dialog.js'></script>
+<script type="text/javascript" charset="utf-8" src='/js/ele.js'></script>
+<script type="text/javascript" charset="utf-8" src='/js/ui.js'></script>
+<script type="text/javascript" charset="utf-8" src='/js/flash.js'></script>
+<script type="text/javascript" charset="utf-8" src='/js/histogram.js'></script>
+<script type='text/javascript'>
+   function OpenHandler(){
+     alert('File Open');
+   }
+   function SelectHandler(name){
+     var uploader = zoyoe.uploader.entity;
+     var s2 = document.getElementById('s2');
+     s2.className = 'ready';
+     s2.getElementsByTagName('span')[0].innerHTML = name;
+     setTimeout("zoyoe.uploader.entity.UploadFile()",0);/* Probably a bug here, need allow flash to complete first */
+   }
+   function ProgressHandler(cur,total){
+     var blocks = document.getElementById('progress').getElementsByTagName('DIV');
+     for(var i=0;i<(25*cur/total);i++){
+        blocks[i].style.backgroundColor = "#0066cc";
+     }
+   }
+   function CompleteHandler(data){
+     document.getElementById('s3').className = 'ready';
+     document.getElementById('s4').className = 'ready';
+     document.getElementById('s5').className = 'ready';
+     document.getElementById('img-container').innerHTML = "<img src='/core/imagecache/{{SERVICE}}/data' onload = \"zoyoe.uploader.Crunch('select','img-container')\" ></img>"
+     document.getElementById('thumb-img').innerHTML = "<img src='/core/imagecache/{{SERVICE}}/data'></img>"
+     document.getElementById('confirm').href = "javascript:zoyoe.uploader.Confirm('{{ACTION}}')"
+     document.getElementById('confirm').className = "ready-to-confirm"
+   }
+   function ErrorHandler(){
+     alert('error');
+   }
+   function UpdateImgUrl(url){
+     document.getElementById('resurl').innerHTML = url;
+     zoyoe.uploader.Rename(url.split("/").pop());
+   }
+   function InitUploader(){
+     zoyoe.uploader.Setup("{{SERVICE}}","{{GALLERY}}","{{NAME}}");
+   }
+   function DocumentLoad(folder,name){
+     if(zoyoe.ElementExtension){
+       zoyoe.ElementExtension.BuildExtensionElements();
+     }
+     MarkAsCrop(document.getElementById('select'),zoyoe.uploader,
+     function(){zoyoe.uploader.ShowThumbnail('thumb-img');});
+     zoyoe.uploader.folder = folder;
+     zoyoe.uploader.name = name;
+     zoyoe.uploader.rename = name;
+     YUI().use('node',function(node){
+       zoyoe.InitZoyoe(false,node);
+       InitDrag();
+       var input = node.one('.extension-drop-list input');
+       var dom_input = node.Node.getDOMNode(input);
+       dom_input.ext_onchange = function(option){
+         option = option.toLowerCase();
+         if(zoyoe.uploader.crunch){
+           if(option=='square'){
+             zoyoe.uploader.hp = 1;
+             zoyoe.uploader.wp = 1;
+             zoyoe.uploader.Crunch(zoyoe.uploader.selection_id,
+               zoyoe.uploader.crunch_id);
+           }else if(option =='vertical'){
+             zoyoe.uploader.hp = 1;
+             zoyoe.uploader.wp = 0.7;
+             zoyoe.uploader.Crunch(zoyoe.uploader.selection_id,
+               zoyoe.uploader.crunch_id);
+           }else if(option =='horizontal'){
+             zoyoe.uploader.wp = 1;
+             zoyoe.uploader.hp = 0.7;
+             zoyoe.uploader.Crunch(zoyoe.uploader.selection_id,
+               zoyoe.uploader.crunch_id);
+           }else{
+             alert(option);
+           }
+         };
+       };
+     });
+     zoyoe.service_name = '{{SERVICE}}';
+   }
+   </script>
+</head>
+<body onload="DocumentLoad('{{GALLERY}}','{{NAME}}')">
+<div class='hform'>
+  <div class='left' id='thumb-container'>
+    <div id='thumb-img' class='img-crunch'>
+    </div>
+  </div>
+  <div class='right'>
+    <h2 class="ready">Url:<span id='resurl'>{{DOMAIN}}/core/data/res/{{SERVICE}}/{{GALLERY}}/{{NAME}}</span></h2>
+    <input class='res-name' value='{{NAME}}' onchange="UpdateImgUrl('{{DOMAIN}}/core/data/res/{{SERVICE}}/{{GALLERY}}/'+this.value)">
+    </input>
+    <h2 id='s2' class='progress'>Source File:<span>No File Specified</h2>
+    <div id='progress' class='progress-bar'>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+       <div class='progress-block'></div>
+    </div>
+    <div class='upload-flash' id="upload-flash">
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="60" height="25" id="ie_uploader">
+        <param name="movie" value="/res/main.swf" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#869ca7" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <embed src="/res/main.swf" quality="high" bgcolor="#869ca7" id="uploader"
+             width="60" height="25" name="uploader" align="middle"
+             play="true" loop="false" quality="high" allowScriptAccess="sameDomain"
+             type="application/x-shockwave-flash" FlashVars="RequestUri=abc" 
+             pluginspage="http://www.macromedia.com/go/getflashplayer">
+        </embed>
+     </object>
+    </div>
+    <h2 id='s3' class='not-ready'>Adjust:</h2>
+    <div class='adjust'>
+    <a href="javascript:zoyoe.uploader.FlipVertical(document.getElementById('img-container'))">
+      <img src="/res/icons/shape_flip_vertical.png"/></a>
+    <a href="javascript:zoyoe.uploader.FlipHorizontal(document.getElementById('img-container'))">
+      <img src="/res/icons/shape_flip_horizontal.png"/></a>
+    <a href="javascript:zoyoe.uploader.RotateCCW(document.getElementById('img-container'))">
+      <img src="/res/icons/shape_rotate_anticlockwise.png"/></a>
+    <a href="javascript:zoyoe.uploader.RotateCW(document.getElementById('img-container'))">
+      <img src="/res/icons/shape_rotate_clockwise.png"/>
+    </a>
+    <a style="width:140px;margin-right:10px;" rel="thumbnail shape">
+    <img src="/res/icons/transform-crop-icon.png"/>
+    {% select %}
+     {"style":"width:100px;float:right;margin:2px 0px 2px 2px",
+     "fields":["Square","Vertical","Horizontal"],
+     "default":"Square",
+     "name":"thumbtype"}
+    {% endselect %}
+    </a>
+    </div>
+    <h2 id='s4' class='not-ready'>Confirm:<span><a id='confirm'>Save</a></span></h2>
+    <div></div>
+  </div>
+  <br style='clear:both'/>
+  <h2 class='not-ready' id = 's5' style="margin:20px 0px 0px 20px;width:497px">Crunch</h3>
+  <div id='img-container' class='img-container'>
+  </div>
+</div>
+<div id='select' class='select'>
+  <div class='corner'></div>
+  <div class='corner'></div>
+  <div class='corner'></div>
+  <div class='corner'></div>
+  <div class='select-area'></div>
+</div>
+<div id='zsk' class='msk'>
+</div>
+
+</body>
+</html>
