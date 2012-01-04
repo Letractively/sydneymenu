@@ -209,19 +209,15 @@ body{
 }
 
 #match-option{
-display:block;
 float:left;
 clear:both;
-margin:0 0px 0px 20px;
 color:#666666;
-padding: 20px 0 35px 0;
 }
 
 #match-option label{
   margin-right:10px;
 }
 #match-option a{
-  border:1px solid #777777;
   padding:4px 15px 4px 15px;
 }
 
@@ -300,14 +296,18 @@ padding: 20px 0 35px 0;
   width:80px;
   float:left;
 }
-div.invalid-hint{
-  background-color:orange;
+div.hint{
   color:white;
   font-size:12px;
   position:absolute;
   padding:5px;
   left:108px;
   top:6px;
+}
+div.invalid-hint{
+  color:orange;
+  float:left;
+  margin:0px 20px 0px 20px;
 }
 #search-btn {
  display:block;

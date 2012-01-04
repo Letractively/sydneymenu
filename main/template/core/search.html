@@ -19,7 +19,7 @@
   <script type="text/javascript" src="/js/histogram.js"></script>
   <!-- Project Components -->
 
-  <script type="text/javascript" src="/js/dialog.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
   <script type="text/javascript" src="/js/comps.js"></script>
   <script type="text/javascript" src="/js/ele.js"></script>
   <script type="text/javascript" src="/js/surburb.js"></script>
@@ -48,17 +48,18 @@
 
 {% block content %}
     <form id="search"><!-- Just for convenience, Not very useful -->
-    <div id = "match-option" class="option">
-      <label>Search By:</label>
-      <a class='select' onclick="zoyoe.search.SetPreference('/general',0)">General</a>
-      <a onclick="zoyoe.search.SetPreference('/address',1)">Address</a>
-    </div>
     <div id = "share-option" class='option'>
       <label>sharing and recording your choice with our :</label>
       <a>facebook application</a>
     </div>
     <div id="search-bar">
-      <div class="invalid-hint">Invalid Query String</div>
+      <div class="hint">
+        <div id="match-option" class="option">
+          <a class='select' onclick="zoyoe.search.SetPreference('/general',0)">General</a>
+          <a onclick="zoyoe.search.SetPreference('/address',1)">Address</a>
+        </div>
+        <div class="invalid-hint">Invalid Query String</div>
+      </div>
       {{"AutoComplete"|auto_complete|style:"left:110px;height:40px;padding:0 40 0 0px;width:740px;"|render|safe}}
     </div>
     <div id = "filter-bar">
