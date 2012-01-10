@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'main.xmldata',
     'main.common',
     'main.pybb',
+    'main.gallery',
     'main.glue'
 )
 

@@ -1,0 +1,116 @@
+{% extends 'core/clean.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+
+{% block css_link %} 
+  <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <style type="text/css">
+    .photo-block {
+      position:relative;
+      height:120px;
+      margin-bottom:20px;
+      top:100px;
+      color:#1b1b1b;
+      text-transform:uppercase;
+    }
+    .photo-block div.buttons{
+      background-color:#F8F8F8;
+      margin:auto;
+      width:940px;
+      height:102px;
+    }
+    .photo-block div.buttons div.button{
+      padding:20px 5px 20px 5px;
+      float:left;
+      width:176px;
+      text-align:center;
+      border:1px solid #EAEAEA;
+      height:60px;
+    }
+    .photo-block div.current{
+      background-color:white;
+    }
+    .photo-block h1{
+      float:left;
+      text-align:center;
+      width:100%;
+      position:absolute;
+      top:-120px;
+    }
+    .photo-block h2{
+      float:left;
+      width:100%;
+      text-align:center;
+      position:absolute;
+      top:-65px;
+      color:gray;
+    }
+
+    .function-block {
+      height: 200px;
+      border:1px solid gray;
+    }
+  </style>
+{% endblock %}
+
+{% block js_link %}
+ <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.ArrangeClips('services','data')
+        zoyoe.InitZoyoe(false,Y);
+      });
+    }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+ <div class='nav-sup' style="margin-bottom:90px;">
+   <div class='container_12'>
+     <div class='grid_12'>
+       <div class='photo-block'>
+         <h1 style="font-weight:bolder;font-size:35px;font-family:Times New Roman, Times, serif;">
+         tools for your local services online 
+         </h1>
+         <h2 style="font-size:15px;font-family:">
+         zoyoe, integrating your local business with your online community
+         </h2>
+         <div class="buttons shadow">
+           <div class="button current">
+             Quick Tour
+           </div>
+           <div class="button">
+             Start Using 
+           </div>
+           <div class="button">
+             Create Service Card
+           </div>
+           <div class="button">
+             Using Gallery 
+           </div>
+           <div class="button">
+             Support & Forum
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+{% endblock %}

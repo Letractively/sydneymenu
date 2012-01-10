@@ -9,17 +9,17 @@
 <body>
 <div class='nav'>
   <ul>
-    {% if user.is_authenticated %}
-    <li class='menu' onclick ="zoyoe.adimin.Logout()"><a>Logout</a></li>
-    {% else %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
     <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
     <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-    {% endif %}
-    <li class='menu'><a href='/search/'>Home</a></li>
-    <li class='menu'><a href='/map/'>Distribution</a></li>
-    <li class='menu'><a href='/forum/'>Forum</a></li>
-    <li class='menu'><a href='/mark/'>Recommendation</a></li>
-    <li class='menu'><a href='/mark/'>Menu</a></li>
+  {% endif %}
   </ul>
 </div>
 <div id="crumbs" class='nav-sup'>
