@@ -5,9 +5,9 @@
 
 {% block css_link %}
   <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
 {% endblock %}
 
 {% block js_link %}
@@ -20,9 +20,12 @@
   <script type="text/javascript" src="/js/ui.js"></script>
   <script type="text/javascript">
     function document_load(){
-      YUI().use('node','anim','io-form',function(Y){
-        zoyoe.ArrangeClips('services','data')
-        zoyoe.InitZoyoe(false,Y);
+      YUI().use('node','event','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y,{static_panel:true});
+        zoyoe.service_name = '{{SERVICE.name}}';
+        zoyoe.ui.ShowPanel('gallery',null,null);
+        zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
+        zoyoe.admin = InitAdmin(zoyoe);
       });
     }
   </script>
@@ -44,27 +47,17 @@
 {% endblock %}
 
 {% block content %}
-<div class='nav-sup'>
-  Mark &raquo;
-  <a href="">Recommandations</a>
+<div id = 'panel' style="top:31px;">
+  <div class='panel-hint general-title nav-sup dark'"> 
+  </div>
+  <div class='panel-content' style="top:90px;">
+  </div>
+  <div class='panel-left' style="top:90px;">
+  </div>
+  <div class='button-lane'>
+  </div>
 </div>
-<div style="width:100%;height:100%;padding:20px 10px 10px 10px;background-color:#E8E7E3;" id="page">
-  <div id='services'>
-  </div>
-  <div id='data'>
-  {% for service in SERVICES%}
-    <div class='clip'>
-    <img src="/gallery/image/{{service.name}}/default/icon/?"></img>
-    <ul>
-    <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
-    <li class='fade'>{{service.email}}</li>
-    <li class='dscp'>{{service.description}}</li>
-    </ul>
-    </div>
-  {% endfor %}
-  </div>
-  <div class='foot'>
-  </div>
+<div id='zsk' class='msk'>
 </div>
 {% endblock %}
 

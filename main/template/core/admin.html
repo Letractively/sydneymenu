@@ -66,6 +66,7 @@
         if(zoyoe.ElementExtension){
           zoyoe.ElementExtension.BuildExtensionElements();
         }
+        zoyoe.InitZoyoe(false,Y);
         var input = Y.one("div.extension-auto-complete").one("input");
         var dom_input = Y.Node.getDOMNode(input);
         dom_input.ext_onchange = function(searchStr){
@@ -107,18 +108,19 @@
 {% endblock %}
 
 {% block nav %}
-  {% if user.is_authenticated %}
-  <li class='menu' onclick ="Logout()"><a>Logout</a></li>
-  {% else %}
-  <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-  <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-  {% endif %}
-  <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
   <li class='menu'><a href='/map/'>Distribution</a></li>
-  <li class='menu'><a href='/mark/'>Recommandations</a></li>
-  <li class='menu' onclick ="zoyoe.admin.ShowAddServiceDialog()"><a>Publish</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
 {% endblock %}
- 
+
 {% block content %}
   <div id='map-lane' onclick="mapToggle()">
     <div class='dense' style="float:left;">
@@ -170,7 +172,7 @@
    <div id='data' class='tmp'>
        {% for service in DATA %}
           <div class='clip'>
-          <img src="/core/data/res/{{service.name}}/default/icon/?"></img>
+          <img src="/gallery/image/{{service.name}}/default/icon/?"></img>
           <ul>
           <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
           <li class='fade'>{{service.email}}</li>
