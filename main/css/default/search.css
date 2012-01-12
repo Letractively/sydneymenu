@@ -27,83 +27,6 @@ body{
   margin:auto;
 }
 
-.foot {
-  clear:both;
-  padding:20px 0 0 0;
-}
-
-.foot .lane-black {
-  height:10px;
-  background-color:#1d1d1f;
-}
-
-.foot .lane-white {
-  height:10px;
-  background:white;
-}
-
-.foot ul {
-  background-color:white;
-  display:block;
-  list-style-type:none; 
-  margin:0; 
-  font-family:Arial;
-  font-size:14px; 
-  font-weight:300;
-  overflow:hidden;
-  padding:0;
-}
-
-.foot ul li {
-  color:black;
-  display:block;
-  float:left;
-}
-
-#footer-end {
-  width:10px;
-  height:21px;
-  margin-bottom:-21px;
-  position:relative;
-  top:0;
-  left:-10px;
-  background:url("/res/search_footer_end.png") no-repeat;
-}
-
-.foot #contact {
-  width:280px;
-  margin:0;
-  padding:0;
-  padding-top:5px;
-  padding-left:20px;
-}
-
-.foot #copyright {
-  width:360px;
-  margin:0;
-  padding:0;
-  padding-top:5px;
-  color:#bc0040;
-  text-align:center;
-}
-
-.foot #email {
-  width:280px;
-  margin:0;
-  margin-bottom:9px;
-  padding:0;
-  padding-right:20px;
-  text-align:right;
-}
-
-.mailLink {
-  text-decoration:none;
-}
-
-.mailLink img {
-  border:none;
-}
-
 .nav {
   width:960px;
   background-color:steelblue;
@@ -164,9 +87,8 @@ body{
   border:0;
   font:21px arial,sans-serif bold;
 }
-#restaurant-type{
+#foot{
  margin:170px 20px 0 20px;
- text-align:center;
  clear:both;
 }
 
