@@ -79,7 +79,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.locale.LocaleMiddleware',
-    'pybb.middleware.PybbMiddleware'
+    'pybb.middleware.PybbMiddleware',
+    'glue.middleware.FacebookConnectMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",

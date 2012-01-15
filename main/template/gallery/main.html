@@ -1,4 +1,4 @@
-{% extends 'core/clean.html' %}
+{% extends 'core/panel.html' %}
 {% load hash_filters %}
 {% load comp_filters %}
 {% block title %} Sydney Menu {% endblock %}
@@ -46,7 +46,7 @@
   {% endif %}
 {% endblock %}
 
-{% block content %}
+{% block extra %}
 <div id = 'panel' style="top:31px;">
   <div class='panel-hint general-title nav-sup dark'"> 
   </div>
@@ -56,8 +56,6 @@
   </div>
   <div class='button-lane'>
   </div>
-</div>
-<div id='zsk' class='msk'>
 </div>
 {% endblock %}
 

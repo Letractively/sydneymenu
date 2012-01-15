@@ -79,9 +79,6 @@
 {% block title %} Sydney Menu {% endblock %}
 
 {% block bar %}
-  <iframe src="http://www.facebook.com/plugins/like.php?href=www.sydneyscent.com"
-     scrolling="no" frameborder="0"
-  style="border:none;position:absolute; width:450px; height:80px;top:40px;"></iframe>
 {% endblock %}
 
 {% block nav %}
@@ -187,6 +184,13 @@
       </div>
     </div>
     </form><!-- End of the main form -->
+   <div class='container_12'>
+     <div class='personalize'>
+       <iframe src="http://www.facebook.com/plugins/like.php?href=www.sydneyscent.com&show_faces=false"
+        scrolling="no" frameborder="0"
+        style="top:0px;border:1px solid #EAEAEA;background-color:white;width:450px;height:25px;"></iframe>
+     </div>
+   </div>
 {% endblock %}
 
 {% block tail %}
@@ -216,7 +220,5 @@
  </ul>
  </div>
  <div style="clear:both">
- </div>
- <div id='zsk' class='msk'>
  </div>
 {% endblock %}

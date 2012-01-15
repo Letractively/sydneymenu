@@ -1,10 +1,10 @@
 {% load comp_filters %}
     <form id='form-mdyservice' action="">
-      <div id="age">
+      <div id="price">
         <label for ="price">Price Range:</label>
         {% select %}
         {"name":"price",
-         "style":"width:152px;margin-top:5px;",
+         "style":"width:158px;margin-top:5px;",
          "fields":["10-20","20-40","40-160"],
          "default":"10-20"}
         {% endselect %}
@@ -12,19 +12,27 @@
       <div id="type">
         <label for='type'>Service Type:</label>
         {% select %}
-        {"style":"width:152px;margin-top:5px;",
+        {"style":"width:158px;margin-top:5px;",
          "fields":["FastFood","Cafe","Vegetarian","Normal"],
          "default":"FastFood",
          "name":"type"}
         {% endselect %}
       </div>
-      <div id="phone">
+      <br style="clear:both"/>
+      <p id="phone">
         <label for='phone'>Phone:</label>
           <span class='input-fine'>
           &#9746
           </span>
         <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
-      </div>
+      </p>
+      <p id="webpage">
+        <label for='phone'>Web Page:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='webpage' value='{{REQUEST.phone}}'/>
+      </p>
       <div id='description'>
         <label for="description">Description:</label>
         <span class='input-fine'>
@@ -33,7 +41,7 @@
         <textarea name='description' value='{{REQUEST.phone}}'></textarea>
       </div>
       <div id='days'>
-        <a>Working Days:</a></br>
+        <label>Working Days:</label></br>
           <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
           <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
           <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
@@ -42,4 +50,9 @@
           <input type = checkbox name='Fri' value = 'Fri'>Fri.</input>
           <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
       </div>
+      <p>
+       <span class="commit" onclick="zoyoe.ui.SubmitForm();">Save</span>
+       <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+      </p>
+      <br style="clear:both"/>
     </form>

@@ -8,28 +8,11 @@
 <body onload = "document_load()">
   <div class='section' id='page'>
     {% block bar %}{% endblock %}
-    <div class='nav'>
-      <ul>
-      {% block nav %}{% endblock %}
-     </ul>
-    </div>
     {% block content %}{% endblock %}
   </div>
   {% block tail %}{% endblock %}
   {% block extra %}{% endblock %}
   <div id='zsk' class='msk'>
-  </div>
-  <div id='panel'>
-    <div class='panel'>
-      <div class='panel-hint general-title bright'>
-      </div>
-      <div class='panel-content'>
-      </div>
-      <div class='panel-left'>
-      </div>
-      <div class='button-lane'>
-      </div>
-    </div>
   </div>
 </body>
 </html>

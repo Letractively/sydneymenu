@@ -117,26 +117,25 @@ function Init(){
 {% with TEMPLATE|component:"main" as main %} 
 {% include main %}
 {% endwith %}
-
-<div id='zsk' class='msk'>
-</div>
-<div id='panel'>
-  <div class='panel'>
-    <div class='panel-hint general-title bright'>
-    </div>
-    <div class='panel-content'>
-    </div>
-    <div class='panel-left'>
-    </div>
-    <div class='button-lane'>
-    </div>
-  </div>
-</div>
 <div id='dd-container' style="z-index:99;opacity:0.8;position:absolute;black;display:none;">
 </div>
 <div id='dd-shadow' class='section-container' style="position:absolute;border:1px dashed gray;display:none;">
 </div>
 <br style="clear:both"/>
 <form name='reload' url='/core/service/{{SERVICE.name}}/'></form>
+  <div id='panel'>
+    <div class='panel'>
+      <div class='panel-hint general-title bright'>
+      </div>
+      <div class='panel-content'>
+      </div>
+      <div class='panel-left'>
+      </div>
+      <div class='button-lane'>
+      </div>
+    </div>
+  </div>
+  <div id='zsk' class='msk'>
+  </div>
 </body>
 </html>

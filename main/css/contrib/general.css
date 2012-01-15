@@ -493,7 +493,7 @@ overflow-y:scroll;
   bottom:20px;
   left:20px;
   right:20px;
-  background-color:ghostwhite;
+  background-color:white;
   border:1px solid #EAEAEA;
 }
 #dialog div.dialog-left{
@@ -501,19 +501,15 @@ right:leftpx;
 top:60px;
 bottom:10px;
 position:absolute;
-width:420px;
-padding-top:20px;
-border-right:1px solid #DADADA;
+width:410px;
 overflow:hidden;
 }
 #dialog div.dialog-content{
 width:388px;
+padding:10px 0 10px 0;
+border:1px solid #EAEAEA;
+background-color:whiteSmoke;
 margin:auto;
-background-color:#FEFEFE;
-border-top:10px solid steelblue;
-border-left:1px solid steelblue;
-border-right:1px solid steelblue;
-border-bottom:10px solid steelblue;
 }
 #dialog div.dialog-content div.msg{
   margin:10px;

@@ -22,21 +22,14 @@
       <div id='icon'>
         <input type='textfield' name='icon' value='icon'/> 
       </div>
-      <p id='email'>
-        <label for="email">Email:</label>
-          <span class='input-fine'>
-          &#9746
-          </span>
-        <input type='textfield' name='email' value='{{REQUEST.email}}'/> 
-      </p>
-      <div id="name">
+      <p id="name">
         <label for='name'>Service Name:</label>
           <span class='input-fine'>
           &#9746
           </span>
         <input type='textfield' name='name' value='{{REQUEST.name}}'/>
       </div>
-      <div id="phone">
+      <p id="phone">
         <label for='phone'>Phone:</label>
           <span class='input-fine'>
           &#9746
@@ -50,15 +43,15 @@
         </span>
         <input type='textfield' name='address' id='address-input' value='{{REQUEST.phone}}'/>
       </p>
-      <div id='description'>
+      <div id='description' class='lane'>
         <label for="description">Description:</label>
         <span class='input-fine'>
         &#9746
         </span>
         <textarea name='description' value='{{REQUEST.phone}}'></textarea>
       </div>
-      <div id='days'>
-        <a>Working Days:</a></br>
+      <div class='lane' id='days'>
+        <label>Working Days:</label></br>
           <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
           <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
           <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
@@ -73,4 +66,9 @@
       <p id='privilege'>
         <input type='textfield' name='privilege' value='normal'/>
       </p>
+      <p>
+       <span class="commit" onclick="zoyoe.ui.SubmitForm();">Create & Publish</span>
+       <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+      </p>
+      <br style="clear:both"/>
     </form>
