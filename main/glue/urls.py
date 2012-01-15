@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^forum-activate/(?P<sname>.*)/$','glue.forum.ServiceActivateForum'),
     (r'^forum-delete/(?P<sname>.*)/$','glue.forum.ServiceDelForum'),
     (r'^login/$','glue.forum.Login'),
+    (r'^fblogin/$','glue.views.FBLogin'),
     (r'^register/$','glue.forum.Register'),
     # Example:
     # (r'^sdist/', include('sdist.foo.urls')),

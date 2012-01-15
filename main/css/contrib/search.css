@@ -18,6 +18,12 @@
   width:750px;
 }
 
+div.personalize{
+  width:452px;
+  padding-top:170px;
+  margin:auto;
+}
+
 #search-bar input{
   height:38px;
   position:relative;
@@ -37,7 +43,7 @@
 
 #foot{
  border-top:1px solid #EAEAEA;
- margin:170px 20px 0 20px;
+ margin:0px 20px 0 20px;
  padding:20px 10px 30px 10px;
  clear:both;
  font-family:arial;

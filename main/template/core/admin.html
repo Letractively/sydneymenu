@@ -6,9 +6,9 @@
 {% block css_link %}
   <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/nav.css" type="text/css" media="all" charset="utf-8"/>
 {% endblock %}
 
 {% block js_link %}
@@ -60,45 +60,11 @@
         {% endif %}
         zoyoe.admin = InitAdmin(zoyoe);
         zoyoe.service_name = '{{SERVICE.name}}';
-        new MapInfoCore(function(rmap){
-           sdist(rmap);
-        },center,"map-info",zoom,true);
         if(zoyoe.ElementExtension){
           zoyoe.ElementExtension.BuildExtensionElements();
         }
         zoyoe.InitZoyoe(false,Y);
-        var input = Y.one("div.extension-auto-complete").one("input");
-        var dom_input = Y.Node.getDOMNode(input);
-        dom_input.ext_onchange = function(searchStr){
-          if(zoyoe.map){
-            zoyoe.map.TargetPlace(searchStr,"AutoCompJSON");
-          }else{
-            zoyoe.ALERT("Map not loaded");
-          }
-        }
         zoyoe.ArrangeClips('services','data')
-        zoyoe.InitZoyoe(false,Y);
-        Y.one('#report-bar').on('click',function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        });
-      });
-    }
-    function sdist(ret_map){
-      YUI().use('io-form',function(IO){
-        var uri = ("/core/data/getservices/?tstmp={{TIME_STAMP}}");
-        zoyoe.map = ret_map;
-        function complete(io,o,args){
-          var s_element = o.responseXML.documentElement.getElementsByTagName('SERVICE');
-          for(var i=0;i<s_element.length;i++){
-            var element = s_element[i];
-            var service = new Service(element);
-            ret_map.AddService(service);
-          }
-          ret_map.ShiftZoom(true);
-        }
-        IO.on('io:complete',complete);
-        var request = IO.io(uri);
       });
     }
   </script>
@@ -124,46 +90,8 @@
 {% block content %}
   <div id='map-lane' onclick="mapToggle()">
     <div class='dense' style="float:left;">
-      <div class="map-title">
-        <div><img src="/res/pushpin_tiny.png">
-       Try our distribution map and sharing your experience with us
-        </div>
-        <div id="map-bot" style="z-index:20;position:relative;top:315px;">
-        </div>
-      </div>
-      <div id="map-info" style="height:300px;z-index:10;">
-      </div>
     </div>
     <div id="report-bar">
-      <form name="form-report">
-        <div class="head">
-        <h5>Sharing Your Experience:</h5>
-        </div>
-        <div class='window-container'>
-          <label>OF:</label>
-          {% select %}
-          {"name":"type",
-           "style":"width:240px;float:left;margin-bottom:2px;",
-           "fields":["Breakfast","Lunch","Dinnner"],
-           "default":"Breakfast"}
-          {% endselect %}
-        </div>
-        <div class='window-container'>
-          <label>IN(restaurant name):</label>
-          <input class="normal" type="textfield" name="name"></input>
-        </div>
-        <div class='window-container'>
-          <label>AT(address):</label>
-          {{"address"|auto_complete|style:"width:240px;height:30px;float:left;margin-bottom:2px;"|render|safe}}
-        </div>
-        <div class='window-container'>
-          <label>FOR(what food you've ordered):</label>
-          <input class="normal" type="textfield" name="item"></input>
-        </div>
-        <div class='window-container'>
-          <input type="button" onclick="zoyoe.admin.AddReport()" class="report-btn" value="SHARE"></input>
-        </div>
-      </form>
     </div>
   </div>
   <div id='rslt-block' style="margin-top:120px;">
@@ -221,6 +149,4 @@
 {% endblock %}
 
 {% block tail %}
- <div id='zsk' class='msk'>
-  </div>
 {% endblock %}

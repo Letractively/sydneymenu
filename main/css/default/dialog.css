@@ -4,9 +4,62 @@ border:1px solid #959595;
 }
 .input-fine {display:none;}
 
+#dialog .dialog-content {
+font-family:arial, helvetica, sans-serif;
+}
+
+#dialog .dialog-content textarea{
+  border:1px solid #DADADA;
+  margin:5px 0 0 0;
+  width:340px;font-size:15px;
+  height:100px;
+}
+
+#dialog .dialog-content p input{
+  border:1px solid #DADADA;
+  margin-top:5px;
+  width:340px;
+  display:block;
+  font-size:15px;
+  padding:3px;
+}
+#dialog span.commit{
+  float:right;
+  display:block;
+  padding:5px 10px 5px 10px;
+  font-size:14px;
+  color:white;
+  margin:5px;
+  border:1px solid #3079ED;
+  background-color:#4D90FE;
+  cursor:pointer;
+}
+#dialog span.cancel{
+  float:left;
+  display:block;
+  padding:5px 10px 5px 10px;
+  font-size:14px;
+  color:white;
+  margin:5px 5px 5px 0px;
+  border:1px solid gray;
+  background-color:#777;
+  cursor:pointer;
+}
+
+
+#dialog .dialog-content p {margin:15px 20px 0px 20px;}
+#dialog .dialog-content div.lane {margin:15px 20px 0px 20px;}
+#dialog .dialog-content label {font-weight:bold;}
+#dialog .dialog-content input.split {
+  width:150px;
+  font-size:15px;
+  margin-top:5px;
+  border:1px solid #DADADA;
+}
+
+
 #form-mdytimetable {padding:20px 0 0 0;margin:0px;}
 #form-mdytimetable {font-size:12px;}
-#form-mdytimetable input{border:1px solid #959595;}
 #form-mdytimetable > div{padding:0px;margin:0 0 0 20px;display:block;}
 #form-mdytimetable #from{float:left;margin-left:20px;}
 #form-mdytimetable #from select{display:block;width:155px;font-size:15px;margin-top:5px;}
@@ -16,82 +69,56 @@ border:1px solid #959595;
 #form-mdy-default-gallery {padding:0px;margin:0px;}
 #form-mdy-default-gallery > div{padding:0px;margin:0 20px 0 20px;display:block;}
 #form-mdy-default-gallery {font-size:12px;}
-#form-mdy-default-gallery p {margin-left:20px;}
-#form-mdy-default-gallery p input{margin-top:5px;width:300px;display:block;font-size:15px;}
-#form-mdy-default-gallery input{border:1px solid #959595;}
 
 #form-addgallery {padding:0px;margin:0px;}
 #form-addgallery {font-size:12px;}
-#form-addgallery input{border:1px solid #959595;}
 #form-addgallery > div{padding:0px;margin:0 0 0 20px;display:block;}
 #form-addgallery textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;}
 #form-addgallery p {margin-left:20px;}
-#form-addgallery p input{margin-top:5px;width:340px;display:block;font-size:15px;}
 #form-addgallery #name{float:left;margin-left:20px;}
 
 #form-addroster {padding:0px;margin:0px;}
 #form-addroster {font-size:12px;}
-#form-addroster input{border:1px solid #959595;}
 #form-addroster > div{padding:0px;margin:0 0 0 20px;display:block;}
 #form-addroster textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;}
-#form-addroster p {margin-left:20px;}
-#form-addroster p input{margin-top:5px;width:340px;display:block;font-size:15px;}
 #form-addroster #name{float:left;margin-left:20px;}
 
 .input-fine {display:none;}
 #form-mdy-icon {padding:0px;margin:0px;}
 #form-mdy-icon {font-size:12px;}
-#form-mdy-icon input{border:1px solid #959595;height:26px}
 #form-mdy-icon > div{padding:0px;margin:0 0 0 0;display:block;}
 #form-mdy-icon textarea{margin:5px 0 0 0;width:340px;height:200px;font-size:14px;border:1px solid #959595;}
-#form-mdy-icon p {margin-left:20px;}
-#form-mdy-icon p input{margin-top:5px;width:340px;display:block;font-size:14px;}
 #form-mdy-icon #icon-view{width:125px;height:125px;float:left;border:1px solid #757575; overflow:hidden;}
 #form-mdy-icon #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
 #form-mdy-icon div.right{float:right;margin-top:20px;width:210px;border-left:1px solid gray;}
 #form-mdy-icon div.left{float:left;width:120px;margin-top:15px;padding:15px 5px 5px 25px;}
 #form-mdy-icon div.right > div{margin: 0 0 5px 25px;}
-#form-mdy-icon div.right div input{display:block;width:155px;font-size:14px;margin-top:5px;}
 #form-mdy-icon #description {clear:both;margin:20px 10px 5px 20px;}
 
 
 #form-addservice {padding:0px;margin:0px;}
 #form-addservice {font-size:12px;}
-#form-addservice input{border:1px solid #959595;}
 #form-addservice > div{padding:0px;margin:0 0 0 20px;display:block;}
-#form-addservice textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;height:100px;}
-#form-addservice p {margin-left:20px;}
-#form-addservice p input{margin-top:5px;width:340px;display:block;font-size:15px;}
 #form-addservice #icon-view{margin:15px 0 10px 20px;width:75px;height:75px;float:left;border:1px solid #757575; }
 #form-addservice #icon-view img{width:75px;height:75px;border:0px;padding:0px;margin:0px;}
 #form-addservice #misc {float:right;padding:20px 16px 0 0;height:80px;width:200px;}
 #form-addservice #misc label{width:40px;float:left;padding:5px;clear:both;}
-#form-addservice #email {clear:both;}
 #form-addservice #privilege{display:none;}
-#form-addservice #name{float:left;margin-left:20px;}
-#form-addservice #name input{display:block;width:155px;font-size:15px;margin-top:5px;}
-#form-addservice #phone{float:right;margin-right:30px;margin-bottom:10px;}
-#form-addservice #phone input{display:block;width:155px;font-size:15px;margin-top:5px;}
-#form-addservice #address {clear:both}
-#form-addservice #days {margin-top:10px;margin-bottom:20px;}
+#form-addservice #name{clear:both;}
 #form-addservice #error {float:left;margin-right:0px;width:120px;margin-top:10px}
 #form-addservice .input-error {color:black;display:inline;}
 #form-addservice #grade{display:none;}
 #form-addservice #icon{display:none;}
+#form-addservice #description {clear:both;}
 
 #form-mdyservice {padding:0px;margin:0px;}
 #form-mdyservice {font-size:12px;}
-#form-mdyservice input{border:1px solid #959595;}
 #form-mdyservice > div{padding:0px;margin:10px 0 0 20px;display:block;}
 #form-mdyservice textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;height:150px;}
-#form-mdyservice p {margin-left:20px;}
-#form-mdyservice p input{margin-top:5px;width:340px;display:block;font-size:15px;}
-#form-mdyservice #phone{float:left;margin-right:30px;clear:both;margin-bottom:5px;}
 #form-mdyservice #description{clear:both;}
-#form-mdyservice #phone input{display:block;width:148px;font-size:15px;margin:5px 0 0 0;}
+#form-mdyservice #phone{clear:both;}
 #form-mdyservice #type{float:left;height:45px;}
-#form-mdyservice #age{float:right;margin-right:20px;height:45px;}
-#form-mdyservice #days {margin-top:10px;margin-bottom:20px;}
+#form-mdyservice #price{float:left;height:45px;}
 #form-addservice #error {float:left;margin-right:0px;width:120px;margin-top:10px}
 #form-addservice .input-error {color:black;display:inline;}
 #form-addservice #icon{display:none;}
@@ -100,12 +127,6 @@ border:1px solid #959595;
 #form-register {padding:0px;margin:0px;}
 #form-login,#form-change-pwd,
 #form-register {font-size:12px;}
-#form-login input,
-#form-change-pwd input,
-#form-register input{border:1px solid #959595;}
-#form-login p,
-#form-change-pwd p,
-#form-register p {margin-left:20px;}
 #form-login p input,
 #form-change-pwd p input,
 #form-register p input{margin-top:5px;width:340px;display:block;font-size:15px;}
