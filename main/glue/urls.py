@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     (r'^login/$','glue.forum.Login'),
     (r'^fblogin/$','glue.views.FBLogin'),
     (r'^register/$','glue.forum.Register'),
+    (r'^collect/$','glue.data.CollectService'),
+    (r'^collectby/$','glue.data.CollectBy'),
     # Example:
     # (r'^sdist/', include('sdist.foo.urls')),
 
