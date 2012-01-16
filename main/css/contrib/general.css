@@ -76,6 +76,16 @@ a img{
 .button{
   cursor:pointer;
 }
+.btnblue{
+ display: block;
+ padding: 5px 10px 5px 10px;
+ font-size: 14px;
+ color: white;
+ margin: 5px;
+ border: 1px solid #3079ED;
+ background-color: #4D90FE;
+ cursor: pointer;
+}
 
 .on-msk{
   z-index:103;
@@ -597,3 +607,4 @@ clear:both;
 #data{
   display:none;
 }
+

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
   <style type="text/css">
     .photo-block {
       position:relative;
@@ -56,11 +57,18 @@
 {% endblock %}
 
 {% block js_link %}
+ <script type="text/javascript" charset="utf-8"
+        src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+ </script>
+ <script type="text/javascript" src="/js/comps.js"></script>
+ <script type="text/javascript" src="/js/ui.js"></script>
+ <script type="text/javascript" src="/js/zoyoe.js"></script>
+ <script type="text/javascript" src="/js/ele.js"></script>
  <script type="text/javascript">
     function document_load(){
       YUI().use('node','anim','io-form',function(Y){
-        zoyoe.ArrangeClips('services','data')
         zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
       });
     }
   </script>
