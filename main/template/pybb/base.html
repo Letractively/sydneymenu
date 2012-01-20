@@ -17,7 +17,19 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% block pybb_scripts_extra %}{% endblock %}
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.ArrangeClips('services','data')
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
 {% endblock %}
 
 {% block crumbs %}

@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
     <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
     <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
     <title>{% block title %}forum{% endblock %}</title>
+
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
 </head>
-<body>
+<body onload="document_load()">
 <div class='nav'>
   <ul>
   <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
@@ -35,5 +54,22 @@
     </div>
   </div>
   <div style="clear:both">
+</div>
+
+<div id='zsk' class='msk'>
+</div>
+<div id='panel' class="mask">
+  <div class='panel'>
+    <div class='panel-hint general-title bright'>
+    </div>
+    <div class='panel-content'>
+    </div>
+    <div class='panel-left'>
+    </div>
+    <div class='button-lane'>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

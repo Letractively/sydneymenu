@@ -272,7 +272,6 @@ a.ready-to-confirm{
      zoyoe.uploader.rename = name;
      YUI().use('node',function(node){
        zoyoe.InitZoyoe(false,node);
-       InitDrag();
        var input = node.one('.extension-drop-list input');
        var dom_input = node.Node.getDOMNode(input);
        dom_input.ext_onchange = function(option){
