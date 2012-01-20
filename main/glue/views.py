@@ -1,6 +1,8 @@
 # Create your views here.
 from user import * 
 from glue.forum import *
+from glue.models import *
+from django.core.urlresolvers import reverse
 # NOTICE: This is the top level module, do not import this file.
 
 def FBApp(request):
@@ -13,4 +15,15 @@ def FBLogin(request):
   c = Context({'SESSION':request.session})
   return HttpResponse(login_t.render(c))
 
+def PersonalCollection(request):
+  user = GetUsr(request)
+  if (user == "GUEST"):
+    return redirect("/glue/login/?next="+reverse("glue.views.PersonalCollection",args=()))
+  else:
+    user = User.objects.get(username = user)
+    collections = ServicesOfUser(user)
+    collect_t = loader.get_template('glue/collection.html')
+    c = RequestContext(request,{'COLLECTIONS':collections,'SESSION':request.session})
+    response = HttpResponse(collect_t.render(c),mimetype = "text/html")
+    return response
 

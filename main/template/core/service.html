@@ -1,5 +1,6 @@
 {% load hash_filters %}
 {% load comp_filters %}
+{% load glue_filters %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmln = "http://www.w3.org/1999/xhtml">
 <head>
@@ -18,7 +19,6 @@
 <script type="text/javascript" charset="utf-8"
         src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
 </script>
-<script type="text/javascript" src="/js/histogram.js"></script>
 <script type="text/javascript" src="/js/comps.js"></script>
 <script type="text/javascript" src="/js/ui.js"></script>
 <script type="text/javascript" src="/js/zoyoe.js"></script>
@@ -47,7 +47,6 @@ function Init(){
   var gallery = document.getElementById('gallery');
   var news = document.getElementById('news');
   var preview = document.getElementById('mappreview');
-  InitDrag(document.getElementById('dd-shadow'));
   if(false){
   if(mid){
     MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
@@ -88,10 +87,12 @@ function Init(){
 <body onload='Init()'>
 <div class='nav'>
   <ul>
-  <li class='menu'><a href='/search/'>Home</a></li>
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
   <li class='menu'><a href='/map/'>Distribution</a></li>
-  <li class='menu'><a href='/mark/'>Recommandations</a></li>
-    {% if user.is_authenticated %}
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+   {% if user.is_authenticated %}
     <li class='menu' style="width:60px;">
       <a>Actions</a>
       <ul class='submenu'>
@@ -114,10 +115,7 @@ function Init(){
   </ul>
 </div>
 <div class='nav-sup'>
-12 users have collect this service in their local services.
-<span class='btnblue' onclick="zoyoe.admin.Collect()" style="float:right;top:-10px;position:relative;">
-Collect this service
-</span>
+{% collect SERVICE user %}
 </div>
 <div class="nav-last" style="height:1px;"></div>
 
@@ -144,5 +142,6 @@ Collect this service
   </div>
   <div id='zsk' class='msk'>
   </div>
+</form>
 </body>
 </html>

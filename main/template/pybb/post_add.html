@@ -2,12 +2,12 @@
 {% load pybb_tags i18n %}
 
 {% block pybb_head_extra %}
-    <script type="text/javascript" src="{{ PYBB_MEDIA_URL }}js/pybbjs.js"></script>
+     <script type="text/javascript" src="{{ PYBB_MEDIA_URL }}js/pybbjs.js"></script>
 {% endblock %}
 
 {% block pybb_crumbs %}
-<a href="">Начало</a> &raquo;
-<a href="{% url pybb_index %}">Форум</a> &raquo;
+<a href="">Zoyoe</a> &raquo;
+<a href="{% url pybb_index %}">Forum</a> &raquo;
 {% if forum %}
     <a href="{{ forum.category.get_absolute_url }}">{{ forum.category }}</a> &raquo;
     <a href="{{ forum.get_absolute_url }}">{{ forum }}</a>

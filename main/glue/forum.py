@@ -39,7 +39,7 @@ def Login(request):
     if request.REQUEST.has_key("next"):
       return redirect(request.REQUEST['next'])
     else:
-      return redirect("/forum/")
+      return redirect("/")
   else:
     command_error = model_obj_builder(u_data,request.REQUEST,login_handler)
     if not command_error:
@@ -48,7 +48,7 @@ def Login(request):
         if request.REQUEST.has_key("next"):
           return redirect(request.REQUEST['next'])
         else:
-          return redirect("/forum/")
+          return redirect("/")
       else:
         log_t = loader.get_template('usrs/login.html')
         c = Context({'REQUEST':request.REQUEST,'CSS_ROOT':'default'})

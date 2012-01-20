@@ -11,7 +11,8 @@ font-family:arial, helvetica, sans-serif;
 #dialog .dialog-content textarea{
   border:1px solid #DADADA;
   margin:5px 0 0 0;
-  width:340px;font-size:15px;
+  width:340px;
+  font-size:15px;
   height:100px;
 }
 
@@ -29,7 +30,7 @@ font-family:arial, helvetica, sans-serif;
   padding:5px 10px 5px 10px;
   font-size:14px;
   color:white;
-  margin:5px;
+  margin:5px 0px 5px 5px;
   border:1px solid #3079ED;
   background-color:#4D90FE;
   cursor:pointer;
@@ -49,7 +50,7 @@ font-family:arial, helvetica, sans-serif;
 
 #dialog .dialog-content p {margin:15px 20px 0px 20px;}
 #dialog .dialog-content div.lane {margin:15px 20px 0px 20px;}
-#dialog .dialog-content label {font-weight:bold;}
+#dialog .dialog-content label {font-size:12px;font-weight:bold;}
 #dialog .dialog-content input.split {
   width:150px;
   font-size:15px;
@@ -70,12 +71,6 @@ font-family:arial, helvetica, sans-serif;
 #form-mdy-default-gallery > div{padding:0px;margin:0 20px 0 20px;display:block;}
 #form-mdy-default-gallery {font-size:12px;}
 
-#form-addgallery {padding:0px;margin:0px;}
-#form-addgallery {font-size:12px;}
-#form-addgallery > div{padding:0px;margin:0 0 0 20px;display:block;}
-#form-addgallery textarea{margin:5px 0 0 0;width:340px;font-size:15px;border:1px solid #959595;}
-#form-addgallery p {margin-left:20px;}
-#form-addgallery #name{float:left;margin-left:20px;}
 
 #form-addroster {padding:0px;margin:0px;}
 #form-addroster {font-size:12px;}
