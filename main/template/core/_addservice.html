@@ -5,16 +5,11 @@
       </div>
       <div id='misc'>
         <label for"type">Type:</label>
-        {% select %}
-        {"style":"width:140px;float:right;",
-         "fields":["FastFood","Cafe","Vegetarian","Normal"],
-         "default":"FastFood",
-         "name":"type"}
-        {% endselect %}
+        <input type='textfield' name='type'/> 
         <label for"price">Price:</label>
         {% select %}
         {"name":"price",
-        "style":"width:140px;float:right;",
+        "style":"width:187px;margin:6px;0px;5px;5px;",
         "fields":["10-20","20-40","40-160"],
         "default":"10-20"}
         {% endselect %}
