@@ -27,48 +27,6 @@ body{
   margin:auto;
 }
 
-.nav {
-  width:960px;
-  background-color:steelblue;
-  text-align:center;
-  border-bottom:1px solid black;
-}
-
-.nav ul {
-  display:block;
-  width:66%;
-  margin:auto;
-  list-style-type:none; 
-  color:white;
-  font-family:Arial;
-  font-size:17px; 
-  font-weight:100;
-  overflow:hidden;
-}
-
-.nav ul li {
-  display:block;
-  height:24px;
-  float:left;
-  padding:12px 20px 8px 20px;
-  cursor:pointer;
-}
-
-.nav ul li a{
-  color:white;
-  text-decoration:none;
-  font-weight:100;
-}
-
-.nav ul li:hover {
-  background-color:#ab0020;
-  color:white;
-}
-
-.nav ul li a:visited {
-  color:white;
-}
-
 #search-bar {
   clear:both;
   height:70px;
@@ -95,6 +53,7 @@ body{
 #restaurant-type ul {
   border-top:1px solid gray;
   display:block;
+  width:100%;
   list-style-type:none; 
   margin:0; 
   font-family:Arial;
@@ -107,7 +66,10 @@ body{
 #restaurant-type ul li {
   margin: 4px;
   color:black;
+  float:left;
+  padding:3px;
   display:inline;
+  border:1px solid #DADADA;
 }
 
 
@@ -189,6 +151,7 @@ padding: 20px 0 35px 0;
 }
 
 #radius {
+  clear:both;
   width:100px;
   float:left;
 }

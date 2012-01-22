@@ -1,3 +1,13 @@
+.extension-tag-list input{
+  display:none;
+}
+
+.extension-tag-list ul li h5{
+  padding:0px;
+  margin:0px;
+  float:left;
+}
+
 .extension-select-list ul li{
   padding:3px 0px 0px 10px;
   margin:2px;
