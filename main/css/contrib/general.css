@@ -392,7 +392,7 @@ border:1px solid #AAAAAA;
 overflow-y:scroll;
 }
 #panel div.panel-left a.gicon{
-  height:65px;
+  height:75px;
   padding:10px;
   border-top:1px solid ghostWhite;
   border-bottom:1px solid #9b9b9b;
@@ -407,6 +407,8 @@ overflow-y:scroll;
   font-size:13px;
   margin:4px;
   color:#1b1b1b;
+  text-align:right;
+  max-width:170px;
 }
 
 #panel div.panel-left a.gicon-tools{
