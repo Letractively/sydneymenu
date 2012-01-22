@@ -6,7 +6,7 @@ from settings import ROOT
 #(r'^test/','test.Test'),
 
 urlpatterns = patterns('',
-    (r'^/{0,1}$','main.core.views.Main'),
+    (r'^/{0,1}$','main.core.views.Search'),
     (r'^zoyoe/$','main.core.views.Main'),
     (r'^map/','main.core.views.Map'),
     (r'^mark/','main.glue.views.Mark'),
