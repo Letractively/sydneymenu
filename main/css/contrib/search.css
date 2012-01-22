@@ -24,6 +24,26 @@ div.personalize{
   margin:auto;
 }
 
+.quicksearch{
+ background: transparent url("/res/bg/quicksearch.png") center 7px no-repeat;
+}
+
+.recommandation{
+ background: transparent url("/res/bg/recommendation.png") center 7px no-repeat;
+}
+
+.distribution{
+ background: transparent url("/res/bg/distribution.png") center 7px no-repeat;
+}
+
+.collection{
+ background: transparent url("/res/bg/collection.png") center 7px no-repeat;
+}
+
+.support{
+ background: transparent url("/res/bg/support.png") center 7px no-repeat;
+}
+
 #search-bar input{
   height:38px;
   position:relative;

@@ -27,3 +27,11 @@ def PersonalCollection(request):
     response = HttpResponse(collect_t.render(c),mimetype = "text/html")
     return response
 
+def Mark(request):
+    services = ServiceCore.objects.all()
+    mark_t = loader.get_template('glue/mark.html')
+    c = RequestContext(request,{'SERVICES':services,'SESSION':request.session})
+    response = HttpResponse(mark_t.render(c),mimetype = "text/html")
+    return response
+
+
