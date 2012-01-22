@@ -152,6 +152,10 @@ div.clip ul{
 }
 
 div.clip ul li.name{
+ margin-bottom:3px;
+}
+div.clip ul li.right{
+ float:right;
 }
 div.clip ul li.fade{
   color:gray;
