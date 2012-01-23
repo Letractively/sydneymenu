@@ -112,6 +112,7 @@ overflow:hidden;
 #form-addservice #error {float:left;margin-right:0px;width:120px;margin-top:10px}
 #form-addservice .input-error {color:black;display:inline;}
 #form-addservice #grade{display:none;}
+#form-addservice #local{display:none;}
 #form-addservice #icon{display:none;}
 #form-addservice #description {clear:both;}
 

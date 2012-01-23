@@ -6,6 +6,7 @@
   <SERVICE name='{{service.name}}' type='{{service.type}}' phone='{{service.phone}}' email='{{service.email}}' grade='{{service.grade}}' privilege='{{service.privilege}}' icon='{{service.icon}}' activity='{{service.activity}}'>
     <latlong>{{service.latitude}},{{service.longitude}}</latlong>
     <address>{{service.address}}</address>
+    <local>{{service.local}}</local>
     <description>{{service.description}}</description>
     <days>{{service.days}}</days>
     <price>{{service.pricelow}}-{{service.pricehigh}}</price>
