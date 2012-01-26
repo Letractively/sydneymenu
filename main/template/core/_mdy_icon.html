@@ -1,30 +1,31 @@
 {% load comp_filters %}
 <form id='form-mdy-icon' action="">
-   <div class="left">
-      <div id='icon-view'>
-      <img src='/res/dft_icon.png'></img>
-      </div>
+   <div id='icon-view'>
+     <img src='/res/dft_icon.png'></img>
    </div>
-   <div class="right">
-      <div id="name">
+   <div id="misc">
+      <p id="name">
         <label for='name'>Name:</label>
           <span class='input-fine'>
           &#9746
           </span>
         <input type='textfield' name='name' value='{{REQUEST.name}}'/>
-      </div>
-      <div id='icon'>
-      <label for='icon'>Icon Path in Gallery:</label>
-       {{"icon"|dictionary|style:"width:160px;padding-top:5px;"|addfield:GALLERY|render|safe}}
-      </div>
-      <div id="size">
+      </p>
+      <p id="size">
         <label for='size'>Size:</label>
           <span class='input-fine'>
           &#9746
           </span>
         <input type='textfield' name='size' value='default'/>
-      </div>
+      </p>
    </div>
+   <p id='path' style="clear:both;">
+    <label for='path'>Icon Path in Gallery:</label>
+     {{"path"|dictionary|style:"clear:both;width:345px;padding:5px 0px 0px 20px;"|addfield:GALLERY|render|safe}}
+   </p>
+   <p id='id' style="display:none;">
+    <input name="id" value="{{ITEM.id}}"></input>
+   </p>
    <div id='description'>
      <label for="description">Description:</label>
      <span class='input-fine'>
@@ -32,5 +33,9 @@
      </span>
      <textarea name='description'></textarea>
    </div>
+   <p>
+     <span class="commit" onclick="zoyoe.ui.SubmitForm();">Modify</span>
+     <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+   </p>
    <br style="clear:both"/>
 </form>

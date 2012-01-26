@@ -2,30 +2,30 @@
 {% load comp_filters %}
 <div class='container_16' style="padding:20px;">
   <div id="left-section" class='left-section'>
-    {% with TEMPLATE|component:"icon" as path %} 
+    {% with 'contrib'|component:"icon" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"forum" as path %} 
+    {% with 'contrib'|component:"forum" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"mappreview" as path %} 
+    {% with 'contrib'|component:"mappreview" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"gallery" as path %} 
+    {% with 'contrib'|component:"gallery" as path %} 
       {% include path %}
     {% endwith %}
   </div><!-- end of left section -->
   <div id="mid-section" class='mid-section'>
-    {% with TEMPLATE|component:"photoplayer" as path %} 
+    {% with 'contrib'|component:"photoplayer" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"info" as path %} 
+    {% with 'contrib'|component:"info" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"timetable" as path %} 
+    {% with 'contrib'|component:"timetable" as path %} 
       {% include path %}
     {% endwith %}
-    {% with TEMPLATE|component:"items" as path %} 
+    {% with 'contrib'|component:"items" as path %} 
       {% include path %}
     {% endwith %}
   </div><!-- end mid section -->

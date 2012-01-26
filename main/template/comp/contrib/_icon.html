@@ -8,11 +8,15 @@
          <h3>{{SERVICE.name}}</h3>
       </div>
       <div class='info-block img-frame'>
+        {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+          {% with "//icon/@path" as xpath %}
 {% if TIME_STAMP %}
-        <img class='whole' src='/gallery/image/{{SERVICE.name}}/{{ICON.GALLERY}}/{{ICON.NAME}}/?tstamp={{TIME_STAMP}}'></img>
+        <img class='whole' src='/gallery/image/{{SERVICE.name}}/{% xattr item xpath %}/?tstamp={{TIME_STAMP}}'></img>
 {% else %}
-        <img class='whole' src='/gallery/image/{{SERVICE.name}}/{{ICON.GALLERY}}/{{ICON.NAME}}/'></img>
+        <img class='whole' src='/gallery/image/{{SERVICE.name}}/{% xattr item xpath %}/'></img>
 {% endif %}
+        {% endwith %}
+       {% endfor %}
       </div>
     </div>
 {% if HAS_AUTHORITY %}

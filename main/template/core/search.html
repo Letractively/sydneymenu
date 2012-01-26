@@ -71,6 +71,7 @@
 
   <script type="text/javascript" src="/js/zoyoe.js"></script>
   <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
   <script type="text/javascript" src="/js/ele.js"></script>
   <script type="text/javascript" src="/js/search.js"></script>
 {% endblock %}
@@ -147,40 +148,6 @@
         Locality 
         </div>
         {% localtags "local" %}
-      </div>
- 
-      <div id = "radius" class="drop-list">
-        <div class="label">
-        Radius 
-        </div>
-        {% select %}
-        {"name":"radius",
-         "style":"width:90px;float:right;",
-         "fields":["1 km","2 km","5 km","10 km","20 km","50 km"],
-         "default":"5 km"}
-        {% endselect %}
-      </div>
-      <div id = "min-price" class="drop-list">
-        <div class="label">
-        Min. price
-        </div>
-        {% select %}
-        {"name":"min",
-         "style":"width:80px;float:left;",
-         "fields":["40","60","80","100","120"],
-         "default":"40"}
-        {% endselect %}
-      </div>
-      <div id="max-price" class="drop-list">
-        <div class="label">
-        Max. price
-        </div>
-        {% select %}
-        {"name":"max",
-         "style":"width:80px;float:left;",
-         "fields":["90","140","190","240","290"],
-         "default":"40"}
-        {% endselect %}
       </div>
     </div>
     </form><!-- End of the main form -->

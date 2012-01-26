@@ -4,6 +4,8 @@ border:1px solid #959595;
 }
 .input-fine {display:none;}
 
+.input-error {color:black;display:inline;}
+
 #dialog .dialog-content {
 font-family:arial, helvetica, sans-serif;
 }
@@ -15,6 +17,9 @@ border:1px solid #EAEAEA;
 overflow:hidden;
 }
 
+#dialog #icon-view{margin:15px 0 20px 20px;float:left;}
+#dialog #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
+
 #dialog .dialog-content textarea{
   border:1px solid #DADADA;
   margin:5px 0 0 0;
@@ -22,6 +27,21 @@ overflow:hidden;
   font-size:15px;
   height:100px;
 }
+
+#dialog #misc > p{
+  float:left;
+  padding:0px;
+  margin:0px;
+}
+
+#dialog #misc > p > input{
+  border:1px solid #DADADA;
+  margin:0px 5px 10px 5px;
+  width:180px;
+  font-size:15px;
+  padding:3px;
+}
+
 
 #dialog #misc > input{
   border:1px solid #DADADA;
@@ -31,10 +51,10 @@ overflow:hidden;
   padding:3px;
 }
 
-#dialog .dialog-content p input{
+#dialog .dialog-content form > p input{
   border:1px solid #DADADA;
   margin-top:5px;
-  width:340px;
+  width:338px;
   display:block;
   font-size:15px;
   padding:3px;
@@ -65,7 +85,7 @@ overflow:hidden;
 
 #dialog .dialog-content p {margin:15px 20px 0px 20px;}
 #dialog .dialog-content div.lane {margin:15px 20px 0px 20px;}
-#dialog .dialog-content label {font-size:12px;font-weight:bold;display:block;}
+#dialog .dialog-content label {font-size:12px;font-weight:bold;display:block;float:left;height:18px;}
 #dialog .dialog-content input.split {
   width:150px;
   font-size:15px;
@@ -96,7 +116,6 @@ overflow:hidden;
 #form-mdy-icon {padding:0px;margin:0px;}
 #form-mdy-icon {font-size:12px;}
 #form-mdy-icon > div{padding:0px;margin:0 0 0 0;display:block;}
-#form-mdy-icon #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
 #form-mdy-icon div.right{float:right;margin-top:20px;width:210px;border-left:1px solid gray;}
 #form-mdy-icon div.left{float:left;width:120px;margin-top:15px;padding:15px 5px 5px 25px;}
 #form-mdy-icon div.right > div{margin: 0 0 5px 25px;}
@@ -105,12 +124,9 @@ overflow:hidden;
 
 #form-addservice {padding:0px;margin:0px;}
 #form-addservice {font-size:12px;}
-#form-addservice #icon-view{margin:15px 0 20px 20px;float:left;}
-#form-addservice #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
 #form-addservice #privilege{display:none;}
 #form-addservice #name{clear:both;}
 #form-addservice #error {float:left;margin-right:0px;width:120px;margin-top:10px}
-#form-addservice .input-error {color:black;display:inline;}
 #form-addservice #grade{display:none;}
 #form-addservice #local{display:none;}
 #form-addservice #icon{display:none;}
@@ -121,7 +137,16 @@ overflow:hidden;
 #form-mdyservice > div{padding:0px;margin:10px 0 0 20px;display:block;}
 #form-mdyservice #description{clear:both;}
 #form-mdyservice #phone{clear:both;}
-#form-mdyservice #type{float:left;height:45px;}
+#form-mdyservice #type{float:left;width:160px;margin-left:20px;}
+#form-mdyservice #type > input{
+  width:100%;
+  padding:3px;
+  border:1px solid #DADADA;
+  font-size:15px;
+}
+#form-mdyservice #price{float:left;width:160px;}
+#form-mdyservice #price > div{clear:both;}
+
 #form-mdyservice #price{float:left;height:45px;}
 
 #form-login,#form-change-pwd,
@@ -132,7 +157,7 @@ overflow:hidden;
 #form-change-pwd p input,
 #form-register p input{margin-top:5px;width:340px;display:block;font-size:15px;}
 
-#misc {float:right;padding:10px 16px 0 0;width:200px;}
-#misc label{width:40px;padding:5px;clear:both;}
+#dialog #misc {float:right;padding:10px 16px 0 0;width:200px;}
+#dialog #misc label{width:100px;padding:5px;clear:both;}
 
 

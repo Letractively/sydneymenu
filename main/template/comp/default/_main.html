@@ -3,21 +3,21 @@
 <div class='container_16' style="padding:20px;">
   <div id="left-section" class='left-section'>
   {% for v in LAYOUT_INFO|hash:'LEFT' %}
-    {% with TEMPLATE|component:v as path %} 
+    {% with 'contrib'|component:v as path %} 
       {% include path %}
     {% endwith %}
   {% endfor %}
   </div><!-- end of left section -->
   <div id="mid-section" class='mid-section'>
   {% for v in LAYOUT_INFO|hash:'MID' %}
-    {% with TEMPLATE|component:v as path %} 
+    {% with 'contrib'|component:v as path %} 
       {% include path %}
     {% endwith %}
   {% endfor %}
   </div><!-- end mid section -->
   <div id="right-section" class='right-section'>
   {% for v in LAYOUT_INFO|hash:'RIGHT' %}
-    {% with TEMPLATE|component:v as path %} 
+    {% with 'contrib'|component:v as path %} 
       {% include path %}
     {% endwith %}
   {% endfor %}
