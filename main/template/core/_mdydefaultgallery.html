@@ -7,8 +7,12 @@
       &#9746
       </span>
     {% select %}
-    {"name":"gname","style":"","fields":{{GALLERYS|safe}},"default":"{{DEFAULT}}"}
+    {"name":"gname","style":"clear:both;padding-top:3px;","fields":{{GALLERYS|safe}},"default":"{{DEFAULT}}"}
     {% endselect %}
+  </p>
+  <p>
+    <span class="commit" onclick="zoyoe.ui.SubmitForm();">Modify</span>
+    <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
   </p>
   <br style="clear:both"/>
 </form>
