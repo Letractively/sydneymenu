@@ -1,7 +1,7 @@
 {% extends 'core/clean.html' %}
 {% load hash_filters %}
 {% load comp_filters %}
-{% block title %} Sydney Menu {% endblock %}
+{% block title %} zoyoe sydneyscent {% endblock %}
 
 {% block css_link %}
   <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
@@ -57,7 +57,7 @@
       YUI().use('node','event','anim','io-form',function(Y){
         if(zoyoe.maptoggle == 1){
           zoyoe.maptoggle = 0;
-          mapToggle();
+          mapToggle(document.getElementById('toggle'));
         }
        	var zoom = 15;
       	var center = null;
@@ -67,6 +67,11 @@
         }
         {% endif %}
         zoyoe.admin = InitAdmin(zoyoe);
+        zoyoe.search = InitSearch(null,"/general",
+            function(){return;},
+            function(){
+              Y.one("#search-bar input").set('value',"Invalidate Query");
+            });
         zoyoe.service_name = '{{SERVICE.name}}';
         if(zoyoe.ElementExtension){
           zoyoe.ElementExtension.BuildExtensionElements();
@@ -98,7 +103,7 @@
 {% block content %}
   <div id='sup-lane' class='nav-sup' >
     <div class='dense' style="float:left;">
- <form id="search" action="javascript:zoyoe.search.PreSearch();" class="container_12" 
+ <form id="search" class="container_12" 
     style="padding-top:20px;"><!-- Just for convenience, Not very useful -->
       <div id = "service-type" class="drop-list">
         <div class="label">
@@ -118,12 +123,13 @@
   <div id='rslt-block' style="margin-top:10px;">
    <div style="height:26px;float:right;white;position:relative;top:-30px;
     padding:5px;overflow:display;background-color:whiteSmoke;text-align:right;">
-    <div class='input-btn'>
-    <image src="/res/icons/arrow_down.png" onclick="mapToggle(this)" 
+    <div class='input-btn' id = "search-bar">
+    <image src="/res/icons/arrow_down.png" id='toggle' onclick="mapToggle(this)" 
       style="width:16px;height:16;margin:4px 8px 4px 2px;float:left"></image>
     <input name='searchstr' class='textfield' 
       style="float:left;width:200px;"></input>
-    <span class="spanblue" style="float:left;margin:0px 2px 0px 2px">Search</input>
+    <span class="spanblue" style="float:left;margin:0px 2px 0px 2px" 
+    onclick="zoyoe.search.PreSearch()">Search</input>
     </div>
    </div>
    <div class='mid-section' id='services' style="clear:both;">

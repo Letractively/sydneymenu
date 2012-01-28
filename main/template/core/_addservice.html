@@ -9,7 +9,7 @@
         <label for"price">Price:</label>
         {% select %}
         {"name":"price",
-        "style":"width:187px;margin:6px;0px;5px;5px;",
+        "style":"width:187px;clear:both;margin:6px;0px;5px;5px;",
         "fields":["10-20","20-40","40-160"],
         "default":"10-20"}
         {% endselect %}
@@ -46,7 +46,7 @@
         <textarea name='description' value='{{REQUEST.phone}}'></textarea>
       </div>
       <div class='lane' id='days'>
-        <label>Working Days:</label></br>
+        <label>Working Days:</label><br style="clear:both"/>
           <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
           <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
           <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
