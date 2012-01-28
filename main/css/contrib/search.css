@@ -277,3 +277,99 @@ div.invalid-hint{
  color:#eeeeee;
  border:2px solid #999999;
 }
+
+
+#page {
+  width:100%;
+  margin:auto;
+}
+
+
+#sup-lane{
+height:100px;
+overflow:hidden !important;
+padding:5px 20px 5px 20px;
+}
+
+div.dense{
+}
+div.mid-section{
+  padding:0px 10px 0px 15px;
+}
+#slist{
+  list-style-type:none;
+  padding:20px 0 0 0;
+}
+#slist li{
+  clear:both;
+  height:110px;
+  margin-bottom:20px;
+}
+#slist div.content{
+  float:left;
+}
+#slist div.content p{
+  width:760px;
+  margin:10px;
+}
+#slist h3{
+  list-style-type:none;
+  padding:0px;
+  font-weight:normal;
+  font-size:14px;
+  width: 860px;
+  border-bottom: 1px dashed steelblue;
+}
+#slist h3 a{
+  font-weight:bold;
+  font-size:16px;
+  color:steelblue;
+  text-decoration:none;
+}
+#slist img{
+  width:70px;
+  height:70px;
+  margin:10px;
+  background-color:ghostwhite;
+  border-top:8px solid steelblue;
+  border-left:1px solid steelblue;
+  border-right:1px solid steelblue;
+  border-bottom:8px solid steelblue;
+}
+#search-result{
+  position:fixed;
+  bottom:0px;
+  right:0px;
+  width:400px;
+  height:40px;
+  border:1px solid white;
+  background-color:whiteSmoke;
+  padding:10px;
+  color:#8b8b8b;
+  opacity:0.5;
+}
+#search-result:hover {
+  opacity:1;
+}
+#search-result span.snum,
+#search-result span.inum{
+  color:orange;
+  font-size:18px;
+  font-weight:bold;
+}
+#search-result span.btn{
+  background-color:steelblue;
+  border:1px solid white;
+  color:white;
+  padding:5px;
+  float:right;
+  cursor:pointer;
+}
+#research-hint {
+  width:600px;
+  margin:auto;
+  background-color:steelblue;
+  color:white;
+  padding:10px 20px 10px 20px;
+  border:1px solid whiteSmoke;
+}
