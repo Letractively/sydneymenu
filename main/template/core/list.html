@@ -8,8 +8,14 @@
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/default/admin.css" type="text/css" media="all" charset="utf-8"/>
-
+  <link rel="stylesheet" href="/css/contrib/search.css" type="text/css" media="all" charset="utf-8"/>
+   <style type="text/css">
+    body{
+      overflow-y:scroll;
+      background-color:#E7E8E9;
+    }
+  </style>
+ 
 {% endblock %}
 
 {% block js_link %}
@@ -29,20 +35,21 @@
    {% else %}
     zoyoe.maptoggle = 0;
    {% endif %}
-   function mapToggle(){
+   function mapToggle(ele){
       zoyoe.maptoggle = 1 - zoyoe.maptoggle;
       YUI().use('node','anim',function(Y){
+        var dense = Y.one('#sup-lane div.dense').get('offsetHeight');
         if(zoyoe.maptoggle == 1){
           var anim = new Y.Anim({
-            node:'#map-lane',
-            to:{height:"380px"},
+            node:'#sup-lane',
+            to:{height:zoyoe.n2px(dense+20)},
             duration:0.2,
           });
           anim.run();
-          Y.one('#rslt-block').setStyle('marginTop',"400px");
+          ele.src = "/res/icons/arrow_up.png";
         }else{
-          Y.one('#rslt-block').setStyle('marginTop',"120px");
-          Y.one('#map-lane').setStyle('height',"100px");
+          Y.one('#sup-lane').setStyle('height',"100px");
+          ele.src = "/res/icons/arrow_down.png";
         } 
       });
     }
@@ -89,13 +96,36 @@
 {% endblock %}
 
 {% block content %}
-  <div id='map-lane' onclick="mapToggle()">
+  <div id='sup-lane' class='nav-sup' >
     <div class='dense' style="float:left;">
-    </div>
-    <div id="report-bar">
+ <form id="search" action="javascript:zoyoe.search.PreSearch();" class="container_12" 
+    style="padding-top:20px;"><!-- Just for convenience, Not very useful -->
+      <div id = "service-type" class="drop-list">
+        <div class="label">
+        Service Type
+        </div>
+        {% typetags "type" %}
+      </div>
+      <div id = "service-local" class="drop-list" style="clear:both">
+        <div class="label">
+        Locality 
+        </div>
+        {% localtags "local" %}
+      </div>
+</form>
     </div>
   </div>
-  <div id='rslt-block' style="margin-top:120px;">
+  <div id='rslt-block' style="margin-top:10px;">
+   <div style="height:26px;float:right;white;position:relative;top:-30px;
+    padding:5px;overflow:display;background-color:whiteSmoke;text-align:right;">
+    <div class='input-btn'>
+    <image src="/res/icons/arrow_down.png" onclick="mapToggle(this)" 
+      style="width:16px;height:16;margin:4px 8px 4px 2px;float:left"></image>
+    <input name='searchstr' class='textfield' 
+      style="float:left;width:200px;"></input>
+    <span class="spanblue" style="float:left;margin:0px 2px 0px 2px">Search</input>
+    </div>
+   </div>
    <div class='mid-section' id='services' style="clear:both;">
    </div>
    <div id='data' class='tmp'>
