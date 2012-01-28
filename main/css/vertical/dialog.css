@@ -51,13 +51,14 @@ overflow:hidden;
   padding:3px;
 }
 
-#dialog .dialog-content form > p input{
+#dialog .dialog-content form > p > input{
   border:1px solid #DADADA;
   margin-top:5px;
   width:338px;
   display:block;
   font-size:15px;
   padding:3px;
+  clear:both;
 }
 #dialog span.commit{
   float:right;
