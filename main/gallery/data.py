@@ -16,10 +16,10 @@ def CrunchImage(folder,img_name,cache_data,crunch):
   sl = w*crunch['left']
   crop = im.crop((int(sl),int(st),int(sw+sl),int(st+sh)))
   p = 1
-  if(sw > 150):
-    p = float(150)/sw
-  if(p > 150/sh):
-    p =float(150)/sh 
+  if(sw > 200):
+    p = float(200)/sw
+  if(p > 200/sh):
+    p =float(200)/sh 
   crop = crop.resize((int(sw*p),int(sh*p)),Image.ANTIALIAS)
   crop.save(img_sc_full_path)
 
@@ -168,6 +168,17 @@ def ImageCache(request,sname,method):
         return HttpResponseRedirect('/res/dft_icon.png');
     else:
       return HttpResponse("ok");
+
+def Icon(request,sname,path):
+    try:
+      data = Info.objects.get(path=path,service = sname)
+      doc = data.GetDataDoc()
+      path = doc.xpath("//icon/@path")[0]
+      return HttpResponseRedirect('/gallery/image/'+sname+'/'+path + '/?sc=true')
+    except Info.DoesNotExist:
+      return HttpResponseRedirect('/res/dft_icon.png');
+      
+    
 
 @cache_page(0)
 def Resource(request,sname,res):      

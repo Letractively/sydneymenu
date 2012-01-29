@@ -7,53 +7,30 @@
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/default/dialog.css" type="text/css" media="all" charset="utf-8"/>
-  <style type="text/css">
-    .photo-block {
-      position:relative;
-      height:120px;
-      margin-bottom:20px;
-      top:100px;
-      color:#1b1b1b;
-      text-transform:uppercase;
-    }
-    .photo-block div.buttons{
-      background-color:#F8F8F8;
-      margin:auto;
-      width:940px;
-      height:102px;
-    }
-    .photo-block div.buttons div.button{
-      padding:20px 5px 20px 5px;
-      float:left;
-      width:176px;
-      text-align:center;
-      border:1px solid #EAEAEA;
-      height:60px;
-    }
-    .photo-block div.current{
-      background-color:white;
-    }
-    .photo-block h1{
-      float:left;
-      text-align:center;
-      width:100%;
-      position:absolute;
-      top:-120px;
-    }
-    .photo-block h2{
-      float:left;
-      width:100%;
-      text-align:center;
-      position:absolute;
-      top:-65px;
-      color:gray;
-    }
 
-    .function-block {
-      height: 200px;
-      border:1px solid gray;
-    }
-  </style>
+<style type="text/css">
+.quicksearch{
+ background: transparent url("/res/bg/quicksearch.png") center 7px no-repeat;
+}
+
+.recommandation{
+ background: transparent url("/res/bg/recommendation.png") center 7px no-repeat;
+}
+
+.distribution{
+ background: transparent url("/res/bg/distribution.png") center 7px no-repeat;
+}
+
+.collection{
+ background: transparent url("/res/bg/collection.png") center 7px no-repeat;
+}
+
+.support{
+ background: transparent url("/res/bg/support.png") center 7px no-repeat;
+}
+</style>
+
+
 {% endblock %}
 
 {% block js_link %}
@@ -101,19 +78,19 @@
          zoyoe, integrating your local business with your online community
          </h2>
          <div class="buttons shadow">
-           <div class="button current">
+           <div class="button quicktour">
              Quick Tour
            </div>
-           <div class="button">
+           <div class="button startusing">
              Start Using 
            </div>
-           <div class="button">
+           <div class="button servicecard">
              Create Service Card
            </div>
-           <div class="button">
+           <div class="button gallery">
              Using Gallery 
            </div>
-           <div class="button">
+           <div class="button support">
              Support & Forum
            </div>
          </div>

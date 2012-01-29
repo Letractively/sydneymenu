@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     (r'^collect/$','glue.data.CollectService'),
     (r'^collectby/$','glue.data.CollectBy'),
     (r'^fblogin/$','glue.views.FBLogin'),
+    (r'^users/$','glue.views.Users'),
     (r'^collection/personal/$','glue.views.PersonalCollection'),
     # Example:
     # (r'^sdist/', include('sdist.foo.urls')),

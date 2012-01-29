@@ -34,4 +34,9 @@ def Mark(request):
     response = HttpResponse(mark_t.render(c),mimetype = "text/html")
     return response
 
+def Users(request):
+  users_t  = loader.get_template('usrs/allusers.html');
+  users = User.objects.all()
+  c = RequestContext(request,{'USERS':users,'CSS_ROOT':'default'})
+  return HttpResponse(users_t.render(c))
 

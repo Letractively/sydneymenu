@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     (r'^imagecache/(?P<sname>.*)/(?P<method>.*)/$','gallery.data.ImageCache'),
     (r'^imagelink/(?P<sname>[^/]*)/(?P<respath>[a-zA-Z0-9/]*)/$','gallery.data.ImageLink'),
     (r'^image/(?P<sname>[^/]*)/(?P<res>.*)/$','gallery.data.Resource'),
+    (r'^imageicon/(?P<sname>[^/]*)/(?P<path>.*)/$','gallery.data.Icon'),
 )
