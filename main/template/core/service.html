@@ -4,9 +4,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmln = "http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" href="/css/{{CSS_ROOT}}/service.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/core/css/{{CSS_ROOT}}/service.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
-<link rel="stylesheet" href="/css/{{CSS_ROOT}}/dialog.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/core/css/dialog.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
@@ -98,7 +98,7 @@ function Init(){
       <ul class='submenu'>
       {% if HAS_AUTHORITY %}
       <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Template</a></li>
-      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].SaveLayout()"><a>Save Current Layout</a></li>
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Color()"><a>Color Theme</a></li>
       <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
       <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
       <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>

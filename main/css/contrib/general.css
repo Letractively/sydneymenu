@@ -437,6 +437,15 @@ overflow-y:scroll;
   text-align:right;
   max-width:170px;
 }
+#panel div.panel-left a.gicon li{
+  display:block;
+  float:right; 
+  padding:2px 4px 2px 4px;
+  background-color:#4D90FE;
+  border:1px solid #3079ED;
+  color:white;
+  margin:5px 0px 0px 3px;
+}
 
 #panel div.panel-left a.gicon-tools{
   cursor:pointer;
