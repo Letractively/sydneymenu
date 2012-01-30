@@ -238,11 +238,11 @@ margin-bottom:50px;
 }
 
 .open div.img-frame{
-  height:200px;
+  max-height:200px;
   overflow:hidden;
 }
 .open div.info-block img.whole{
-  width:934px;
+  max-width:934px;
   background-color:#cccccc;
   margin:auto;
 }
