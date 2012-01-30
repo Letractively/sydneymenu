@@ -2,7 +2,7 @@
   <ICON name='icon' gallery='default'/>
   <GALLERY>
   <G name="default" default="true"><IMG url="icon.png" name="icon"/></G></GALLERY>
-  <LAYOUT template="default">
+  <LAYOUT template="default" color="steelblue,steelblue,steelblue,steelblue">
     <LEFT><icon/><items/><mappreview/></LEFT>
     <MID><info/><photoplayer/><timetable/><news/></MID>
     <RIGHT><forum/><gallery/></RIGHT>
