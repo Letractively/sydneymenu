@@ -237,8 +237,12 @@ margin-bottom:50px;
   overflow:hidden;
 }
 
+.open div.img-frame{
+  height:200px;
+  overflow:hidden;
+}
 .open div.info-block img.whole{
-  width:202px;
+  width:934px;
   background-color:#cccccc;
   margin:auto;
 }
