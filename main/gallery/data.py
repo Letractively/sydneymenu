@@ -140,6 +140,7 @@ def GetGallery(request,sname):
     except ServiceCore.DoesNotExist:
         return HttpResponse("<FAIL>Service not existed</FAIL>")
 
+@cache_page(0)
 def ImageCache(request,sname,method):
     service = GetService(sname)
     reqdic = request.REQUEST
@@ -163,6 +164,7 @@ def ImageCache(request,sname,method):
       if(cache_data):
         response = HttpResponse(mimetype = "image/"+cache_data['type'])
         cache_data['data'].save(response,cache_data['data'].format)
+        response['Cache-Control'] = 'no-cache'
         return response 
       else:
         return HttpResponseRedirect('/res/dft_icon.png');

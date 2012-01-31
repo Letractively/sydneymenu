@@ -3,6 +3,10 @@ font-family: "Trebuchet MS", sans-serif;
 list-style-type:none;
 }
 
+body{
+background-color:{{COLOR.0}}
+}
+
 div.page{
 margin:auto;
 margin-top:30px;
@@ -11,7 +15,7 @@ width:960px;
 #title-bar{
 width:100%;
 margin-bottom:60px;
-border-bottom:1px solid steelblue;
+border-bottom:1px solid {{COLOR.1}};
 }
 
 div.section{
@@ -23,7 +27,7 @@ div.section > div.title{
 div.section > div.title > h3{
   display:inline;
   cursor:move;
-  color:steelblue;
+  color:{{COLOR.2}};
 }
 div.section h3.split{
 }
@@ -111,9 +115,9 @@ body{
 margin-bottom:30px;
 }
 .wide .section{
-  border:1px solid steelblue; 
-  border-top:5px solid steelblue;
-  background-color:ghostwhite;
+  border:1px solid {{COLOR.1}}; 
+  border-top:5px solid {{COLOR.1}};
+  background-color:{{COLOR.3}};
   padding:10px;
 }
 .wide .section div.title{
@@ -121,18 +125,18 @@ margin-bottom:30px;
 }
 .wide .section div.title h3{
   font-size:18px;
-  color:steelblue;
+  color:{{COLOR.1}};
   font-weight:300;
 }
 
 .wide .section div.title div.menu{
-  border-bottom:1px solid steelblue;
+  border-bottom:1px solid {{COLOR.1}};
   text-align:right;
   position:relative;
   top:-10px;
 }
 .wide .section div.title a.tab{
-  background-color:steelblue;
+  background-color:{{COLOR.1}};
   margin:0px;
   font-size:14px;
   padding:3px 3px 0 3px;
@@ -141,11 +145,11 @@ margin-bottom:30px;
 }
 .wide .section div.title a.focus{
   background-color:white;
-  color:steelblue;
+  color:{{COLOR.1}};
 }
 
 .wide .section h3.split{
-  background-color:steelblue;
+  background-color: {{COLOR.2}};
   margin:0px;
   font-size:14px;
   padding:3px;
@@ -158,7 +162,7 @@ margin-bottom:30px;
 }
 
 .wide .section div.info-block {
-  color:steelblue;
+  color:{{COLOR.1}};
   padding-bottom:5px;
 }
 .wide .section div.info-block ul li{
@@ -167,7 +171,7 @@ margin-bottom:30px;
 .wide .section div.info-block ul.border-split li{
   font-size:14px;
   border-top:1px solid #8b8b8b;
-  color:steelblue;
+  color:{{COLOR.1}};
 }
 .wide .section div.info-block ul.border-split li#service-name a{
   color: #ff25a5;
@@ -203,10 +207,10 @@ margin-top:5px;
 }
 
 div.tail h3{
-  border-right:7px solid steelblue;
-  border-bottom:2px solid steelblue;
-  border-left:7px solid steelblue;
-  background-color:steelblue;
+  border-right:7px solid {{COLOR.1}};
+  border-bottom:2px solid {{COLOR.1}};
+  border-left:7px solid {{COLOR.1}};
+  background-color:{{COLOR.1}};
   font-size:12px;
   font-weight:100;
   color:white;
@@ -222,14 +226,14 @@ margin-bottom:50px;
 
 .open .section div.title{
   padding-bottom:3px;
-  border-bottom:1px solid steelblue;
+  border-bottom:1px solid {{COLOR.1}};
   text-align:right;
   text-transform:uppercase;
   margin-bottom:10px;
 }
 .open .section div.title h3{
   font-size:24px;
-  color:steelblue;
+  color:{{COLOR.1}};
   font-weight:300;
 }
 .open div.info-block ul li div.gicon{
@@ -285,7 +289,7 @@ margin-top:5px;
 }
 
 .open .tail{
-  border-top:1px solid steelblue;
+  border-top:1px solid {{COLOR.1}};
   margin-top:5px;
 }
 
@@ -295,10 +299,10 @@ div.img-frame iframe{
   margin:auto;
   width:202px;
   height:202px;
-  background-color:steelblue;
+  background-color:{{COLOR.1}};
 }
 div.img-frame{
-border:1px solid steelblue;
+border:1px solid {{COLOR.1}};
 padding:3px;
 }
 
@@ -306,9 +310,9 @@ padding:3px;
 margin-bottom:30px;
 }
 .close .section{
-  border:1px solid steelblue;
-  border-top:5px solid steelblue;
-  background-color: ghostwhite;
+  border:1px solid {{COLOR.1}};
+  border-top:5px solid {{COLOR.1}};
+  background-color: {{COLOR.3}};
   padding:10px;
 }
 .close .section div.title{
@@ -316,7 +320,7 @@ margin-bottom:30px;
 }
 .close .section div.title h3{
   font-size:18px;
-  color:steelblue;
+  color:{{COLOR.1}};
   font-weight:300;
 }
 .close .section div.info-block{

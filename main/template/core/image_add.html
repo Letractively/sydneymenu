@@ -307,6 +307,9 @@ a.ready-to-confirm{
 <div class='hform'>
   <div class='left' id='thumb-container'>
     <div id='thumb-img' class='img-crunch'>
+     {% if MODIFY %}
+     <img src='/gallery/imagecache/{{SERVICE}}/data'></img>
+     {% endif %}
     </div>
   </div>
   <div class='right'>
@@ -381,6 +384,10 @@ a.ready-to-confirm{
   <br style='clear:both'/>
   <h2 class='not-ready' id = 's5' style="margin:20px 0px 0px 20px;width:497px">Crunch</h3>
   <div id='img-container' class='img-container'>
+    {% if MODIFY %}
+    <img src='/gallery/imagecache/{{SERVICE}}/data' 
+    onload = "CompleteHandler(null);zoyoe.uploader.Crunch('select','img-container')"></img>"
+    {% endif %}
   </div>
 </div>
 <div id='select' class='select'>
