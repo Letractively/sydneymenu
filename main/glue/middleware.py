@@ -8,20 +8,6 @@ import urllib
 import time
 from datetime import datetime
 
-class BrowserDetectMiddleware(object):
-  def process_request(self,request):
-    browser_patten = re.compile("webkit|mozilla|chrome|safari")
-    agent = request.META['HTTP_USER_AGENT']
-    ie_patten = re.compile("msie [6-8]")
-    if ie_patten.search(agent.lower()):
-      browser_t = loader.get_template('glue/browser.html')
-      c = RequestContext(request,{'AGENT':agent})
-      return HttpResponse(browser_t.render(c),mimetype = "text/html")
-    elif browser_patten.match(agent.lower()):
-      return None
-    else:
-      return HttpResponse(agent)
-
 class FacebookConnectMiddleware(object):
   delete_fb_cookies = False
   facebook_user_is_authenticated = False

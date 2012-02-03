@@ -2,6 +2,7 @@ from user import *
 from glue.forum import *
 from django.views.decorators.csrf import csrf_exempt
 import logging
+from django.views.decorators.cache import cache_control
 
 # NOTICE: This is the top level module, do not import this file.
 
@@ -140,7 +141,8 @@ def GetGallery(request,sname):
     except ServiceCore.DoesNotExist:
         return HttpResponse("<FAIL>Service not existed</FAIL>")
 
-@cache_page(0)
+#@cache_page(0)
+@cache_control(must_revalidate=True,max_age=0)
 def ImageCache(request,sname,method):
     service = GetService(sname)
     reqdic = request.REQUEST
