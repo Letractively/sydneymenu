@@ -37,4 +37,3 @@ def CollectBy(request):
    except ServiceCore.DoesNotExist:
      command_error['ERROR'] = "Service Does Not Exist"
      return GeneralXMLResponse(request,command_error,'Service not exist')
-  
