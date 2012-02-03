@@ -5,7 +5,8 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^view/(?P<sname>[^/]*)/(?P<path>[a-zA-Z0-9/]*)/$','gallery.view.Main'),
+    (r'^main/(?P<sname>[^/]*)/(?P<path>[a-zA-Z0-9/]*)/$','gallery.view.Main'),
+    (r'^view/(?P<sname>[^/]*)/(?P<path>[a-zA-Z0-9/]*)/$','gallery.view.View'),
     (r'^info/(?P<sname>[^/]*)/$','gallery.data.GalleryInfo'),
     (r'^add/(?P<sname>[^/]*)/$','gallery.data.Add'),
     (r'^remove/(?P<sname>[^/]*)/(?P<gname>.*)/$','gallery.data.Remove'),
