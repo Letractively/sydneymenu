@@ -1,20 +1,5 @@
-{% extends 'core/clean.html'%}
-{% block css_link %}
-  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
-  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
-{% endblock %}
-
-{% block js_link %}
-  <!-- YUI Components --> 
-  <script type="text/javascript" charset="utf-8"
-          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
-  </script>
-
-  <script type="text/javascript" src="/js/zoyoe.js"></script>
-  <script type="text/javascript" src="/js/ui.js"></script>
-  <script type="text/javascript" src="/js/ele.js"></script>
-  <script type="text/javascript" src="/js/comps.js"></script>
-
+{% extends 'glue/dialog.html'%}
+{% block js_code %}
   <script type="text/javascript">
   function document_load(){
     YUI().use('node','io-form',function(Y){
@@ -26,7 +11,6 @@
   }
   </script>
 {% endblock %}
-
 
 {% block tittle %}login in{% endblock %}
 
