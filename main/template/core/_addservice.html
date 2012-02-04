@@ -4,7 +4,11 @@
         <img id='icon-cover' src='/res/dft_icon.png'></img>
       </div>
       <div id='misc'>
-        <label for"type">Type:</label>
+        <label for="type">Type:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label>
         <input type='textfield' name='type'/> 
         <label for"price">Price:</label>
         {% select %}
@@ -17,36 +21,42 @@
       <div id='icon'>
         <input type='textfield' name='icon' value='icon'/> 
       </div>
-      <p id="name">
-        <label for='name'>Service Name:</label>
+      <p style="clear:both">
+        <label for='name'>Service Name:
           <span class='input-fine'>
           &#9746
           </span>
+        </label>
         <input type='textfield' name='name' value='{{REQUEST.name}}'/>
       </div>
-      <p id="phone">
-        <label for='phone'>Phone:</label>
+      <p>
+        <label for='phone'>Phone:
           <span class='input-fine'>
           &#9746
           </span>
+        </label>
         <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
       </div>
-      <p id='address'>
-        <label for="address">Address:</label>
+      <p>
+        <label for="address">Address:
         <span class='input-fine'>
           &#9746
         </span>
+        </label>
         <input type='textfield' name='address' id='address-input' value='{{REQUEST.phone}}'/>
       </p>
-      <div id='description' class='lane'>
-        <label for="description">Description:</label>
+      <div class='lane'>
+        <label for="description">Description:
         <span class='input-fine'>
         &#9746
         </span>
+        </label>
         <textarea name='description' value='{{REQUEST.phone}}'></textarea>
       </div>
       <div class='lane' id='days'>
-        <label>Working Days:</label><br style="clear:both"/>
+        <label>Working Days:
+        <span class='input-fine'>&#9746</span>
+        </label><br style="clear:both"/>
           <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
           <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
           <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
@@ -55,13 +65,13 @@
           <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
           <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
       </div>
-      <p id='grade'>
+      <p class='tmp'>
         <input type='textfield' name='grade' value='1'/>
       </p>
-      <p id='privilege'>
+      <p class='tmp'>
         <input type='textfield' name='privilege' value='normal'/>
       </p>
-      <p id='local'>
+      <p class='tmp'>
         <input type='textfield' name='local' value='normal'/>
       </p>
       <p>
