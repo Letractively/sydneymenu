@@ -1,6 +1,6 @@
 {% load comp_filters %}
     <form id='form-mdyservice' action="">
-      <div id="price">
+      <div>
         <label for ="price">Price Range:</label>
         {% select %}
         {"name":"price",
@@ -9,34 +9,45 @@
          "default":"10-20"}
         {% endselect %}
       </div>
-      <div id="type">
-        <label for='type'>Service Type:</label>
+      <div>
+        <label for='type'>Service Type:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label>
         <input type='textfield' name='type'/> 
       </div>
       <br style="clear:both"/>
-      <p id="phone">
-        <label for='phone'>Phone:</label>
+      <p>
+        <label for='phone'>Phone:
           <span class='input-fine'>
           &#9746
           </span>
+        </label>
         <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
       </p>
-      <p id="webpage">
-        <label for='phone'>Web Page:</label>
+      <p>
+        <label for='phone'>Web Page:
           <span class='input-fine'>
           &#9746
           </span>
+        </label>
         <input type='textfield' name='webpage' value='{{REQUEST.phone}}'/>
       </p>
-      <div id='description'>
-        <label for="description">Description:</label>
+      <div>
+        <label for="description">Description:
         <span class='input-fine'>
         &#9746
         </span>
+        </label>
         <textarea name='description' value='{{REQUEST.phone}}'></textarea>
       </div>
       <div id='days'>
-        <label>Working Days:</label><br style="clear:both"/>
+        <label>Working Days:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label><br style="clear:both"/>
           <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
           <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
           <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>

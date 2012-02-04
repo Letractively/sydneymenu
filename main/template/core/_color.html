@@ -1,0 +1,42 @@
+<form id='form-mdycolor' action="">
+  <p id="dialog-background">
+    <label for='name'>background:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    <input type='textfield' name='background' value='{{REQUEST.name}}'/>
+  </p>
+  <p id="dialog-border">
+    <label for='box'>box:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    <input type='textfield' name='box' value='{{REQUEST.name}}'/>
+  </p>
+  <p id="dialog-content">
+    <label for='color'>background:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    <input type='textfield' name='color' value='{{REQUEST.name}}'/>
+  </p>
+  <p id="dialog-component">
+    <label for='component'>component:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    <input type='textfield' name='component' value='{{REQUEST.name}}'/>
+  </p>
+  <p id="dialog-decoration">
+    <label for='misc'>decoration:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    <input type='textfield' name='misc' value='{{REQUEST.name}}'/>
+  </p>
+  <p>
+   <span class="commit" onclick="zoyoe.ui.SubmitForm();">Confirm</span>
+   <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+  </p>
+  <br style="clear:both"/>
+</form>
