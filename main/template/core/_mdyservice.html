@@ -1,23 +1,22 @@
 {% load comp_filters %}
     <form id='form-mdyservice' action="">
-      <div>
-        <label for ="price">Price Range:</label>
-        {% select %}
-        {"name":"price",
-         "style":"width:158px;margin-top:5px;",
-         "fields":["10-20","20-40","40-160"],
-         "default":"10-20"}
-        {% endselect %}
-      </div>
-      <div>
-        <label for='type'>Service Type:
+      <p>
+        <label for="type">Type:
           <span class='input-fine'>
           &#9746
           </span>
         </label>
         <input type='textfield' name='type'/> 
-      </div>
-      <br style="clear:both"/>
+      </p>
+      <p>
+        <label for"price">Price:</label>
+        {% select %}
+        {"name":"price",
+        "style":"width:346px;clear:both;margin:0px 0px 0px 20px",
+        "fields":["10-20","20-40","40-160"],
+        "default":"10-20"}
+        {% endselect %}
+      </p>
       <p>
         <label for='phone'>Phone:
           <span class='input-fine'>

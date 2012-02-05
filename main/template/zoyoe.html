@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
 
 <style type="text/css">
-.quicksearch{
- background: transparent url("/res/bg/quicksearch.png") center 7px no-repeat;
+.mission{
+ background: transparent url("/res/bg/target.png") center 9px no-repeat;
 }
 
 .recommandation{
@@ -27,6 +27,15 @@
 
 .support{
  background: transparent url("/res/bg/support.png") center 7px no-repeat;
+}
+.approach{
+ width:300px;
+ height:110px;
+ margin:0px 30px 0px 30px;
+ border:1px solid #EAEAEA;
+}
+#foot{
+ margin-top:30px;
 }
 </style>
 
@@ -78,8 +87,8 @@
          zoyoe, integrating your local business with your online community
          </h2>
          <div class="buttons shadow">
-           <div class="button quicktour">
-             Quick Tour
+           <div class="button mission current">
+             Our Mission 
            </div>
            <div class="button startusing">
              Start Using 
@@ -87,9 +96,9 @@
            <div class="button servicecard">
              Create Service Card
            </div>
-           <div class="button gallery">
-             Using Gallery 
-           </div>
+           <a href="/glue/collection/myservices" class="button collection">
+             My Services 
+           </a>
            <div class="button support">
              Support & Forum
            </div>
@@ -98,4 +107,38 @@
      </div>
    </div>
  </div>
+ <div class='container_12'>
+   <div class='grid_7'>
+     <p>Zoyoe's mission is to integrate your local services with your online community. Which means we are not targeting replacing your exsiting promotion web pages like service main page, facebook page, twitter page, etc ... Instead we are interested in helping you maintaining your existing web resources and providing integration tools for you to make your online promotion more successfull.
+     </p> 
+   </div>
+   <div class='grid_5'>
+    <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_5' style="clear:both">
+    <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_7'>
+     <p>We have several steps to achieve our mission. To begion with, we provide you a framework to create a page as your service card which can be easily integrated into your existing web pages and will be fairly easy to be find via our search of business cards. 
+     </p>
+   </div>
+   <div class='grid_7' style="clear:both">
+     <p> We allow your customers to collect your service on our site for convinence. More over, we provide you functionality to invite your local customers to be members of your services. Personal collection and membership subsystem will help you track your valuable customers. As a quick example, you can give discount to members.  
+     </p>
+   </div>
+   <div class='grid_5' >
+     <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_5' style="clear:both">
+     <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_7'>
+     <p> We will try to integrate your online selling services(ebay, quicksales, classfields, etc ...) via a list all your selling items and redirecting the user to the specific platform you used to sell. Also we will try to allow you importing your selling items from existing platforms. (currently we are targeting ebay sell list). We can aslo build your own online shop (email us for details)  
+     </p>
+   </div>
+ </div>
+{% endblock %}
+
+{% block tail %}
+ {% include "core/_tail.html" %}
 {% endblock %}

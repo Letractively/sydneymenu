@@ -170,3 +170,45 @@ div.clip ul li.dscp{
   max-height:220px;
   overflow:hidden;
 }
+#foot{
+ border-top:1px solid #EAEAEA;
+ margin:0px 20px 0 20px;
+ padding:20px 10px 30px 10px;
+ clear:both;
+ font-family:arial;
+ font-size:12px;
+ color:#555555;
+}
+
+#foot ul li{
+ margin-bottom:10px;
+}
+
+#foot ul li .info-block{
+  border:1px solid #EAEAEA;
+  width:80px;
+  height:80px;
+  float:left;
+  margin:5px;
+}
+
+#foot ul.info{
+ padding:10px;
+ margin-left:5px;
+ width:700px;
+ float:left;
+}
+#foot div.contact{
+ float:left;
+ width:30%;
+ text-align:left;
+}
+#foot div.contact:last-child{
+}
+
+#foot .contact ul{
+ width:150px;
+ margin:auto;
+} 
+
+
