@@ -1,0 +1,191 @@
+{% extends 'core/clean.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/search.css" type="text/css" media="all" charset="utf-8"/>
+   <style type="text/css">
+    body{
+      overflow-y:scroll;
+      background-color:#E7E8E9;
+    }
+  </style>
+ 
+{% endblock %}
+
+{% block js_link %}
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+
+  <script type="text/javascript">
+   {% if DATA|length == 0 and SIDEDATA|length == 0 %}
+    zoyoe.maptoggle = 1;
+   {% else %}
+    zoyoe.maptoggle = 0;
+   {% endif %}
+   function mapToggle(ele){
+      zoyoe.maptoggle = 1 - zoyoe.maptoggle;
+      YUI().use('node','anim',function(Y){
+        var dense = Y.one('#sup-lane div.dense').get('offsetHeight');
+        if(zoyoe.maptoggle == 1){
+          var anim = new Y.Anim({
+            node:'#sup-lane',
+            to:{height:zoyoe.n2px(dense+20)},
+            duration:0.2,
+          });
+          anim.run();
+          ele.src = "/res/icons/arrow_up.png";
+        }else{
+          Y.one('#sup-lane').setStyle('height',"100px");
+          ele.src = "/res/icons/arrow_down.png";
+        } 
+      });
+    }
+    function document_load(){
+      YUI().use('node','event','anim','io-form',function(Y){
+        if(zoyoe.maptoggle == 1){
+          zoyoe.maptoggle = 0;
+          mapToggle(document.getElementById('toggle'));
+        }
+       	var zoom = 15;
+      	var center = null;
+        {% if LOC %}
+        if({{LOC.x}} != 0 && {{LOC.y}} != 0){
+          center = new Microsoft.Maps.Location({{LOC.x}},{{LOC.y}});
+        }
+        {% endif %}
+        zoyoe.admin = InitAdmin(zoyoe);
+        zoyoe.search = InitSearch(null,"/general",
+            function(){return;},
+            function(){
+              Y.one("#search-bar input").set('value',"Invalidate Query");
+            });
+        zoyoe.service_name = '{{SERVICE.name}}';
+        if(zoyoe.ElementExtension){
+          zoyoe.ElementExtension.BuildExtensionElements();
+        }
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.ArrangeClips('services','data')
+      });
+    }
+  </script>
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id='sup-lane' class='nav-sup' >
+    <div class='dense' style="float:left;">
+ <form id="search" class="container_12" 
+    style="padding-top:20px;"><!-- Just for convenience, Not very useful -->
+      <div id = "service-type" class="drop-list">
+        <div class="label">
+        Service Type
+        </div>
+        {% typetags "type" %}
+      </div>
+      <div id = "service-local" class="drop-list" style="clear:both">
+        <div class="label">
+        Locality 
+        </div>
+        {% localtags "local" %}
+      </div>
+</form>
+    </div>
+  </div>
+  <div id='rslt-block' style="margin-top:10px;">
+   <div style="height:26px;float:right;white;position:relative;top:-30px;
+    padding:5px;overflow:display;background-color:whiteSmoke;
+    text-align:right;border-bottom:1px solid white;">
+    <div class='input-btn' id = "search-bar">
+    <image src="/res/icons/arrow_down.png" id='toggle' onclick="mapToggle(this)" 
+      style="width:16px;height:16;margin:4px 8px 4px 2px;float:left"></image>
+    <input name='searchstr' class='textfield' 
+      style="float:left;width:200px;"></input>
+    <span class="spanblue" style="float:left;margin:0px 2px 0px 2px" 
+    onclick="zoyoe.search.PreSearch()">Search</input>
+    </div>
+   </div>
+   <div class='mid-section' id='services' style="clear:both;">
+   </div>
+   <div id='data' class='tmp'>
+       {% for service in DATA %}
+          <div class='clip'>
+          <img src="/gallery/imageicon/{{service.name}}/icon/?"></img>
+          <ul>
+          <li class='fade right'>{{service.type}}</li>
+          <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
+          <li class='fade'>{{service.email}}</li>
+          <li class='dscp'>{{service.description}}</li>
+          </ul>
+        </div>
+        {% endfor %}
+   </div>
+   <div class='mid-section' id = "items" style="clear:both;">
+   </div>
+   <div id = 'sidedata' class='tmp'>
+        {% for info in SIDEDATA%}
+          {% with info|info as data %}
+          {% with data|hash:"ATTRS" as attrs %}
+          {% with data|hash:"TEXT" as description %}
+            <div class='clip'>
+              <a href="/core/service/{{info.service}}/">
+               <img src="{{attrs|hashout:'icon'}}/?sc=true">
+               </img>
+              </a>
+              <ul>
+              <li class='name'><a href="/core/service/{{info.service}}/">{{attrs|hashout:'name'}}</a>
+              {% for attr in attrs %}
+                <li class='fade'>{{attr}}:<span>{{attrs|hash:attr}}</span></li>
+              {% endfor %}
+              <li class='fade'>collected in <a href="/core/service/{{info.service}}/">{{info.service}}</a></span></li>
+              <li class='dscp'>{{description}}</li>
+              </ul>
+           </div>
+          {%endwith%}
+          {%endwith%}
+          {%endwith%}
+        {% endfor %}
+   </div>
+  </div><!-- page -->
+ </div>
+ {% if DATA|length == 0 and SIDEDATA|length == 0 %}
+   <div id="research-hint">
+   No Results Found, Try Our Recommendations Or Distribution Map ?
+   </div>
+ {% else %}
+ <div id="search-result">
+ <span class='snum'>{{DATA|length}}</span> services and <span class='snum'>{{SIDEDATA|length}}</span> items found,<span class='inum'> 0</span> showed. <span class='btn'>show more</span>
+ </div>
+ {% endif %}
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

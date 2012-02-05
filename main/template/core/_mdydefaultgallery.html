@@ -1,0 +1,18 @@
+{% load hash_filters %}
+{% load comp_filters %}
+<form id='form-mdy-default-gallery' action="">
+  <p id="name">
+    <label for='name'>Gallery You Want To Play:</label>
+      <span class='input-fine'>
+      &#9746
+      </span>
+    {% select %}
+    {"name":"gname","style":"clear:both;padding-top:3px;","fields":{{GALLERYS|safe}},"default":"{{DEFAULT}}"}
+    {% endselect %}
+  </p>
+  <p>
+    <span class="commit" onclick="zoyoe.ui.SubmitForm();">Modify</span>
+    <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+  </p>
+  <br style="clear:both"/>
+</form>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block css_link %}{% endblock %}
+    {% block js_link %}{% endblock %}
+    <title>{% block title %}forum{% endblock %}</title>
+</head>
+<body onload = "document_load()">
+  <div class='section' id='page'>
+    {% block bar %}{% endblock %}
+    <div class='nav'>
+      <ul>
+      {% block nav %}{% endblock %}
+     </ul>
+    </div>
+    {% block content %}{% endblock %}
+  </div>
+  {% block tail %}{% endblock %}
+  {% block extra %}{% endblock %}
+  <div id='zsk' class='msk'>
+  </div>
+</body>
+</html>

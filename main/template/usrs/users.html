@@ -1,0 +1,10 @@
+<html>
+<ul>
+{% for user in USERS %}
+<li>username:<a>{{user.username}}</a>,
+    emai:{{user.email}},
+    is active:{{user.is_active}},
+    <a href = /core/user/remove/{{user.username}}/>[DEL]</a></li>
+{% endfor %}
+</ul>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
+    <title>{% block title %}zoyoe sydneyscent{% endblock %}</title>
+
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
+</head>
+<body onload="document_load()">
+<div class='nav'>
+  <ul>
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+  </ul>
+</div>
+<div id="crumbs" class='nav-sup'>
+        {% block pybb_crumbs %}{% endblock %}
+</div>
+<div class = 'page'>
+  <div id="left-section" class='left-section'>
+   {% block sidebar %}{% endblock %}
+  </div>
+  <div id="mid-section" class='mid-section'>
+    <div id="content">
+        {% block pybb_content %}{% endblock %}
+    </div>
+  </div>
+  <div style="clear:both">
+</div>
+
+<div id='zsk' class='msk'>
+</div>
+<div id='panel' class="mask">
+  <div class='panel'>
+    <div class='panel-hint general-title bright'>
+    </div>
+    <div class='panel-content'>
+    </div>
+    <div class='panel-left'>
+    </div>
+    <div class='button-lane'>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

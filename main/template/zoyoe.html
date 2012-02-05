@@ -1,0 +1,144 @@
+{% extends 'core/clean.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+
+{% block css_link %} 
+  <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+
+<style type="text/css">
+.mission{
+ background: transparent url("/res/bg/target.png") center 9px no-repeat;
+}
+
+.recommandation{
+ background: transparent url("/res/bg/recommendation.png") center 7px no-repeat;
+}
+
+.distribution{
+ background: transparent url("/res/bg/distribution.png") center 7px no-repeat;
+}
+
+.collection{
+ background: transparent url("/res/bg/collection.png") center 7px no-repeat;
+}
+
+.support{
+ background: transparent url("/res/bg/support.png") center 7px no-repeat;
+}
+.approach{
+ width:300px;
+ height:110px;
+ margin:0px 30px 0px 30px;
+ border:1px solid #EAEAEA;
+}
+#foot{
+ margin-top:30px;
+}
+</style>
+
+
+{% endblock %}
+
+{% block js_link %}
+ <script type="text/javascript" charset="utf-8"
+        src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+ </script>
+ <script type="text/javascript" src="/js/comps.js"></script>
+ <script type="text/javascript" src="/js/ui.js"></script>
+ <script type="text/javascript" src="/js/zoyoe.js"></script>
+ <script type="text/javascript" src="/js/ele.js"></script>
+ <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+ <div class='nav-sup' style="margin-bottom:90px;">
+   <div class='container_12'>
+     <div class='grid_12'>
+       <div class='photo-block'>
+         <h1 style="font-weight:bolder;font-size:35px;font-family:Times New Roman, Times, serif;">
+         tools for your local services online 
+         </h1>
+         <h2 style="font-size:15px;font-family:">
+         zoyoe, integrating your local business with your online community
+         </h2>
+         <div class="buttons shadow">
+           <div class="button mission current">
+             Our Mission 
+           </div>
+           <div class="button startusing">
+             Start Using 
+           </div>
+           <div class="button servicecard">
+             Create Service Card
+           </div>
+           <a href="/glue/collection/myservices" class="button collection">
+             My Services 
+           </a>
+           <div class="button support">
+             Support & Forum
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class='container_12'>
+   <div class='grid_7'>
+     <p>Zoyoe's mission is to integrate your local services with your online community. Which means we are not targeting replacing your exsiting promotion web pages like service main page, facebook page, twitter page, etc ... Instead we are interested in helping you maintaining your existing web resources and providing integration tools for you to make your online promotion more successfull.
+     </p> 
+   </div>
+   <div class='grid_5'>
+    <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_5' style="clear:both">
+    <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_7'>
+     <p>We have several steps to achieve our mission. To begion with, we provide you a framework to create a page as your service card which can be easily integrated into your existing web pages and will be fairly easy to be find via our search of business cards. 
+     </p>
+   </div>
+   <div class='grid_7' style="clear:both">
+     <p> We allow your customers to collect your service on our site for convinence. More over, we provide you functionality to invite your local customers to be members of your services. Personal collection and membership subsystem will help you track your valuable customers. As a quick example, you can give discount to members.  
+     </p>
+   </div>
+   <div class='grid_5' >
+     <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_5' style="clear:both">
+     <p><img class='approach'></img></p>
+   </div>
+   <div class='grid_7'>
+     <p> We will try to integrate your online selling services(ebay, quicksales, classfields, etc ...) via a list all your selling items and redirecting the user to the specific platform you used to sell. Also we will try to allow you importing your selling items from existing platforms. (currently we are targeting ebay sell list). We can aslo build your own online shop (email us for details)  
+     </p>
+   </div>
+ </div>
+{% endblock %}
+
+{% block tail %}
+ {% include "core/_tail.html" %}
+{% endblock %}

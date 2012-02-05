@@ -1,0 +1,49 @@
+{% extends 'glue/app.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="/js/comps.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+  <script type="text/javascript" src="/js/ui.js"></script>
+
+  <script type="text/javascript">
+    function document_load(){
+      zoyoe.admin = InitAdmin(zoyoe);
+      zoyoe.service_name = '{{SERVICE.name}}';
+    }
+  </script>
+{% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block content %}
+  <div id="service-board">
+  <ul class='tabs'>
+    <li class='tab'>
+      <h4>my local services</h4>
+    </li>
+    <li class='tab'>
+      <h4>services I provide</h4>
+    </li>
+    <li class='tab'>
+      <h4>serviced I visited</h4>
+    </li>
+  </ul>
+  </div>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}
