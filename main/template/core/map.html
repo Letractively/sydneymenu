@@ -45,11 +45,23 @@
   <script type="text/javascript" src="/js/mesh.js"></script>
   <!-- Project Components -->
 
-  <script type="text/javascript" src="/js/ui.js"></script>
-  <script type="text/javascript" src="/js/comps.js"></script>
-  <script type="text/javascript" src="/js/zoyoe.js"></script>
-  <script type="text/javascript" src="/js/ele.js"></script>
   <script type="text/javascript" src="/js/home.js"></script>
+  {% zoyoejs 'all' %}
+  <script type="text/javascript">
+  function document_load(){
+      YUI().use('node','io-form',function(Y){
+      if(zoyoe.ElementExtension){
+        zoyoe.ElementExtension.BuildExtensionElements();
+      }
+      zoyoe.InitZoyoe(false,Y,{static_panel:true});
+      zoyoe.ui.ShowPanel('map',null,null);
+      zoyoe.admin = InitAdmin(zoyoe);
+      new MapInfoCore(function(rmap){
+        sdist(rmap)
+      },null,"map-info")
+    });
+  }
+  </script>
 
 {% endblock %}
 
