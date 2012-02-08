@@ -9,13 +9,15 @@
           <ul>
             {% for n,v in GALLERY_INFO.iteritems %}
             <li>
-              <div class='gicon' onclick="zoyoe.ui.ShowPanel('gallery',['{{n}}'],'gallery')">
+              <a href = "/gallery/view/{{SERVICE.name}}/{{n}}/">
+              <div class='gicon'>
               {% if v %}
                 <img src='/gallery/image/{{SERVICE.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
               {% else %}
                 <img src='/gallery/image/{{SERVICE.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
               {% endif %}
               </div>
+              </a>
             </li>
             {% endfor %}
           </ul>

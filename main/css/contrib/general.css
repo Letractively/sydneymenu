@@ -515,14 +515,12 @@ overflow-y:scroll;
 
 #panel div.panel-hint h2{
 }
-#panel div.panel-hint a{
-  float:right;
-  margin:4px 10px 0 0;
-  color:white;
-}
 #panel div.panel-hint a.gbutton{
   display:block;
   cursor:pointer;
+  float:right;
+  margin:4px 10px 0 0;
+  color:white;
   font-size:18px;
 }
 #panel div.panel-hint a.gbutton:hover {
