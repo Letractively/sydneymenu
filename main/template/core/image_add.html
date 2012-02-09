@@ -246,7 +246,8 @@ a.ready-to-confirm{
      document.getElementById('s3').className = 'ready';
      document.getElementById('s4').className = 'ready';
      document.getElementById('s5').className = 'ready';
-     document.getElementById('img-container').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data' onload = \"zoyoe.uploader.Crunch('select','img-container')\" ></img>"
+     document.getElementById('img-container').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data/?timestamp=" + (new Date()).getTime() + "' "
+	 + "onload = \"zoyoe.uploader.Crunch('select','img-container')\" ></img>"
      document.getElementById('thumb-img').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data'></img>"
      document.getElementById('confirm').href = "javascript:zoyoe.uploader.Confirm('{{ACTION}}')"
      document.getElementById('confirm').className = "ready-to-confirm"
