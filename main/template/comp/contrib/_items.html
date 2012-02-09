@@ -5,7 +5,7 @@
 {% endif %}
       <div class='section' id="item">
         <div class='title'>
-           <h3>Menu</h3>
+           <h3>Items</h3>
         </div>
         <div class='info-block'>
           {% for item in COMP|hash:"ITEMS"|hash:"item" %}
@@ -15,7 +15,7 @@
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['item'].ShowModifyDialog('item')">modify</a></h3>
+        <h3><a href="/glue/data/{{SERVICE.name}}/item/">modify</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}
