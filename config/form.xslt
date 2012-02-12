@@ -12,6 +12,9 @@
         <xsl:attribute name = "name">
           <xsl:value-of select="./@name"/>
         </xsl:attribute>
+        <xsl:attribute name = "class">
+          <xsl:value-of select="./@type"/>
+        </xsl:attribute>
         <xsl:attribute name = "value">{%with '/'|add:PATH|add:'/@<xsl:value-of select="./@name"/>' as XPATH%}{%xattr ITEM XPATH %}{%endwith%}</xsl:attribute>
       </input>
     </div>

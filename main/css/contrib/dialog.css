@@ -20,6 +20,32 @@ overflow:hidden;
 #dialog #icon-view{margin:15px 0 20px 20px;float:left;}
 #dialog #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
 
+#dialog ul.gallery-list{
+  clear:both;
+}
+#dialog ul.gallery-list li{
+  margin:0px 20px 5px 20px;
+  border:1px solid #DADADA;
+  padding:3px 6px 3px 6px;
+  background-color:#DDD;
+  color:gray;
+}
+#dialog ul.gallery-list li.current{
+  background-color:#1e4f76;
+  color:white;
+}
+
+#dialog div.right-content > img{
+width:100px;
+height:100px;
+border:1px solid #EAEAEA;
+margin:5px;
+}
+#dialog div.right-content > img.current{
+  border: 1px solid steelblue;
+}
+
+
 #dialog .dialog-content textarea{
   border:1px solid #DADADA;
   margin:5px 0 0 0;
