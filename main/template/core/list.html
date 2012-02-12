@@ -77,7 +77,12 @@
           zoyoe.ElementExtension.BuildExtensionElements();
         }
         zoyoe.InitZoyoe(false,Y);
+        {% if DATA %}
         zoyoe.ArrangeClips('services','data')
+        {% endif %}
+        {% if SIDEDATA %}
+        zoyoe.ArrangeClips('services','sidedata')
+        {% endif %}
       });
     }
   </script>

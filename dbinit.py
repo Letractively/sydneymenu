@@ -51,7 +51,7 @@ def InitServiceConfig():
     form = xmlbase.FormFromXSD('item',etree.parse(xsd_io2))
     print form
     print "Clean data in info before version %s" % default.version
-    CleanData(default.version)
+    #CleanData(default.version)
     return True
   except etree.XMLSyntaxError,e:
     print e
