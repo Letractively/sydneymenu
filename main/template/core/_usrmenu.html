@@ -1,0 +1,19 @@
+<li class='menu' style="width:90px;float:right;">
+  {% if user.is_authenticated %}
+  <a>{{user.username}}</a>
+  <ul class='submenu'>
+    <div style="text-align:left;margin:5px;padding:5px;border-bottom:1px solid #EAEAEA;"><a style="color:black;font-weight:bold;">{{user.username}}
+        </br><a style="color:#1b1b1b;">{{user.email}}</a></div>
+    <li class='submenu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+    <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
+    <li class='submenu'><a href="/glue/collection/myservices/">My Services</a></li>
+    <li class='submenu'><a href="/glue/collection/personal/">My Collection</a></li>
+  {% else %}
+  <a>Account</a>
+  <ul class='submenu' style="width:100px;">
+    <li class='submenu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='submenu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+  </ul>
+</li>
+
