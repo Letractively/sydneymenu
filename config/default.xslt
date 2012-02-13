@@ -3,8 +3,7 @@
  <ul>
   <div class='icon'>
     <img>
-      <xsl:attribute name="src">/gallery/image/<xsl:value-of select="./@icon"/>
-      </xsl:attribute>
+      <xsl:attribute name="src">/gallery/image/<xsl:value-of select="./@icon"/>/?sc=true</xsl:attribute>
     </img>
   </div>
   <xsl:for-each select="./@*">

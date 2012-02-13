@@ -36,12 +36,7 @@
   <li class='menu'><a href='/map/'>Distribution</a></li>
   <li class='menu'><a href='/forum/'>Forum</a></li>
   <li class='menu'><a href='/gallery/main'>Gallery</a></li>
-  {% if user.is_authenticated %}
-  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
-  {% else %}
-    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-  {% endif %}
+  {% include "core/_usrmenu.html" %}
 {% endblock %}
 
 {% block content %}

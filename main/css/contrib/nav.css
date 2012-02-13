@@ -45,9 +45,14 @@ background-color:#E8E7E3;
 }
 
 .nav ul li a{
+  display:block;
+}
+
+.nav ul li.menu > a{
   text-decoration:none;
   font-weight:100;
   padding:4px
+  color:whiteSmoke;
 }
 
 .nav ul li:hover {
@@ -59,22 +64,20 @@ background-color:#E8E7E3;
   zoom: 1;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=135, Strength=3);
 }
-.nav ul li a{
-  color:whiteSmoke;
-}
 .nav ul li:hover a{
+  width:100%;
   color:white;
 }
 
 .nav ul li:hover a:visited {
-  color:white;
+  color:inherit;
 }
 
 .nav ul li:hover a:active {
-  color:white;
+  color:inherit;
 }
 .nav ul li:hover a:link {
-  color:white;
+  color:inherit;
 }
 
 .nav div.title img {padding:6px 3px 3px 3px;border:none;}
@@ -97,13 +100,13 @@ div.nav ul.submenu:hover {
 div.nav ul.submenu{
   display:none;
   color:steelblue;
-  width:250px;
   background-color:ghostwhite;
   position:relative;
   top:5px;
-  left:-10px;
+  width:220px;
+  left:0px;
   clear:both;
-  float:left;
+  float:right;
   border-top:2px solid steelblue;
   border-bottom:1px solid steelblue;
   border-left:1px solid steelblue;

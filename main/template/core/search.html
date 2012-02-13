@@ -82,18 +82,11 @@
   <li class='menu'><a href='/map/'>Distribution</a></li>
   <li class='menu'><a href='/forum/'>Forum</a></li>
   <li class='menu'><a href='/gallery/main'>Gallery</a></li>
-  {% if user.is_authenticated %}
-  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
-  {% else %}
-    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
-  {% endif %}
+  {% include "core/_usrmenu.html" %}
 {% endblock %}
 
 {% block content %}
- <div class='nav-sup' style="margin-bottom:90px;">
-   <div class='container_12'>
-     <div class='grid_12'>
+ <div class='nav-sup' style="border-bottom:90px solid white;">
        <div class='photo-block'>
          <h1 style="font-weight:bolder;font-size:35px;font-family:Times New Roman, Times, serif;">
          business cards of local services
@@ -128,8 +121,6 @@
           </div>
          </div>
        </div>
-     </div>
-   </div>
  </div>
  <form id="search" action="javascript:zoyoe.search.PreSearch();" class="container_12" style="padding-top:130px;"><!-- Just for convenience, Not very useful -->
     <div id = "filter-bar">

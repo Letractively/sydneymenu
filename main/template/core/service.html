@@ -92,25 +92,21 @@ function Init(){
   <li class='menu'><a href='/map/'>Distribution</a></li>
   <li class='menu'><a href='/forum/'>Forum</a></li>
   <li class='menu'><a href='/gallery/main'>Gallery</a></li>
-   {% if user.is_authenticated %}
-    <li class='menu' style="width:60px;">
-      <a>Actions</a>
-      <ul class='submenu'>
-      {% if HAS_AUTHORITY %}
-      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Template</a></li>
-      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Color()"><a>Color Theme</a></li>
+   {% include "core/_usrmenu.html" %}
+   {% if HAS_AUTHORITY %}
+    <li class='menu' style="width:110px;float:right">
+      <a>Service Config</a>
+      <ul class='submenu' style="width:200px;">
+      <div style="text-align:left;margin:5px;padding:5px;border-bottom:1px solid #EAEAEA;"><a style="color:black;font-weight:bold;">You are the owner of {{SERVICE.name}} 
+        </br><a style="color:#1b1b1b;">has full authority</a></div>
+ 
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Change Template</a></li>
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Color()"><a>Change Color Theme</a></li>
       <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
       <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
       <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
-      <li class='submenu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
-      {% endif %}
-      <li class='submenu' onclick ="zoyoe.admin.ShowChangePWDDialog()"><a>Reset Password</a></li>
       </ul>
-      </a>
     </li>
-    {% else %}
-    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
     {% endif %}
   </ul>
 </div>
