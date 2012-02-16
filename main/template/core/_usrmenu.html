@@ -9,10 +9,7 @@
     <li class='submenu'><a href="/glue/collection/myservices/">My Services</a></li>
     <li class='submenu'><a href="/glue/collection/personal/">My Collection</a></li>
   {% else %}
-  <a>Account</a>
-  <ul class='submenu' style="width:100px;">
-    <li class='submenu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
-    <li class='submenu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  <a onclick ="zoyoe.admin.ShowLoginDialog()">Login</a>
   {% endif %}
   </ul>
 </li>

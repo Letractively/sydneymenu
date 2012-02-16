@@ -12,7 +12,7 @@ Options list:
 import socket
 import smtplib
 from email.MIMEText import MIMEText
-from core.config import *
+from config import *
 import json
 import os
 import getopt
