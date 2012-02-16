@@ -1,0 +1,18 @@
+{% extends 'glue/dialog.html'%}
+{% block js_code %}
+  <script type="text/javascript">
+  function document_load(){
+    YUI().use('node','io-form',function(Y){
+      zoyoe.InitZoyoe(false,Y,{static_dialog:true});
+      zoyoe.admin = InitAdmin(zoyoe);
+      zoyoe.admin.ShowChangePWDDialog();
+      Y.one('#dialog').setStyle('display','block');
+    });
+  }
+  </script>
+{% endblock %}
+
+{% block tittle %}login in{% endblock %}
+
+{% block content %}
+{% endblock %}
