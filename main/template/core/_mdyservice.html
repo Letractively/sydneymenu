@@ -6,7 +6,7 @@
           &#9746
           </span>
         </label>
-        <input type='textfield' name='type'/> 
+        <input type='textfield' name='type' value='{{SERVICE.type}}'/> 
       </p>
       <p>
         <label for"price">Price:</label>
@@ -23,15 +23,15 @@
           &#9746
           </span>
         </label>
-        <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
+        <input type='textfield' name='phone' value='{{SERVICE.phone}}'/>
       </p>
       <p>
-        <label for='phone'>Web Page:
+        <label for='webpage'>Web Page:
           <span class='input-fine'>
           &#9746
           </span>
         </label>
-        <input type='textfield' name='webpage' value='{{REQUEST.phone}}'/>
+        <input type='textfield' name='webpage' value='{{SERVICE.webpage}}'/>
       </p>
       <div>
         <label for="description">Description:
@@ -39,7 +39,7 @@
         &#9746
         </span>
         </label>
-        <textarea name='description' value='{{REQUEST.phone}}'></textarea>
+        <textarea name='description'>{{SERVICE.description}}</textarea>
       </div>
       <div id='days'>
         <label>Working Days:
