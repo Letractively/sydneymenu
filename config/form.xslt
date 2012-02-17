@@ -26,7 +26,7 @@
       <xsl:attribute name = "name">
         <xsl:value-of select="./@name"/>
       </xsl:attribute>
-      <xsl:value-of select="./@name"/>
+{%with '/'|add:PATH|add:'/<xsl:value-of select="./@name"/>'|add:'/text()' as XPATH%}{%xattr ITEM XPATH %}{%endwith%}
       </textarea>
     </div>
    </xsl:for-each>

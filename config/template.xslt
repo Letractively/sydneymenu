@@ -11,9 +11,7 @@
      <xsl:attribute name="{./@name}">{{REQUEST.<xsl:value-of select="./@name"/>}}</xsl:attribute>
     </xsl:for-each>
     <xsl:for-each select = "./xs:sequence/xs:element|./xs:element">
-     <xsl:element name="{./@name}">
-     {{REQUEST.<xsl:value-of select="./@name"/>}}
-     </xsl:element>
+     <xsl:element name="{./@name}">{{REQUEST.<xsl:value-of select="./@name"/>}}</xsl:element>
     </xsl:for-each>
    </xsl:element>
  </xsl:for-each>
