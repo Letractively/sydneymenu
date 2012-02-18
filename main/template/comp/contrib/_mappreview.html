@@ -3,7 +3,7 @@
     <div class='section-container open'>
 {% endif %}
       <div id='mappreview' class='section'>
-        <div class='title'><h3>You on the map</h3></div>
+        <div class='title'><h3>our location</h3></div>
         <div id='map' style='position:relative; width:210px; height:150px;'></div>
         <script type='text/javascript'>
           
@@ -23,6 +23,7 @@
               center: new Microsoft.Maps.Location(latitude,
           longitude),
               zoom: 15,
+              disableUserInput:true,
               showCopyright: false, showDashboard: false,
           showLogo:false, showScalebar: false,
             }
