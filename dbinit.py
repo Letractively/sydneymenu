@@ -99,6 +99,10 @@ def main():
       InitForum()
       print 'Database has been initialized'
       sys.exit(0)
+    elif arg == "forum":
+      InitForum()
+      print 'Forum has been initialized'
+      sys.exit(0)
   print ("Argument is not provided.\n")
   sys.exit(1)
 

@@ -34,6 +34,10 @@
 .extension-select-list input{
   display:none;
 }
+
+.extension-photo-player {
+  overflow:hidden;
+}
 .extension-photo-player input{
   display:none;
 }
