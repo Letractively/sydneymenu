@@ -35,7 +35,7 @@
                     <div class="inner">
                         <div class="avatar">
                             <a href="{{ post.user.pybb_profile.get_absolute_url }}">
-                            <img src="{{ post.user|pybb_avatar_url }}" alt="" />
+                            <img src="/glue/avatar/{{post.user}}/" alt="" />
                             </a>
                         </div>
                         <div class="author">{{ post.user|pybb_profile_link }}</div>
