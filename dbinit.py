@@ -17,6 +17,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 from main.core.models import ServiceConfig 
 from main.pybb.models import Forum,Category
 from main.core import xmlbase
+from main.glue.forum import AddForum 
+from main.glue.forum import DeleteForum 
 import json
 import os
 import getopt
@@ -74,7 +76,16 @@ def InitForum():
   except Category.DoesNotExist:
     category_record = Category(name='Issues')
     category_record.save()
-    print 'Initial record has been inserted'
+  try:
+    get_category = Category.objects.get(name='Technical Support')
+  except Category.DoesNotExist:
+    category_record = Category(name='Technical Support')
+    category_record.save()
+  DeleteForum('Bug Report')
+  AddForum('Issues','Bug Report')
+  DeleteForum('FAQ')
+  AddForum('Technical Support','FAQ')
+  print 'Forum Bug Report created'
 
     
 def main():
