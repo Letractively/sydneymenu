@@ -38,10 +38,10 @@ div.info-block{
 }
 div.info-block div.description{
   display:block;
-  width:240px;
-  text-align:right;
-  padding:0px 10px 0px 0px;
-  float:right;
+  margin:10px;
+  padding:0px 0px 10px 0px;
+  clear:both;
+  border-bottom:1px solid #AAA;
 }
 div.info-block .post{
   min-height:50px;
@@ -362,7 +362,6 @@ margin-bottom:30px;
 }
 
 #item ul{
-  height:80px;
   clear:both;
 }
 #item ul li{

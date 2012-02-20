@@ -6,12 +6,6 @@
       <xsl:attribute name="src">/gallery/image/<xsl:value-of select="./@icon"/>/?sc=true</xsl:attribute>
     </img>
   </div>
-  <xsl:for-each select = "./*">
-   <div>
-      <xsl:attribute name="class"><xsl:value-of select="name()"/></xsl:attribute>
-     <xsl:value-of select="."/>
-   </div>
-  </xsl:for-each>
   <xsl:for-each select="./@*">
    <xsl:if test="name()!='icon'">
    <li>
@@ -19,6 +13,12 @@
     <span><xsl:value-of select="."/></span>
    </li>
    </xsl:if>
+  </xsl:for-each>
+  <xsl:for-each select = "./*">
+   <div>
+      <xsl:attribute name="class"><xsl:value-of select="name()"/></xsl:attribute>
+     <xsl:value-of select="."/>
+   </div>
   </xsl:for-each>
  </ul>
 </xsl:template>
