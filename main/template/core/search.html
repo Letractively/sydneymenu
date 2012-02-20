@@ -10,18 +10,34 @@
   <style type="text/css">
     #search-bar {
       clear:both;
-      padding:0px;
-      top:80px;
-      margin:auto;
+      padding:20px 0px 0px 15px;
       position:relative;
-      height:0px;
-      width:750px;
+      height:70px;
+      width:550px;
+    }
+    div.discount-title{
+      color:steelblue;
+      font-size:16px;
+      font-family:arial,sans-serif;
+      padding:0px 5px 4px 5px;
+      margin:1px 8px 10px 15px;
+    }
+    #discount-list div.container{
+      background-color:smokeWhite;
+      float:left;
+    }
+    div.discount-item{
+      margin:0px 0px 15px 15px;
+      width:85px;
+      height:85px;
+      float:left;
+      border:1px solid #AAA;
     }
 
     #search-bar input{
       height:38px;
       position:relative;
-      width:738px;
+      width:538px;
       padding:0 5px 0 5px;
       margin-top:7px;
       top:0px;
@@ -92,7 +108,7 @@
          business cards of local services
          </h1>
          <h2 style="font-size:15px;font-family:">
-         zoyoe, integrating your local business with your online community
+         zoyoe, integrating your local services with online community
          </h2>
          <div class="buttons shadow">
            <a class="button current quicksearch">
@@ -109,7 +125,34 @@
              Support & Forum
            </a>
          </div>
-         <div id="search-bar">
+       </div>
+ </div>
+ <div class="container_12">
+   <div id='discount-list' class="grid_12">
+    <div class='container'>
+      <div class='discount-title'>Zoyoe's recommendations of items</div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+      <div class='discount-item'>
+      </div>
+    </div>
+   </div>
+   <form id="search" action="javascript:zoyoe.search.PreSearch();" class="grid_8" style="padding-top:10px;"><!-- Just for convenience, Not very useful -->
+    <div id="search-bar">
          {{"AutoComplete"|auto_complete|style:"padding:0px;margin:0px 2px 0px 2px;"|render|safe}}
           <div class="hint">
             <div id="match-option" class="option">
@@ -119,10 +162,7 @@
             </div>
             <div class="invalid-hint">Invalid Query String</div>
           </div>
-         </div>
-       </div>
- </div>
- <form id="search" action="javascript:zoyoe.search.PreSearch();" class="container_12" style="padding-top:130px;"><!-- Just for convenience, Not very useful -->
+    </div>
     <div id = "filter-bar">
       <div id = "service-type" class="drop-list">
         <div class="label">
@@ -137,14 +177,15 @@
         {% localtags "local" %}
       </div>
     </div>
- </form><!-- End of the main form -->
-   <div class='container_12'>
-     <div class='personalize'>
-       <iframe src="http://www.facebook.com/plugins/like.php?href=www.sydneyscent.com&show_faces=false"
-        scrolling="no" frameborder="0"
-        style="top:0px;border:1px solid #EAEAEA;background-color:white;width:450px;height:25px;"></iframe>
-     </div>
+  </form><!-- End of the main form -->
+ </div>
+ <div class='container_12'>
+   <div class='personalize'>
+     <iframe src="http://www.facebook.com/plugins/like.php?href=www.sydneyscent.com&show_faces=false"
+     scrolling="no" frameborder="0"
+      style="top:0px;border:1px solid #EAEAEA;background-color:white;width:450px;height:25px;"></iframe>
    </div>
+ </div>
 {% endblock %}
 
 {% block tail %}
