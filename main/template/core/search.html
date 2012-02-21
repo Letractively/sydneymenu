@@ -1,5 +1,6 @@
 {% extends 'core/clean.html'%}
 {% load comp_filters %}
+{% load glue_filters %}
 {% block css_link %}
   <link rel="stylesheet" href="/css/contrib/search.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
@@ -15,16 +16,14 @@
       height:70px;
       width:550px;
     }
-    div.discount-title{
-      color:steelblue;
-      font-size:16px;
-      font-family:arial,sans-serif;
-      padding:0px 5px 4px 5px;
-      margin:1px 8px 10px 15px;
-    }
     #discount-list div.container{
       background-color:smokeWhite;
       float:left;
+    }
+    #advertise > div{
+      border: 1px solid #AAA;
+      min-height:500px;
+      width:285px;
     }
     div.discount-item{
       margin:0px 0px 15px 15px;
@@ -33,11 +32,20 @@
       float:left;
       border:1px solid #AAA;
     }
+    div.discount-item a{
+      border:none;
+      width:85px;
+      height:85px;
+    }
+    div.discount-item img{
+      width:85px;
+      height:85px;
+    }
 
     #search-bar input{
       height:38px;
       position:relative;
-      width:538px;
+      width:558px;
       padding:0 5px 0 5px;
       margin-top:7px;
       top:0px;
@@ -102,7 +110,7 @@
 {% endblock %}
 
 {% block content %}
- <div class='nav-sup' style="border-bottom:90px solid white;">
+ <div class='nav-sup' style="border-bottom:75px solid white;">
        <div class='photo-block'>
          <h1 style="font-weight:bolder;font-size:35px;font-family:Times New Roman, Times, serif;">
          business cards of local services
@@ -130,25 +138,7 @@
  <div class="container_12">
    <div id='discount-list' class="grid_12">
     <div class='container'>
-      <div class='discount-title'>Zoyoe's recommendations of items</div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
-      <div class='discount-item'>
-      </div>
+      {% discountservices %}
     </div>
    </div>
    <form id="search" action="javascript:zoyoe.search.PreSearch();" class="grid_8" style="padding-top:10px;"><!-- Just for convenience, Not very useful -->
@@ -178,6 +168,9 @@
       </div>
     </div>
   </form><!-- End of the main form -->
+  <div id = 'advertise' class="grid_4">
+    <div></div>
+  </div>
  </div>
  <div class='container_12'>
    <div class='personalize'>
