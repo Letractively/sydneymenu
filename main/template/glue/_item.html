@@ -1,0 +1,17 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% for info in ITEMS%}
+  {% with info|info as data %}
+  {% with data|hash:"ATTRS" as attrs %}
+  {% with data|hash:"TEXT" as description %}
+    <div class='discount-item'>
+      <a href="/core/service/{{info.service}}/">
+       <img src="/gallery/image/{{attrs|hashout:'icon'}}/?sc=true">
+       </img>
+      </a>
+    </div>
+  {%endwith%}
+  {%endwith%}
+  {%endwith%}
+{% endfor %}
+

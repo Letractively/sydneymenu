@@ -1,0 +1,11 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% for info in SERVICES%}
+    <div class='discount-item'>
+      <a href="/core/service/{{info.name}}/">
+       <img src="/gallery/imageicon/{{info.name}}/icon/?sc=true">
+       </img>
+      </a>
+    </div>
+{% endfor %}
+
