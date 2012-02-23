@@ -49,11 +49,14 @@
   <div id='data'>
   {% for collection in COLLECTIONS%}
     <div class='clip'>
-    <img src="/gallery/image/{{collection.service.name}}/default/icon/?"></img>
+    <img src="/gallery/imageicon/{{collection.service.name}}/icon/?"></img>
     <ul>
     <li class='name'><a href="/core/service/{{collection.service.name}}">{{collection.service.name}}</a></li>
+    <li class='fade right'>{{service.type}}</li>
     <li class='fade'>{{collection.service.email}}</li>
     <li class='dscp'>{{collection.service.description}}</li>
+    <li class='spangray right' onclick="zoyoe.admin.CollectDelete('{{collection.service.name}}')">delete</li>
+    <br style="clear:both"/>
     </ul>
     </div>
   {% endfor %}
