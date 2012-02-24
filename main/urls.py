@@ -7,6 +7,7 @@ from settings import ROOT
 
 urlpatterns = patterns('',
     (r'^google2cc4d0d43e33a613.html$','glue.views.Verify'),
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/res/icons/zoyoe.jpg'}),
     (r'^/{0,1}$','main.core.views.Search'),
     (r'^zoyoe/$','main.core.views.Main'),
     (r'^map/','main.core.views.Map'),
