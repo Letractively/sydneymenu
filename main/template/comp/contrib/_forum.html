@@ -1,4 +1,5 @@
 {% load pybb_tags %}
+{% load glue_filters %}
 {% if ROOT %}
     <div class='section-container close'>
 {% endif %}
@@ -8,10 +9,11 @@
         </div>
         <div class='info-block' style="text-align:center">
           {% if FORUM %}
-          {% pybb_load_last_topics as last_topics with forum = FORUM.id %}
+          {% glue_load_last_topics as last_topics with forum=FORUM.pk %}
           {% for topic in last_topics %}
           <p><a href="{{ topic.get_absolute_url }}">{{ topic }}</a>
-            </br> - {% pybb_time topic.created %}</p>
+            </br> - {% pybb_time topic.created %} - {{topic.post_count}} posts 
+            </br> - last post:{{topic.last_post}}</p>
           {% endfor %}
           <p><a style="border:0px solid white;" href = "/forum/forum/{{FORUM.id}}/"> 
           Enter Forum 
