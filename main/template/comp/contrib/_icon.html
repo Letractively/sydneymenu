@@ -5,7 +5,7 @@
 {% endif %}
     <div class='section' id="icon">
       <div class='title'>
-         <h3>{{SERVICE.name}}</h3>
+         <h3>{{SERVICE.name|informal}}</h3>
       </div>
       <div class='info-block img-frame'>
         {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
