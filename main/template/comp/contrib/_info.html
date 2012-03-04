@@ -1,3 +1,5 @@
+{% load comp_filters %}
+{% load hash_filters %}
 {% if ROOT %}
     <div class='section-container wide'>
 {% endif %}
@@ -7,8 +9,8 @@
         </div>
         <div class='info-block'>
           <ul class='border-split'>
-          <li id="service-name"><span class='label'>Service Name:</span><a>{{SERVICE.name}}</a></li>
-          <li><span class='label'>Contact Number:</span><a>{{SERVICE.phone}}</a></li>
+          <li id="service-name"><span class='label'>Service Name:</span><a>{{SERVICE.name|informal}}</a></li>
+          <li><span class='label'>Contact Number:</span><a>only members of this shop can see this</a></li>
           <li><span class='label'>Emai Address:</span><a>{{SERVICE.email}}</a></li>
           <li><span class='label'>Nation:</span><a>{{SERVICE.nation}}</a></li>
           <li><span class='label'>Price:</span><a>{{SERVICE.pricelow}} - {{SERVICE.pricehigh}}</a></li>
