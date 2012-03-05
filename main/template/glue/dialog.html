@@ -15,16 +15,8 @@
 {% endblock %}
 
 {% block js_link %}
-  <!-- YUI Components --> 
-  <script type="text/javascript" charset="utf-8"
-          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
-  </script>
 
-  <script type="text/javascript" src="/js/zoyoe.js"></script>
-  <script type="text/javascript" src="/js/ui.js"></script>
-  <script type="text/javascript" src="/js/ele.js"></script>
-  <script type="text/javascript" src="/js/comps.js"></script>
-
+  {% zoyoejs 'all' %}
   {% block js_code %}{% endblock %}
   </script>
 {% endblock %}

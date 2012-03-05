@@ -19,15 +19,9 @@
 {% endblock %}
 
 {% block js_link %}
-  <script type="text/javascript" charset="utf-8"
-          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
-  </script>
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-  <script type="text/javascript" src="/js/comps.js"></script>
-  <script type="text/javascript" src="/js/zoyoe.js"></script>
-  <script type="text/javascript" src="/js/ele.js"></script>
+  {% zoyoejs 'all' %}
   <script type="text/javascript" src="/js/mesh.js"></script>
-  <script type="text/javascript" src="/js/ui.js"></script>
 
   <script type="text/javascript">
    {% if DATA|length == 0 and SIDEDATA|length == 0 %}
