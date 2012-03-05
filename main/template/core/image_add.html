@@ -214,9 +214,32 @@ a.ready-to-confirm{
 <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
 <script type="text/javascript">
-  function commit(){
-    return false;/*document.forms['hform'].submit();*/
+function ProgressHandler(cur,total){
+  var blocks = document.getElementById('progress').getElementsByTagName('DIV');
+  for(var i=0;i<(25*cur/total);i++){
+     blocks[i].style.backgroundColor = "#0066cc";
   }
+}
+function CompleteHandler(data){
+  document.getElementById('s3').className = 'ready';
+  document.getElementById('s4').className = 'ready';
+  document.getElementById('s5').className = 'ready';
+  document.getElementById('img-container').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data/?timestamp=" + (new Date()).getTime() + "' "
+   + "onload = \"zoyoe.uploader.Crunch('select','img-container')\" ></img>"
+  document.getElementById('thumb-img').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data'></img>"
+  document.getElementById('confirm').href = "javascript:zoyoe.uploader.Confirm('{{ACTION}}')"
+  document.getElementById('confirm').className = "ready-to-confirm"
+}
+function ErrorHandler(){
+  alert('error');
+}
+
+function InitUploader(){
+  zoyoe.uploader.Setup("{{SERVICE}}","{{GALLERY}}","{{NAME}}");
+}
+function commit(){
+  return false;/*document.forms['hform'].submit();*/
+}
 </script>
 <script type="text/javascript" charset="utf-8"
         src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
@@ -227,42 +250,6 @@ a.ready-to-confirm{
 <script type="text/javascript" charset="utf-8" src='/js/flash.js'></script>
 <script type="text/javascript" charset="utf-8" src='/js/histogram.js'></script>
 <script type='text/javascript'>
-   function OpenHandler(){
-     alert('File Open');
-   }
-   function SelectHandler(name){
-     var uploader = zoyoe.uploader.entity;
-     var s2 = document.getElementById('s2');
-     s2.className = 'ready';
-     s2.getElementsByTagName('span')[0].innerHTML = name;
-     setTimeout("zoyoe.uploader.entity.UploadFile()",0);/* Probably a bug here, need allow flash to complete first */
-   }
-   function ProgressHandler(cur,total){
-     var blocks = document.getElementById('progress').getElementsByTagName('DIV');
-     for(var i=0;i<(25*cur/total);i++){
-        blocks[i].style.backgroundColor = "#0066cc";
-     }
-   }
-   function CompleteHandler(data){
-     document.getElementById('s3').className = 'ready';
-     document.getElementById('s4').className = 'ready';
-     document.getElementById('s5').className = 'ready';
-     document.getElementById('img-container').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data/?timestamp=" + (new Date()).getTime() + "' "
-	 + "onload = \"zoyoe.uploader.Crunch('select','img-container')\" ></img>"
-     document.getElementById('thumb-img').innerHTML = "<img src='/gallery/imagecache/{{SERVICE}}/data'></img>"
-     document.getElementById('confirm').href = "javascript:zoyoe.uploader.Confirm('{{ACTION}}')"
-     document.getElementById('confirm').className = "ready-to-confirm"
-   }
-   function ErrorHandler(){
-     alert('error');
-   }
-   function UpdateImgUrl(url){
-     document.getElementById('resurl').innerHTML = url;
-     zoyoe.uploader.Rename(url.split("/").pop());
-   }
-   function InitUploader(){
-     zoyoe.uploader.Setup("{{SERVICE}}","{{GALLERY}}","{{NAME}}");
-   }
    function DocumentLoad(folder,name){
      if(zoyoe.ElementExtension){
        zoyoe.ElementExtension.BuildExtensionElements();
@@ -318,7 +305,7 @@ a.ready-to-confirm{
     <h2 class="ready">Url:<span id='resurl'>{{DOMAIN}}/core/data/res/{{SERVICE}}/{{GALLERY}}/{{NAME}}</span></h2>
     <input class='res-name' value='{{NAME}}' onchange="UpdateImgUrl('{{DOMAIN}}/core/data/res/{{SERVICE}}/{{GALLERY}}/'+this.value)">
     </input>
-    <h2 id='s2' class='progress'>Source File:<span>No File Specified</h2>
+    <h2 id='s2' class='progress'>Source File:<span>No File Specified</span></h2>
     <div id='progress' class='progress-bar'>
        <div class='progress-block'></div>
        <div class='progress-block'></div>
@@ -377,7 +364,7 @@ a.ready-to-confirm{
   <div id='img-container' class='img-container'>
     {% if USETMP %}
     <img src='/gallery/imagecache/{{SERVICE}}/data' 
-    onload = "CompleteHandler(null);zoyoe.uploader.Crunch('select','img-container')"></img>"
+    onload = "(function(){CompleteHandler(null);zoyoe.uploader.Crunch('select','img-container');})()"></img>"
     {% endif %}
   </div>
 </div>

@@ -1,7 +1,7 @@
 {% regroup logList|dictsort:"IP" by IP as log %}
 <div>
   {% for IP in log %}
-  <h2>{{ IP.grouper }}</h2>
+  <h2>IPADDR:{{ IP.grouper }}</h2>
   <table cellspacing="2px" id="log-table" style="width: 100%; font-size: 10px; overflow: auto; text-align: center">
     <thead>
       <tr>
