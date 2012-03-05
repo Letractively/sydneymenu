@@ -11,13 +11,7 @@
 {% endblock %}
 
 {% block js_link %}
-  <script type="text/javascript" charset="utf-8"
-          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
-  </script>
-  <script type="text/javascript" src="/js/comps.js"></script>
-  <script type="text/javascript" src="/js/zoyoe.js"></script>
-  <script type="text/javascript" src="/js/ele.js"></script>
-  <script type="text/javascript" src="/js/ui.js"></script>
+  {% zoyoejs 'all' %}
   <script type="text/javascript">
     function document_load(){
       YUI().use('node','event','io-form',function(Y){
