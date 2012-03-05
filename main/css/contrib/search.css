@@ -189,7 +189,6 @@ div.hint{
   color:white;
   font-size:12px;
   position:relative;
-  float:left;
   top:-20px;
   padding:5px;
 }
@@ -198,12 +197,6 @@ div.invalid-hint{
   float:left;
   margin:0px 20px 0px 20px;
 }
-
-#page {
-  width:100%;
-  margin:auto;
-}
-
 
 #sup-lane{
 height:80px;

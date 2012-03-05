@@ -14,7 +14,7 @@
       padding:20px 0px 0px 15px;
       position:relative;
       height:70px;
-      width:550px;
+      width:575px;
     }
     #discount-list div.container{
       background-color:smokeWhite;
@@ -86,20 +86,6 @@
       height: 200px;
       border:1px solid gray;
     }
-    #search-btn{
-      display:block;
-      padding:14px;
-      float:left;
-      font-size:20px;
-      text-transform:uppercase;
-      background-color: steelblue;
-      margin:10px 0 0 10px;
-      cursor:pointer;
-      color:#eeeeee;
-      border:2px solid #999999;
-    }
-
-
   </style>
 {% endblock %}
 
@@ -174,6 +160,7 @@
               <a onclick="zoyoe.search.SetPreference('item',2)">Items</a>
             </div>
             <div class="invalid-hint">Invalid Query String</div>
+            <div class="btnblue" style='float:right;top:23px;position:relative;' onclick="zoyoe.search.PreSearch()">go</div>
           </div>
     </div>
     <div id = "filter-bar">
