@@ -1,0 +1,56 @@
+{% extends 'core/panel.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  {% zoyoejs 'all' %}
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','event','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y,{static_panel:true});
+        zoyoe.service_name = '{{SERVICE.name}}';
+        zoyoe.ui.ShowPanel('gallery',null,null);
+        zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% if user.is_authenticated %}
+  <li class='menu' onclick ="zoyoe.admin.Logout()"><a>Logout</a></li>
+  {% else %}
+    <li class='menu' onclick ="zoyoe.admin.ShowLoginDialog()"><a>Login</a></li>
+    <li class='menu' onclick ="zoyoe.admin.ShowRegisterDialog()"><a>Register</a></li>
+  {% endif %}
+{% endblock %}
+
+{% block extra %}
+<div id = 'panel' style="top:31px;">
+  <div class='panel-hint general-title nav-sup dark'"> 
+  </div>
+  <div class='panel-content' style="top:90px;">
+  </div>
+  <div class='panel-left' style="top:90px;">
+  </div>
+  <div class='button-lane'>
+  </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,13 @@
+div.adventure-square{
+width:150px;
+height:150px;
+float:left;
+margin:30px;
+border:1px solid gray;
+}
+div.list{
+  width:650px;
+  height:100%;
+  float:left;
+  border-right:1px solid gray;
+}

@@ -1,0 +1,97 @@
+{% extends 'core/panel.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/map.css" type="text/css" media="all" charset="utf-8"/>
+
+  <!-- FIX ME:Do not put craps here -->
+  <style type="text/css">
+    .map-icon {
+      opacity:0.9;
+      font-size:12px;
+      width:30px;height:30px;
+      padding-top:7px;
+      text-align:center;
+      color:white;
+      background:url('/js/res/pushpin.png') no-repeat
+    }
+    .map-icon-inactive {
+      opacity:0.7;
+      font-size:12px;
+      width:30px;
+      height:30px;
+      padding-top:7px;
+      text-align:center;
+      color:white;
+      background:url('/js/res/pushpin_inactive.png') no-repeat
+    }
+    .nav{
+      position:absolute;
+      z-index:100;
+    }
+  </style>
+{% endblock %}
+
+{% block js_link %}
+
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <!-- need finally make a new js file contain all the info manage script -->	
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <!-- Project Components -->
+
+  <script type="text/javascript" src="/js/home.js"></script>
+  {% zoyoejs 'all' %}
+  <script type="text/javascript">
+  function document_load(){
+      YUI().use('node','io-form',function(Y){
+      if(zoyoe.ElementExtension){
+        zoyoe.ElementExtension.BuildExtensionElements();
+      }
+      zoyoe.InitZoyoe(false,Y,{static_panel:true});
+      zoyoe.ui.ShowPanel('map',null,null);
+      zoyoe.admin = InitAdmin(zoyoe);
+      new MapInfoCore(function(rmap){
+        sdist(rmap)
+      },null,"map-info")
+    });
+  }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% include "core/_usrmenu.html" %}
+{% endblock %}
+ 
+
+{% block content %}
+<div id = 'panel' style="top:31px;">
+  <div class='panel-hint general-title nav-sup dark'" 
+    style="background:whiteSmoke url('/res/bg/distribution.png') 20px center no-repeat;
+    padding-left:70px;"> 
+  </div>
+  <div class='panel-content' style="top:90px;z-index:10;" id="map-info">
+  </div>
+  <div class='panel-left' style="top:90px;">
+  </div>
+  <div class='button-lane'>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra %}
+{% include "core/shortcut.html" %}
+{% endblock %}
+
+

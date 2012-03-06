@@ -1,0 +1,212 @@
+{% extends 'core/clean.html'%}
+{% load comp_filters %}
+{% load glue_filters %}
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/search.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <style type="text/css">
+    #search-bar {
+      clear:both;
+      padding:20px 0px 0px 15px;
+      position:relative;
+      height:70px;
+      width:575px;
+    }
+    #discount-list div.container{
+      background-color:smokeWhite;
+      float:left;
+    }
+    #advertise ul li{
+      margin-top:20px;
+      border: 1px solid #AAA;
+      width:275px;
+      border-bottom:1px solid #AAA;
+    }
+    #advertise{
+      padding-bottom:20px;
+    }
+    #advertise p{
+      margin: 0px 5px 4px 5px;
+      padding:0px;
+      font-size:12px;
+    }
+    ul.poster{
+      font-family:Arial;
+    }
+    ul.poster li > a{
+      background: transparent url("/res/icons/steparrow.png") right center no-repeat;
+      color:#1b1b1b;
+      background-color:whiteSmoke;
+      font-size:14px;
+      font-weight:bold;
+      padding:5px 5px 5px 5px;
+      display:block;
+      margin-bottom:10px;
+      border-bottom:1px solid #CCC;
+    }
+    div.discount-item{
+      margin:0px 0px 15px 15px;
+      width:85px;
+      height:85px;
+      float:left;
+      border:1px solid #AAA;
+    }
+    div.discount-item a{
+      border:none;
+      width:85px;
+      height:85px;
+    }
+    div.discount-item img{
+      width:85px;
+      height:85px;
+    }
+
+    #search-bar input{
+      height:38px;
+      position:relative;
+      width:558px;
+      padding:0 5px 0 5px;
+      margin-top:7px;
+      top:0px;
+      font-size:25px;
+      border:none;
+      font:21px arial,sans-serif bold;
+      border:1px solid #EAEAEA;
+      -moz-box-shadow: 2px 2px 3px #969696;
+      -webkit-box-shadow: 2px 2px 3px #969696;
+      zoom: 1;
+      filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=135, Strength=3);
+    }
+
+    .function-block {
+      height: 200px;
+      border:1px solid gray;
+    }
+  </style>
+{% endblock %}
+
+{% block js_link %}
+
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  {% zoyoejs 'all' %}
+  <script type="text/javascript" src="/js/search.js"></script>
+{% endblock %}
+
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block bar %}
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% include "core/_usrmenu.html" %}
+{% endblock %}
+
+{% block content %}
+ <div class='nav-sup' style="border-bottom:75px solid white;">
+       <div class='photo-block'>
+         <h1 style="font-weight:bolder;font-size:35px;font-family:Times New Roman, Times, serif;">
+         business cards of local services
+         </h1>
+         <h2 style="font-size:15px;font-family:">
+         zoyoe, build online community for your local services
+         </h2>
+         <div class="buttons shadow">
+           <a class="button current quicksearch">
+             Quick Search 
+           </a>
+           <a href="/mark/" class='button recommandation'>Recommandation</a>
+           <a href="/map/" class="button distribution">
+             Distribution
+           </a>
+           <a href="/glue/collection/personal" class="button collection">
+             My Collection 
+           </a>
+           <a class="button support">
+             Support & Forum
+           </a>
+         </div>
+       </div>
+ </div>
+ <div class="container_12">
+   <div id='discount-list' class="grid_12">
+    <div class='container'>
+      {% discountservices %}
+    </div>
+   </div>
+   <form id="search" action="javascript:zoyoe.search.PreSearch();" class="grid_8" style="padding-top:10px;"><!-- Just for convenience, Not very useful -->
+    <div id="search-bar">
+         {{"AutoComplete"|auto_complete|style:"padding:0px;margin:0px 2px 0px 2px;"|render|safe}}
+          <div class="hint">
+            <div id="match-option" class="option">
+              <a class='select' onclick="zoyoe.search.SetPreference('general',0)">Services</a>
+              <a onclick="zoyoe.search.SetPreference('address',1)">Address</a>
+              <a onclick="zoyoe.search.SetPreference('item',2)">Items</a>
+            </div>
+            <div class="invalid-hint">Invalid Query String</div>
+            <div class="btnblue" style='float:right;top:23px;position:relative;' onclick="zoyoe.search.PreSearch()">go</div>
+          </div>
+    </div>
+    <div id = "filter-bar">
+      <div id = "service-type" class="drop-list">
+        <div class="label">
+        Service Type
+        </div>
+        {% typetags "type" %}
+      </div>
+      <div id = "service-local" class="drop-list" style="clear:both">
+        <div class="label">
+        Locality 
+        </div>
+        {% localtags "local" %}
+      </div>
+    </div>
+  </form><!-- End of the main form -->
+  <div id = 'advertise' class="grid_4">
+    <div class='personalize'>
+<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FZoyoe%2F174678205955396&amp;width=275&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:275px; height:290px;" allowTransparency="true"></iframe>
+    </div>
+    <div>
+      <ul class='poster'>
+        <li>
+          <a>online booking program</a>
+          <p>
+            The online booking program enables services to integrate their booking system into zoyoe service page. 
+          </p>
+          <p>Usually, Those who come to our door to deliverying their services are more likelyto join this program</p>
+        </li>
+        <li>
+          <a>discount program</a>
+          <div>
+            <p>The discount program allows services to generate a discount card every 4-24 hours. Services do not generate new discount cards if the old one has not been consumed.
+            </p>
+            <p>Customers who collects discount cards will get certain discount for related services.
+            </p>
+          </div>
+        </li>
+        <li>
+          <a>e-commence program</a>
+            <p>E-commence program allows services to collect payment online. 
+            </p>
+            <p>Since online shopping is not our main targeting area. We highly recommend our services providers to use this program as a way to collect regular fees for non-merchandise sale. 
+            </p>
+        </li>
+        </li>
+      </ul>
+    </div>
+  </div>
+ </div>
+{% endblock %}
+
+{% block tail %}
+ {% include "core/_tail.html" %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% if ROOT %}
+    <div class='section-container wide'>
+{% endif %}
+      <div id='photoplayer' class='section'>
+        <div class='info-block'>
+         <div class='extension-photo-player'>
+         </div>
+        </div>
+      </div>
+{% if HAS_AUTHORITY %}
+      <div class='tail'>
+        <h3><a onclick="zoyoe.comps['GALLERY'].ShowModifyDefaultDialog()">modify</a></h3>
+      </div>
+{% endif %}
+{% if ROOT %}
+    </div>
+{% endif %}
+

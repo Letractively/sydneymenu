@@ -1,0 +1,36 @@
+{% load hash_filters %}
+{% if ROOT %}
+    <div class='section-container open'>
+{% endif %}
+      <div id='mappreview' class='section'>
+        <div class='title'><h3>our location</h3></div>
+        <div id='map' style='position:relative; width:210px; height:150px;'></div>
+        <script type='text/javascript'>
+          
+          var key =
+          "Av6myMPPl0Aix9wsk-YXGQ23bvY1A3I2dmHJ44GAVYwlF_70J4OJdmv_SqM1rFJd";
+
+          var longitude = {{SERVICE.longitude}}/1000000;
+          var latitude = {{SERVICE.latitude}}/1000000;
+          
+          var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude,
+          longitude), {text:""});
+          var map = new Microsoft.Maps.Map(
+            document.getElementById("map"),
+            {
+              credentials: key,
+              mapTypeId: Microsoft.Maps.MapTypeId.road,
+              center: new Microsoft.Maps.Location(latitude,
+          longitude),
+              zoom: 15,
+              disableUserInput:true,
+              showCopyright: false, showDashboard: false,
+          showLogo:false, showScalebar: false,
+            }
+          );
+          map.entities.push(pin);
+        </script>
+      </div>
+{% if ROOT %}
+    </div>
+{% endif %}

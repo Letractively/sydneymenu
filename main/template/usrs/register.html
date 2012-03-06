@@ -1,0 +1,19 @@
+{% extends 'glue/dialog.html'%}
+{% block tittle %}register{% endblock %}
+
+{% block js_code %}
+  <script type="text/javascript">
+  function document_load(){
+    YUI().use('node','io-form',function(Y){
+      zoyoe.InitZoyoe(false,Y,{static_dialog:true});
+      zoyoe.admin = InitAdmin(zoyoe);
+      zoyoe.admin.ShowRegisterDialog();
+      Y.one('#dialog').setStyle('display','block');
+   });
+  }
+  </script>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}

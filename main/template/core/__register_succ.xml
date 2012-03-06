@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SUCC>
+  {% for key, value in REQUEST.iteritems%}
+  <key name='{{key}}'>{{value}}
+  </key>
+  {% endfor %}
+  <HTMLMSG>
+      Congratulation! Your are now a registerred member of us and can use all the utilities after login. An email has been send to your email address, using the link in your email to activate your account and fill the details about yourself once you get time.
+  </HTMLMSG>
+</SUCC>

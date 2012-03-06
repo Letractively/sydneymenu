@@ -1,0 +1,50 @@
+{% load comp_filters %}
+<form id='form-addgirl' action="">
+   <div class="left">
+      <div id='icon-view'>
+      <img src='/res/dft_icon.png'></img>
+      </div>
+   </div>
+   <div class="right">
+      <div id="name">
+        <label for='name'>Name:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='name' value='{{REQUEST.name}}'/>
+      </div>
+      <div id="size">
+        <label for='name'>Size:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='size'/>
+      </div>
+      <div id="age">
+        <label for='age'>Age:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='age'/>
+      </div>
+      <div id="nation">
+        <label for='name'>Nation:</label>
+          <span class='input-fine'>
+          &#9746
+          </span>
+        <input type='textfield' name='nation'/>
+      </div>
+   </div>
+   <div id='icon'>
+     <label for='icon'>Icon Path in Gallery:</label>
+     {{"icon"|dictionary|style:"width:345px;padding-top:5px;"|addfield:GALLERY_INFO|render|safe}}
+   </div>
+   <div id='description'>
+     <label for="description">Description:</label>
+     <span class='input-fine'>
+     &#9746
+     </span>
+     <textarea name='description'></textarea>
+   </div>
+   <br style="clear:both"/>
+</form>

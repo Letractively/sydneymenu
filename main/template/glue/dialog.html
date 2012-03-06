@@ -1,0 +1,35 @@
+{% extends 'core/clean.html'%}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <style type="text/css">
+  #dialog{
+    top:30px;
+  }
+  #dialog .dialog{
+    top:10px;
+  }
+  </style>
+
+{% endblock %}
+
+{% block js_link %}
+
+  {% zoyoejs 'all' %}
+  {% block js_code %}{% endblock %}
+  </script>
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+{% endblock %}
+ 
+{% block content %}
+{% endblock %}

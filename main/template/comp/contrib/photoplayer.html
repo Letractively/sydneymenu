@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+#player{
+}
+#player img{
+  display:block;
+  position:absolute;
+  max-height:190px;
+  margin:auto;
+}
+</style>
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+<script>
+InitPlayer = function(){
+    YUI({
+        gallery: 'gallery-2011.04.20-13-04' // Last Gallery Build of this module.
+    }).use('gallery-yui-slideshow', function(Y){
+        var slideshow = new Y.Slideshow({ srcNode: '#player' });
+        slideshow.render();
+    });
+}
+</script>
+</head>
+<body onload="InitPlayer()" style="overflow:hidden">
+<div class="player">
+  <div id = "player">
+   {% for img in PHOTOS %}
+   <img src="/gallery/image/{{SERVICE}}/{{GALLERY}}/{{img}}/">
+   {% endfor %}
+   </img>
+  </div>
+</div>
+</body>
+</html>

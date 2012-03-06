@@ -1,0 +1,81 @@
+{% load comp_filters %}
+    <form id='form-addservice' action="">
+      <p>
+        <label for="type">Type:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label>
+        <input type='textfield' name='type'/> 
+      </p>
+      <p>
+        <label for"price">Price:</label>
+        {% select %}
+        {"name":"price",
+        "style":"width:346px;clear:both;margin:0px 0px 0px 20px",
+        "fields":["10-20","20-40","40-160"],
+        "default":"10-20"}
+        {% endselect %}
+      </p>
+      <p class='tmp'>
+        <input type='textfield' name='icon' value='icon'/> 
+      </p>
+      <p>
+        <label for='name'>Service Name:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label>
+        <input type='textfield' name='name' value='{{REQUEST.name}}'/>
+      </p>
+      <p>
+        <label for='phone'>Phone:
+          <span class='input-fine'>
+          &#9746
+          </span>
+        </label>
+        <input type='textfield' name='phone' value='{{REQUEST.phone}}'/>
+      </div>
+      <p>
+        <label for="address">Address:
+        <span class='input-fine'>
+          &#9746
+        </span>
+        </label>
+        <input type='textfield' name='address' id='address-input' value='{{REQUEST.phone}}'/>
+      </p>
+      <div class='lane'>
+        <label for="description">Description:
+        <span class='input-fine'>
+        &#9746
+        </span>
+        </label>
+        <textarea name='description' value='{{REQUEST.phone}}'></textarea>
+      </div>
+      <div class='lane' id='days'>
+        <label>Working Days:
+        <span class='input-fine'>&#9746</span>
+        </label><br style="clear:both"/>
+          <input type = checkbox name='Mon' value = 'Mon'>Mon.</input>
+          <input type = checkbox name='Tue' value = 'Tue'>Tue.</input>
+          <input type = checkbox name='Wed' value = 'Wed'>Wed.</input>
+          <input type = checkbox name='Thu' value = 'Thu'>Thu.</input>
+          <input type = checkbox name='Fri' value = 'Fri'>Fri.</input>
+          <input type = checkbox name='Sat' value = 'Sat'>Sat.</input>
+          <input type = checkbox name='Sun' value = 'Sun'>Sun.</input>
+      </div>
+      <p class='tmp'>
+        <input type='textfield' name='grade' value='1'/>
+      </p>
+      <p class='tmp'>
+        <input type='textfield' name='privilege' value='normal'/>
+      </p>
+      <p class='tmp'>
+        <input type='textfield' name='local' value='normal'/>
+      </p>
+      <p>
+       <span class="commit" onclick="zoyoe.ui.SubmitForm();">Create & Publish</span>
+       <span class="cancel" onclick="zoyoe.ui.HideDialog();">Back</span>
+      </p>
+      <br style="clear:both"/>
+    </form>

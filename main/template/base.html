@@ -1,0 +1,50 @@
+{% extends 'core/panel.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/pybb/base.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  {% zoyoejs 'all' %}
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+        Y.Node.one('#panel').setStyle('display','block');
+      });
+    }
+  </script>
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+  {% include "core/_usrmenu.html" %}
+{% endblock %}
+
+{% block extra %}
+<div id = 'panel' style="top:31px;">
+  <div class='panel-hint general-title nav-sup dark' style="background: whiteSmoke url('/res/bg/support.png') 20px center no-repeat;padding-left:80px;"> 
+    {% block pybb_crumbs %}{% endblock %}
+  </div>
+  <div class='panel-content' style="top:90px;overflow-y:scroll;">
+   <div id = 'content'>
+   {% block pybb_content %}{% endblock %}
+   </div>
+  </div>
+  <div class='panel-left' style="top:90px;">
+   {% block sidebar %}{% endblock %}
+  </div>
+  <div class='button-lane'>
+  </div>
+</div>
+{% endblock %}

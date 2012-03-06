@@ -1,0 +1,25 @@
+{% load comp_filters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Adult Services Distribution</title>
+  <META name="description" content="Sydney Adult Services Distribution"></META>
+  <link rel="stylesheet" href="/css/default/element.css" type="text/css" media="all" charset="utf-8"/>
+
+  <!-- YUI Components --> 
+  <script type="text/javascript" charset="utf-8"
+          src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+  </script>
+  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <script type="text/javascript" src="/js/mesh.js"></script>
+  <script type="text/javascript" src="/js/zoyoe.js"></script>
+  <script type="text/javascript" src="/js/ele.js"></script>
+</head>
+
+<body onload="ExtensionTest()">
+<label for "single select">SelectSingle:</label>{{"SelectSingle"|select|style:"width:200px;"|addfield:"Field1"|addfield:"Field2"|render|safe}}
+<label for "auto auto_complete">AutoComplete:</label>{{"AutoComplete"|auto_complete|style:"width:200px;height:25px;border:1px solid gray"|render|safe}}
+<label for "test combo">ComboTest:</label>{{"ComboTest"|combo|style:"width:200px;"|addfield:"Strong"|addfield:"Skinny"|render|safe}}
+<label for "test dict">DictTest:</label>{{"DictTest"|dictionary|style:"width:200px;"|addfield:DICT|render|safe}}
+</body>
+</html>

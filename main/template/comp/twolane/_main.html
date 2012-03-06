@@ -1,0 +1,34 @@
+{% load hash_filters %}
+{% load comp_filters %}
+<div class='container_16' style="padding:20px;">
+  <div id="left-section" class='left-section'>
+    {% with 'contrib'|component:"icon" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"forum" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"mappreviewlarge" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"gallery" as path %} 
+      {% include path %}
+    {% endwith %}
+  </div><!-- end of left section -->
+  <div id="mid-section" class='mid-section'>
+    {% with 'contrib'|component:"photoplayer" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"info" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"timetable" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"items" as path %} 
+      {% include path %}
+    {% endwith %}
+  </div><!-- end mid section -->
+  <br style="clear:both"/>
+</div>
+

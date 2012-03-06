@@ -1,0 +1,26 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% if ROOT %}
+    <div class='section-container wide'>
+{% endif %}
+      <div id='timetable' class='section'>
+        <div class='title'>
+          <h3>Time Table:</h3>
+        </div>
+        <div class='info-block'>
+          <ul class='border-split select'>
+          {% for item in COMP|hash:"ITEMS"|hash:"timetable" %}
+          {{COMP|hash:"RENDER"|xslt:item|safe}}
+          {% endfor %}
+          </ul>
+       </div>
+      </div>
+{% if HAS_AUTHORITY %}
+      <div class='tail'>
+        <h3><a href="/glue/data/{{SERVICE.name}}/timetable/">modify</a></h3>
+      </div>
+{% endif %}
+{% if ROOT %}
+    </div>
+{% endif %}
+ 

@@ -1,0 +1,137 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% load glue_filters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmln = "http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" href="/core/css/{{CSS_ROOT}}/service.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/core/css/dialog.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+
+
+<!-- Microsoft Bingmap -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+<!-- YUI Components --> 
+{% zoyoejs 'all' %}
+
+<script type="text/javascript">
+function GetTitle(obj){
+  var ns = obj.getElementsByTagName('div');
+  for(var i=0;i<ns.length;i++){
+    if(ns[i].className == 'title'){
+      return ns[i].getElementsByTagName('h3')[0];
+    }
+  }
+  return null;
+}
+function Init(){
+  var mid = document.getElementById('mid-section');
+  var left = document.getElementById('left-section');
+  var right = document.getElementById('right-section');
+  var basic_info = document.getElementById('info');
+  var time_table = document.getElementById('timetable');
+  var roster = document.getElementById('roster');
+  var photos = document.getElementById('photoplayer');
+  var item = document.getElementById('item');
+  var icon = document.getElementById('icon');
+  var gallery = document.getElementById('gallery');
+  var news = document.getElementById('news');
+  var preview = document.getElementById('mappreview');
+  if(false){
+  if(mid){
+    MarkAsArrangeV(mid,basic_info.parentNode,GetTitle(basic_info));
+    MarkAsArrangeV(mid,time_table.parentNode,GetTitle(time_table));
+    MarkAsArrangeV(mid,roster.parentNode,GetTitle(roster));
+    MarkAsArrangeV(mid,photos.parentNode,GetTitle(photos));
+    MarkAsArrangeV(mid,news.parentNode,GetTitle(news));
+  }
+  if(left){
+    MarkAsArrangeV(left,icon.parentNode,GetTitle(icon));
+    MarkAsArrangeV(left,item.parentNode,GetTitle(item));
+    MarkAsArrangeV(left, preview.parentNode, GetTitle(preview));
+  }
+  if(right){
+    MarkAsArrangeV(right,gallery.parentNode,GetTitle(gallery));
+  }
+  }
+  YUI().use('node','io-form','event',function(Y){
+    //zoyoe.InitZoyoe(true,Y);
+    zoyoe.InitZoyoe(false,Y);
+    zoyoe.service_name = '{{SERVICE.name}}';
+    zoyoe.comps['item'] = InitItems(zoyoe,'item');
+    zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
+    zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
+    zoyoe.comps['LAYOUT'] = InitLayout(zoyoe);
+    zoyoe.comps['ICON'] = InitIcon(zoyoe);
+    zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
+    zoyoe.comps['timetable'] = InitItems(zoyoe,'timetable');
+//    zoyoe.comps['preview'] = InitPreview(zoyoe,'preview');
+    zoyoe.admin = InitAdmin(zoyoe);
+    if(zoyoe.ElementExtension){
+      zoyoe.ElementExtension.BuildExtensionElements();
+    }
+  });
+}
+</script>
+</head>
+<body onload='Init()'>
+<div class='nav'>
+  <ul>
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/search/'>Service Cards</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
+   {% include "core/_usrmenu.html" %}
+   {% if HAS_AUTHORITY %}
+    <li class='menu' style="width:110px;float:right">
+      <a>Service Config</a>
+      <ul class='submenu' style="width:200px;">
+      <div style="text-align:left;margin:5px;padding:5px;border-bottom:1px solid #EAEAEA;"><a style="color:black;font-weight:bold;">You are the owner of {{SERVICE.name}} 
+        </br><a style="color:#1b1b1b;">has full authority</a></div>
+ 
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Change Template</a></li>
+      <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Color()"><a>Change Color Theme</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
+      </ul>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+<div class='nav-sup'>
+{% collect SERVICE user %}
+</div>
+<div class="nav-last" style="height:1px;"></div>
+
+{% with TEMPLATE|component:"main" as main %} 
+{% include main %}
+{% endwith %}
+<div id='dd-container' style="z-index:99;opacity:0.8;position:absolute;black;display:none;">
+</div>
+<div id='dd-shadow' class='section-container' style="position:absolute;border:1px dashed gray;display:none;">
+</div>
+<br style="clear:both"/>
+<form name='reload' url='/core/service/{{SERVICE.name}}/'></form>
+  <div id='panel'>
+    <div class='panel'>
+      <div class='panel-hint general-title bright'>
+      </div>
+      <div class='panel-content'>
+      </div>
+      <div class='panel-left'>
+      </div>
+      <div class='button-lane'>
+      </div>
+    </div>
+  </div>
+  <div id='zsk' class='msk'>
+  </div>
+</form>
+</body>
+</html>

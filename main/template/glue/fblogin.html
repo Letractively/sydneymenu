@@ -1,0 +1,71 @@
+<html>
+<head>
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+</head>
+<body style="overflow:hidden">
+<div id="fb-root">
+<script>
+  function setCookie(c_name,value){
+    var exdate=new Date();
+    var c_value=escape(value) + ";path=/;";
+    document.cookie=c_name + "=" + c_value;
+  }
+  function login(user_id){
+    setCookie('ZOYOE_FB_USR',user_id);
+    setCookie('ZOYOE_FB_TOKEN',FB.getAuthResponse()['accessToken']);
+    top.location.reload(true);
+  }
+  function fblogin(){
+    FB.login(function(response){
+      if(response.authResponse){
+         FB.api('/me', function(user) {
+            if (user) {
+              login(user.id);
+            }
+         });
+      }else{
+      }
+    },{scope:'email'});
+  }
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '360231047327032', // App ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+    FB.getLoginStatus(function(response){
+      if (response.status == 'connected'){
+         FB.api('/me', function(user) {
+            if (user) {
+              var image_url = 'https://graph.facebook.com/' + user.id + '/picture';
+              var status = document.getElementById('zoyoe-fb-status');
+              status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+            }
+         });
+      }else if(response.status == 'not_authroized'){
+        var status = document.getElementById('zoyoe-fb-status');
+        status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+      }else{
+        var status = document.getElementById('zoyoe-fb-status');
+        status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+      }
+    });
+    // Additional initialization code here
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+</div>
+<div id='zoyoe-fb-status'>
+<a href='javascript:fblogin()' class='fblogin'></a>
+</div>
+</body>
+</html>

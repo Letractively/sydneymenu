@@ -1,0 +1,28 @@
+{% if IPAD %}
+<a class='spanblue'>
+<script type='text/javascript'>
+  function appurl(url){
+    var fullurl = "zoyoe-ipad-uploader://"
+      + url + "/{{SERVICE}}" 
+      + "/{{GALLERY}}/{{NAME}}/?cmd={{ACTION}}&usetmp=true"
+    return fullurl;
+  }
+  var href = document.getElementById('upload-flash').getElementsByTagName('a')[0];
+  href.href = appurl(window.location.host);
+</script>open</a>
+
+{% else %}
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="60" height="25" id="ie_uploader">
+        <param name="movie" value="/res/main.swf" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#869ca7" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <embed src="/res/main.swf" quality="high" bgcolor="#869ca7" id="uploader"
+             width="60" height="25" name="uploader" align="middle"
+             play="true" loop="false" quality="high" allowScriptAccess="sameDomain"
+             type="application/x-shockwave-flash" FlashVars="RequestUri=abc" 
+             pluginspage="http://www.macromedia.com/go/getflashplayer">
+        </embed>
+     </object>
+{% endif %}
+
