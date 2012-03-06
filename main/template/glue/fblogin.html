@@ -40,16 +40,15 @@
             if (user) {
               var image_url = 'https://graph.facebook.com/' + user.id + '/picture';
               var status = document.getElementById('zoyoe-fb-status');
-              status.innerHTML = "<span class='btnblue' onclick=\"login('"+ user.id +"')\"" 
-                + "style='margin:0px;float:left;'>login as "+ user.name + "</span>";
+              status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
             }
          });
       }else if(response.status == 'not_authroized'){
         var status = document.getElementById('zoyoe-fb-status');
-        status.innerHTML = "<span onclick='fblogin()' class='spanblue'>login via facebook account</span>";
+        status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
       }else{
         var status = document.getElementById('zoyoe-fb-status');
-        status.innerHTML = "<span onclick='fblogin()' class='spanblue'>login via facebook account </span>";
+        status.innerHTML = "<a href='javascript::fblogin()' class='fblogin'></a>";
       }
     });
     // Additional initialization code here
@@ -66,6 +65,7 @@
 </script>
 </div>
 <div id='zoyoe-fb-status'>
+<a href='javascript::fblogin()' class='fblogin'></a>
 </div>
 </body>
 </html>
