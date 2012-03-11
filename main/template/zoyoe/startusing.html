@@ -34,19 +34,24 @@
  margin:0px 30px 0px 30px;
  border:1px solid #EAEAEA;
 }
-#steps p label{
- padding:5px 0px 10px 40px;
+#steps div.step label{
+ padding:5px 0px 0px 20px;
  display:block;
  margin:0px 0px 10px 0px;
- font-size:18px;
- font-weight:bold;
+ font-size:22px;
+ font-weight:normal;
  position:relative;
  left:-10px;
- background: transparent url("/res/icons/greenlight.png") left 0px no-repeat;
+ font-family: Georgia;
+ color:#1e4f76;
 }
-#steps p{
+#steps div.step p{
+  margin:8px 0 17px 0;
+}
+#steps div.step{
+ font-size:12px;
  padding:10px 5px 10px 20px;
- margin:0px 0px 20px 20px;
+ margin:0px 0px 20px 0px;
  border-bottom:1px solid #AAA;
  border-top:1px solid #EAEAEA;
  border-left:1px solid #EAEAEA;
@@ -98,12 +103,12 @@
          zoyoe, integrating your local business with your online community
          </h2>
          <div class="buttons shadow">
-           <a href="/zoyoe/" class="button mission">
-             Our Mission 
-           </a>
            <div class="button startusing current">
              Start Using 
            </div>
+           <a href="/zoyoe/mission/" class="button mission">
+             Our Mission 
+           </a>
            <div class="button servicecard">
              Our Programs
            </div>
@@ -117,30 +122,26 @@
        </div>
  </div>
  <div class='container_12' id='steps'>
- <p class='grid_8'>
-    <label>Step 1:</label>
-    Get a zoyoe account. If you already got one, login and back to this page.
- </p>
- <p class='grid_8'>
-    <label>Step 2:</label>
-    Create a simple service page. By doing this you will create a web page that contains your basic infomation about yourself and your service.
- </p>
- <p class='grid_8'>
-    <label>Step 3:</label>
-    Manage your service by uploading images to your gallery, writing down your time table and fullfill the items your will provide in your service.
- </p>
- <p class='grid_8'>
-    <label>Step 4 (Optional):</label>
-    Enable the forum of your service if you already got some local customers and want to collect after-sale information from them.
- </p>
- <p class='grid_8'>
-    <label>Step 5 (Optional):</label>
-    Connect the page with your other web resources, your facebook page, your twitter page, etc...
- </p>
- <p class='grid_8'>
-    <label>Step 6 (Optional and fees apply):</label>
-    Join our programs. We currently have 3 programs, they are online booking program, discount retail program, and e-commence program.
- </p>
+ <div class='step'>
+  <label> Advertising your service uniformly</label>
+  <iframe style="width:605px;height:350px;margin:10px 10px 10px 5px;float:left;" frameborder='0' src='/wiki/card.html'></iframe>
+  <p style='float:right;width:300px;'>
+  To start with, you need to create a zoyoe web page that contains your basic infomation about yourself and your service.
+  </p>
+  <p style='float:right;width:300px;'>
+  After that you can manage the content of your service by uploading images to your gallery, writing down your time table and fullfill the items your will provide in your service.
+  </p>
+  <p style='float:right;width:300px;'>
+  If you have already got your social pages like facebook wall, twitter page, digg or a dedicated web page setup, then you probably need to connect them into your zoyoe web page.
+  </p>
+  <p style='float:right;width:300px;'>
+  Once you've done all these, you can create a business card just as showed in the left.
+  </p>
+  <p style='float:right;width:300px;'>
+  You can plug your business card into any kind of content you publish on your local classfield , bbs , your blog , your dedicated web page, etc ...
+  You can also plug this into your retailing pages like ebay product pages and email retailing pages.
+  </p>
+  <br style="clear:both"/>
  </div>
 {% endblock %}
 
