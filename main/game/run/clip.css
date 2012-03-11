@@ -5,16 +5,31 @@ body,div{
  -webkit-tap-highlight-color: rgba(0,0,0,0); 
  select:none;
 }
+ul{
+  padding:0px;
+  margin:0px;
+  list-style-type:none;
+}
 body{
 position:absolute;
 height:100%;
 width:100%;
 }
+
+.bg-menu{
+ background: url('res/bg/cover.jpg') no-repeat;
+}
+
+.bg-test{
+ background: url('res/bg/test.jpg') no-repeat;
+}
+
 div.playground{
-width:1020px;
-height:704px;
-border:2px solid gray;
+width:960px;
+height:640px;
 position:absolute;
+border-bottom:1px solid black;
+border-right:1px solid black;
 }
 div.env{
   position:absolute;
@@ -68,4 +83,9 @@ div.panel div.bombtouch{
 
 div.block-normal {
  overflow:hidden;
+}
+a{
+  color:inherit;
+  border:none;
+  text-decoration:none;
 }
