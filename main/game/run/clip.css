@@ -1,3 +1,6 @@
+@font-face {
+  font-family:"Walt Disney Script";src:url("./res/fonts/wds052801.eot?") format("eot"),url("./res/fonts/wds052801.woff") format("woff"),url("./res/fonts/wds052801.ttf") format("truetype"),url("./res/fonts/wds052801.svg#WaltDisneyScript") format("svg");font-weight:normal;font-style:normal;}
+
 body,div{
  padding:0px; 
  margin:0px;
@@ -17,11 +20,21 @@ width:100%;
 }
 
 .bg-menu{
- background: url('res/bg/cover.jpg') no-repeat;
+ background: url('./res/bg/cover.jpg') no-repeat;
 }
 
 .bg-test{
- background: url('res/bg/test.jpg') no-repeat;
+ background: url('./res/bg/test.jpg') no-repeat;
+}
+.bg-scenario{
+ background: url('./res/ground/grass.jpg') repeat;
+}
+
+.gold-impact{
+  font-family:"Walt Disney Script";
+  color:#ecff18;
+  font-weight:bold;
+  text-shadow: 0px 0px 20px black;
 }
 
 div.playground{
@@ -32,18 +45,19 @@ border-bottom:1px solid black;
 border-right:1px solid black;
 }
 div.env{
-  position:absolute;
+  position:fixed;
   width:900px;
-  height:700px;
+  height:600px;
   cursor:pointer;
-  background-color:white;
-  overflow:hidden;
+  background: url('./res/ground/grass.jpg') repeat;
+  overflow:display;
+  z-index:20;
 }
 
 div.env div{
   top:0px;
   left:0px;
-  position:absolute;
+  position:fixed;
   overflow:show;
 }
 
@@ -61,27 +75,57 @@ div.route div{
   background-color:steelblue;
 }
 div.panel{
+  z-index:21;
   position:absolute;
+  width:960px;
   top:0px;
-  left:900px;
-  right:0px;
-  bottom:0px;
-  border-left:1px solid gray;
-  border-right:1px solid gray;
+  left:0px;
+  height:40px;
+  font-size:22px;
+  background: url('res/button/topbg.png') 0px -70px no-repeat;
 }
 div.panel div{
-  border:1px solid black;
-  padding:5px;
-  margin:5px;
+  float:right;
   cursor:pointer;
 }
+
+div.panel div.replay{
+ height:50px;
+ width:50px;
+ background: url('res/button/replay.png') 0px 0px no-repeat;
+ background-size: 50px 50px;
+ float:left;
+ margin:5px 40px 0px 20px;
+}
+div.panel a.menu{
+ display:block;
+}
 div.panel div.bombtouch{
- height:100px;
- background: url('res/actor/bomb.png') top no-repeat;
- background-size: 100px 100px;
+ height:130px;
+ width:140px;
+ background: url('res/button/bomb-btn.png') 0px -30px no-repeat;
+ background-size: 166px 166px;
+}
+div.panel div.bombtouch .bomb{
+ height:40px;
+ width:10px;
+ float:right;
+ position:relative;
+ top:100px;
+ padding:0px 15px 0px 15px;
+}
+div.panel .energy,
+div.panel .quest-item,
+div.panel .menu {
+  float:left;
+  margin:10px 40px 0px 20px;
 }
 
 div.block-normal {
+ overflow:display;
+}
+
+div.block-actor {
  overflow:hidden;
 }
 a{

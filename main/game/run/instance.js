@@ -10,6 +10,9 @@ zoyoe.game.instance = function(cells,path){
    this.cells = cells;
    this.path = path;
    var ns = neighbours(this.cells);
+   this.getZIndex = function(ps){
+     return ps.x * this.cells.length + ps.y;
+   }
    this.acquire = function(ps){
      for(var i=0;i<ps.length;i++){
        if (ps[i].x < 0 || this.cells.length <= ps[i].x
@@ -53,8 +56,8 @@ zoyoe.game.instance = function(cells,path){
       idx = info[0];
     }
     switch(idx){
-    case 0: return null;
-    case 1: return (new game.obstcal.bowl());
+    case 0: return game.path.normal();
+    case 1: return (new game.obstcal.tree());
     case 2: {
         var main = new game.actor.main(info[1]);
         this.actors['main'] = main;
@@ -173,7 +176,7 @@ zoyoe.game.instance = function(cells,path){
          /* Nothing to Do */
         this.clip.stop()
       }else{
-        this.clip.play()
+        //this.clip.play()
         if(this.clip.targets[0].remain >0){
           if(this.clip.targets[0].remain == this.clip.targets[0].bound){
             if(this.clip.targets[0].vtop>0){
@@ -190,6 +193,7 @@ zoyoe.game.instance = function(cells,path){
           var rl = this.clip.targets[0].vleft * this.clip.targets[0].remain;
           var ps = self.pixel2cells(this.top+rt,this.left+rl);
           if(self.acquire(ps)){
+            this.clip.zidx(self.getZIndex(self.pixel2cell(this.top+rt,this.left+rl)));
             this.top += this.clip.targets[0].vtop;
             this.left += this.clip.targets[0].vleft;
             this.clip.targets[0].remain -= 1;
