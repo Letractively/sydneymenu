@@ -11,7 +11,6 @@ var scenario1 = (function createInstance(){
     [0,cm1,cm3,0,1,cmain,0,0,0],
     [0,0,  1,  0,0,0,    0,1,1],
     [1,1,  0,  0,0,0,    0,0,1],
-    [0,1,  0,  1,0,1,    1,1,0],
    ]
    var path = 
    [
@@ -21,7 +20,6 @@ var scenario1 = (function createInstance(){
     [0,0,1,0,1,0,0,0,0],
     [0,0,1,0,0,0,0,1,1],
     [1,1,0,0,0,0,0,0,1],
-    [0,1,0,1,0,1,1,1,0],
    ];
    return (new zoyoe.game.instance(cells,path));
 })();
@@ -39,7 +37,6 @@ var scenario2 = (function createInstance(){
     [0,cm1,cm3,0,1,cmain,0,0,0],
     [0,0,  1,  0,0,0,    0,1,1],
     [1,1,  0,  0,0,0,    0,0,1],
-    [0,1,  0,  1,0,1,    1,1,0],
    ]
    var path = 
    [
@@ -49,7 +46,6 @@ var scenario2 = (function createInstance(){
     [0,0,1,0,1,0,0,0,0],
     [0,0,1,0,0,0,0,1,1],
     [1,1,0,0,0,0,0,0,1],
-    [0,1,0,1,0,1,1,1,0],
    ];
    return (new zoyoe.game.instance(cells,path));
 })();
@@ -100,7 +96,7 @@ function loadScenario(){
     var sc = getUrlVars();
     singleton.inst = getScenario(sc.set,sc.idx);
     var jq_root = $('#root');
-	var env = new zoyoe.game.env($('#root').get(0),30,0,0);
+	var env = new zoyoe.game.env($('#root').get(0),30,40,0);
     bindClickHandler($("#root").get(0),function(e){
         var touch = e;
         if(e.type == "touchstart"){

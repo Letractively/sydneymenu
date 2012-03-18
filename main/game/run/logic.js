@@ -100,6 +100,8 @@ zoyoe.game.noopFrame = function(parent,idx){
 zoyoe.game.clip = function (n,ele,top,left){
   var relative_top = 0;
   var relative_left = 0;
+  var center_top = 0;
+  var center_left = 0;
   var element = ele;
   var clips = [];
   var frames = [new zoyoe.game.noopFrame(this,0)];
@@ -107,11 +109,38 @@ zoyoe.game.clip = function (n,ele,top,left){
   var name = n;
   var status = zoyoe.game.RUN;
   ele.id = n;
+  var parent = this;
+  var zidxlock = false;
   if(!isNaN(top)){
     relative_top = top;
   }
   if(!isNaN(left)){
     relative_left = left;
+  }
+  this.center = function(top,left){
+    center_top = top;
+    center_left = left;
+  }
+  this.centerTop = function(){
+    return center_top;
+  }
+  this.centerLeft = function(){
+    return center_left;
+  }
+  this.zidxLock = function(idx){
+    zidxlock = true;
+    element.style.zIndex = idx;
+  }
+  this.zidx = function(idx){
+    if(!zidxlock){
+      element.style.zIndex = idx;
+    }
+  }
+  this.getParent = function(){
+    return parent;
+  }
+  this.setParent = function(clip){
+    parent = clip;
   }
   this.reset = function(){
     element.innerHTML = "";
@@ -150,8 +179,18 @@ zoyoe.game.clip = function (n,ele,top,left){
 	  return {top:relative_top,left:relative_left};
   };
   this.render = function(){
-    element.style.top = n2px(relative_top); 
-    element.style.left = n2px(relative_left); 
+    var top = 0;
+    var left = 0;
+    var p = this;
+    var current = this;
+    do{
+      current = p;
+      top += p.top() - p.centerTop();
+      left += p.left() - p.centerLeft();
+      p = p.getParent();
+    }while(current != p);
+    element.style.top = n2px(top); 
+    element.style.left = n2px(left); 
   };
   this.inc = function(){
 	  idx = idx+1;
@@ -167,6 +206,8 @@ zoyoe.game.clip = function (n,ele,top,left){
 	  }
   };
   this.step = function(){
+    var display = element.style.display;
+    element.style.display = "none";
 	var frame = frames[idx];
 	frame.render(this);
     var keyframe = this.getPreKey(idx);
@@ -192,6 +233,7 @@ zoyoe.game.clip = function (n,ele,top,left){
       this.inc();
     }else{
     }
+    element.style.display = display;
   };
   this.play = function(){
     status = zoyoe.game.RUN;
@@ -200,6 +242,7 @@ zoyoe.game.clip = function (n,ele,top,left){
     status = zoyoe.game.PAUSE;
   };
   this.gotoAndStop = function(frame_number){
+    return;
     idx = frame_number;
     status = zoyoe.game.PAUSE;
   };
@@ -210,6 +253,7 @@ zoyoe.game.clip = function (n,ele,top,left){
   };
   this.insertClip = function(clip){
 	  this.clips().push(clip);
+      clip.setParent(this);
   };
   this.name = function(){
     return name;
