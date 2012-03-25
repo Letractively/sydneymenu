@@ -271,6 +271,9 @@ zoyoe.game.clip = function (n,ele,top,left){
   this.getFrame = function(n){
     return frames[n];
   }
+  this.length = function(){
+    return frames.length;
+  }
   this.top = function(){
     return relative_top;
   }
