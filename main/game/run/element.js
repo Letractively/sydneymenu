@@ -81,73 +81,44 @@ game.actor.BuildMoveAction = function(clip){
   var ele = clip.element();
   var img = ele.getElementsByTagName("img")[0];
   clip.center(17,0);
-  clip.appendFrames(160);
-  var mainframe = clip.getFrame(0); 
-  var moveTop = [clip.getFrame(1),clip.getFrame(6),
-    clip.getFrame(11),clip.getFrame(16),clip.getFrame(20)];
-  var moveBottom = [clip.getFrame(21),clip.getFrame(26),
-    clip.getFrame(31),clip.getFrame(36),clip.getFrame(40)];
-  var moveRight = [clip.getFrame(41),clip.getFrame(46),
-    clip.getFrame(51),clip.getFrame(56),clip.getFrame(60)];
-  var moveLeft = [clip.getFrame(61),clip.getFrame(66),
-    clip.getFrame(71),clip.getFrame(76),clip.getFrame(80)];
- 
-  var top = 2040 - 120;
-  for(var i=0;i<4;i++){
-    moveLeft[i].setKeyframe(true);
-    moveLeft[i].tmp = top;
-    moveLeft[i].action = function(){
-      img.style.top = "-"+this.tmp+"px";
+  function createStep(number,gap,offset){
+    var first = clip.length();
+    for(var i=0;i<number;i++){
+      var start = clip.appendFrames(gap);
+      var frame = clip.getFrame(start);
+      frame.setKeyframe(true);
+      frame.tmp = offset;
+      frame.action = function(){
+        img.style.top = "-"+this.tmp+"px";
+      }
+      offset = offset + 120;
+      if(i+1 == number){
+        var tailframe = clip.getFrame(clip.length() - 1);
+        tailframe.setKeyframe(true);
+        tailframe.next = first;
+        tailframe.action = function(){
+          clip.gotoAndPlay(this.next);
+        }
+      }
     }
-    top -= 120;
+    return first;
   }
-  moveLeft[4].action = function(){
-    clip.gotoAndPlay(61);
-  }
-  for(var i=0;i<4;i++){
-    moveRight[i].setKeyframe(true);
-    moveRight[i].tmp = top;
-    moveRight[i].action = function(){
-      img.style.top = "-"+this.tmp+"px";
-    }
-    top -= 120;
-  }
-  moveRight[4].action = function(){
-    clip.gotoAndPlay(41);
-  }
-  for(var i=0;i<4;i++){
-    moveBottom[i].setKeyframe(true);
-    moveBottom[i].tmp = top;
-    moveBottom[i].action = function(){
-      img.style.top = "-"+this.tmp+"px";
-    }
-    top -= 120;
-  }
-  moveBottom[4].action = function(){
-    clip.gotoAndPlay(21);
-  }
-  for(var i=0;i<4;i++){
-    moveTop[i].setKeyframe(true);
-    moveTop[i].tmp = top;
-    moveTop[i].action = function(){
-      img.style.top = "-"+this.tmp+"px";
-    }
-    top -= 120;
-  }
-  moveTop[4].action = function(){
-    clip.gotoAndPlay(1);
+  var offset = 120;
+  for(var i = 0;i<4;i++){
+    createStep(4,5,offset);
+    offset += 120 * 4;
   }
   clip.towardsTop = function(){
     clip.gotoAndPlay(1);
+  }
+  clip.towardsBottom = function(){
+    clip.gotoAndPlay(21);
   }
   clip.towardsRight = function(){
     clip.gotoAndPlay(41);
   }
   clip.towardsLeft = function(){
     clip.gotoAndPlay(61);
-  }
-  clip.towardsBottom = function(){
-    clip.gotoAndPlay(21);
   }
   clip.stand = function(){
     clip.gotoAndStop(0);
