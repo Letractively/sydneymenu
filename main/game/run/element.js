@@ -14,7 +14,7 @@ game.path.NORMAL_CENTER = {top:0,left:0};
 game.obstcal.TREE_IMG = "res/obstcals/tree.png";
 game.obstcal.TREECUT_IMG = "res/obstcals/treecut.png";
 game.actor.MAIN_IMG = "res/actors/main.png";
-game.actor.MONSTER_IMG = "res/actors/monster1.png";
+game.actor.MONSTER_IMG = "res/actors/mob1.png";
 game.actor.BOMB_IMG = "res/actors/bomb.png";
 game.actortype.GENERAL_MONSTER = 1;
 game.actortype.GENERAL_MONSTER_CONTAINER = 2;
@@ -77,16 +77,9 @@ game.actor.bomb = function(){
   clip.stop();
   return clip;
 }
-game.actor.main = function(name){
-  var ele = $("<div class='block-actor'><img src='"+game.actor.MAIN_IMG+"'></image></div>").get(0);
-  ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.ACTOR_HEIGHT);
+game.actor.BuildMoveAction = function(clip){
+  var ele = clip.element();
   var img = ele.getElementsByTagName("img")[0];
-  img.style.position = "relative";
-  img.style.width = "100px";
-  img.style.left = "0px";
-  img.style.top = "0px";
-  var clip = (new zoyoe.game.clip(name,ele));
   clip.center(17,0);
   clip.appendFrames(160);
   var mainframe = clip.getFrame(0); 
@@ -160,19 +153,33 @@ game.actor.main = function(name){
     clip.gotoAndStop(0);
   }
   clip.stop();
+}
+game.actor.main = function(name){
+  var ele = $("<div class='block-actor'><img src='"+game.actor.MAIN_IMG+"'></image></div>").get(0);
+  ele.style.width = n2px(game.BLOCK_SZ);
+  ele.style.height = n2px(game.ACTOR_HEIGHT);
+  var img = ele.getElementsByTagName("img")[0];
+  img.style.position = "relative";
+  img.style.width = "100px";
+  img.style.left = "0px";
+  img.style.top = "0px";
+  var clip = (new zoyoe.game.clip(name,ele));
+  game.actor.BuildMoveAction(clip);
   return clip;
 }
 game.actor.monster = function(name,para){
-  var ele = $("<div class='block-normal'><img src='"+game.actor.MONSTER_IMG+"'></image></div>").get(0);
-  ele.style.overflow = "hidden";
+  var ele = $("<div class='block-actor'><img src='"+game.actor.MONSTER_IMG+"'></image></div>").get(0);
   ele.style.width = n2px(game.BLOCK_SZ);
-  ele.style.height = n2px(game.BLOCK_SZ);
+  ele.style.height = n2px(game.ACTOR_HEIGHT);
   var img = ele.getElementsByTagName("img")[0];
   img.style.position = "relative";
-  img.style.left = "8px";
+  img.style.width = "100px";
+  img.style.left = "0px";
+  img.style.top = "0px";
   var clip = (new zoyoe.game.clip(name,ele));
   clip.para = para;
   clip.type = game.actortype.GENERAL_MONSTER;
+  game.actor.BuildMoveAction(clip);
   return clip;
 }
 

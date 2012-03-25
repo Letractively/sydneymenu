@@ -221,8 +221,20 @@ zoyoe.game.instance = function(cells,path){
       }
       return {top:this.top+rt,left:this.left+rl};
     } 
+    function move(clip){
+      if(clip.targets[0].vtop > 0){
+        clip.towardsBottom();
+      }else if(clip.targets[0].vtop < 0){
+        clip.towardsTop();
+      }else if(clip.targets[0].vleft < 0){
+        clip.towardsLeft();
+      }else if(clip.targets[0].vleft > 0){
+        clip.towardsRight();
+      }
+    }
     function initMonster(mtrack,v){
       mtrack.clip.targets = [{vtop:v.vt,vleft:v.vl}];
+      move(mtrack.clip);
       mtrack.action = function(){
         var top = this.top + this.clip.targets[0].vtop;
         var left = this.left + this.clip.targets[0].vleft;
@@ -233,6 +245,7 @@ zoyoe.game.instance = function(cells,path){
         }else{
           this.clip.targets[0].vtop = 0 - this.clip.targets[0].vtop;
           this.clip.targets[0].vleft = 0 - this.clip.targets[0].vleft;
+          move(this.clip);
         }
       }
     }
@@ -250,6 +263,7 @@ zoyoe.game.instance = function(cells,path){
         mctrack.action = function(){
           frame.untrackClip(mctrack);
           track.clip.targets = [{vtop:v.vt,vleft:v.vl}];
+          move(track.clip);
           track.action = function(){
             var left = this.left + this.clip.targets[0].vleft;
             var top = this.top + this.clip.targets[0].vtop;
@@ -260,6 +274,7 @@ zoyoe.game.instance = function(cells,path){
             }else{
               this.clip.targets[0].vleft = 0 - this.clip.targets[0].vleft;
               this.clip.targets[0].vtop = 0 - this.clip.targets[0].vtop;
+              move(this.clip);
             }
           }
           self.path[cell.x][cell.y] = 0;
