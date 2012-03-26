@@ -111,6 +111,7 @@ zoyoe.game.clip = function (n,ele,top,left){
   ele.id = n;
   var parent = this;
   var zidxlock = false;
+  var stay = false;
   if(!isNaN(top)){
     relative_top = top;
   }
@@ -193,6 +194,10 @@ zoyoe.game.clip = function (n,ele,top,left){
     element.style.left = n2px(left); 
   };
   this.inc = function(){
+      if(stay){
+        stay = false;
+        return;
+      }
 	  idx = idx+1;
 	  if(idx == frames.length){
 		  idx = 0;
@@ -248,6 +253,7 @@ zoyoe.game.clip = function (n,ele,top,left){
   };
   this.gotoAndPlay = function(frame_number){
     idx = frame_number;
+    stay = true;
     status = zoyoe.game.RUN;
     /* not implemented */
   };

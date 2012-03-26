@@ -120,6 +120,21 @@ div.panel .menu {
   float:left;
   margin:10px 40px 0px 20px;
 }
+div.panel .energy {
+  width:500px;
+}
+div.panel .energy > span {
+  float:left;
+}
+div.panel .energy > div {
+  height:14px;
+  margin:6px 0px 2px 20px;
+  width:400px;
+  border:1px solid wheat;
+  background-color:#ecff18;
+  opacity:0.5;
+  float:left;
+} 
 
 div.block-normal {
  overflow:display;
