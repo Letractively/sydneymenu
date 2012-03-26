@@ -7,6 +7,24 @@
   <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <style type="text/css">
+    .clip{
+      float:left;
+      margin:10px;
+      width:80px;
+      font-size:10px;
+      border:1px solid #EAEAEA;
+      padding:10px;
+    }
+    .clip img{
+      width:80px;
+    }
+    h4{
+      padding:0px;
+      margin:5px;
+      clear:both;
+    }
+  </style>
 {% endblock %}
 
 {% block js_link %}
@@ -14,7 +32,6 @@
   <script type="text/javascript">
     function document_load(){
       zoyoe.admin = InitAdmin(zoyoe);
-      zoyoe.service_name = '{{SERVICE.name}}';
     }
   </script>
 {% endblock %}
@@ -26,13 +43,40 @@
   <div id="service-board">
   <ul class='tabs'>
     <li class='tab'>
-      <h4>my local services</h4>
+      <h4>My Gardens</h4>
+      {% for service in MY_SERVICES%}
+        <div class='clip'>
+          <img src="/gallery/imageicon/{{service.name}}/icon/?"></img>
+        <ul>
+        <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
+        <li class='dscp'>{{service.description}}</li>
+        </ul>
+        </div>
+      {% endfor %}
     </li>
     <li class='tab'>
-      <h4>services I provide</h4>
+      <h4>Gardens You've collected</h4>
+      {% for collection in MY_COLLECTIONS%}
+        <div class='clip'>
+          <img src="/gallery/imageicon/{{collection.service.name}}/icon/?"></img>
+        <ul>
+        <li class='name'><a href="/core/service/{{collection.service.name}}">{{service.name}}</a></li>
+        <li class='dscp'>{{collection.service.description}}</li>
+        </ul>
+        </div>
+      {% endfor %}
     </li>
     <li class='tab'>
-      <h4>serviced I visited</h4>
+      <h4>Gardens you've visited recently</h4>
+      {% for service in MY_SERVICES%}
+        <div class='clip'>
+          <img src="/gallery/imageicon/{{service.name}}/icon/?"></img>
+        <ul>
+        <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
+        <li class='dscp'>{{service.description}}</li>
+        </ul>
+        </div>
+      {% endfor %}
     </li>
   </ul>
   </div>

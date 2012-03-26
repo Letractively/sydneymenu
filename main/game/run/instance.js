@@ -5,7 +5,7 @@ game.sign = function(n){
 }
 
 zoyoe.game.instance = function(cells,path){
-   var self = this;
+   var instance = this;
    var parent = null;
    this.cells = cells;
    this.path = path;
@@ -60,6 +60,7 @@ zoyoe.game.instance = function(cells,path){
     case 1: return (new game.obstcal.tree());
     case 2: {
         var main = new game.actor.main(info[1]);
+        main.energy = 100;
         this.actors['main'] = main;
         main.is_actor = true;
         main.speed_top = 0;
@@ -139,7 +140,7 @@ zoyoe.game.instance = function(cells,path){
     var main = this.actors['main'];
     var p = parent.getFrame(0).getTrack(this.actors['main'].name()).clearTailTargets();
     var actcell = this.pixel2cell(p.top,p.left); 
-    var path = self.pathExtractor(actcell.x,actcell.y)(cell.x,cell.y);
+    var path = instance.pathExtractor(actcell.x,actcell.y)(cell.x,cell.y);
     var st = '';
     var acy = actcell.y
     var acx = actcell.x
@@ -165,6 +166,21 @@ zoyoe.game.instance = function(cells,path){
       acy = y;
       acx = x;
     }
+  }
+  this.costEnergy = function(per){
+    var ma = this.actors['main'];
+    ma.energy -= per;
+    if(ma.energy < 0){
+      ma.energy = 0;
+    }
+    $("#panel .energy div").css('width',n2px(ma.energy*4));
+    if(ma.energy == 0){
+      this.fail();
+    } 
+  }
+  
+  this.fail = function(){
+    alert(fail);
   }
   this.initStage = function(p){
     parent = p;
@@ -200,10 +216,12 @@ zoyoe.game.instance = function(cells,path){
           }else{
             this.clip.targets[0].ele.remove();
             this.clip.targets.shift();
+            instance.costEnergy(2);
           }
         }else{
           this.clip.targets[0].ele.remove();
           this.clip.targets.shift();
+          instance.costEnergy(2);
         }
       }
     }
