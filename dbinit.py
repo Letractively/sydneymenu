@@ -14,7 +14,7 @@ sys.path.append(os.path.join(os.path.abspath('..'), 'sydneymenu', 'main'))
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 
-from main.core.models import ServiceConfig 
+from main.core.models import EntityConfig 
 from main.pybb.models import Forum,Category
 from main.core import xmlbase
 from main.glue.forum import AddForum 
@@ -30,12 +30,12 @@ def CleanData(version):
   cursor.execute("DELETE FROM core_info where version<%s",[version])
   transaction.commit_unless_managed()
 
-def InitServiceConfig():
+def InitEntityConfig():
   default = None
   try:
-    default = ServiceConfig.objects.get(name='default')
-  except ServiceConfig.DoesNotExist:
-    default = ServiceConfig() 
+    default = EntityConfig.objects.get(name='default')
+  except EntityConfig.DoesNotExist:
+    default = EntityConfig() 
     default.version = 0
   try:
     old_version = default.version
@@ -100,13 +100,13 @@ def main():
       print __doc__
       sys.exit(0)
     elif o in ("-t","--test"):
-      if InitServiceConfig():
+      if InitEntityConfig():
         sys.exit(0)
       else:
         sys.exit(1)
   for arg in args:
     if arg == "setup":
-      InitServiceConfig()
+      InitEntityConfig()
       InitForum()
       print 'Database has been initialized'
       sys.exit(0)

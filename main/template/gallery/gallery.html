@@ -16,7 +16,7 @@
     function document_load(){
       YUI().use('node','event','io-form',function(Y){
         zoyoe.InitZoyoe(false,Y,{static_panel:true});
-        zoyoe.service_name = '{{SERVICE.name}}';
+        zoyoe.service_name = '{{ENTITY.name}}';
         zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
         zoyoe.admin = InitAdmin(zoyoe);
         zoyoe.ui.ShowPanel('gallery',['{{GALLERY}}'],null,function(){

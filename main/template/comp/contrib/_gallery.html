@@ -9,12 +9,12 @@
           <ul>
             {% for n,v in GALLERY_INFO.iteritems %}
             <li>
-              <a href = "/gallery/view/{{SERVICE.name}}/{{n}}/">
+              <a href = "/gallery/view/{{SERVICE.entity.name}}/{{n}}/">
               <div class='gicon'>
               {% if v %}
-                <img src='/gallery/image/{{SERVICE.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
+                <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
               {% else %}
-                <img src='/gallery/image/{{SERVICE.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
+                <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
               {% endif %}
               </div>
               </a>
