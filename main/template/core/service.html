@@ -61,7 +61,7 @@ function Init(){
   YUI().use('node','io-form','event',function(Y){
     //zoyoe.InitZoyoe(true,Y);
     zoyoe.InitZoyoe(false,Y);
-    zoyoe.service_name = '{{SERVICE.name}}';
+    zoyoe.service_name = '{{SERVICE.entity.name}}';
     zoyoe.comps['item'] = InitItems(zoyoe,'item');
     zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
     zoyoe.comps['ROSTER'] = InitRoster(zoyoe,zoyoe.week_day.{{WEEK_DAY}});
@@ -91,14 +91,14 @@ function Init(){
     <li class='menu' style="width:110px;float:right">
       <a>Service Config</a>
       <ul class='submenu' style="width:200px;">
-      <div style="text-align:left;margin:5px;padding:5px;border-bottom:1px solid #EAEAEA;"><a style="color:black;font-weight:bold;">You are the owner of {{SERVICE.name}} 
+      <div style="text-align:left;margin:5px;padding:5px;border-bottom:1px solid #EAEAEA;"><a style="color:black;font-weight:bold;">You are the owner of {{SERVICE.entity.name}} 
         </br><a style="color:#1b1b1b;">has full authority</a></div>
  
       <li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Template()"><a>Change Template</a></li>
       <!--li class='submenu' onclick ="zoyoe.comps['LAYOUT'].Color()"><a>Change Color Theme</a></li>-->
-      <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.name}}')"><a>Enable Forum</a></li>
-      <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.name}}')"><a>Delete Service</a></li>
-      <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.name}}')"><a>Reset Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.EnableForum('{{SERVICE.entity.name}}')"><a>Enable Forum</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.DeleteService('{{SERVICE.entity.name}}')"><a>Delete Service</a></li>
+      <li class='submenu' onclick ="zoyoe.admin.ResetService('{{SERVICE.entity.name}}')"><a>Reset Service</a></li>
       </ul>
     </li>
     {% endif %}
@@ -117,7 +117,7 @@ function Init(){
 <div id='dd-shadow' class='section-container' style="position:absolute;border:1px dashed gray;display:none;">
 </div>
 <br style="clear:both"/>
-<form name='reload' url='/core/service/{{SERVICE.name}}/'></form>
+<form name='reload' url='/core/service/{{SERVICE.entity.name}}/'></form>
   <div id='panel'>
     <div class='panel'>
       <div class='panel-hint general-title bright'>

@@ -16,10 +16,10 @@
     function document_load(){
       YUI().use('node','event','io-form',function(Y){
         zoyoe.InitZoyoe(false,Y,{static_panel:true});
-        zoyoe.service_name = '{{SERVICE.name}}';
+        zoyoe.service_name = '{{ENTITY.name}}';
         zoyoe.comps['{{PATH}}'] = InitItems(zoyoe,'{{PATH}}');
         zoyoe.admin = InitAdmin(zoyoe);
-        var upinfo = new update_info("/glue/{{SERVICE.name}}/data/{{PATH}}/");
+        var upinfo = new update_info("/glue/{{ENTITY.name}}/data/{{PATH}}/");
         zoyoe.ui.ShowPanel('data',{path:'{{PATH}}'},upinfo,function(){
        });
       });
