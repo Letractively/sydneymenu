@@ -13,7 +13,7 @@ class Garden(models.Model):
 # Associate a Garden with a fb_accout
 
 def RegisterIconComponent(entity):
-  data = """<icon name='tmpname' path='default/icon' size='default'>\
+  data = """<icon name='icon' path='default/icon'>\
 <description>Default Icon</description></icon>"""
   xmlbase.CreateNewInfo(entity,data,'icon')
 
