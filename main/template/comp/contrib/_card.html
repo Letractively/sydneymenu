@@ -1,0 +1,171 @@
+{% load comp_filters %}
+{% load hash_filters %}
+<style type="text/css">
+  div.card{
+    width:600px;
+    margin-bottom:40px;
+  }
+  div.card div.top{
+    {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+      {% with "//icon/@path" as xpath %}
+      background:url('/gallery/image/{{SERVICE.entity.name}}/{% xattr item xpath %}/') no-repeat;
+      {% endwith %}
+    {% endfor %}
+    border-left:1px solid #AAA;
+    border-right:1px solid #AAA;
+    border-bottom:1px solid #AAA;
+    height:200px;
+    border-top:1px solid #AAA;
+  }
+  div.card div.mid{
+    height:40px;
+    overflow:visible;
+    float:left;
+    width:600px;
+    background-color:#6682b5;
+  }
+  div.card div.bot{
+    clear:both;
+    height:100px;
+    background-color:#6682b5;
+  }
+  div.card div.icon{
+    height:101px;
+    width:101px;
+    border:1px solid #d5d5e5;
+    position:relative;
+    top:-85px;
+    float:left;
+    margin-left:15px;
+    padding:5px;
+    background-color:white;
+  }
+  div.card div.icon img{
+    border:1px solid #EAEAEA;
+    height:100px;
+    width:100px;
+  }
+  div.card div.info{
+    padding:5px 5px 5px 25px;
+    font-size:12px;
+    float:left;
+    color:whiteSmoke;
+    width:320px;
+    background-color:#6898ce;
+    height:70px;
+  }
+  div.card div.info li{
+    margin-bottom:3px;
+  }
+  div.card div.title{
+    float:left;
+    color:#EAEAEA;
+    font-weight:bold;
+    font-size:16px;
+    padding:5px 10px 5px 10px; 
+    width:170px;
+  }
+  div.card div.social{
+    float:right;
+    height:20px;
+    margin-right:12px;
+    
+  }
+  div.card .sicon{
+    height:50px;
+    width:50px;
+    display:block;
+    float:left;
+  }
+  div.card div.social .sicon{
+    margin:3px 1px 5px 1px;
+    position:relative;
+    top:-20px;
+  }
+  div.card .gallery-icon{
+    border:2px solid #EAEAEA;
+    float:right;
+  }
+  div.card .sicon img{
+    height:50px;
+    width:50px;
+  }
+  div.card div.gicon{
+    height:80px;
+    width:100px;
+    float:left;
+    border:1px solid #6898ce;
+    margin:0px 0px 0px 15px;
+  }
+  div.top ul{
+    width:210px;
+    float:right;
+    height: 170px;
+    padding:10px 20px 5px 0px;
+  }
+  div.tab{
+    height:22px;
+    background-color: #6682B5;
+  }
+  .spandarkblue{
+   display: block;
+   padding: 4px 10px 3px 10px;
+   font-size: 12px;
+   color: white;
+   background-color: #6682B5;
+   cursor: pointer;
+   margin:0px 0px 0px 0px;
+  }
+</style>
+<div class='card'>
+<div class='top'>
+   <ul>
+     {% for n,v in GALLERY_INFO.iteritems %}
+     <li>
+       <div class='sicon gallery-icon'>
+       <a href = "/gallery/view/{{SERVICE.entity.name}}/{{n}}/">
+       {% if v %}
+         <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
+       {% else %}
+         <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
+       {% endif %}
+         </a>
+       </div>
+     </li>
+     {% endfor %}
+   </ul>
+  <br style="clear:both"/>
+</div>
+<div class='mid'>
+  <div class='icon'>
+    <img src='/res/icons/zoyoe.jpg'>
+    </img>
+  </div>
+  <div class='title'>
+  Zoyoe Web Solution 
+  </div>
+  <div class='social'>
+    <a class='sicon'><img src='/res/icons/mediaicons/png/facebook.png'></img></a>
+    <a class='sicon'><img src='/res/icons/mediaicons/png/twitter.png'></img></a>
+    <a class='sicon'><img src='/res/icons/mediaicons/png/digg.png'></img></a>
+    <a class='sicon'><img src='/res/icons/mediaicons/png/youtube.png'></img></a>
+  </div>
+</div>
+ <div class='bot'>
+  <div class='info'>
+  <ul>
+    <li>email: zoyoeproject@gmail.com </li>
+    <li>service type: web develop and maintaince</li>
+    <li>working days: Mon,Tue,Wed,Thu,Fri</li>
+    <li>web site: <a href='zoyoe.sydneyscent.com'>zoyoe.sydneyscent.com</a></li>
+  </ul>
+  </div>
+  <div class='gicon'></div>
+  <div class='gicon'></div>
+ </div>
+ <div class='tab'>
+    <span class='spandarkblue' style='float:right;' >add galllery</span>
+    <span class='spandarkblue' style='float:right;' >change overview image</span>
+ </div>
+</div>
+

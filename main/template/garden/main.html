@@ -1,0 +1,88 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% load glue_filters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmln = "http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" href="/core/css/fbapp/service.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/core/css/dialog.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+<link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+
+
+<!-- Microsoft Bingmap -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+<!-- YUI Components --> 
+{% zoyoejs 'all' %}
+
+<script type="text/javascript">
+function GetTitle(obj){
+  var ns = obj.getElementsByTagName('div');
+  for(var i=0;i<ns.length;i++){
+    if(ns[i].className == 'title'){
+      return ns[i].getElementsByTagName('h3')[0];
+    }
+  }
+  return null;
+}
+function Init(){
+  YUI().use('node','io-form','event',function(Y){
+    //zoyoe.InitZoyoe(true,Y);
+    zoyoe.InitZoyoe(false,Y);
+    zoyoe.service_name = '{{SERVICE.entity.name}}';
+    zoyoe.comps['plant'] = InitItems(zoyoe,'plant');
+    zoyoe.comps['GALLERY'] = InitGallery(zoyoe);
+    zoyoe.comps['ICON'] = InitIcon(zoyoe);
+    zoyoe.comps['BASIC_INFO'] = InitBasicInfo(zoyoe);
+    zoyoe.admin = InitAdmin(zoyoe);
+    if(zoyoe.ElementExtension){
+      zoyoe.ElementExtension.BuildExtensionElements();
+    }
+  });
+}
+</script>
+</head>
+<body onload='Init()'>
+<div class='nav-sup'>
+</div>
+<div class="nav-last" style="height:1px;"></div>
+<div class="mid-section">
+  {% with 'contrib'|component:"card" as path %} 
+    {% include path %}
+  {% endwith %}
+  {% with 'contrib'|component:"weather" as path %} 
+    {% include path %}
+  {% endwith %}
+  {% with 'contrib'|component:"season" as path %} 
+    {% include path %}
+  {% endwith %}
+  {% with 'contrib'|component:"plants" as path %} 
+    {% include path %}
+  {% endwith %}
+  {% with 'contrib'|component:"items" as path %} 
+    {% include path %}
+  {% endwith %}
+</div><!-- end mid section -->
+
+<div id='dd-container' style="z-index:99;opacity:0.8;position:absolute;black;display:none;">
+</div>
+<div id='dd-shadow' class='section-container' style="position:absolute;border:1px dashed gray;display:none;">
+</div>
+<br style="clear:both"/>
+<div id='panel'>
+    <div class='panel'>
+      <div class='panel-hint general-title bright'>
+      </div>
+      <div class='panel-content'>
+      </div>
+      <div class='panel-left'>
+      </div>
+      <div class='button-lane'>
+      </div>
+    </div>
+</div>
+<div id='zsk' class='msk'>
+</div>
+</body>

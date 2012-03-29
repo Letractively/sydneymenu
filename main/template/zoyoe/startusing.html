@@ -76,7 +76,7 @@
  <script type="text/javascript">
     function document_load(){
       YUI().use('node','anim','io-form',function(Y){
-        zoyoe.InitZoyoe(false,Y,{static_dialog:true});
+        zoyoe.InitZoyoe(false,Y);
         zoyoe.admin = InitAdmin(zoyoe);
       });
     }
@@ -86,10 +86,8 @@
 
 {% block nav %}
   <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
-  <li class='menu'><a href='/search/'>Service Cards</a></li>
   <li class='menu'><a href='/map/'>Distribution</a></li>
   <li class='menu'><a href='/forum/'>Forum</a></li>
-  <li class='menu'><a href='/gallery/main'>Gallery</a></li>
   {% include "core/_usrmenu.html" %}
 {% endblock %}
 

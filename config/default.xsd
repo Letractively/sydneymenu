@@ -12,17 +12,21 @@
     <xs:attribute name="icon" type="iconpath"/>
     <xs:attribute name="price" type="xs:string"/>
   </xs:complexType>
+  <xs:complexType name="plant">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="category" type="xs:string" use="required"/>
+    <xs:attribute name="icon" type="iconpath"/>
+  </xs:complexType>
   <xs:complexType name="timetable">
     <xs:attribute name="day" type="xs:string"/>
     <xs:attribute name="from" type="xs:string"/>
     <xs:attribute name="to" type="xs:string"/>
   </xs:complexType>
   <xs:complexType name="icon">
-    <xs:sequence>
-      <xs:element name="description" type="xs:string"/>
-    </xs:sequence>
     <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="size" type="xs:string"/>
     <xs:attribute name="path" type="xs:string"/>
   </xs:complexType>
   <xs:element name='zoyoe'>
@@ -30,6 +34,7 @@
     <xs:choice>
      <xs:element name="icon" type="icon"></xs:element>
      <xs:element name="item" type="item"></xs:element>
+     <xs:element name="plant" type="plant"></xs:element>
      <xs:element name="timetable" type="timetable"></xs:element>
     </xs:choice>
    </xs:complexType>
