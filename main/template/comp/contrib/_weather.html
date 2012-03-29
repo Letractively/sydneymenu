@@ -1,0 +1,31 @@
+{% load hash_filters %}
+{% load comp_filters %}
+{% if ROOT %}
+    <div class='section-container wide'>
+{% endif %}
+      <div class='section' id="weather-and-react">
+        <div class='title'>
+           <h3>Today's Weather Condition</h3>
+        </div>
+        <div class='info-block'>
+          <ul>
+          <li>
+            <img src='{{WEATHER|hash:'icon'}}'></img>
+            Condition:{{WEATHER|hash:'condition'}}
+            {{WEATHER|hash:'humidity'}}
+            tempture:{{WEATHER|hash:'temp_f'}}
+          </li>
+          </ul>
+        </div>
+        <h3 class="split">threats</h3>
+        <div class='info-block'>
+          <ul>
+          <li>
+          It is a nice day, no common threats detected.
+          </ul>
+          </li>
+        </div>
+      </div>
+{% if ROOT %}
+    </div>
+{% endif %}

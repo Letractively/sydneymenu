@@ -1,5 +1,5 @@
 class CONFIG:
-  SERVICES_PATH = "/var/www/sydneymenu/main/services/"
+  ENTITY_PATH = "/var/www/sydneymenu/main/entities/"
   GMAIL_LOGIN = "zoyoeproject@gmail.com"
   GMAIL_PASSWORD = "aab09jpg"
   WEEK_DAY_NAME = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
@@ -12,5 +12,6 @@ class CONFIG:
   FB_COOKIE_TOKEN = 'ZOYOE_FB_TOKEN' 
   FB_API_SECRET = 'f1231ceb5b252f9f2b5ef0c3edc1dafe'
   FB_GRAPH_SERVER = 'https://graph.facebook.com/'
+  GOOGLE_WEATHER = 'http://www.google.com/ig/api'
 
 
