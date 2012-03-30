@@ -39,11 +39,14 @@
     margin-left:15px;
     padding:5px;
     background-color:white;
+    overflow:hidden;
   }
-  div.card div.icon img{
+  div.card div.icon .img{
     border:1px solid #EAEAEA;
-    height:100px;
     width:100px;
+    height:100px;
+    background-size:100px;
+    background:url('https://graph.facebook.com/1126092701/picture/?type=large') center center no-repeat;
   }
   div.card div.info{
     padding:5px 5px 5px 25px;
@@ -85,6 +88,7 @@
   div.card .gallery-icon{
     border:2px solid #EAEAEA;
     float:right;
+    margin-left:10px;
   }
   div.card .sicon img{
     height:50px;
@@ -138,11 +142,11 @@
 </div>
 <div class='mid'>
   <div class='icon'>
-    <img src='/res/icons/zoyoe.jpg'>
-    </img>
+    <div class='img'>
+    </div>
   </div>
   <div class='title'>
-  Zoyoe Web Solution 
+  Xin,Gao's Garden 
   </div>
   <div class='social'>
     <a class='sicon'><img src='/res/icons/mediaicons/png/facebook.png'></img></a>
@@ -154,17 +158,17 @@
  <div class='bot'>
   <div class='info'>
   <ul>
-    <li>email: zoyoeproject@gmail.com </li>
-    <li>service type: web develop and maintaince</li>
-    <li>working days: Mon,Tue,Wed,Thu,Fri</li>
-    <li>web site: <a href='zoyoe.sydneyscent.com'>zoyoe.sydneyscent.com</a></li>
+    <li>type: vegetable garden </li>
+    <li>area: 2m * 4m </li>
+    <li>position: out door, back yard </li>
+    <li>faces: west </li>
   </ul>
   </div>
   <div class='gicon'></div>
   <div class='gicon'></div>
  </div>
  <div class='tab'>
-    <span class='spandarkblue' style='float:right;' >add galllery</span>
+    <span class='spandarkblue' style='float:right;' onclick="zoyoe.comps['GALLERY'].ShowAddDialog()" >add galllery</span>
     <span class='spandarkblue' style='float:right;' >change overview image</span>
  </div>
 </div>
