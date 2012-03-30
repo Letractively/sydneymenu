@@ -22,3 +22,9 @@ def GetWeatherInfo():
    xml_root = etree.parse(StringIO(xml_str))
    current_node = xml_root.xpath("//current_conditions")[0]
    return BuildCondition(current_node)
+
+def GetSensisServiceList(gear,plant):
+   url = CONFIG.SENSIS_API_EP + "&categoryId=28436&query=soil"
+   json_rslt = urllib.urlopen(url).read()
+   results  = json.loads(json_rslt)
+   return results

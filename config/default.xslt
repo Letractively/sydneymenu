@@ -44,6 +44,16 @@
      <xsl:value-of select="."/>
    </div>
   </xsl:for-each>
+  <li class='hint'>
+    <a>
+      <xsl:attribute name="href">/garden/hint/soil/<xsl:value-of select="./@name"/>/</xsl:attribute>
+      soil hint:
+    </a>
+    Best grown in deep sandy, loamy soil
+  </li>
+  <li class='hint'>
+    <a>fertilize reminder:</a> no fertilizing needed if the soil is well prepared before
+  </li>
   <div style="clear:both"/>
  </ul>
 </xsl:template>

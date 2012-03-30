@@ -35,3 +35,13 @@ def Main(request):
     dic['HAS_AUTHORITY'] = True 
     c = RequestContext(request,dic)
     return HttpResponse(garden_t.render(c),mimetype = "text/html")
+
+@browser_prefix
+def Sensis(request,gear,plant): 
+    results = GetSensisServiceList(gear,plant)
+    sensis_t = loader.get_template('garden/sensis.html')
+    dic = {}
+    dic['SENSIS'] = results
+    dic['CSS_COLOR'] = ['white','steelblue','steelblue','ghostwhite']
+    c = RequestContext(request,dic)
+    return HttpResponse(sensis_t.render(c),mimetype = "text/html")

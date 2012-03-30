@@ -375,3 +375,13 @@ div.info-block div.description{
 div.extension-photo-player div{
   height:200px;
 }
+
+li.hint{
+  clear:both;
+  color:#8e7067;
+  width:580px;
+  padding:2px 5px 2px 2px;
+}
+li.hint a{
+  color:#9a3232;
+}
