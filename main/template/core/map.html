@@ -45,6 +45,10 @@
   <script type="text/javascript" src="/js/mesh.js"></script>
   <!-- Project Components -->
 
+  {% if SENSIS %}
+  <script type="text/javascript" src="/garden/sensis/{{SENSIS}}/"></script>
+  {% endif %}
+
   <script type="text/javascript" src="/js/home.js"></script>
   {% zoyoejs 'all' %}
   <script type="text/javascript">
@@ -57,7 +61,11 @@
       zoyoe.ui.ShowPanel('map',null,null);
       zoyoe.admin = InitAdmin(zoyoe);
       new MapInfoCore(function(rmap){
+        {% if SENSIS %}
+         sensis_dist(sensis_obj,rmap);
+        {% else %}
         sdist(rmap)
+        {% endif %}
       },null,"map-info")
     });
   }

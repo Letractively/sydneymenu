@@ -23,8 +23,11 @@ def GetWeatherInfo():
    current_node = xml_root.xpath("//current_conditions")[0]
    return BuildCondition(current_node)
 
-def GetSensisServiceList(gear,plant):
-   url = CONFIG.SENSIS_API_EP + "&categoryId=28436&query=soil"
+def GetSensisServiceListString(gear,plant):
+   url = CONFIG.SENSIS_API_EP + "&location=NSW&&locationTiers=2&categoryId=28436&query=soil"
    json_rslt = urllib.urlopen(url).read()
-   results  = json.loads(json_rslt)
+   return json_rslt
+
+def GetSensisServiceList(gear,plant):
+   results  = json.loads(GetSensisServiceListString(gear,plant))
    return results

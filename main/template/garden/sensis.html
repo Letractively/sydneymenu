@@ -36,7 +36,7 @@
 
 {% block nav %}
   <li class='menu'><a href='/garden/main/'>My Garden</a></li>
-  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/map/?sensis={{SENSIS_PATH}}'>Distribution</a></li>
   {% include "core/_usrmenu.html" %}
 {% endblock %}
 
@@ -51,8 +51,13 @@
         {% for result in SENSIS.results %}
         <ul>
           <div class='icon'>
+          {% if result|hash:"businessLogo"|hash:"url" %}
           <img src='{{result|hash:"businessLogo"|hash:"url"}}'>
           </img>
+          {% else %}
+          <img src='/res/res_error.png'>
+          </img>
+          {% endif %}
           </div>
           <li>
            <span>{{result|hash:'name'}}</span>

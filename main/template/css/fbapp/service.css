@@ -372,6 +372,11 @@ div.info-block div.description{
   border:1px solid gray;
 }
 
+.item ul div.icon img{
+  width:100%;
+  height:100%;
+}
+
 div.extension-photo-player div{
   height:200px;
 }
