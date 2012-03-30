@@ -6,5 +6,5 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^main/$','garden.views.Main'),
-    # (r'^admin/', include(admin.site.urls)),
+    (r'^hint/(?P<gear>[^/]*)/(?P<plant>[^/]*)/$', 'garden.views.Sensis'),
 )
