@@ -1,0 +1,81 @@
+{% extends 'core/clean.html' %}
+{% load hash_filters %}
+{% load comp_filters %}
+
+{% block css_link %} 
+  <link rel="stylesheet" href="/core/css/fbapp/service.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+
+<style type="text/css">
+</style>
+
+
+{% endblock %}
+
+{% block js_link %}
+ <script type="text/javascript" charset="utf-8"
+        src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+ </script>
+ <script type="text/javascript" src="/js/comps.js"></script>
+ <script type="text/javascript" src="/js/ui.js"></script>
+ <script type="text/javascript" src="/js/zoyoe.js"></script>
+ <script type="text/javascript" src="/js/ele.js"></script>
+ <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/garden/main/'>My Garden</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  {% include "core/_usrmenu.html" %}
+{% endblock %}
+
+{% block content %}
+ <div class='nav-sup'>
+   Services that provides Soil solutions
+ </div>
+ <div class="nav-last" style="height:1px;"></div>
+ <div class="mid-section">
+    <div class='section item' id="plant">
+     <div class='info-block'>
+        {% for result in SENSIS.results %}
+        <ul>
+          <div class='icon'>
+          <img src='{{result|hash:"businessLogo"|hash:"url"}}'>
+          </img>
+          </div>
+          <li>
+           <span>{{result|hash:'name'}}</span>
+          </li>
+          <li style='clear:right'>
+           {{result|hash:"primaryAddress"|hash:"addressLine"}}
+           {{result|hash:"primaryAddress"|hash:"suburb"}}
+           {{result|hash:"primaryAddress"|hash:"state"}}
+          </li>
+          {% for contact in result|hash:"primaryContacts" %}
+          <li style='clear:right'>
+           {{contact|hash:"type"}}:{{contact|hash:"value"}}
+          </li>
+          {% endfor %}
+          <br style="clear:both;"/>
+        </ul>
+        {% endfor %}
+        <br style="clear:both;"/>
+      </div>
+    </div>
+ </div>
+{% endblock %}
+
+{% block tail %}
+ {% include "core/_tail.html" %}
+{% endblock %}
