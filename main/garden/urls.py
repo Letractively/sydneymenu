@@ -7,4 +7,5 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('',
     (r'^main/$','garden.views.Main'),
     (r'^hint/(?P<gear>[^/]*)/(?P<plant>[^/]*)/$', 'garden.views.Sensis'),
+    (r'^sensis/(?P<gear>[^/]*)/(?P<plant>[^/]*)/$', 'garden.views.SensisJSON'),
 )
