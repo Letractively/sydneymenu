@@ -13,5 +13,7 @@ class CONFIG:
   FB_API_SECRET = 'f1231ceb5b252f9f2b5ef0c3edc1dafe'
   FB_GRAPH_SERVER = 'https://graph.facebook.com/'
   GOOGLE_WEATHER = 'http://www.google.com/ig/api'
+  SENSIS_API_KEY = 'qshea9bvs33zt68yzu5g5txj'
+  SENSIS_API_EP = 'http://api.sensis.com.au/ob-20110511/test/search?key=qshea9bvs33zt68yzu5g5txj'
 
 

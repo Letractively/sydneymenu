@@ -13,7 +13,7 @@ def Main(request):
     dic = {}
     user = GetUsr(request)
     if (user == "GUEST"):
-      return redirect("/glue/login/?next="+reverse("main.garden.views.Main",args=()))
+      return redirect("/glue/login/?next="+reverse("garden.views.Main",args=()))
     if (not (user.startswith("fb_"))):
       return HttpResponse("You need login with your facebook account to using this fb application")
     garden = GetGardenOption(request.user)
