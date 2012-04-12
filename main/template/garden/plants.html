@@ -1,0 +1,59 @@
+{% extends 'core/clean.html' %}
+{% load glue_filters %}
+{% load hash_filters %}
+{% load comp_filters %}
+{% block title %} zoyoe sydneyscent {% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="/css/contrib/element.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
+  <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
+{% endblock %}
+
+{% block js_link %}
+  {% zoyoejs 'all' %}
+  <script type="text/javascript">
+    function document_load(){
+      YUI().use('node','anim','io-form',function(Y){
+        zoyoe.ArrangeClips('services','data')
+        zoyoe.InitZoyoe(false,Y);
+        zoyoe.admin = InitAdmin(zoyoe);
+      });
+    }
+  </script>
+
+{% endblock %}
+
+{% block nav %}
+  <li class='menu'><a href='/zoyoe/'>Zoyoe</a></li>
+  <li class='menu'><a href='/map/'>Distribution</a></li>
+  <li class='menu'><a href='/forum/'>Forum</a></li>
+  {% include "core/_usrmenu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class='nav-sup'>
+  Service Cards &raquo;
+  <a href="">Personal Collection</a>
+</div>
+<div style="width:100%;height:100%;padding:20px 10px 10px 10px;background-color:#E8E7E3;" id="page">
+  <div id='services'>
+  </div>
+  <div id='data'>
+  {% for plant in PLANTS%}
+    <div class='clip'>
+    <img src="/gallery/imageicon/{{plant.entity.name}}/icon/?"></img>
+    <ul>
+    <li class='name'><a href="/core/entity/{{plant.entity.name}}">{{plant.entity.name}}</a></li>
+    <li class='spangray right' onclick="zoyoe.admin.DeleteEntity('{{plant.entity.name}}')">delete</li>
+    <br style="clear:both"/>
+    </ul>
+    </div>
+  {% endfor %}
+  </div>
+  <div class='foot'>
+  </div>
+</div>
+{% endblock %}
+
