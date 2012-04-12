@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'main.pybb',
     'main.gallery',
     'main.garden',
+    'main.service',
     'main.glue',
 )
 

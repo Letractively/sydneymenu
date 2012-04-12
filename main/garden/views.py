@@ -6,35 +6,77 @@ from garden.models import *
 from garden.mesh import *
 
 @browser_prefix
+def Preload(request):
+    user = GetUsr(request)
+    if user: 
+      return Main(request)
+    else:
+      preload_t = loader.get_template('glue/fblogin.html')
+      c = RequestContext(request,{})
+      return HttpResponse(garden_t.render(c),mimetype = "text/html")
+
+@browser_prefix
 def Main(request):
     today = date.today()
     now = datetime.now()
     tstamp = now.strftime("%Y-%m-%d-%H-%M-%S")
     dic = {}
     user = GetUsr(request)
-    if (user == "GUEST"):
+    if (user == None):
       return redirect("/glue/login/?next="+reverse("garden.views.Main",args=()))
-    if (not (user.startswith("fb_"))):
-      return HttpResponse("You need login with your facebook account to using this fb application")
     garden = GetGardenOption(request.user)
     if(garden == None):
       garden = CreateGarden(request.user)
     name = garden.entity.name
-    gnode = GetConfigDoc(garden.entity)
-    layout = Layout.InitLayoutConfig(gnode.getroot())
-    gallery = Gallery.InitGalleryConfig(gnode.getroot())
-    gallery_info = gallery.BasicInfo()
     garden_t = loader.get_template('garden/main.html')
+    config = GetConfig(garden.entity)
     dic['SERVICE'] = garden
     dic['ROOT'] = True 
     dic['COMP'] = garden.entity.BuildComp()
-    dic['GALLERY_INFO'] = gallery_info
     dic['SESSION'] = request.session
-    dic['CSS_COLOR'] = layout.GetColor() 
+    dic['CSS_COLOR'] = config['layout']['color'] 
     dic['WEATHER'] = GetWeatherInfo()
     dic['HAS_AUTHORITY'] = True 
+    dic['CONFIG'] = config 
     c = RequestContext(request,dic)
     return HttpResponse(garden_t.render(c),mimetype = "text/html")
+
+@browser_prefix
+def SinglePlant(request,pname):
+    today = date.today()
+    now = datetime.now()
+    tstamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+    dic = {}
+    user = GetUsr(request)
+    if (user == 'SYSTEM'):
+      dic['HAS_AUTHORITY'] = True
+    else:
+      dic['HAS_AUTHORITY'] = False 
+    formal_name = GetFormalName(pname)
+    plant = GetPlantOption(formal_name)
+    if(plant == None):
+      if (request.REQUEST.has_key('create')):
+        plant = CreatePlant(formal_name)
+    if(plant == None):
+      return HttpResponse('plant not found') 
+    name = plant.entity.name
+    plant_t = loader.get_template('garden/plant.html')
+    config = GetConfig(plant.entity)
+    dic['SERVICE'] = plant 
+    dic['ROOT'] = True 
+    dic['COMP'] = plant.entity.BuildComp()
+    dic['SESSION'] = request.session
+    dic['CSS_COLOR'] = config['layout']['color'] 
+    dic['CONFIG'] = config 
+    c = RequestContext(request,dic)
+    return HttpResponse(plant_t.render(c),mimetype = "text/html")
+
+@browser_prefix
+def Plants(request):
+    plants_t = loader.get_template('garden/plants.html')
+    plants = Plant.objects.all()
+    c = RequestContext(request,{'PLANTS':plants})
+    return HttpResponse(plants_t.render(c),mimetype = "text/html")
 
 @browser_prefix
 def Sensis(request,gear,plant): 

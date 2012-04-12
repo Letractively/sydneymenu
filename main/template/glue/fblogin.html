@@ -13,7 +13,7 @@
   function login(user_id){
     setCookie('ZOYOE_FB_USR',user_id);
     setCookie('ZOYOE_FB_TOKEN',FB.getAuthResponse()['accessToken']);
-    top.location.reload(true);
+    window.location.href = "/garden/main/"
   }
   function fblogin(){
     FB.login(function(response){
@@ -38,22 +38,16 @@
       if (response.status == 'connected'){
          FB.api('/me', function(user) {
             if (user) {
-              var image_url = 'https://graph.facebook.com/' + user.id + '/picture';
-              var status = document.getElementById('zoyoe-fb-status');
-              status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+              login(user.id);
             }
-         });
-      }else if(response.status == 'not_authroized'){
-        var status = document.getElementById('zoyoe-fb-status');
-        status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+         });        
       }else{
-        var status = document.getElementById('zoyoe-fb-status');
-        status.innerHTML = "<a href='javascript:fblogin()' class='fblogin'></a>";
+        alert('no fb detected');
+        window.location.href = "/garden/main/"
       }
     });
     // Additional initialization code here
   };
-
   // Load the SDK Asynchronously
   (function(d){
      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -63,9 +57,6 @@
      ref.parentNode.insertBefore(js, ref);
    }(document));
 </script>
-</div>
-<div id='zoyoe-fb-status'>
-<a href='javascript:fblogin()' class='fblogin'></a>
 </div>
 </body>
 </html>

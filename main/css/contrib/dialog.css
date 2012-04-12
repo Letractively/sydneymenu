@@ -24,14 +24,17 @@ overflow:hidden;
   clear:both;
 }
 #dialog ul.gallery-list li{
-  margin:0px 20px 5px 20px;
+  margin:0px;
+  width:338px;
   border:1px solid #DADADA;
-  padding:3px 6px 3px 6px;
-  background-color:#DDD;
-  color:gray;
+  padding:3px;
+  margin-top:2px;
+  background-color:white;
+  color:#545454;
 }
 #dialog ul.gallery-list li.current{
-  background-color:#1e4f76;
+  background-color:#4D90FE;
+  border:1px solid #3079ED;
   color:white;
 }
 

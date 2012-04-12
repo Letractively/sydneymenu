@@ -6,16 +6,15 @@
     margin-bottom:40px;
   }
   div.card div.top{
-    {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
-      {% with "//icon/@path" as xpath %}
-      background:url('/gallery/image/{{SERVICE.entity.name}}/{% xattr item xpath %}/') no-repeat;
-      {% endwith %}
-    {% endfor %}
     border-left:1px solid #AAA;
     border-right:1px solid #AAA;
     border-bottom:1px solid #AAA;
     height:200px;
     border-top:1px solid #AAA;
+    overflow:hidden;
+  }
+  div.card div.top img{
+    width:600px;
   }
   div.card div.mid{
     height:40px;
@@ -59,6 +58,7 @@
   }
   div.card div.info li{
     margin-bottom:3px;
+    height:14px;
   }
   div.card div.title{
     float:left;
@@ -100,6 +100,10 @@
     float:left;
     border:1px solid #6898ce;
     margin:0px 0px 0px 15px;
+    overflow:hidden;
+  }
+  div.card div.gicon img{
+    width:100px;
   }
   div.top ul{
     width:210px;
@@ -112,10 +116,11 @@
     background-color: #6682B5;
   }
   .spandarkblue{
+   height:12px;
    display: block;
    padding: 4px 10px 3px 10px;
    font-size: 12px;
-   color: white;
+   color: white !important;
    background-color: #6682B5;
    cursor: pointer;
    margin:0px 0px 0px 0px;
@@ -123,21 +128,15 @@
 </style>
 <div class='card'>
 <div class='top'>
-   <ul>
-     {% for n,v in GALLERY_INFO.iteritems %}
-     <li>
-       <div class='sicon gallery-icon'>
-       <a href = "/gallery/view/{{SERVICE.entity.name}}/{{n}}/">
-       {% if v %}
-         <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
-       {% else %}
-         <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
-       {% endif %}
-         </a>
-       </div>
-     </li>
-     {% endfor %}
-   </ul>
+  {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+    {% with "//icon[@name='background']/@path" as xpath %}
+      {% with item|fattr:xpath as path%}
+      {% if path %}
+      <img src="{{path}}/"></img>
+      {% endif %}
+      {% endwith %}
+    {% endwith %}
+  {% endfor %}
   <br style="clear:both"/>
 </div>
 <div class='mid'>
@@ -164,12 +163,32 @@
     <li>faces: west </li>
   </ul>
   </div>
-  <div class='gicon'></div>
-  <div class='gicon'></div>
+  <div class='gicon'>
+  {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+    {% with "//icon[@name='icon1']/@path" as xpath %}
+      {% with item|fattr:xpath as path%}
+      {% if path %}
+      <img src="{{path}}/"></img>
+      {% endif %}
+      {% endwith %}
+    {% endwith %}
+  {% endfor %}
+  </div>
+  <div class='gicon'>
+  {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+    {% with "//icon[@name='icon2']/@path" as xpath %}
+      {% with item|fattr:xpath as path%}
+      {% if path %}
+      <img src="{{path}}/"></img>
+      {% endif %}
+      {% endwith %}
+    {% endwith %}
+  {% endfor %}
+  </div>
+
  </div>
  <div class='tab'>
-    <span class='spandarkblue' style='float:right;' onclick="zoyoe.comps['GALLERY'].ShowAddDialog()" >add galllery</span>
-    <span class='spandarkblue' style='float:right;' >change overview image</span>
+    <a href='/glue/data/{{SERVICE.entity.name}}/icon/' class='spandarkblue' style='float:right;' >change overview image</a>
  </div>
 </div>
 
