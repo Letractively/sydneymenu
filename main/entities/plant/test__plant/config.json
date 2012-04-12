@@ -1,0 +1,10 @@
+{
+  "icon":
+    {"url":"/res/res_error.png"},
+  "account":[],
+  "gallery":[{"backend":"internal","src":"/garden/gallery/config/","img":"/garden/gallery/image/"}],
+  "layout":
+    {"template":"default","color":"white,steelblue,steelblue,ghostwhite"},
+  "component":
+    ["icon","items","mappreview","info","photoplayer","news","forum"]
+}
