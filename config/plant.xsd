@@ -1,0 +1,33 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="iconpath">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="hint">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="tags" type="xs:string" use="required"/>
+    <xs:attribute name="icon" type="iconpath"/>
+  </xs:complexType>
+  <xs:complexType name="info">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="tags" type="xs:string" use="required"/>
+    <xs:attribute name="icon" type="iconpath"/>
+  </xs:complexType>
+  <xs:complexType name="icon">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="iconpath"/>
+  </xs:complexType>
+  <xs:element name='zoyoe'>
+   <xs:complexType>
+    <xs:choice>
+     <xs:element name="icon" type="icon"></xs:element>
+     <xs:element name="hint" type="hint"></xs:element>
+     <xs:element name="info" type="info"></xs:element>
+    </xs:choice>
+   </xs:complexType>
+  </xs:element>
+</xs:schema>
