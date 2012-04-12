@@ -2,8 +2,27 @@
 <head>
 <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/wiki.css" type="text/css" media="all" charset="utf-8"/>
+<script type="text/javascript"
+        src = "http://connect.facebook.net/en_US/all.js"
+        id = "facebook-jssdk">
+</script>
+
+
+<script type="text/javascript" src = "http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+
+<script type="text/javascript" src = "/js/zoyoe.js"></script>
+<script type="text/javascript" src = "/js/ui.js"></script>
+<script type="text/javascript" src = "/js/comps.js"></script>
+<script type="text/javascript">
+  var document_load = function(){
+    YUI().use('node','anim','io-form',function(Y){
+      zoyoe.InitZoyoe(false,Y);
+      zoyoe.admin = InitAdmin(zoyoe);
+    });
+  }
+</script>
 </head>
-<body>
+<body onload='document_load()'>
 <h3>A Zoyoe account allows you to</h3>
 <ul>
 <li>
@@ -25,7 +44,9 @@
   You can sign into zoyoe via your social account
 </li>
 <li>
-  <iframe frameborder='0' src="/accounts/fblogin/" style="display:block;width:290px;height:30px;"></iframe>
+  <div id='zoyoe-fb-status'>
+    <a href='javascript:zoyoe.admin.FaceBookLogin()' class='fblogin'></a>
+  </div>
 </li>
 <li>
   You are also welcomed to <a style="color:steelblue;font-weight:bold;" href="/glue/register/" target = "_top">register</a> a Zoyoe account which should only takes no more than 3 minutes 
@@ -49,5 +70,7 @@
   <iframe src='/core/user/reactivate/' style="width:500px;"></iframe>
 </li>
 </ul>
+<div id='fb-root'>
+</div>
 </body>
 </html>

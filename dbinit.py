@@ -30,29 +30,25 @@ def CleanData(version):
   cursor.execute("DELETE FROM core_info where version<%s",[version])
   transaction.commit_unless_managed()
 
-def InitEntityConfig():
-  default = None
+def InitEntityConfig(name):
+  config = None
   try:
-    default = EntityConfig.objects.get(name='default')
+    config = EntityConfig.objects.get(name=name)
   except EntityConfig.DoesNotExist:
-    default = EntityConfig() 
-    default.version = 0
+    config = EntityConfig() 
+    config.version = 0
   try:
-    old_version = default.version
-    xslt_io = open ("./config/default.xslt")
-    xsd_io = open("./config/default.xsd")
-    xsd_io2 = open("./config/default.xsd")
-    test_io = open("./config/test.xml") 
-    print "Set Default Extension:"
-    xmlbase.SetExtension(default,'default',xslt_io,xsd_io)
-    print "Initial default Service Config Successful"
+    old_version = config.version
+    xslt_io = open ("./config/" + name + ".xslt")
+    xsd_io = open("./config/" + name + ".xsd")
+    xsd_io2 = open("./config/" + name + ".xsd")
+    print ("Set Extension:" + name)
+    xmlbase.SetExtension(config,name,xslt_io,xsd_io)
     print "testing rending ..."
-    test_doc = etree.parse(test_io)
-    rslt = default.GetXSLT()
-    print etree.tostring(rslt(test_doc.getroot()[0]).getroot(),pretty_print = True)
+    rslt = config.GetXSLT()
     form = xmlbase.FormFromXSD('item',etree.parse(xsd_io2))
     print form
-    print "Clean data in info before version %s" % default.version
+    #print "Clean data in info before version %s" % config.version
     #CleanData(default.version)
     return True
   except etree.XMLSyntaxError,e:
@@ -62,7 +58,6 @@ def InitEntityConfig():
     xslt_io.close()
     xsd_io.close()
     xsd_io2.close()
-    test_io.close()
  
 
 def InitForum():
@@ -100,13 +95,13 @@ def main():
       print __doc__
       sys.exit(0)
     elif o in ("-t","--test"):
-      if InitEntityConfig():
-        sys.exit(0)
-      else:
-        sys.exit(1)
+      InitEntityConfig('default')
+      InitEntityConfig('plant')
+      sys.exit(0)
   for arg in args:
     if arg == "setup":
-      InitEntityConfig()
+      InitEntityConfig('default')
+      InitEntityConfig('plant')
       InitForum()
       print 'Database has been initialized'
       sys.exit(0)

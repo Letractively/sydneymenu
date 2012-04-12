@@ -1,41 +1,24 @@
-{% load comp_filters %}
 {% load hash_filters %}
+{% load comp_filters %}
 {% if ROOT %}
-    <div class='section-container wide'>
+    <div class='section-container open'>
 {% endif %}
-      <div id='info' class='section'>
+      <div class='section item' id="info">
         <div class='title'>
-          <h3>About Us:</h3>
+           <h3>Info</h3>
         </div>
         <div class='info-block'>
-          <ul class='border-split'>
-          <li id="service-name"><span class='label'>Service Name:</span><a>{{SERVICE.name|informal}}</a></li>
-          <li><span class='label'>Contact Number:</span><a>only members of this shop can see this</a></li>
-          <li><span class='label'>Emai Address:</span><a>{{SERVICE.email}}</a></li>
-          <li><span class='label'>Nation:</span><a>{{SERVICE.nation}}</a></li>
-          <li><span class='label'>Price:</span><a>{{SERVICE.pricelow}} - {{SERVICE.pricehigh}}</a></li>
-          <li><span class='label'>Web Site:</span><a>/core/service/{{SERVICE.name}}</a></li>
-          </ul>
-        </div>
-        <h3 class='split'>Address:</h3>
-        <div class='info-block'>
-          <ul>
-            <li>{{SERVICE.address}}</li>
-          </ul>
-        </div>
-        <h3 class='split'>Description:</h3>
-        <div class='info-block'>
-          <ul>
-            <li>{{SERVICE.description}}</li>
-          </ul>
+          {% for info in COMP|hash:"ITEMS"|hash:"info" %}
+          {{COMP|hash:"RENDER"|xslt:info|safe}}
+          {% endfor %}
+          <br style="clear:both"/>
         </div>
       </div>
 {% if HAS_AUTHORITY %}
       <div class='tail'>
-        <h3><a onclick="zoyoe.comps['BASIC_INFO'].ShowModifyServiceDialog()">modify</a></h3>
+        <h3><a href="/glue/data/{{SERVICE.entity.name}}/info/">modify</a></h3>
       </div>
 {% endif %}
 {% if ROOT %}
     </div>
 {% endif %}
- 

@@ -1,12 +1,25 @@
 .nav-sup {
   min-width:600px;
   background-color:whiteSmoke;
-  padding: 40px 20px 15px 20px;
+  padding: 20px 20px 15px 20px;
   border-bottom:1px solid white;
   border-top:1px solid #EAEAEA;
   font-size:16px;
   font-family:Helvetica,sans-serif;
   color:black;
+}
+
+.nav-sup .icon{
+  display:block;
+  background-color:white;
+  width:70px;
+  height:70px;
+  border:1px solid #EAEAEA;
+  overflow:hidden;
+}
+
+.nav-sup .icon img{
+  width:70px;
 }
 
 .nav-last {

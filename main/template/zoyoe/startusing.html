@@ -2,6 +2,8 @@
 {% load hash_filters %}
 {% load comp_filters %}
 
+{% block title %} zoyoe sydneyscent {% endblock %}
+
 {% block css_link %} 
   <link rel="stylesheet" href="/css/contrib/960.css" type="text/css" media="all" charset="utf-8"/>
   <link rel="stylesheet" href="/css/contrib/general.css" type="text/css" media="all" charset="utf-8"/>
@@ -9,6 +11,10 @@
   <link rel="stylesheet" href="/css/contrib/dialog.css" type="text/css" media="all" charset="utf-8"/>
 
 <style type="text/css">
+h3{
+  padding:0px;
+  margin:15px 0px 5px 0px;
+}
 .mission{
  background: transparent url("/res/bg/target.png") center 9px no-repeat;
 }
@@ -37,13 +43,19 @@
 #steps div.step label{
  padding:5px 0px 0px 20px;
  display:block;
+ float:left;
  margin:0px 0px 10px 0px;
- font-size:22px;
- font-weight:normal;
+ font-size:26px;
+ font-weight:bold;
  position:relative;
  left:-10px;
- font-family: Georgia;
- color:#1e4f76;
+ font-family: arial,sans-serif;
+ color:#6682b5;
+}
+#steps div.step label span{
+ font-size:16px;
+ margin-left:0px;
+ font-weight:normal;
 }
 #steps div.step p{
   margin:8px 0 17px 0;
@@ -105,7 +117,7 @@
              Start Using 
            </div>
            <a href="/zoyoe/mission/" class="button mission">
-             Our Mission 
+             About Zoyoe 
            </a>
            <div class="button servicecard">
              Our Programs
@@ -121,24 +133,58 @@
  </div>
  <div class='container_12' id='steps'>
  <div class='step'>
-  <label> Advertising your service uniformly</label>
+  <label style="width:605px;">
+  Manage your social accounts, 
+  </br><span>integrating them with web applications to provide richer content for your web pages.
+  </span>
   <iframe style="width:605px;height:350px;margin:10px 10px 10px 5px;float:left;" frameborder='0' src='/wiki/card.html'></iframe>
-  <p style='float:right;width:300px;'>
-  To start with, you need to create a zoyoe web page that contains your basic infomation about yourself and your service.
-  </p>
-  <p style='float:right;width:300px;'>
-  After that you can manage the content of your service by uploading images to your gallery, writing down your time table and fullfill the items your will provide in your service.
-  </p>
-  <p style='float:right;width:300px;'>
-  If you have already got your social pages like facebook wall, twitter page, digg or a dedicated web page setup, then you probably need to connect them into your zoyoe web page.
-  </p>
-  <p style='float:right;width:300px;'>
-  Once you've done all these, you can create a business card just as showed in the left.
-  </p>
-  <p style='float:right;width:300px;'>
-  You can plug your business card into any kind of content you publish on your local classfield , bbs , your blog , your dedicated web page, etc ...
-  You can also plug this into your retailing pages like ebay product pages and email retailing pages.
-  </p>
+  </label>
+  <h3 style='float:right;width:270px;'>
+    Sign in with your social accounts: 
+  </h3>
+  <div style='float:right;width:270px;position:relative;'>
+    <a class='fblogin'>
+    </a>
+    <a class='twitterlogin'>
+    </a>
+    <a class='linkedinlogin'>
+    </a>
+  </div>
+  <h3 style='float:right;width:270px;'>
+    Integrate your image hosting services:
+  </h3>
+  <ul style='float:right;width:270px;'>
+    <a class='backend'>
+      <img src="/res/icons/mediaicons/PNG/photobucket.png"></img>
+      <span>photobucket</span>
+    </a>
+    <a class='backend'>
+      <img src="/res/icons/mediaicons/PNG/facebook.png"></img>
+      <span>facebook</span>
+    </a>
+    <a class='backend'>
+      <img src="/res/icons/mediaicons/PNG/flickr.png"></img>
+      <span>flickr</span>
+    </a>
+  </ul>
+  <h3 style='float:right;width:270px;'>
+    Integrate your video hosting services:
+  </h3>
+  <ul style='float:right;width:270px;'>
+    <a class='backend'>
+      <img src="/res/icons/mediaicons/PNG/youtube.png"></img>
+      <span>youtube</span>
+    </a>
+  </ul>
+  <h3 style='float:right;width:270px;'>
+    Integrate your retailing services:
+  </h3>
+  <ul style='float:right;width:270px;'>
+    <a class='backend'>
+      <img src="/res/icons/mediaicons/PNG/ebay.png"></img>
+      <span>ebay</span>
+    </a>
+  </ul>
   <br style="clear:both"/>
  </div>
 {% endblock %}
