@@ -7,7 +7,7 @@ from settings import ROOT
 
 urlpatterns = patterns('',
     (r'^main/$','garden.views.Main'),
-    (r'^preload/$','garden.views.Preload'),
+    (r'^fbapp/$','garden.views.FBApp'),
     (r'^plant/(?P<pname>[^/]*)/$','garden.views.SinglePlant'),
     (r'^plants/$','garden.views.Plants'),
     (r'^hint/(?P<gear>[^/]*)/(?P<plant>[^/]*)/$', 'garden.views.Sensis'),

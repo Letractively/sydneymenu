@@ -1,19 +1,29 @@
 # Create your views here.
 from user import * 
 from glue.forum import *
+import glue
 from django.db.models import Q
 from garden.models import *
 from garden.mesh import *
 
+def DecodeBase64Url(token):
+    padding_factor = (4 - len(token) % 4) % 4
+    token += "="*padding_factor
+    return base64.b64decode(unicode(token).translate(dict(zip(map(ord,
+u'-_'), u'+/'))))
+
 @browser_prefix
-def Preload(request):
-    user = GetUsr(request)
-    if user: 
-      return Main(request)
+def FBApp(request):
+    sig,payload = request.REQUEST['signed_request'].split('.',2)
+    sig = DecodeBase64Url(sig)
+    data = json.loads(DecodeBase64Url(payload))
+    user_id = data.get('user_id')
+    token = data.get('oauth_token')
+    user = glue.middleware.LoginFBUser(request,user_id,token)
+    if(user):
+      return redirect(reverse("garden.views.Main",args=()))
     else:
-      preload_t = loader.get_template('glue/fblogin.html')
-      c = RequestContext(request,{})
-      return HttpResponse(garden_t.render(c),mimetype = "text/html")
+      return redirect("/glue/login/?next="+reverse("garden.views.Main",args=()))
 
 @browser_prefix
 def Main(request):
