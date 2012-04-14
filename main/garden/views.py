@@ -48,6 +48,7 @@ def Main(request):
     dic['WEATHER'] = GetWeatherInfo()
     dic['HAS_AUTHORITY'] = True 
     dic['CONFIG'] = config 
+    dic['USER_NAME'] = user 
     c = RequestContext(request,dic)
     return HttpResponse(garden_t.render(c),mimetype = "text/html")
 
