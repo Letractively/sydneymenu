@@ -135,3 +135,14 @@ function loadScenario(){
     buildInfo(singleton.inst);
     env.run();
 }
+
+function dialog(message,actionlist){
+  var dialog = $("dialog");
+  if(!dialog){
+    dialog = $("<div id = 'dialog'></div>");
+    dialog.css({"top":n2px(-100000000)
+      ,"left":n2px(-10000000)
+      ,"position":"fixed"
+      });
+  }
+}
