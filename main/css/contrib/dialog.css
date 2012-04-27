@@ -20,10 +20,10 @@ overflow:hidden;
 #dialog #icon-view{margin:15px 0 20px 20px;float:left;}
 #dialog #icon-view img{width:125px;height:125px;border:0px;padding:0px;margin:0px;}
 
-#dialog ul.gallery-list{
+#dialog ul.list{
   clear:both;
 }
-#dialog ul.gallery-list li{
+#dialog ul.list li{
   margin:0px;
   width:338px;
   border:1px solid #DADADA;
@@ -32,7 +32,7 @@ overflow:hidden;
   background-color:white;
   color:#545454;
 }
-#dialog ul.gallery-list li.current{
+#dialog ul.list li.current{
   background-color:#4D90FE;
   border:1px solid #3079ED;
   color:white;

@@ -2,7 +2,7 @@
 {% load hash_filters %}
 <style type="text/css">
   div.card{
-    width:600px;
+    width:100%px;
     margin-bottom:40px;
   }
   div.card div.top{
@@ -14,13 +14,13 @@
     overflow:hidden;
   }
   div.card div.top img{
-    width:600px;
+    width:100%;
   }
   div.card div.mid{
     height:40px;
     overflow:visible;
     float:left;
-    width:600px;
+    width:100%;
     background-color:#6682b5;
   }
   div.card div.bot{
@@ -97,9 +97,9 @@
   div.card div.gicon{
     height:80px;
     width:100px;
-    float:left;
+    float:right;
     border:1px solid #6898ce;
-    margin:0px 0px 0px 15px;
+    margin:0px 15px 0px 0px;
     overflow:hidden;
   }
   div.card div.gicon img{
@@ -145,7 +145,7 @@
     </div>
   </div>
   <div class='title'>
-  Xin,Gao's Garden 
+  {{PAGE_NAME}}
   </div>
   <div class='social'>
     <a class='sicon'><img src='/res/icons/mediaicons/png/facebook.png'></img></a>

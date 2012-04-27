@@ -11,7 +11,7 @@
         {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
           {% with "//icon/@path" as xpath %}
 {% if TIME_STAMP %}
-        <img class='whole' src='/gallery/image/{{SERVICE.entity.name}}/{% xattr item xpath %}/?tstamp={{TIME_STAMP}}'></img>
+        <img class='whole' src='{% xattr item xpath %}/?tstamp={{TIME_STAMP}}'></img>
 {% else %}
         <img class='whole' src='/gallery/image/{{SERVICE.entity.name}}/{% xattr item xpath %}/'></img>
 {% endif %}
@@ -21,7 +21,7 @@
     </div>
 {% if HAS_AUTHORITY %}
     <div class='tail'>
-      <h3><a onclick="zoyoe.comps['ICON'].ShowModifyDialog()">modify</a></h3>
+      <h3><a href='/glue/data/{{SERVICE.entity.name}}/icon/'>modify</a></h3>
     </div>
 {% endif %}
 {% if ROOT %}

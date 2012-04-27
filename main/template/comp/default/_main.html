@@ -2,25 +2,34 @@
 {% load comp_filters %}
 <div class='container_16' style="padding:20px;">
   <div id="left-section" class='left-section'>
-  {% for v in LAYOUT_INFO|hash:'LEFT' %}
-    {% with 'contrib'|component:v as path %} 
+    {% with 'contrib'|component:"icon" as path %} 
       {% include path %}
     {% endwith %}
-  {% endfor %}
+    {% with 'contrib'|component:"forum" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"mappreviewlarge" as path %} 
+      {% include path %}
+    {% endwith %}
   </div><!-- end of left section -->
   <div id="mid-section" class='mid-section'>
-  {% for v in LAYOUT_INFO|hash:'MID' %}
-    {% with 'contrib'|component:v as path %} 
+    {% with 'contrib'|component:"info" as path %} 
       {% include path %}
     {% endwith %}
-  {% endfor %}
+    {% with 'contrib'|component:"photoplayer" as path %} 
+      {% include path %}
+    {% endwith %}
+    {% with 'contrib'|component:"items" as path %} 
+      {% include path %}
+    {% endwith %}
   </div><!-- end mid section -->
   <div id="right-section" class='right-section'>
-  {% for v in LAYOUT_INFO|hash:'RIGHT' %}
-    {% with 'contrib'|component:v as path %} 
+    {% with 'contrib'|component:"timetable" as path %} 
       {% include path %}
     {% endwith %}
-  {% endfor %}
+    {% with 'contrib'|component:"gallery" as path %} 
+      {% include path %}
+    {% endwith %}
   </div><!-- end of right section -->
   <br style="clear:both"/>
 </div>

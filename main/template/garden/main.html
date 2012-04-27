@@ -4,6 +4,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmln = "http://www.w3.org/1999/xhtml">
 <head>
+
+<title>{{PAGE_NAME}}</title>
+
 <link rel="stylesheet" href="/core/css/fbapp/service.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/css/contrib/nav.css" type="text/css" media="all" charset="utf-8"/>
 <link rel="stylesheet" href="/core/css/dialog.css/?color={{CSS_COLOR|urlencode}}" type="text/css" media="all" charset="utf-8"/>
@@ -50,6 +53,9 @@ function Init(){
 <div class="nav-last" style="height:1px;"></div>
 <div class="mid-section">
   {% with 'contrib'|component:"card" as path %} 
+    {% include path %}
+  {% endwith %}
+  {% with 'contrib'|component:"yard" as path %} 
     {% include path %}
   {% endwith %}
   {% with 'contrib'|component:"weather" as path %} 

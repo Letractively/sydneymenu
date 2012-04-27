@@ -33,7 +33,7 @@ cursor:pointer;
 div.info-block{
 }
 div.info-block div.description{
-  display:none;
+  display:block;
 }
 div.info-block .post{
   min-height:50px;
