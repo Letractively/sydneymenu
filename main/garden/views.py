@@ -13,19 +13,6 @@ def DecodeBase64Url(token):
 u'-_'), u'+/'))))
 
 @browser_prefix
-def FBApp(request):
-    sig,payload = request.REQUEST['signed_request'].split('.',2)
-    sig = DecodeBase64Url(sig)
-    data = json.loads(DecodeBase64Url(payload))
-    user_id = data.get('user_id')
-    token = data.get('oauth_token')
-    user = glue.middleware.LoginFBUser(request,user_id,token)
-    if(user):
-      return redirect(reverse("garden.views.Main",args=()))
-    else:
-      return redirect("/glue/login/?next="+reverse("garden.views.Main",args=()))
-
-@browser_prefix
 def Main(request):
     today = date.today()
     now = datetime.now()
@@ -40,6 +27,7 @@ def Main(request):
     name = garden.entity.name
     garden_t = loader.get_template('garden/main.html')
     config = GetConfig(garden.entity)
+    dic['PAGE_NAME'] = user + "'s" + " Garden"
     dic['SERVICE'] = garden
     dic['ROOT'] = True 
     dic['COMP'] = garden.entity.BuildComp()

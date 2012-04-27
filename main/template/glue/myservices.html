@@ -51,11 +51,11 @@
   <div id='data'>
   {% for service in SERVICES%}
     <div class='clip'>
-    <img src="/gallery/imageicon/{{service.name}}/icon/?"></img>
+    <img src="/gallery/imageicon/{{service.entity.name}}/icon/?"></img>
     <ul>
-    <li class='name'><a href="/core/service/{{service.name}}">{{service.name}}</a></li>
-    <li class='fade'>{{service.email}}</li>
-    <li class='dscp'>{{service.description}}</li>
+    <li class='name'><a href="/core/entity/{{service.entity.name}}">{{service.entity.name}}</a></li>
+    <li class='fade'>{{service.entity.email}}</li>
+    <li class='dscp'>{{service.entity.description}}</li>
     </ul>
     </div>
   {% endfor %}

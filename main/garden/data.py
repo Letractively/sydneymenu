@@ -11,3 +11,10 @@ def Config(request):
   PLANT_ICON_LIST[0]['imgs'].append({'name':'amaranth','url':'/garden/gallery/image/amaranth.jpg'})
   GINFO = {'backend':'internal','albums':PLANT_ICON_LIST}
   return HttpResponse(json.dumps(GINFO))
+
+def Plants(request):
+  PLANT_ICON_LIST = [{'name':'vegetable','plants':[]},{'name':'flower','plants':[]}]
+  PLANT_ICON_LIST[0]['plants'].append({'name':'amaranth','url':'/garden/gallery/image/amaranth.jpg'})
+  PLANT_ICON_LIST[0]['plants'].append({'name':'amaranth','url':'/garden/gallery/image/amaranth.jpg'})
+  GINFO = {'categorys':PLANT_ICON_LIST}
+  return HttpResponse(json.dumps(GINFO))

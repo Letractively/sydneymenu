@@ -1,3 +1,5 @@
+{% load hash_filters %}
+{% load comp_filters %}
 {% if ROOT %}
     <div class='section-container close'>
 {% endif %}
@@ -7,15 +9,11 @@
         </div>
         <div class='info-block'>
           <ul>
-            {% for n,v in GALLERY_INFO.iteritems %}
+            {% for album in GALLERY_INFO %}
             <li>
-              <a href = "/gallery/view/{{SERVICE.entity.name}}/{{n}}/">
+              <a href = "/gallery/view/{{SERVICE.entity.name}}/{{album|hash:'name'}}/">
               <div class='gicon'>
-              {% if v %}
-                <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/{{v|first}}/?sc=large&cite=1'></img>
-              {% else %}
-                <img src='/gallery/image/{{SERVICE.entity.name}}/{{n}}/unknow/?sc=large&cite=1'></img>
-              {% endif %}
+                <img src='/gallery/album/{{SERVICE.entity.name}}/{{album|hash:'name'}}/?sc=large&cite=1'></img>
               </div>
               </a>
             </li>

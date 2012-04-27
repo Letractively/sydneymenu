@@ -1,0 +1,10 @@
+{% load comp_filters %}
+{% load hash_filters %}
+<a class='icon shadow' href="/glue/data/{{SERVICE.entity.name}}/icon/">
+ {% for item in COMP|hash:"ITEMS"|hash:"icon" %}
+   {% with "//icon/@path" as xpath %}
+   <img src='{% xattr item xpath %}/'></img>
+   {% endwith %}
+ {% endfor %}
+</a>
+ 
